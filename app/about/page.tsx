@@ -113,13 +113,19 @@ export default function AboutPage() {
       {/* Hero Section with Vanta HALO effect and Parallax */}
       <section 
         ref={heroRef}
-        className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black"
+        className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-black via-zinc-900 to-black"
         style={{ willChange: 'transform' }}
       >
+        {/* Background effects - same as Hero */}
+        <div className="absolute inset-0 opacity-20 z-0">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        </div>
+        
         {/* Vanta HALO effect container */}
         <div 
           ref={vantaRef}
-          className="absolute inset-0 w-full h-full z-0"
+          className="absolute inset-0 w-full h-full z-10"
           style={{ minHeight: '100vh' }}
         />
         
