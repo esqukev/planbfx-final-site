@@ -14,26 +14,31 @@ export default function AboutPage() {
 
     // Dynamically import Vanta.js
     const loadVanta = async () => {
-      const VANTA = (await import('vanta/dist/vanta.halo.min.js')).default;
-      
-      if (vantaEffect.current) {
-        vantaEffect.current.destroy();
-      }
+      try {
+        const vantaHalo = await import('vanta/dist/vanta.halo.min.js');
+        const VANTA = (vantaHalo as any).default || vantaHalo;
+        
+        if (vantaEffect.current) {
+          vantaEffect.current.destroy();
+        }
 
-      vantaEffect.current = VANTA.HALO({
-        el: vantaRef.current,
-        mouseControls: true,
-        touchControls: true,
-        gyroControls: false,
-        minHeight: 200.00,
-        minWidth: 200.00,
-        baseColor: 0x0,
-        backgroundColor: 0x0,
-        amplitudeFactor: 1.5,
-        xOffset: 0,
-        yOffset: 0,
-        size: 1.5,
-      });
+        vantaEffect.current = VANTA({
+          el: vantaRef.current,
+          mouseControls: true,
+          touchControls: true,
+          gyroControls: false,
+          minHeight: 200.00,
+          minWidth: 200.00,
+          baseColor: 0x0,
+          backgroundColor: 0x0,
+          amplitudeFactor: 1.5,
+          xOffset: 0,
+          yOffset: 0,
+          size: 1.5,
+        });
+      } catch (error) {
+        console.error('Error loading Vanta HALO:', error);
+      }
     };
 
     loadVanta();
@@ -54,11 +59,12 @@ export default function AboutPage() {
         {/* Vanta HALO effect container */}
         <div 
           ref={vantaRef}
-          className="absolute inset-0 w-full h-full"
+          className="absolute inset-0 w-full h-full z-0"
+          style={{ minHeight: '100vh' }}
         />
         
         {/* Logo image centered on top */}
-        <div className="relative z-10 flex items-center justify-center">
+        <div className="relative z-20 flex items-center justify-center w-full h-full">
           <div className="relative w-64 h-64 md:w-96 md:h-96">
             <Image
               src="/planb-logo.svg"
