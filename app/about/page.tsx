@@ -5,6 +5,12 @@ import Footer from '../components/Footer';
 import { useEffect, useRef } from 'react';
 import Image from 'next/image';
 
+declare global {
+  interface Window {
+    VANTA: any;
+  }
+}
+
 export default function AboutPage() {
   const vantaRef = useRef<HTMLDivElement>(null);
   const vantaEffect = useRef<any>(null);
@@ -12,17 +18,15 @@ export default function AboutPage() {
   useEffect(() => {
     if (!vantaRef.current) return;
 
-    // Dynamically import Vanta.js
-    const loadVanta = async () => {
-      try {
-        const vantaHalo = await import('vanta/dist/vanta.halo.min.js');
-        const VANTA = (vantaHalo as any).default || vantaHalo;
-        
+    // Load Vanta.js from CDN
+    const loadVanta = () => {
+      // Check if already loaded
+      if (window.VANTA && window.VANTA.HALO) {
         if (vantaEffect.current) {
           vantaEffect.current.destroy();
         }
 
-        vantaEffect.current = VANTA({
+        vantaEffect.current = window.VANTA.HALO({
           el: vantaRef.current,
           mouseControls: true,
           touchControls: true,
@@ -36,8 +40,39 @@ export default function AboutPage() {
           yOffset: 0,
           size: 1.5,
         });
-      } catch (error) {
-        console.error('Error loading Vanta HALO:', error);
+        return;
+      }
+
+      // Load scripts if not already loaded
+      if (!document.querySelector('script[src*="three"]')) {
+        const threeScript = document.createElement('script');
+        threeScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js';
+        threeScript.onload = () => {
+          const vantaScript = document.createElement('script');
+          vantaScript.src = 'https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.halo.min.js';
+          vantaScript.onload = () => {
+            if (vantaEffect.current) {
+              vantaEffect.current.destroy();
+            }
+
+            vantaEffect.current = window.VANTA.HALO({
+              el: vantaRef.current,
+              mouseControls: true,
+              touchControls: true,
+              gyroControls: false,
+              minHeight: 200.00,
+              minWidth: 200.00,
+              baseColor: 0x0,
+              backgroundColor: 0x0,
+              amplitudeFactor: 1.5,
+              xOffset: 0,
+              yOffset: 0,
+              size: 1.5,
+            });
+          };
+          document.body.appendChild(vantaScript);
+        };
+        document.body.appendChild(threeScript);
       }
     };
 
