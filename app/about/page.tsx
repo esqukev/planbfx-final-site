@@ -139,7 +139,7 @@ export default function AboutPage() {
         >
           <div className="relative w-64 h-64 md:w-96 md:h-96">
             <Image
-              src="/planb-logo.svg"
+              src="/planb-variant2.svg"
               alt="PlanB FX"
               fill
               className="object-contain"

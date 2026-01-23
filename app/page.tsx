@@ -21,11 +21,10 @@ export default function Home() {
       />
       
       {/* About Section */}
-      <div id="about">
+      <div id="about" className="scroll-section">
         <ContentSection
           title="Crafting Immersive Visual Experiences"
           description="We create immersive, tailored visuals that push the boundaries of your vision. From concept to execution, we merge creativity, interaction, and technology to build unique visual experiences that engage, evolve, and resonate beyond the screen."
-          imageUrl="/planb-variant2.svg"
           learnMoreLink="/about"
         />
       </div>
