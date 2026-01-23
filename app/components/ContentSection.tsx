@@ -8,7 +8,7 @@ interface ContentSectionProps {
   description: string;
   imageUrl?: string;
   reverse?: boolean;
-  stats?: Array<{ number: string; label: string }>;
+  stats?: Array<{ number: string; numberSuffix?: string; label: string }>;
 }
 
 export default function ContentSection({
@@ -43,6 +43,9 @@ export default function ContentSection({
                 <div key={index}>
                   <div className="text-4xl font-bold text-black dark:text-white mb-2">
                     {stat.number}
+                    {stat.numberSuffix && (
+                      <span className="font-sans">{stat.numberSuffix}</span>
+                    )}
                   </div>
                   <div className="text-sm text-zinc-600 dark:text-zinc-400">
                     {stat.label}

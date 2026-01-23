@@ -27,16 +27,16 @@ export default function Home() {
         subtitle="About Us"
         description="Founded with a vision to create extraordinary experiences, PlanB FX has become a leading agency in creative advertising, event organization, and brand consultancy. We combine innovative ideas with creative mastery to elevate brands ahead of the competition."
           stats={[
-            { number: '200+', label: 'Events organized' },
-            { number: '1000+', label: 'Publications designed' },
-            { number: '50+', label: 'Experienced staff' },
+            { number: '200', numberSuffix: '+', label: 'Events organized' },
+            { number: '1000', numberSuffix: '+', label: 'Publications designed' },
+            { number: '50', numberSuffix: '+', label: 'Experienced staff' },
           ]}
         />
       </div>
       
       {/* Animated Strip */}
       <AnimatedStrip 
-        text="Be Different • Lead Boldly" 
+        text="Be Different Lead Boldly" 
         speed={35}
         className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-4"
       />

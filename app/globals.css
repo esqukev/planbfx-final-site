@@ -51,6 +51,11 @@ body {
   font-family: var(--font-allround), var(--font-geist-sans), Arial, Helvetica, sans-serif;
 }
 
+/* Fallback font for special characters not in AllRoundGothic demo */
+.font-fallback {
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+
 /* Animations */
 @keyframes scroll-left {
   0% {
