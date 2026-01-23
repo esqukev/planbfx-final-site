@@ -10,13 +10,6 @@ export default function Home() {
     <main className="relative">
       <Navigation />
       
-      {/* Animated Strip at top */}
-      <AnimatedStrip 
-        text="PlanB FX" 
-        speed={30}
-        className="bg-black text-white py-4"
-      />
-      
       <Hero />
       
       {/* Animated Strip */}
