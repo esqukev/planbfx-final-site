@@ -1,5 +1,30 @@
 @import "tailwindcss";
 
+/* Custom Fonts - AllRoundGothic */
+@font-face {
+  font-family: 'AllRoundGothic';
+  src: url('/fonts/Fontspring-DEMO-allroundgothic-text.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'AllRoundGothic';
+  src: url('/fonts/Fontspring-DEMO-allroundgothic-medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'AllRoundGothic';
+  src: url('/fonts/Fontspring-DEMO-allroundgothic-bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -10,6 +35,7 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-allround: 'AllRoundGothic', sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,7 +48,7 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  font-family: var(--font-allround), var(--font-geist-sans), Arial, Helvetica, sans-serif;
 }
 
 /* Animations */
