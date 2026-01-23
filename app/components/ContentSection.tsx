@@ -62,7 +62,9 @@ export default function ContentSection({
               href={learnMoreLink}
               className="inline-flex items-center gap-2 text-black dark:text-white font-semibold hover:gap-4 transition-all group mt-6"
             >
-              Learn More
+              <span className="inline-block group-hover:scale-110 transition-transform duration-300">
+                Learn More
+              </span>
               <svg 
                 className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" 
                 fill="none" 
