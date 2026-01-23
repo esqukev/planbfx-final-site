@@ -14,7 +14,7 @@ export default function Home() {
       
       {/* Animated Strip */}
       <AnimatedStrip 
-        text="Creative Above All" 
+        text="CUSTOM INTERACTIVE EXPERIENCES" 
         speed={40}
         direction="right"
         className="bg-white dark:bg-black text-black dark:text-white py-4"
@@ -23,9 +23,9 @@ export default function Home() {
       {/* About Section */}
       <div id="about">
         <ContentSection
-          title="Vietnam´s leading creative agency"
+          title="Crafting Immersive Visual Experiences"
         subtitle="About Us"
-        description="Founded with a vision to create extraordinary experiences, PlanB FX has become a leading agency in creative advertising, event organization, and brand consultancy. We combine innovative ideas with creative mastery to elevate brands ahead of the competition."
+        description="We create immersive, tailored visuals that push the boundaries of your vision."
           stats={[
             { number: '200', numberSuffix: '+', label: 'Events organized' },
             { number: '1000', numberSuffix: '+', label: 'Publications designed' },
@@ -49,7 +49,7 @@ export default function Home() {
               What we do
             </span>
             <h2 className="text-5xl md:text-6xl font-bold text-black dark:text-white mb-4">
-              We create, produce, and design experiences that make brands hit different.
+              We create, produce, and design experiences that make your events hit different.
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
