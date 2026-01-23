@@ -16,7 +16,7 @@ export default function Navigation() {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-transparent">
-      <div className="max-w-7xl mx-auto px-4 md:px-12 lg:px-16 py-4 flex items-center justify-between">
+      <div className="w-full px-4 md:px-8 lg:px-12 xl:px-16 py-4 flex items-center justify-between">
         <a href="#" className="relative h-12 w-32 cursor-pointer hover:opacity-80 transition-opacity">
           <Image
             src="/planb-logo.svg"
@@ -26,7 +26,7 @@ export default function Navigation() {
             priority
           />
         </a>
-        <div className="hidden md:flex items-center gap-12">
+        <div className="hidden md:flex items-center gap-8 lg:gap-12">
           {menuItems.map((item) => (
             <a
               key={item.label}
