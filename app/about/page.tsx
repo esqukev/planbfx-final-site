@@ -2,7 +2,7 @@
 
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 
 declare global {
@@ -14,6 +14,8 @@ declare global {
 export default function AboutPage() {
   const vantaRef = useRef<HTMLDivElement>(null);
   const vantaEffect = useRef<any>(null);
+  const heroRef = useRef<HTMLDivElement>(null);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     if (!vantaRef.current) return;
@@ -40,6 +42,7 @@ export default function AboutPage() {
           yOffset: 0,
           size: 1.5,
         });
+        setIsLoaded(true);
         return;
       }
 
@@ -69,6 +72,7 @@ export default function AboutPage() {
               yOffset: 0,
               size: 1.5,
             });
+            setIsLoaded(true);
           };
           document.body.appendChild(vantaScript);
         };
@@ -85,12 +89,33 @@ export default function AboutPage() {
     };
   }, []);
 
+  // Parallax effect on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!heroRef.current) return;
+      
+      const scrolled = window.pageYOffset;
+      const hero = heroRef.current;
+      
+      // Parallax effect - move slower than scroll
+      hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+      hero.style.opacity = `${1 - scrolled / 800}`;
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <main className="relative min-h-screen">
       <Navigation />
       
-      {/* Hero Section with Vanta HALO effect */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
+      {/* Hero Section with Vanta HALO effect and Parallax */}
+      <section 
+        ref={heroRef}
+        className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black"
+        style={{ willChange: 'transform' }}
+      >
         {/* Vanta HALO effect container */}
         <div 
           ref={vantaRef}
@@ -98,8 +123,14 @@ export default function AboutPage() {
           style={{ minHeight: '100vh' }}
         />
         
-        {/* Logo image centered on top */}
-        <div className="relative z-20 flex items-center justify-center w-full h-full">
+        {/* Logo image centered on top with fade-in from bottom */}
+        <div 
+          className={`relative z-20 flex items-center justify-center w-full h-full transition-all duration-1000 ease-out ${
+            isLoaded 
+              ? 'opacity-100 translate-y-0' 
+              : 'opacity-0 translate-y-16'
+          }`}
+        >
           <div className="relative w-64 h-64 md:w-96 md:h-96">
             <Image
               src="/planb-logo.svg"
