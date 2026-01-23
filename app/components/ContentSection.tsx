@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface ContentSectionProps {
   title: string;
@@ -9,6 +10,7 @@ interface ContentSectionProps {
   imageUrl?: string;
   reverse?: boolean;
   stats?: Array<{ number: string; numberSuffix?: string; label: string }>;
+  learnMoreLink?: string;
 }
 
 export default function ContentSection({
@@ -18,6 +20,7 @@ export default function ContentSection({
   imageUrl,
   reverse = false,
   stats,
+  learnMoreLink,
 }: ContentSectionProps) {
   // Placeholder image URL from a generative image service
   const placeholderImage = imageUrl || `https://picsum.photos/800/600?random=${Math.random()}`;
@@ -31,10 +34,10 @@ export default function ContentSection({
               {subtitle}
             </span>
           )}
-          <h2 className="text-5xl md:text-6xl font-bold mb-6 text-black dark:text-white">
+          <h2 className="text-[3.3rem] md:text-[4.4rem] font-bold mb-6 text-black dark:text-white leading-tight">
             {title}
           </h2>
-          <p className="text-lg text-zinc-600 dark:text-zinc-400 mb-8 leading-relaxed">
+          <p className="text-[1.1rem] text-zinc-600 dark:text-zinc-400 mb-8 leading-relaxed">
             {description}
           </p>
           {stats && (
@@ -54,18 +57,36 @@ export default function ContentSection({
               ))}
             </div>
           )}
+          {learnMoreLink && (
+            <Link 
+              href={learnMoreLink}
+              className="inline-flex items-center gap-2 text-black dark:text-white font-semibold hover:gap-4 transition-all group mt-6"
+            >
+              Learn More
+              <svg 
+                className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" 
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </Link>
+          )}
         </div>
-        <div className="flex-1 w-full">
-          <div className="relative aspect-video rounded-lg overflow-hidden shadow-2xl">
-            <Image
-              src={placeholderImage}
-              alt={title}
-              fill
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, 50vw"
-            />
+        {imageUrl && (
+          <div className="flex-1 w-full">
+            <div className="relative aspect-video rounded-lg overflow-hidden shadow-2xl">
+              <Image
+                src={imageUrl}
+                alt={title}
+                fill
+                className="object-contain"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </section>
   );
