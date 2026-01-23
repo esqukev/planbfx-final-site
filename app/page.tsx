@@ -39,6 +39,19 @@ export default function Home() {
         {/* Content can be added here */}
       </section>
       
+      {/* Works Section */}
+      <div id="works">
+        <ProjectGrid />
+      </div>
+      
+      {/* Animated Strip */}
+      <AnimatedStrip 
+        text="Ready to Create Your Brand Breakthrough?" 
+        speed={45}
+        direction="right"
+        className="bg-black text-white py-4"
+      />
+      
       {/* Services Section */}
       <section id="services" className="py-24 px-4 md:px-8 bg-zinc-50 dark:bg-zinc-900">
         <div className="max-w-7xl mx-auto">
@@ -88,19 +101,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-      
-      {/* Animated Strip */}
-      <AnimatedStrip 
-        text="Ready to Create Your Brand Breakthrough?" 
-        speed={45}
-        direction="right"
-        className="bg-black text-white py-4"
-      />
-      
-      {/* Works Section */}
-      <div id="works">
-        <ProjectGrid />
-      </div>
       
       {/* CTA Section */}
       <section id="contact" className="py-32 px-4 md:px-8 bg-gradient-to-br from-black via-zinc-900 to-black text-white">
