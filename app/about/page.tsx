@@ -3,99 +3,45 @@
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import { useEffect, useRef } from 'react';
+import Image from 'next/image';
 
 export default function AboutPage() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const vantaRef = useRef<HTMLDivElement>(null);
+  const vantaEffect = useRef<any>(null);
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!vantaRef.current) return;
 
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
+    // Dynamically import Vanta.js
+    const loadVanta = async () => {
+      const VANTA = (await import('vanta/dist/vanta.halo.min.js')).default;
+      
+      if (vantaEffect.current) {
+        vantaEffect.current.destroy();
+      }
 
-    const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      vantaEffect.current = VANTA.HALO({
+        el: vantaRef.current,
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        minHeight: 200.00,
+        minWidth: 200.00,
+        baseColor: 0x0,
+        backgroundColor: 0x0,
+        amplitudeFactor: 1.5,
+        xOffset: 0,
+        yOffset: 0,
+        size: 1.5,
+      });
     };
 
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-
-    // Large geometric shapes for background
-    const shapes: Array<{
-      x: number;
-      y: number;
-      size: number;
-      rotation: number;
-      rotationSpeed: number;
-      vx: number;
-      vy: number;
-      sides: number;
-    }> = [];
-
-    // Create large geometric shapes
-    for (let i = 0; i < 8; i++) {
-      shapes.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        size: 150 + Math.random() * 200, // Large shapes
-        rotation: Math.random() * Math.PI * 2,
-        rotationSpeed: (Math.random() - 0.5) * 0.003, // Very slow rotation
-        vx: (Math.random() - 0.5) * 0.1, // Slow movement
-        vy: (Math.random() - 0.5) * 0.1,
-        sides: 3 + Math.floor(Math.random() * 4), // 3-6 sides
-      });
-    }
-
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      shapes.forEach((shape) => {
-        // Update position slowly
-        shape.x += shape.vx;
-        shape.y += shape.vy;
-        shape.rotation += shape.rotationSpeed;
-
-        // Wrap around edges
-        if (shape.x < -shape.size) shape.x = canvas.width + shape.size;
-        if (shape.x > canvas.width + shape.size) shape.x = -shape.size;
-        if (shape.y < -shape.size) shape.y = canvas.height + shape.size;
-        if (shape.y > canvas.height + shape.size) shape.y = -shape.size;
-
-        // Draw large geometric shape with very light opacity
-        ctx.save();
-        ctx.translate(shape.x, shape.y);
-        ctx.rotate(shape.rotation);
-        
-        // Very light stroke
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        
-        for (let i = 0; i < shape.sides; i++) {
-          const angle = (Math.PI * 2 * i) / shape.sides;
-          const x = Math.cos(angle) * shape.size;
-          const y = Math.sin(angle) * shape.size;
-          if (i === 0) {
-            ctx.moveTo(x, y);
-          } else {
-            ctx.lineTo(x, y);
-          }
-        }
-        ctx.closePath();
-        ctx.stroke();
-        
-        ctx.restore();
-      });
-
-      requestAnimationFrame(animate);
-    };
-
-    animate();
+    loadVanta();
 
     return () => {
-      window.removeEventListener('resize', resizeCanvas);
+      if (vantaEffect.current) {
+        vantaEffect.current.destroy();
+      }
     };
   }, []);
 
@@ -103,29 +49,26 @@ export default function AboutPage() {
     <main className="relative min-h-screen">
       <Navigation />
       
-      {/* Hero Section with Large Background Geometry */}
+      {/* Hero Section with Vanta HALO effect */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
-        {/* Subtle Grid Background */}
+        {/* Vanta HALO effect container */}
         <div 
-          className="absolute inset-0 opacity-5"
-          style={{
-            backgroundImage: `
-              linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px)
-            `,
-            backgroundSize: '50px 50px',
-          }}
+          ref={vantaRef}
+          className="absolute inset-0 w-full h-full"
         />
         
-        {/* Large Geometric Shapes Canvas */}
-        <canvas
-          ref={canvasRef}
-          className="absolute inset-0 z-0"
-          style={{ opacity: 0.4 }}
-        />
-        
-        {/* Gradient overlay for better visibility */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/30 z-10 pointer-events-none" />
+        {/* Logo image centered on top */}
+        <div className="relative z-10 flex items-center justify-center">
+          <div className="relative w-64 h-64 md:w-96 md:h-96">
+            <Image
+              src="/planb-logo.svg"
+              alt="PlanB FX"
+              fill
+              className="object-contain"
+              priority
+            />
+          </div>
+        </div>
       </section>
       
       {/* Content Section */}
