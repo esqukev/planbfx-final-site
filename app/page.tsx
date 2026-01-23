@@ -14,7 +14,7 @@ export default function Home() {
       
       {/* Animated Strip */}
       <AnimatedStrip 
-        text="CUSTOM INTERACTIVE EXPERIENCES" 
+        text="CUSTOM INTERACTIVE INMMERSIONS" 
         speed={40}
         direction="right"
         className="bg-white dark:bg-black text-black dark:text-white py-4"
@@ -25,7 +25,7 @@ export default function Home() {
         <ContentSection
           title="Crafting Immersive Visual Experiences"
         subtitle="About Us"
-        description="We create immersive, tailored visuals that push the boundaries of your vision."
+        description="We create immersive, tailored visuals that push the boundaries of your vision. From concept to execution, we merge creativity, interaction, and technology to build unique visual experiences that engage, evolve, and resonate beyond the screen."
           stats={[
             { number: '200', numberSuffix: '+', label: 'Events organized' },
             { number: '1000', numberSuffix: '+', label: 'Publications designed' },
