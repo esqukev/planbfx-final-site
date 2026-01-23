@@ -30,7 +30,7 @@ export default function Home() {
       {/* About Section */}
       <div id="about">
         <ContentSection
-          title="Vietnam's leading creative agency"
+          title="Vietnam´s leading creative agency"
         subtitle="About Us"
         description="Founded with a vision to create extraordinary experiences, PlanB FX has become a leading agency in creative advertising, event organization, and brand consultancy. We combine innovative ideas with creative mastery to elevate brands ahead of the competition."
           stats={[
@@ -115,12 +115,12 @@ export default function Home() {
       <section id="contact" className="py-32 px-4 md:px-8 bg-gradient-to-br from-black via-zinc-900 to-black text-white">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-6xl md:text-8xl font-bold mb-8">
-            Let's Create<br />
+            Let´s Create<br />
             Something<br />
             Extraordinary
           </h2>
           <p className="text-xl text-zinc-400 mb-12">
-            Got A Project? Let's Talk
+            Got A Project? Let´s Talk
           </p>
           <button className="px-12 py-6 bg-white text-black font-semibold rounded-full hover:bg-zinc-200 transition-all transform hover:scale-105 text-lg">
             Contact Us
