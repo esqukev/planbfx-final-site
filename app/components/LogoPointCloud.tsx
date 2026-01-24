@@ -298,9 +298,9 @@ export default function LogoPointCloud() {
     // Fade in animation
     const timer = setTimeout(() => {
       setIsLoaded(true);
-      // Smooth fade in over 1.5 seconds
+      // Smooth fade in over 3 seconds (slower)
       let startTime: number | null = null;
-      const duration = 1500; // 1.5 seconds
+      const duration = 3000; // 3 seconds
 
       const animate = (currentTime: number) => {
         if (startTime === null) startTime = currentTime;
@@ -317,7 +317,7 @@ export default function LogoPointCloud() {
       };
 
       requestAnimationFrame(animate);
-    }, 100); // Small delay before starting fade
+    }, 200); // Slightly longer delay before starting fade
 
     return () => clearTimeout(timer);
   }, []);
