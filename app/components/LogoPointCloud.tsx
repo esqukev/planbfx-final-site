@@ -32,26 +32,13 @@ export default function LogoPointCloud() {
           const shapes = SVGLoader.createShapes(path);
           shapes.forEach((shape: any) => {
             shape.getSpacedPoints(1200).forEach((p: any) => {
-              // Enhanced 3D depth effect with more variation
-              const zOffset = (Math.random() - 0.5) * 0.8;
-              // Add slight random offset for more organic 3D feel
-              const xOffset = (Math.random() - 0.5) * 0.1;
-              const yOffset = (Math.random() - 0.5) * 0.1;
-              points.push(new THREE.Vector3(p.x + xOffset, -p.y + yOffset, zOffset));
+              points.push(new THREE.Vector3(p.x, -p.y, 0));
             });
           });
         });
 
         const geo = new THREE.BufferGeometry().setFromPoints(points);
         geo.center();
-        
-        // Scale to fit in viewport completely - larger scale for bigger logo
-        const box = new THREE.Box3().setFromBufferAttribute(geo.attributes.position);
-        const size = box.getSize(new THREE.Vector3());
-        const maxDim = Math.max(size.x, size.y);
-        const scale = 90 / maxDim; // Scale to fit in viewport completely
-        
-        geo.scale(scale, scale, scale);
 
         if (!cancelled) setGeometry(geo);
       } catch (e) {
@@ -72,13 +59,12 @@ export default function LogoPointCloud() {
 
   return (
     <points ref={ref} geometry={geometry}>
-      <pointsMaterial 
-        size={1.2} 
-        color="#ffffff" 
-        transparent 
-        opacity={0.95} 
+      <pointsMaterial
+        size={0.7}
+        color="#ffffff"
+        transparent
+        opacity={0.9}
         depthWrite={false}
-        sizeAttenuation={true}
       />
     </points>
   );
