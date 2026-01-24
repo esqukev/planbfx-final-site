@@ -4,6 +4,7 @@ import ContentSection from './components/ContentSection';
 import ProjectGrid from './components/ProjectGrid';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
+import PointCloudVisual from './components/PointCloudVisual';
 
 export default function Home() {
   return (
@@ -26,8 +27,17 @@ export default function Home() {
           title="Crafting Immersive Visual Experiences"
           description="We create immersive, tailored visuals that push the boundaries of your vision. From concept to execution, we merge creativity, interaction, and technology to build unique visual experiences that engage, evolve, and resonate beyond the screen."
           learnMoreLink="/about"
+          sideVisual={<PointCloudVisual className="rounded-lg border border-black/10 dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.02] backdrop-blur-sm" />}
         />
       </div>
+
+      {/* Animated Strip */}
+      <AnimatedStrip
+        text="CUSTOM INTERACTIVE INMMERSION"
+        speed={40}
+        direction="right"
+        className="bg-white dark:bg-black text-black dark:text-white py-4"
+      />
       
       {/* Seamless Hero Background Section */}
       <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-black via-zinc-900 to-black">

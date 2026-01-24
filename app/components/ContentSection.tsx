@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import type { ReactNode } from 'react';
 import { useEffect, useRef, useState } from 'react';
 
 interface ContentSectionProps {
@@ -9,6 +10,7 @@ interface ContentSectionProps {
   subtitle?: string;
   description: string;
   imageUrl?: string;
+  sideVisual?: ReactNode;
   reverse?: boolean;
   stats?: Array<{ number: string; numberSuffix?: string; label: string }>;
   learnMoreLink?: string;
@@ -19,12 +21,14 @@ export default function ContentSection({
   subtitle,
   description,
   imageUrl,
+  sideVisual,
   reverse = false,
   stats,
   learnMoreLink,
 }: ContentSectionProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const hasRight = Boolean(imageUrl || sideVisual);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -54,8 +58,8 @@ export default function ContentSection({
       ref={sectionRef}
       className={`py-24 px-4 md:px-8 ${reverse ? 'bg-zinc-50 dark:bg-zinc-900' : 'bg-white dark:bg-black'}`}
     >
-      <div className={`max-w-7xl mx-auto flex flex-col ${reverse ? 'md:flex-row-reverse' : 'md:flex-row'} ${imageUrl ? 'items-center' : 'items-start'} gap-12`}>
-        <div className={`flex-1 ${!imageUrl ? 'max-w-3xl' : ''}`}>
+      <div className={`max-w-7xl mx-auto flex flex-col ${reverse ? 'md:flex-row-reverse' : 'md:flex-row'} ${hasRight ? 'items-center' : 'items-start'} gap-10 md:gap-12`}>
+        <div className={`flex-1 ${hasRight ? 'md:max-w-[620px]' : 'max-w-3xl'}`}>
           {subtitle && (
             <span className={`text-sm uppercase tracking-wider text-zinc-500 mb-4 block transition-all duration-1000 ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
@@ -111,19 +115,25 @@ export default function ContentSection({
             </Link>
           )}
         </div>
-        {imageUrl && (
-          <div className={`flex-1 w-full transition-all duration-1000 delay-300 ${
-            isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
-          }`}>
-            <div className="relative aspect-video rounded-lg overflow-hidden shadow-2xl">
-              <Image
-                src={imageUrl}
-                alt={title}
-                fill
-                className="object-contain"
-                sizes="(max-width: 768px) 100vw, 50vw"
-              />
-            </div>
+        {hasRight && (
+          <div
+            className={`flex-1 w-full md:max-w-[440px] transition-all duration-1000 delay-300 ${
+              isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
+            }`}
+          >
+            {imageUrl ? (
+              <div className="relative aspect-video rounded-lg overflow-hidden shadow-2xl">
+                <Image
+                  src={imageUrl}
+                  alt={title}
+                  fill
+                  className="object-contain"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+              </div>
+            ) : (
+              sideVisual
+            )}
           </div>
         )}
       </div>
