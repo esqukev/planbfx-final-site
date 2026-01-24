@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+// @ts-ignore - Vercel may fail to resolve `three` types even when installed; runtime import is valid.
 import * as THREE from 'three';
 
 type PointCloudVisualProps = {
@@ -61,6 +62,40 @@ export default function PointCloudVisual({ className = '' }: PointCloudVisualPro
 
     const points = new THREE.Points(geometry, material);
     scene.add(points);
+
+    // “Depth” pulse points (subset, same positions, larger size, animated)
+    const makePulseLayer = (seedOffset: number, layerCount: number) => {
+      const pulseGeometry = new THREE.BufferGeometry();
+      const pulsePositions = new Float32Array(layerCount * 3);
+      for (let i = 0; i < layerCount; i++) {
+        const idx = Math.floor(Math.random() * count);
+        pulsePositions[i * 3 + 0] = positions[idx * 3 + 0];
+        pulsePositions[i * 3 + 1] = positions[idx * 3 + 1];
+        pulsePositions[i * 3 + 2] = positions[idx * 3 + 2];
+      }
+      pulseGeometry.setAttribute('position', new THREE.BufferAttribute(pulsePositions, 3));
+
+      const pulseMaterial = new THREE.PointsMaterial({
+        color: 0xffffff,
+        size: 0.04,
+        transparent: true,
+        opacity: 0.35,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false,
+      });
+
+      const pulsePoints = new THREE.Points(pulseGeometry, pulseMaterial);
+      pulsePoints.renderOrder = 1;
+      scene.add(pulsePoints);
+
+      return { pulsePoints, pulseGeometry, pulseMaterial, seedOffset };
+    };
+
+    const pulseLayers = [
+      makePulseLayer(0.0, 55),
+      makePulseLayer(1.7, 45),
+      makePulseLayer(3.4, 35),
+    ];
 
     // Subtle halo ring
     const ringGeo = new THREE.RingGeometry(2.0, 2.06, 128);
@@ -130,6 +165,15 @@ export default function PointCloudVisual({ className = '' }: PointCloudVisualPro
       points.rotation.y += (targetY - points.rotation.y) * 0.06;
       points.rotation.x += (targetX - points.rotation.x) * 0.06;
 
+      // Pulse layers: gentle “pop” effect (size + opacity), without changing base sphere
+      for (let i = 0; i < pulseLayers.length; i++) {
+        const layer = pulseLayers[i];
+        const p = (Math.sin(t * (2.2 + i * 0.7) + layer.seedOffset) + 1) * 0.5; // 0..1
+        layer.pulseMaterial.size = 0.028 + p * 0.03;
+        layer.pulseMaterial.opacity = 0.12 + p * 0.28;
+        layer.pulsePoints.rotation.copy(points.rotation);
+      }
+
       ring.rotation.z += 0.0006;
 
       renderer.render(scene, camera);
@@ -143,6 +187,11 @@ export default function PointCloudVisual({ className = '' }: PointCloudVisualPro
       // pointerleave handler is anonymous; removing is optional due to element removal
       geometry.dispose();
       material.dispose();
+      for (const layer of pulseLayers) {
+        layer.pulseGeometry.dispose();
+        layer.pulseMaterial.dispose();
+        scene.remove(layer.pulsePoints);
+      }
       ringGeo.dispose();
       ringMat.dispose();
       renderer.dispose();
