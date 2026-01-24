@@ -2,7 +2,6 @@
 
 import { Canvas, useFrame } from '@react-three/fiber';
 import { useEffect, useRef, useState } from 'react';
-import * as THREE from 'three';
 
 type AnyThree = any;
 
@@ -12,6 +11,8 @@ function PointLogo({ url }: { url: string }) {
   const pointsRef = useRef<any>(null);
   const pulseLayersRef = useRef<any[]>([]);
   const ringRef = useRef<any>(null);
+  const explosionPointsRef = useRef<any>(null);
+  const originalPositionsRef = useRef<Float32Array | null>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -31,10 +32,11 @@ function PointLogo({ url }: { url: string }) {
 
           const points: number[] = [];
 
+          // Increase points from 400 to 1000 for more density
           data.paths.forEach((path: any) => {
             const shapes = SVGLoader.createShapes(path);
             shapes.forEach((shape: any) => {
-              const spacedPoints = shape.getSpacedPoints(400);
+              const spacedPoints = shape.getSpacedPoints(1000); // Increased from 400
               spacedPoints.forEach((p: any) => {
                 points.push(p.x, p.y, (Math.random() - 0.5) * 20);
               });
@@ -60,8 +62,45 @@ function PointLogo({ url }: { url: string }) {
           const scale = 120 / maxAxis;
           geo.scale(scale, scale, scale);
 
-          // Create pulse layers similar to PointCloudVisual
+          // Store original positions for explosion effect
           const positions = geo.getAttribute('position').array;
+          originalPositionsRef.current = new Float32Array(positions);
+
+          // Create explosion points - some points that will explode outward
+          const explosionCount = Math.floor(points.length / 3 * 0.15); // 15% of points
+          const explosionIndices: number[] = [];
+          for (let i = 0; i < explosionCount; i++) {
+            explosionIndices.push(Math.floor(Math.random() * (points.length / 3)));
+          }
+
+          const explosionGeo = new THREE.BufferGeometry();
+          const explosionPositions = new Float32Array(explosionIndices.length * 3);
+          explosionIndices.forEach((idx, i) => {
+            explosionPositions[i * 3 + 0] = positions[idx * 3 + 0];
+            explosionPositions[i * 3 + 1] = positions[idx * 3 + 1];
+            explosionPositions[i * 3 + 2] = positions[idx * 3 + 2];
+          });
+          explosionGeo.setAttribute('position', new THREE.BufferAttribute(explosionPositions, 3));
+
+          const explosionMaterial = new THREE.PointsMaterial({
+            color: 0xffffff,
+            size: 0.03,
+            transparent: true,
+            opacity: 0.9,
+            blending: 2, // AdditiveBlending
+            depthWrite: false,
+          });
+
+          const explosionPoints = new THREE.Points(explosionGeo, explosionMaterial);
+          explosionPointsRef.current = {
+            points: explosionPoints,
+            geometry: explosionGeo,
+            material: explosionMaterial,
+            indices: explosionIndices,
+            startTime: performance.now(),
+          };
+
+          // Create pulse layers similar to PointCloudVisual
           const count = positions.length / 3;
 
           const makePulseLayer = (layerCount: number, cadenceMs: number) => {
@@ -84,7 +123,7 @@ function PointLogo({ url }: { url: string }) {
 
             const pulseMaterial = new THREE.PointsMaterial({
               color: 0xffffff,
-              size: 0.02,
+              size: 0.025,
               transparent: true,
               opacity: 0.0,
               blending: 2, // AdditiveBlending
@@ -101,9 +140,9 @@ function PointLogo({ url }: { url: string }) {
           };
 
           const layers = [
-            makePulseLayer(36, 1400),
-            makePulseLayer(28, 1800),
-            makePulseLayer(22, 2200),
+            makePulseLayer(50, 1200),
+            makePulseLayer(40, 1600),
+            makePulseLayer(30, 2000),
           ];
 
           // Create halo ring
@@ -145,17 +184,9 @@ function PointLogo({ url }: { url: string }) {
 
     const t = clock.getElapsedTime();
 
-    // Slow continuous motion (always on) - horizontal only
-    const baseY = t * 0.35;
-
-    // Idle "breathing" motion (subtle) - horizontal only
-    const idleY = Math.sin(t * 2.1) * 0.06;
-
-    // Only horizontal rotation, no mouse interaction
-    const targetY = baseY + idleY;
-
-    // Smooth interpolation
-    group.current.rotation.y += (targetY - group.current.rotation.y) * 0.06;
+    // HORIZONTAL ROTATION ONLY (Y axis)
+    // Continuous smooth rotation
+    group.current.rotation.y = t * 0.3; // Direct rotation, no interpolation needed
 
     // Update pulse layers
     const now = performance.now();
@@ -168,11 +199,54 @@ function PointLogo({ url }: { url: string }) {
       }
 
       const env = phase < 0.55 ? easeInOut(phase / 0.55) : 1 - easeInOut((phase - 0.55) / 0.45);
-      layer.pulseMaterial.size = 0.018 + env * 0.045;
-      layer.pulseMaterial.opacity = 0.02 + env * 0.38;
+      layer.pulseMaterial.size = 0.02 + env * 0.05;
+      layer.pulseMaterial.opacity = 0.05 + env * 0.45;
       if (group.current) {
         layer.pulseGeometry.attributes.position.needsUpdate = true;
       }
+    }
+
+    // Explosion effect - points explode outward and return
+    if (explosionPointsRef.current && originalPositionsRef.current) {
+      const explosion = explosionPointsRef.current;
+      const elapsed = (now - explosion.startTime) % 3000; // 3 second cycle
+      const phase = elapsed / 3000;
+      
+      const positions = explosion.geometry.attributes.position.array;
+      const originalPos = originalPositionsRef.current;
+
+      explosion.indices.forEach((idx: number, i: number) => {
+        const baseX = originalPos[idx * 3 + 0];
+        const baseY = originalPos[idx * 3 + 1];
+        const baseZ = originalPos[idx * 3 + 2];
+
+        // Explosion: points move outward then return
+        let distance = 0;
+        if (phase < 0.5) {
+          // Exploding outward
+          distance = easeInOut(phase * 2) * 8; // Max distance 8 units
+        } else {
+          // Returning
+          distance = easeInOut((1 - phase) * 2) * 8;
+        }
+
+        // Random direction for each point
+        const angle = (idx * 137.5) % (Math.PI * 2); // Golden angle for distribution
+        const elevation = (idx * 0.1) % Math.PI;
+
+        const offsetX = Math.sin(elevation) * Math.cos(angle) * distance;
+        const offsetY = Math.sin(elevation) * Math.sin(angle) * distance;
+        const offsetZ = Math.cos(elevation) * distance;
+
+        positions[i * 3 + 0] = baseX + offsetX;
+        positions[i * 3 + 1] = baseY + offsetY;
+        positions[i * 3 + 2] = baseZ + offsetZ;
+      });
+
+      explosion.geometry.attributes.position.needsUpdate = true;
+      
+      // Update explosion points rotation to match main group
+      explosion.points.rotation.y = group.current.rotation.y;
     }
 
     // Update ring rotation
@@ -185,17 +259,22 @@ function PointLogo({ url }: { url: string }) {
 
   return (
     <group ref={group}>
-      {/* Main points with same style as PointCloudVisual */}
+      {/* Main points - MORE VISIBLE */}
       <points ref={pointsRef} geometry={geometry}>
         <pointsMaterial
-          size={0.015}
+          size={0.025}
           color="#ffffff"
           transparent
-          opacity={0.55}
+          opacity={0.85}
           blending={2}
           depthWrite={false}
         />
       </points>
+
+      {/* Explosion points */}
+      {explosionPointsRef.current && (
+        <primitive object={explosionPointsRef.current.points} />
+      )}
 
       {/* Pulse layers */}
       {pulseLayersRef.current.map((layer, idx) => (
