@@ -35,11 +35,11 @@ export default function LogoPointCloud() {
             const geo = new THREE.BufferGeometry().setFromPoints(points);
             geo.center();
             
-            // Scale to fit in container (800x700px)
+            // Scale logo to exactly 700px
             const box = new THREE.Box3().setFromBufferAttribute(geo.attributes.position);
             const size = box.getSize(new THREE.Vector3());
             const maxDim = Math.max(size.x, size.y);
-            const scale = 60 / maxDim; // Scale to fit in container
+            const scale = 70 / maxDim; // Scale to 700px (70 units in Three.js space)
             
             geo.scale(scale, scale, scale);
             
