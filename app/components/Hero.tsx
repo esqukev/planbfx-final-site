@@ -1,13 +1,13 @@
 'use client';
 
 import LogoPointCloud from './LogoPointCloud';
-import WireframeBackground from './WireframeBackground';
+import InteractiveBackground from './InteractiveBackground';
 
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
-      {/* Wireframe Background - digital waves, no mouse interaction */}
-      <WireframeBackground />
+      {/* Interactive Background - auto-moving, no mouse interaction */}
+      <InteractiveBackground />
 
       {/* Space for brand banner or animation */}
       <div className="relative z-10 w-full h-full">
