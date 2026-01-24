@@ -13,6 +13,7 @@ function PointLogo({ url }: { url: string }) {
   const ringRef = useRef<any>(null);
   const explosionPointsRef = useRef<any>(null);
   const originalPositionsRef = useRef<Float32Array | null>(null);
+  const threeRef = useRef<AnyThree | null>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -29,6 +30,9 @@ function PointLogo({ url }: { url: string }) {
 
         loader.load(url, (data: any) => {
           if (cancelled) return;
+
+          // Store THREE reference for useFrame
+          threeRef.current = THREE;
 
           const points: number[] = [];
 
@@ -184,10 +188,46 @@ function PointLogo({ url }: { url: string }) {
     if (!group.current) return;
 
     const t = clock.getElapsedTime();
+    const time = t;
 
     // HORIZONTAL ROTATION ONLY (Y axis)
     // Continuous smooth rotation
     group.current.rotation.y = t * 0.3; // Direct rotation, no interpolation needed
+
+    // EFECTO 2 — Depth-based Opacity (3D real)
+    // Los puntos lejanos se ven más suaves
+    if (pointsRef.current && pointsRef.current.geometry && threeRef.current) {
+      const pos = pointsRef.current.geometry.attributes.position;
+      if (pos) {
+        const THREE = threeRef.current;
+        const colors: number[] = [];
+
+        for (let i = 0; i < pos.count; i++) {
+          const z = pos.getZ(i);
+          const alpha = THREE.MathUtils.clamp(
+            (z + 20) / 40,
+            0.3,
+            1
+          );
+          colors.push(1, 1, 1, alpha);
+        }
+
+        pointsRef.current.geometry.setAttribute(
+          'color',
+          new THREE.Float32BufferAttribute(colors, 4)
+        );
+        pointsRef.current.geometry.attributes.color.needsUpdate = true;
+      }
+    }
+
+    // EFECTO 4 — Pulse Light (energía interna)
+    // Un pulso lento, muy fino
+    if (pointsRef.current && pointsRef.current.material) {
+      const material = pointsRef.current.material as any;
+      if (material && typeof material.opacity !== 'undefined') {
+        material.opacity = 0.75 + Math.sin(time * 1.3) * 0.15;
+      }
+    }
 
     // Update pulse layers
     const now = performance.now();
@@ -261,14 +301,16 @@ function PointLogo({ url }: { url: string }) {
   return (
     <group ref={group}>
       {/* Main points - MORE VISIBLE */}
+      {/* EFECTO 1 — Depth Fog (volumen cinematográfico) */}
       <points ref={pointsRef} geometry={geometry}>
         <pointsMaterial
-          size={0.025}
+          size={1.4}
           color="#ffffff"
           transparent
           opacity={0.85}
-          blending={2}
           depthWrite={false}
+          blending={2}
+          vertexColors={true}
         />
       </points>
 
