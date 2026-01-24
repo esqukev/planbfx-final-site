@@ -3,7 +3,6 @@
 import { Canvas } from '@react-three/fiber';
 import { Suspense } from 'react';
 import LogoPointCloud from './LogoPointCloud';
-import Cursor3DPointCloud from './Cursor3DPointCloud';
 
 export default function LogoBanner() {
   return (
@@ -15,9 +14,7 @@ export default function LogoBanner() {
           <directionalLight position={[-10, -10, -5]} intensity={0.8} />
           <pointLight position={[0, 0, 10]} intensity={0.6} />
           <Suspense fallback={null}>
-            <Cursor3DPointCloud>
-              <LogoPointCloud />
-            </Cursor3DPointCloud>
+            <LogoPointCloud />
           </Suspense>
         </Canvas>
       </div>
