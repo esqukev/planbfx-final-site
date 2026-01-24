@@ -1,12 +1,12 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
-import { useFrame } from '@react-three/fiber';
+import { useEffect, useState } from 'react';
+import { useCursor3DEffect } from './useCursor3DEffect';
 
 type AnyThree = any;
 
 export default function LogoPointCloud() {
-  const ref = useRef<any>(null);
+  const ref = useCursor3DEffect();
   const [geometry, setGeometry] = useState<any>(null);
 
   useEffect(() => {
@@ -32,18 +32,13 @@ export default function LogoPointCloud() {
           const shapes = SVGLoader.createShapes(path);
           shapes.forEach((shape: any) => {
             shape.getSpacedPoints(1200).forEach((p: any) => {
-              // Add 3D depth effect with extrude-like variation
-              const zOffset = (Math.random() - 0.5) * 0.5;
-              points.push(new THREE.Vector3(p.x, -p.y, zOffset));
+              points.push(new THREE.Vector3(p.x, -p.y, 0));
             });
           });
         });
 
         const geo = new THREE.BufferGeometry().setFromPoints(points);
         geo.center();
-        
-        // Scale down by 40% (make 60% of original size)
-        geo.scale(0.6, 0.6, 0.6);
 
         if (!cancelled) setGeometry(geo);
       } catch (e) {
@@ -65,7 +60,7 @@ export default function LogoPointCloud() {
   return (
     <points ref={ref} geometry={geometry}>
       <pointsMaterial
-        size={0.7}
+        size={0.6}
         color="#ffffff"
         transparent
         opacity={0.9}

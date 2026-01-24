@@ -58,9 +58,16 @@ export default function ContentSection({
   return (
     <section 
       ref={sectionRef}
-      className={`py-24 px-4 md:px-8 ${backgroundClassName || (reverse ? 'bg-zinc-50 dark:bg-zinc-900' : 'bg-white dark:bg-black')}`}
+      className={`relative py-24 px-4 md:px-8 ${backgroundClassName || (reverse ? 'bg-zinc-50 dark:bg-zinc-900' : 'bg-white dark:bg-black')}`}
     >
-      <div className={`max-w-7xl mx-auto flex flex-col ${reverse ? 'md:flex-row-reverse' : 'md:flex-row'} ${hasRight ? 'items-center' : 'items-start'} gap-10 md:gap-10`}>
+      {/* Light effects on the left for dark backgrounds */}
+      {backgroundClassName?.includes('from-black') && (
+        <div className="absolute inset-0 opacity-20 pointer-events-none">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-purple-500 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        </div>
+      )}
+      <div className={`relative z-10 max-w-7xl mx-auto flex flex-col ${reverse ? 'md:flex-row-reverse' : 'md:flex-row'} ${hasRight ? 'items-center' : 'items-start'} gap-10 md:gap-10`}>
         <div className={`flex-1 ${hasRight ? 'md:max-w-[620px]' : 'max-w-3xl'}`}>
           {subtitle && (
             <span className={`text-sm uppercase tracking-wider text-zinc-500 mb-4 block transition-all duration-1000 ${
