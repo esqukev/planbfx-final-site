@@ -28,7 +28,7 @@ export default function Home() {
           description="We create immersive, tailored visuals that push the boundaries of your vision. From concept to execution, we merge creativity, interaction, and technology to build unique visual experiences that engage, evolve, and resonate beyond the screen."
           learnMoreLink="/about"
           sideVisual={<PointCloudVisual />}
-          backgroundClassName="bg-gradient-to-bl from-black via-zinc-900 to-black text-white"
+          backgroundClassName="bg-gradient-to-b from-black via-zinc-900 to-black text-white"
         />
       </div>
 

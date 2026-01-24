@@ -1,6 +1,6 @@
 'use client';
 
-import LogoBanner from './LogoBanner';
+import LogoPointCloud3D from './LogoPointCloud3D';
 
 export default function Hero() {
   return (
@@ -13,7 +13,7 @@ export default function Hero() {
 
       {/* Space for brand banner or animation */}
       <div className="relative z-10 w-full h-full">
-        <LogoBanner />
+        <LogoPointCloud3D />
       </div>
     </section>
   );
