@@ -1,6 +1,6 @@
 'use client';
 
-import { Canvas, useFrame } from '@react-three/fiber';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { useEffect, useRef, useState } from 'react';
 
 type AnyThree = any;
@@ -8,6 +8,7 @@ type AnyThree = any;
 function PointLogo({ url }: { url: string }) {
   const group = useRef<any>(null);
   const [geometry, setGeometry] = useState<any>(null);
+  const { mouse } = useThree();
 
   useEffect(() => {
     let cancelled = false;
@@ -73,11 +74,22 @@ function PointLogo({ url }: { url: string }) {
     };
   }, [url]);
 
-  useFrame((_, delta) => {
-    if (group.current) {
-      // Rotate only horizontally (Y axis only)
-      group.current.rotation.y += delta * 0.25;
-    }
+  useFrame(({ clock }) => {
+    if (!group.current) return;
+
+    const t = clock.getElapsedTime();
+
+    // Slow continuous motion (always on) - horizontal only
+    const baseY = t * 0.35;
+
+    // Idle "breathing" motion (subtle) - horizontal only
+    const idleY = Math.sin(t * 2.1) * 0.06;
+
+    // Pointer influence (when hovering) - horizontal only
+    const targetY = baseY + idleY + (mouse.x * 0.35);
+
+    // Smooth interpolation
+    group.current.rotation.y += (targetY - group.current.rotation.y) * 0.06;
   });
 
   if (!geometry) return null;
