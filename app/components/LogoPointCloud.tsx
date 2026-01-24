@@ -73,7 +73,7 @@ export default function LogoPointCloud() {
   return (
     <points ref={ref} geometry={geometry}>
       <pointsMaterial 
-        size={1.2} 
+        size={1.5} 
         color="#ffffff" 
         transparent 
         opacity={0.95} 
