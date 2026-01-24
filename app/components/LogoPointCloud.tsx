@@ -20,7 +20,7 @@ export default function LogoPointCloud() {
         // @ts-ignore
         const { SVGLoader }: AnyThree = await import('three/examples/jsm/loaders/SVGLoader.js');
 
-        const res = await fetch('/logos/planblogolanding.svg');
+        const res = await fetch('/logos/plablandinglogo.svg');
         const svgText = await res.text();
 
         const loader = new SVGLoader();
@@ -64,8 +64,8 @@ export default function LogoPointCloud() {
   if (!geometry) return null;
 
   return (
-    <points ref={ref} geometry={geometry}>
-      <pointsMaterial size={0.7} color="#ffffff" transparent opacity={0.9} depthWrite={false} />
+    <points ref={ref} geometry={geometry} scale={0.7}>
+      <pointsMaterial size={0.5} color="#ffffff" transparent opacity={0.9} depthWrite={false} />
     </points>
   );
 }
