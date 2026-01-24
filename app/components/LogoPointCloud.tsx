@@ -45,11 +45,11 @@ export default function LogoPointCloud() {
         const geo = new THREE.BufferGeometry().setFromPoints(points);
         geo.center();
         
-        // Scale to fit in viewport completely - larger scale for bigger logo
+        // Scale to fit in viewport completely - ensure logo fits in larger container
         const box = new THREE.Box3().setFromBufferAttribute(geo.attributes.position);
         const size = box.getSize(new THREE.Vector3());
         const maxDim = Math.max(size.x, size.y);
-        const scale = 100 / maxDim; // Larger scale for bigger logo
+        const scale = 120 / maxDim; // Larger scale to fit in 700px container
         
         geo.scale(scale, scale, scale);
 
@@ -67,12 +67,6 @@ export default function LogoPointCloud() {
     };
   }, []);
 
-  useFrame(() => {
-    if (ref.current) {
-      ref.current.rotation.y += 0.003;
-      ref.current.rotation.x += 0.001;
-    }
-  });
 
   if (!geometry) return null;
 
