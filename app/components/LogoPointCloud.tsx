@@ -32,13 +32,14 @@ function PointLogo({ url }: { url: string }) {
 
           const points: number[] = [];
 
-          // Increase points from 400 to 1000 for more density
+          // Increase points significantly for much more density
           data.paths.forEach((path: any) => {
             const shapes = SVGLoader.createShapes(path);
             shapes.forEach((shape: any) => {
-              const spacedPoints = shape.getSpacedPoints(1000); // Increased from 400
+              const spacedPoints = shape.getSpacedPoints(3000); // Much more points
               spacedPoints.forEach((p: any) => {
-                points.push(p.x, p.y, (Math.random() - 0.5) * 20);
+                // Flip Y to fix upside-down logo
+                points.push(p.x, -p.y, (Math.random() - 0.5) * 20);
               });
             });
           });
