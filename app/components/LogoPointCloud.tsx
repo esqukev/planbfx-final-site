@@ -32,13 +32,23 @@ export default function LogoPointCloud() {
           const shapes = SVGLoader.createShapes(path);
           shapes.forEach((shape: any) => {
             shape.getSpacedPoints(1200).forEach((p: any) => {
-              points.push(new THREE.Vector3(p.x, -p.y, 0));
+              // Add some Z variation for 3D depth effect
+              const zOffset = (Math.random() - 0.5) * 0.3;
+              points.push(new THREE.Vector3(p.x, -p.y, zOffset));
             });
           });
         });
 
         const geo = new THREE.BufferGeometry().setFromPoints(points);
         geo.center();
+        
+        // Scale to fit in viewport completely
+        const box = new THREE.Box3().setFromBufferAttribute(geo.attributes.position);
+        const size = box.getSize(new THREE.Vector3());
+        const maxDim = Math.max(size.x, size.y);
+        const scale = 80 / maxDim; // Scale to fit in ~80 units
+        
+        geo.scale(scale, scale, scale);
 
         if (!cancelled) setGeometry(geo);
       } catch (e) {
@@ -64,9 +74,15 @@ export default function LogoPointCloud() {
   if (!geometry) return null;
 
   return (
-    <points ref={ref} geometry={geometry} scale={0.3}>
-      <pointsMaterial size={0.4} color="#ffffff" transparent opacity={0.9} depthWrite={false} />
+    <points ref={ref} geometry={geometry}>
+      <pointsMaterial 
+        size={0.5} 
+        color="#ffffff" 
+        transparent 
+        opacity={0.95} 
+        depthWrite={false}
+        sizeAttenuation={true}
+      />
     </points>
   );
 }
-
