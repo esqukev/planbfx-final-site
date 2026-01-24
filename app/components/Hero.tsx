@@ -1,5 +1,7 @@
 'use client';
 
+import LogoBanner from './LogoBanner';
+
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-black via-zinc-900 to-black">
@@ -10,8 +12,8 @@ export default function Hero() {
       </div>
 
       {/* Space for brand banner or animation */}
-      <div className="relative z-10 w-full h-full">
-        {/* Content will be added here */}
+      <div className="relative z-10 w-full px-4 md:px-8">
+        <LogoBanner />
       </div>
     </section>
   );
