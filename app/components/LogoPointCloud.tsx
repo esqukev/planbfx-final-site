@@ -291,12 +291,45 @@ function PointLogo({ url }: { url: string }) {
 }
 
 export default function LogoPointCloud() {
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [opacity, setOpacity] = useState(0);
+
+  useEffect(() => {
+    // Fade in animation
+    const timer = setTimeout(() => {
+      setIsLoaded(true);
+      // Smooth fade in over 1.5 seconds
+      let startTime: number | null = null;
+      const duration = 1500; // 1.5 seconds
+
+      const animate = (currentTime: number) => {
+        if (startTime === null) startTime = currentTime;
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        
+        // Ease out cubic for smooth fade
+        const eased = 1 - Math.pow(1 - progress, 3);
+        setOpacity(eased);
+
+        if (progress < 1) {
+          requestAnimationFrame(animate);
+        }
+      };
+
+      requestAnimationFrame(animate);
+    }, 100); // Small delay before starting fade
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div
       style={{
         width: '100%',
         height: '1000px',
         overflow: 'hidden',
+        opacity: opacity,
+        transition: 'opacity 0.3s ease-out',
       }}
     >
       <Canvas
