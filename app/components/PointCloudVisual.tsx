@@ -245,8 +245,7 @@ export default function PointCloudVisual({ className = '' }: PointCloudVisualPro
   return (
     <div
       ref={mountRef}
-      // v2: dynamic three import + autonomous pulse layers
-      className={`relative mx-auto w-full max-w-[420px] aspect-square -translate-y-4 md:-translate-y-6 ${className}`}
+      className={`relative mx-auto w-full max-w-[420px] aspect-square ${className}`}
       aria-hidden="true"
     />
   );
