@@ -27,7 +27,7 @@ export default function Home() {
           title="Crafting Immersive Visual Experiences"
           description="We create immersive, tailored visuals that push the boundaries of your vision. From concept to execution, we merge creativity, interaction, and technology to build unique visual experiences that engage, evolve, and resonate beyond the screen."
           learnMoreLink="/about"
-          sideVisual={<PointCloudVisual className="rounded-lg border border-black/10 dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.02] backdrop-blur-sm" />}
+          sideVisual={<PointCloudVisual />}
         />
       </div>
 
