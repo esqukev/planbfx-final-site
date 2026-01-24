@@ -25,13 +25,8 @@ export default function Cursor3DPointCloud({ children }: Cursor3DPointCloudProps
 
     // mezcla rotación + cursor (parallax 3D)
     ref.current.rotation.y = baseY + mouse.x * intensity;
-
     ref.current.rotation.x = baseX - mouse.y * intensity;
   });
 
-  return (
-    <group ref={ref}>
-      {children}
-    </group>
-  );
+  return <group ref={ref}>{children}</group>;
 }
