@@ -8,7 +8,7 @@ export default function LogoBanner() {
   return (
     <div className="relative w-full h-full flex items-center justify-center">
       <div className="w-[800px] h-[700px] flex items-center justify-center">
-        <Canvas camera={{ position: [0, 0, 180], fov: 45 }}>
+        <Canvas camera={{ position: [0, 0, 200], fov: 50 }}>
           <ambientLight intensity={0.5} />
           <directionalLight position={[10, 10, 5]} intensity={1.2} />
           <directionalLight position={[-10, -10, -5]} intensity={0.8} />

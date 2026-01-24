@@ -34,6 +34,15 @@ export default function LogoPointCloud() {
 
             const geo = new THREE.BufferGeometry().setFromPoints(points);
             geo.center();
+            
+            // Scale to fit in container (800x700px)
+            const box = new THREE.Box3().setFromBufferAttribute(geo.attributes.position);
+            const size = box.getSize(new THREE.Vector3());
+            const maxDim = Math.max(size.x, size.y);
+            const scale = 60 / maxDim; // Scale to fit in container
+            
+            geo.scale(scale, scale, scale);
+            
             setGeometry(geo);
           });
       });
