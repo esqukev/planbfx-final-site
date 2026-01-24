@@ -1,11 +1,12 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import PointCloud3DWrapper from './PointCloud3DWrapper';
+import { Canvas, useFrame } from '@react-three/fiber';
+import { useEffect, useRef, useState } from 'react';
 
 type AnyThree = any;
 
-export default function LogoPointCloud() {
+function PointLogo({ url }: { url: string }) {
+  const group = useRef<any>(null);
   const [geometry, setGeometry] = useState<any>(null);
 
   useEffect(() => {
@@ -13,36 +14,55 @@ export default function LogoPointCloud() {
 
     const load = async () => {
       try {
-        // Avoid static `three` imports to prevent Vercel TS type-resolution issues.
+        // Dynamic imports to avoid Vercel TS issues
         // @ts-ignore
         const THREE: AnyThree = await import('three');
         // @ts-ignore
         const { SVGLoader }: AnyThree = await import('three/examples/jsm/loaders/SVGLoader.js');
 
-        const res = await fetch('/logos/plablandinglogo.svg');
-        const svgText = await res.text();
-
         const loader = new SVGLoader();
-        const svg = loader.parse(svgText);
 
-        const points: any[] = [];
+        loader.load(url, (data: any) => {
+          if (cancelled) return;
 
-        svg.paths.forEach((path: any) => {
-          const shapes = SVGLoader.createShapes(path);
-          shapes.forEach((shape: any) => {
-            shape.getSpacedPoints(1200).forEach((p: any) => {
-              points.push(new THREE.Vector3(p.x, -p.y, 0));
+          const points: number[] = [];
+
+          data.paths.forEach((path: any) => {
+            const shapes = SVGLoader.createShapes(path);
+            shapes.forEach((shape: any) => {
+              const spacedPoints = shape.getSpacedPoints(400);
+              spacedPoints.forEach((p: any) => {
+                points.push(p.x, p.y, (Math.random() - 0.5) * 20);
+              });
             });
           });
+
+          const geo = new THREE.BufferGeometry();
+          geo.setAttribute(
+            'position',
+            new THREE.Float32BufferAttribute(points, 3)
+          );
+
+          geo.center();
+
+          // 🔑 Auto scale to fit nicely
+          const box = new THREE.Box3().setFromBufferAttribute(
+            geo.getAttribute('position') as any
+          );
+          const size = new THREE.Vector3();
+          box.getSize(size);
+
+          const maxAxis = Math.max(size.x, size.y);
+          const scale = 120 / maxAxis;
+          geo.scale(scale, scale, scale);
+
+          if (!cancelled) {
+            setGeometry(geo);
+          }
         });
-
-        const geo = new THREE.BufferGeometry().setFromPoints(points);
-        geo.center();
-
-        if (!cancelled) setGeometry(geo);
       } catch (e) {
         // eslint-disable-next-line no-console
-        console.error('LogoPointCloud failed to load:', e);
+        console.error('PointLogo failed to load:', e);
       }
     };
 
@@ -51,23 +71,48 @@ export default function LogoPointCloud() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [url]);
 
+  useFrame((_, delta) => {
+    if (group.current) {
+      group.current.rotation.x += delta * 0.15;
+      group.current.rotation.y += delta * 0.25;
+    }
+  });
 
   if (!geometry) return null;
 
   return (
-    <PointCloud3DWrapper>
+    <group ref={group}>
       <points geometry={geometry}>
         <pointsMaterial
-          size={0.6}
+          size={1.4}
           color="#ffffff"
           transparent
           opacity={0.9}
           depthWrite={false}
-          sizeAttenuation={true}
         />
       </points>
-    </PointCloud3DWrapper>
+    </group>
+  );
+}
+
+export default function LogoPointCloud() {
+  return (
+    <div
+      style={{
+        width: '100%',
+        height: '700px',
+        overflow: 'hidden',
+      }}
+    >
+      <Canvas
+        camera={{ position: [0, 0, 180], fov: 45 }}
+        style={{ width: '100%', height: '100%' }}
+      >
+        <ambientLight intensity={1} />
+        <PointLogo url="/logos/planblogolanding.svg" />
+      </Canvas>
+    </div>
   );
 }
