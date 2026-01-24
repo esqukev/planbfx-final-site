@@ -12,7 +12,7 @@ export default function Hero() {
       </div>
 
       {/* Space for brand banner or animation */}
-      <div className="relative z-10 w-full px-4 md:px-8">
+      <div className="relative z-10 w-full h-full">
         <LogoBanner />
       </div>
     </section>

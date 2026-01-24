@@ -64,8 +64,8 @@ export default function LogoPointCloud() {
   if (!geometry) return null;
 
   return (
-    <points ref={ref} geometry={geometry} scale={0.7}>
-      <pointsMaterial size={0.5} color="#ffffff" transparent opacity={0.9} depthWrite={false} />
+    <points ref={ref} geometry={geometry} scale={0.3}>
+      <pointsMaterial size={0.4} color="#ffffff" transparent opacity={0.9} depthWrite={false} />
     </points>
   );
 }
