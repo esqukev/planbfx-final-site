@@ -14,6 +14,7 @@ interface ContentSectionProps {
   reverse?: boolean;
   stats?: Array<{ number: string; numberSuffix?: string; label: string }>;
   learnMoreLink?: string;
+  backgroundClassName?: string;
 }
 
 export default function ContentSection({
@@ -25,6 +26,7 @@ export default function ContentSection({
   reverse = false,
   stats,
   learnMoreLink,
+  backgroundClassName,
 }: ContentSectionProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -56,7 +58,7 @@ export default function ContentSection({
   return (
     <section 
       ref={sectionRef}
-      className={`py-24 px-4 md:px-8 ${reverse ? 'bg-zinc-50 dark:bg-zinc-900' : 'bg-white dark:bg-black'}`}
+      className={`py-24 px-4 md:px-8 ${backgroundClassName || (reverse ? 'bg-zinc-50 dark:bg-zinc-900' : 'bg-white dark:bg-black')}`}
     >
       <div className={`max-w-7xl mx-auto flex flex-col ${reverse ? 'md:flex-row-reverse' : 'md:flex-row'} ${hasRight ? 'items-center' : 'items-start'} gap-10 md:gap-10`}>
         <div className={`flex-1 ${hasRight ? 'md:max-w-[620px]' : 'max-w-3xl'}`}>
@@ -67,12 +69,12 @@ export default function ContentSection({
               {subtitle}
             </span>
           )}
-          <h2 className={`text-[3.3rem] md:text-[4.4rem] font-bold mb-6 text-black dark:text-white leading-tight transition-all duration-1000 delay-100 ${
+          <h2 className={`text-[3.3rem] md:text-[4.4rem] font-bold mb-6 ${backgroundClassName?.includes('from-black') ? 'text-white' : 'text-black dark:text-white'} leading-tight transition-all duration-1000 delay-100 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}>
             {title}
           </h2>
-          <p className={`text-[1.1rem] text-zinc-600 dark:text-zinc-400 mb-8 leading-relaxed transition-all duration-1000 delay-200 ${
+          <p className={`text-[1.1rem] ${backgroundClassName?.includes('from-black') ? 'text-zinc-300' : 'text-zinc-600 dark:text-zinc-400'} mb-8 leading-relaxed transition-all duration-1000 delay-200 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}>
             {description}
@@ -97,7 +99,7 @@ export default function ContentSection({
           {learnMoreLink && (
             <Link 
               href={learnMoreLink}
-              className={`inline-flex items-center gap-2 text-black dark:text-white font-semibold hover:gap-4 transition-all group mt-6 duration-1000 delay-300 ${
+              className={`inline-flex items-center gap-2 ${backgroundClassName?.includes('from-black') ? 'text-white' : 'text-black dark:text-white'} font-semibold hover:gap-4 transition-all group mt-6 duration-1000 delay-300 ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               }`}
             >
