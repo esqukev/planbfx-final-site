@@ -75,7 +75,7 @@ function PointLogo({ url }: { url: string }) {
 
   useFrame((_, delta) => {
     if (group.current) {
-      group.current.rotation.x += delta * 0.15;
+      // Rotate only horizontally (Y axis only)
       group.current.rotation.y += delta * 0.25;
     }
   });
@@ -102,7 +102,7 @@ export default function LogoPointCloud() {
     <div
       style={{
         width: '100%',
-        height: '700px',
+        height: '1000px',
         overflow: 'hidden',
       }}
     >
@@ -111,7 +111,7 @@ export default function LogoPointCloud() {
         style={{ width: '100%', height: '100%' }}
       >
         <ambientLight intensity={1} />
-        <PointLogo url="/logos/planblogolanding.svg" />
+        <PointLogo url="/logos/plablandinglogo.svg" />
       </Canvas>
     </div>
   );
