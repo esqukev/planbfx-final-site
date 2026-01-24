@@ -8,7 +8,7 @@ import Cursor3DPointCloud from './Cursor3DPointCloud';
 export default function LogoBanner() {
   return (
     <div className="relative w-full h-full flex items-center justify-center">
-      <div className="w-[700px] h-[700px] -translate-x-8 md:-translate-x-12">
+      <div className="w-[900px] h-[900px] -translate-x-8 md:-translate-x-12">
         <Canvas camera={{ position: [0, 0, 120], fov: 45 }}>
           <ambientLight intensity={0.5} />
           <directionalLight position={[10, 10, 5]} intensity={1.2} />
