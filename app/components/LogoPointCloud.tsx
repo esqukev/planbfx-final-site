@@ -1,12 +1,11 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useCursor3DEffect } from './useCursor3DEffect';
+import PointCloud3DWrapper from './PointCloud3DWrapper';
 
 type AnyThree = any;
 
 export default function LogoPointCloud() {
-  const ref = useCursor3DEffect();
   const [geometry, setGeometry] = useState<any>(null);
 
   useEffect(() => {
@@ -58,15 +57,17 @@ export default function LogoPointCloud() {
   if (!geometry) return null;
 
   return (
-    <points ref={ref} geometry={geometry}>
-      <pointsMaterial
-        size={0.6}
-        color="#ffffff"
-        transparent
-        opacity={0.9}
-        depthWrite={false}
-        sizeAttenuation={true}
-      />
-    </points>
+    <PointCloud3DWrapper>
+      <points geometry={geometry}>
+        <pointsMaterial
+          size={0.6}
+          color="#ffffff"
+          transparent
+          opacity={0.9}
+          depthWrite={false}
+          sizeAttenuation={true}
+        />
+      </points>
+    </PointCloud3DWrapper>
   );
 }
