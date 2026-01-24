@@ -77,6 +77,7 @@ export default function PointCloudVisual({ className = '' }: PointCloudVisualPro
 
     let mouseX = 0;
     let mouseY = 0;
+    let hasPointer = false;
 
     const onPointerMove = (e: PointerEvent) => {
       const rect = mount.getBoundingClientRect();
@@ -84,9 +85,17 @@ export default function PointCloudVisual({ className = '' }: PointCloudVisualPro
       const y = (e.clientY - rect.top) / rect.height;
       mouseX = (x - 0.5) * 0.35;
       mouseY = (y - 0.5) * 0.35;
+      hasPointer = true;
     };
 
     mount.addEventListener('pointermove', onPointerMove, { passive: true });
+    mount.addEventListener(
+      'pointerleave',
+      () => {
+        hasPointer = false;
+      },
+      { passive: true }
+    );
 
     const resize = () => {
       const w = mount.clientWidth;
@@ -104,13 +113,22 @@ export default function PointCloudVisual({ className = '' }: PointCloudVisualPro
     const animate = () => {
       raf = window.requestAnimationFrame(animate);
 
-      // Slow continuous motion
-      points.rotation.y += 0.0014;
-      points.rotation.x += 0.0007;
+      const t = performance.now() * 0.0002;
 
-      // Light interaction
-      points.rotation.y += (mouseX - points.rotation.y) * 0.02;
-      points.rotation.x += (mouseY - points.rotation.x) * 0.02;
+      // Slow continuous motion (always on)
+      const baseY = t * 0.35;
+      const baseX = t * 0.18;
+
+      // Idle “breathing” motion (subtle)
+      const idleY = Math.sin(t * 2.1) * 0.06;
+      const idleX = Math.cos(t * 1.7) * 0.04;
+
+      // Pointer influence (when hovering)
+      const targetY = baseY + idleY + (hasPointer ? mouseX : 0);
+      const targetX = baseX + idleX + (hasPointer ? mouseY : 0);
+
+      points.rotation.y += (targetY - points.rotation.y) * 0.06;
+      points.rotation.x += (targetX - points.rotation.x) * 0.06;
 
       ring.rotation.z += 0.0006;
 
@@ -122,6 +140,7 @@ export default function PointCloudVisual({ className = '' }: PointCloudVisualPro
       window.cancelAnimationFrame(raf);
       window.removeEventListener('resize', resize);
       mount.removeEventListener('pointermove', onPointerMove);
+      // pointerleave handler is anonymous; removing is optional due to element removal
       geometry.dispose();
       material.dispose();
       ringGeo.dispose();

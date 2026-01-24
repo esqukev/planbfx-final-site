@@ -58,7 +58,7 @@ export default function ContentSection({
       ref={sectionRef}
       className={`py-24 px-4 md:px-8 ${reverse ? 'bg-zinc-50 dark:bg-zinc-900' : 'bg-white dark:bg-black'}`}
     >
-      <div className={`max-w-7xl mx-auto flex flex-col ${reverse ? 'md:flex-row-reverse' : 'md:flex-row'} ${hasRight ? 'items-center' : 'items-start'} gap-10 md:gap-12`}>
+      <div className={`max-w-7xl mx-auto flex flex-col ${reverse ? 'md:flex-row-reverse' : 'md:flex-row'} ${hasRight ? 'items-center md:justify-between' : 'items-start'} gap-10 md:gap-12`}>
         <div className={`flex-1 ${hasRight ? 'md:max-w-[620px]' : 'max-w-3xl'}`}>
           {subtitle && (
             <span className={`text-sm uppercase tracking-wider text-zinc-500 mb-4 block transition-all duration-1000 ${
@@ -117,7 +117,7 @@ export default function ContentSection({
         </div>
         {hasRight && (
           <div
-            className={`flex-1 w-full md:max-w-[440px] transition-all duration-1000 delay-300 ${
+            className={`flex-1 w-full md:max-w-[440px] md:ml-auto transition-all duration-1000 delay-300 ${
               isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
             }`}
           >
