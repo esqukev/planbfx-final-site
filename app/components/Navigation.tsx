@@ -3,9 +3,11 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   const menuItems = [
     { label: 'Home', href: '/' },
@@ -18,7 +20,16 @@ export default function Navigation() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-transparent">
       <div className="w-full px-4 md:px-8 lg:px-12 xl:px-16 py-4 flex items-center justify-between">
-        <Link href="/" className="relative h-12 w-32 cursor-pointer hover:opacity-80 transition-opacity">
+        <Link
+          href="/"
+          className="relative h-12 w-32 cursor-pointer hover:opacity-80 transition-opacity"
+          onClick={(e) => {
+            if (pathname === '/') {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+          }}
+        >
           <Image
             src="/planb-logo.svg"
             alt="PlanB FX"
