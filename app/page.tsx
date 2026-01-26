@@ -40,22 +40,6 @@ export default function Home() {
         direction="right"
         className="bg-white dark:bg-black text-black dark:text-white py-4"
       />
-
-      {/* Video Banner */}
-      <section className="relative w-full overflow-hidden bg-black min-h-[400px] flex items-center justify-center">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="w-full h-auto max-w-full"
-          style={{ maxHeight: '80vh', objectFit: 'contain', display: 'block' }}
-        >
-          <source src="/videos/plabanfisa.mov" type="video/quicktime" />
-          <source src="/videos/plabanfisa.mov" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-      </section>
       
       {/* Seamless Hero Background Section */}
       <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-black via-zinc-900 to-black">
