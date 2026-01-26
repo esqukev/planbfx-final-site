@@ -6,7 +6,6 @@ import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 import PointCloudVisual from './components/PointCloudVisual';
 import HyperSpaceBackground from './components/HyperSpaceBackground';
-import ScrollText from './components/ScrollText';
 
 export default function Home() {
   return (
@@ -140,15 +139,16 @@ export default function Home() {
       </section>
       
       {/* CTA Section */}
-      <section id="contact" className="relative py-32 px-4 md:px-8 text-white overflow-hidden min-h-screen">
+      <section id="contact" className="relative py-32 px-4 md:px-8 text-white overflow-hidden">
         {/* HyperSpace Background */}
         <HyperSpaceBackground />
         
         <div className="relative z-10 max-w-4xl mx-auto text-center">
-          <ScrollText 
-            text="Let´s Create Something Extraordinary"
-            className="mb-8"
-          />
+          <h2 className="text-6xl md:text-8xl font-bold mb-8">
+            Let´s Create<br />
+            Something<br />
+            Extraordinary
+          </h2>
           <p className="text-xl text-zinc-400 mb-12">
             Got A Project? Let´s Talk
           </p>
