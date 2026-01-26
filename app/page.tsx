@@ -7,6 +7,7 @@ import Footer from './components/Footer';
 import PointCloudVisual from './components/PointCloudVisual';
 import HyperSpaceBackground from './components/HyperSpaceBackground';
 import ScrollTextEffect from './components/ScrollTextEffect';
+import FadeInOnScroll from './components/FadeInOnScroll';
 
 export default function Home() {
   return (
@@ -150,9 +151,11 @@ export default function Home() {
             Something<br />
             Extraordinary
           </ScrollTextEffect>
-          <p className="text-xl text-zinc-400 mb-12">
+          <FadeInOnScroll 
+            className="text-xl text-zinc-400 mb-12"
+          >
             Got A Project? Let´s Talk
-          </p>
+          </FadeInOnScroll>
           <button className="px-12 py-6 bg-white text-black font-semibold rounded-full hover:bg-zinc-200 transition-all transform hover:scale-105 text-lg">
             Contact Us
           </button>
