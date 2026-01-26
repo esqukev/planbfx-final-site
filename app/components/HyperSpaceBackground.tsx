@@ -1,38 +1,11 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 type AnyThree = any;
 
 export default function HyperSpaceBackground() {
   const mountRef = useRef<HTMLDivElement>(null);
-  const [opacity, setOpacity] = useState(0);
-
-  useEffect(() => {
-    // Fade in animation - slow like a spaceship taking off
-    const timer = setTimeout(() => {
-      let startTime: number | null = null;
-      const duration = 4000; // 4 seconds for slow fade in
-
-      const animate = (currentTime: number) => {
-        if (startTime === null) startTime = currentTime;
-        const elapsed = currentTime - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-        
-        // Ease out for smooth fade
-        const eased = 1 - Math.pow(1 - progress, 3);
-        setOpacity(eased);
-
-        if (progress < 1) {
-          requestAnimationFrame(animate);
-        }
-      };
-
-      requestAnimationFrame(animate);
-    }, 200);
-
-    return () => clearTimeout(timer);
-  }, []);
 
   useEffect(() => {
     const mount = mountRef.current;
@@ -40,7 +13,6 @@ export default function HyperSpaceBackground() {
 
     let disposed = false;
     let cleanup: (() => void) | null = null;
-    let materialRef: any = null;
 
     const init = async () => {
       // @ts-ignore
@@ -112,12 +84,10 @@ export default function HyperSpaceBackground() {
       const material = new THREE.PointsMaterial({
         size: 1.2,
         transparent: true,
-        opacity: 0, // Start at 0 for fade in
+        opacity: 0.9,
         vertexColors: true, // Enable vertex colors
         blending: 2, // AdditiveBlending for better color visibility
       });
-
-      materialRef = material; // Store reference for opacity updates
 
       const stars = new THREE.Points(geometry, material);
       scene.add(stars);
@@ -132,11 +102,6 @@ export default function HyperSpaceBackground() {
       const animate = () => {
         if (disposed) return;
         raf = requestAnimationFrame(animate);
-
-        // Update material opacity with fade in (spaceship taking off effect)
-        if (materialRef) {
-          materialRef.opacity = 0.9 * opacity;
-        }
 
         const pos = stars.geometry.attributes.position.array as Float32Array;
 
@@ -190,7 +155,7 @@ export default function HyperSpaceBackground() {
       disposed = true;
       cleanup?.();
     };
-  }, [opacity]); // Re-run when opacity changes
+  }, []);
 
   return (
     <div
