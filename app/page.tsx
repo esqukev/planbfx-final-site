@@ -6,6 +6,7 @@ import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 import PointCloudVisual from './components/PointCloudVisual';
 import HyperSpaceBackground from './components/HyperSpaceBackground';
+import ScrollTextEffect from './components/ScrollTextEffect';
 
 export default function Home() {
   return (
@@ -144,11 +145,11 @@ export default function Home() {
         <HyperSpaceBackground />
         
         <div className="relative z-10 max-w-4xl mx-auto text-center">
-          <h2 className="text-6xl md:text-8xl font-bold mb-8">
+          <ScrollTextEffect className="text-6xl md:text-8xl font-bold mb-8">
             Let´s Create<br />
             Something<br />
             Extraordinary
-          </h2>
+          </ScrollTextEffect>
           <p className="text-xl text-zinc-400 mb-12">
             Got A Project? Let´s Talk
           </p>
