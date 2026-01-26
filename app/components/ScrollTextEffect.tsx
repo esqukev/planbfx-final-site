@@ -23,20 +23,19 @@ export default function ScrollTextEffect({ children, className = '' }: ScrollTex
       text,
       {
         opacity: 0,
-        scale: 2.5,
-        y: 100,
+        scale: 3,
+        y: 150,
       },
       {
         opacity: 1,
         scale: 1,
         y: 0,
-        duration: 1.2,
-        ease: 'power3.out',
+        ease: 'none',
         scrollTrigger: {
           trigger: text,
-          start: 'top 85%',
-          end: 'top 50%',
-          scrub: 1.5,
+          start: 'top 100%',
+          end: 'top 20%',
+          scrub: true,
         },
       }
     );
