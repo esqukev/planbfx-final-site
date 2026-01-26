@@ -29,52 +29,39 @@ export default function VideoHero() {
   }, []);
 
   return (
-    <section className="video-hero">
+    <section 
+      className="relative w-full h-screen overflow-hidden bg-black"
+      style={{ height: '100vh' }}
+    >
       <video
         ref={videoRef}
-        className="video-bg"
+        className="absolute top-1/2 left-1/2 w-[110%] h-[110%] object-cover"
+        style={{
+          transform: 'translate(-50%, -50%)',
+          willChange: 'transform',
+          zIndex: 0,
+        }}
         src="/videos/plabanfisa.mp4"
         autoPlay
         loop
         muted
         playsInline
         preload="auto"
+        onError={(e) => {
+          console.error('Video error:', e);
+        }}
+        onLoadedData={() => {
+          console.log('Video loaded successfully');
+        }}
       />
 
-      <div className="overlay" />
-
-      <style jsx>{`
-        .video-hero {
-          position: relative;
-          width: 100%;
-          height: 100vh;
-          overflow: hidden;
-          background: black;
-        }
-
-        .video-bg {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          width: 110%;
-          height: 110%;
-          object-fit: cover;
-          transform: translate(-50%, -50%);
-          will-change: transform;
-        }
-
-        .overlay {
-          position: absolute;
-          inset: 0;
-          background: radial-gradient(
-            circle at center,
-            rgba(0, 0, 0, 0.2) 0%,
-            rgba(0, 0, 0, 0.6) 70%,
-            rgba(0, 0, 0, 0.9) 100%
-          );
-          z-index: 1;
-        }
-      `}</style>
+      <div 
+        className="absolute inset-0"
+        style={{
+          background: 'radial-gradient(circle at center, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.6) 70%, rgba(0, 0, 0, 0.9) 100%)',
+          zIndex: 1,
+        }}
+      />
     </section>
   );
 }
