@@ -21,6 +21,9 @@ export default function HyperSpaceBackground() {
       if (disposed) return;
 
       const scene = new THREE.Scene();
+      
+      // Fog for smooth star fade-out
+      scene.fog = new THREE.Fog(0x000000, 800, 5000);
 
       const camera = new THREE.PerspectiveCamera(
         75,
@@ -28,7 +31,7 @@ export default function HyperSpaceBackground() {
         1,
         2000
       );
-      camera.position.z = 400;
+      camera.position.z = 800;
 
       const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
       renderer.setSize(window.innerWidth, window.innerHeight);
@@ -43,7 +46,7 @@ export default function HyperSpaceBackground() {
       for (let i = 0; i < starCount; i++) {
         positions[i * 3] = (Math.random() - 0.5) * 2000;
         positions[i * 3 + 1] = (Math.random() - 0.5) * 2000;
-        positions[i * 3 + 2] = Math.random() * -2000;
+        positions[i * 3 + 2] = Math.random() * -6000;
 
         // Random colors with low saturation (~20%)
         const hue = Math.random(); // Random hue (0-1)
@@ -107,8 +110,8 @@ export default function HyperSpaceBackground() {
 
         for (let i = 0; i < starCount; i++) {
           pos[i * 3 + 2] += 15;
-          if (pos[i * 3 + 2] > 400) {
-            pos[i * 3 + 2] = -2000;
+          if (pos[i * 3 + 2] > 1000) {
+            pos[i * 3 + 2] = -6000;
           }
         }
 

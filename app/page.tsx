@@ -42,13 +42,13 @@ export default function Home() {
       />
 
       {/* Video Banner */}
-      <section className="relative w-full overflow-hidden bg-black">
+      <section className="relative w-full overflow-hidden bg-black min-h-[400px] flex items-center justify-center">
         <video
           autoPlay
           loop
           muted
           playsInline
-          className="w-full h-auto"
+          className="w-full h-auto max-w-full"
           style={{ maxHeight: '80vh', objectFit: 'contain', display: 'block' }}
         >
           <source src="/videos/plabanfisa.mov" type="video/quicktime" />
