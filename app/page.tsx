@@ -41,10 +41,11 @@ export default function Home() {
           muted
           playsInline
           className="w-full h-auto"
-          style={{ maxHeight: '80vh', objectFit: 'contain' }}
+          style={{ maxHeight: '80vh', objectFit: 'contain', display: 'block' }}
         >
           <source src="/videos/plabanfisa.mov" type="video/quicktime" />
           <source src="/videos/plabanfisa.mov" type="video/mp4" />
+          Your browser does not support the video tag.
         </video>
       </section>
 

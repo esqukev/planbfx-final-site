@@ -55,6 +55,28 @@ export default function ContentSection({
     };
   }, []);
 
+  // Parallax effect on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!sectionRef.current) return;
+      
+      const scrolled = window.pageYOffset;
+      const rect = sectionRef.current.getBoundingClientRect();
+      const sectionTop = rect.top + scrolled;
+      const windowHeight = window.innerHeight;
+      
+      // Only apply parallax when section is in view
+      if (scrolled + windowHeight > sectionTop && scrolled < sectionTop + rect.height) {
+        // Parallax effect - move slower than scroll
+        const parallaxOffset = (scrolled - sectionTop + windowHeight) * 0.3;
+        sectionRef.current.style.transform = `translateY(${parallaxOffset}px)`;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <section 
       ref={sectionRef}
@@ -63,7 +85,8 @@ export default function ContentSection({
         background: backgroundClassName?.includes('from-black') 
           ? 'linear-gradient(to bottom, #000000, #18181b, #000000)' 
           : undefined,
-        isolation: 'isolate' // Creates a new stacking context to prevent bleed-through
+        isolation: 'isolate', // Creates a new stacking context to prevent bleed-through
+        willChange: 'transform' // Optimize for parallax
       }}
     >
       <div className={`max-w-7xl mx-auto flex flex-col ${reverse ? 'md:flex-row-reverse' : 'md:flex-row'} ${hasRight ? 'items-center' : 'items-start'} gap-10 md:gap-10`}>
