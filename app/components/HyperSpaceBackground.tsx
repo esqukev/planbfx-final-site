@@ -38,21 +38,52 @@ export default function HyperSpaceBackground() {
       // ⭐ STARFIELD
       const starCount = 4000;
       const positions = new Float32Array(starCount * 3);
+      const colors = new Float32Array(starCount * 3);
 
       for (let i = 0; i < starCount; i++) {
         positions[i * 3] = (Math.random() - 0.5) * 2000;
         positions[i * 3 + 1] = (Math.random() - 0.5) * 2000;
         positions[i * 3 + 2] = Math.random() * -2000;
+
+        // Random colors with low saturation (~20%)
+        const hue = Math.random(); // Random hue
+        const saturation = 0.2; // Low saturation (20%)
+        const lightness = 0.8 + Math.random() * 0.2; // 80-100% lightness
+
+        // Convert HSL to RGB (simplified)
+        const c = (1 - Math.abs(2 * lightness - 1)) * saturation;
+        const x = c * (1 - Math.abs(((hue * 6) % 2) - 1));
+        const m = lightness - c / 2;
+
+        let r = 0, g = 0, b = 0;
+        if (hue < 1/6) {
+          r = c; g = x; b = 0;
+        } else if (hue < 2/6) {
+          r = x; g = c; b = 0;
+        } else if (hue < 3/6) {
+          r = 0; g = c; b = x;
+        } else if (hue < 4/6) {
+          r = 0; g = x; b = c;
+        } else if (hue < 5/6) {
+          r = x; g = 0; b = c;
+        } else {
+          r = c; g = 0; b = x;
+        }
+
+        colors[i * 3] = r + m;
+        colors[i * 3 + 1] = g + m;
+        colors[i * 3 + 2] = b + m;
       }
 
       const geometry = new THREE.BufferGeometry();
       geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
       const material = new THREE.PointsMaterial({
-        color: 0xffffff,
         size: 1.2,
         transparent: true,
         opacity: 0.9,
+        vertexColors: true, // Enable vertex colors
       });
 
       const stars = new THREE.Points(geometry, material);
