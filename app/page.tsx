@@ -8,6 +8,7 @@ import PointCloudVisual from './components/PointCloudVisual';
 import HyperSpaceBackground from './components/HyperSpaceBackground';
 import ScrollTextEffect from './components/ScrollTextEffect';
 import FadeInOnScroll from './components/FadeInOnScroll';
+import VideoHero from './components/VideoHero';
 
 export default function Home() {
   return (
@@ -44,29 +45,7 @@ export default function Home() {
       />
 
       {/* Hero-like Section with Video Banner */}
-      <section className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-gradient-to-br from-black via-zinc-900 to-black">
-        {/* Background effects */}
-        <div className="absolute inset-0 opacity-20 z-0">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        </div>
-        
-        {/* Video Banner */}
-        <div className="relative z-10 w-full h-full flex items-center justify-center">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="w-full h-full object-cover"
-            style={{ display: 'block' }}
-          >
-            <source src="/videos/plabanfisa.mov" type="video/quicktime" />
-            <source src="/videos/plabanfisa.mov" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        </div>
-      </section>
+      <VideoHero />
       
       {/* Seamless Hero Background Section */}
       <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-black via-zinc-900 to-black">
