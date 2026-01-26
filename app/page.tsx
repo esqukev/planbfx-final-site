@@ -5,6 +5,7 @@ import ProjectGrid from './components/ProjectGrid';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 import PointCloudVisual from './components/PointCloudVisual';
+import HyperSpaceBackground from './components/HyperSpaceBackground';
 
 export default function Home() {
   return (
@@ -113,8 +114,11 @@ export default function Home() {
       </section>
       
       {/* CTA Section */}
-      <section id="contact" className="py-32 px-4 md:px-8 bg-gradient-to-br from-black via-zinc-900 to-black text-white">
-        <div className="max-w-4xl mx-auto text-center">
+      <section id="contact" className="relative py-32 px-4 md:px-8 text-white overflow-hidden">
+        {/* HyperSpace Background */}
+        <HyperSpaceBackground />
+        
+        <div className="relative z-10 max-w-4xl mx-auto text-center">
           <h2 className="text-6xl md:text-8xl font-bold mb-8">
             Let´s Create<br />
             Something<br />
