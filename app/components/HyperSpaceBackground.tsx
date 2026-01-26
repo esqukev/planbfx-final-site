@@ -199,9 +199,7 @@ export default function HyperSpaceBackground() {
         position: 'absolute',
         inset: 0,
         zIndex: -1,
-        background: 'black',
-        opacity: opacity, // Apply fade in to container
-        transition: 'opacity 0.3s ease-out',
+        background: 'black', // Black background always visible
       }}
     />
   );

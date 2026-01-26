@@ -33,6 +33,14 @@ export default function Home() {
         />
       </div>
 
+      {/* Animated Strip */}
+      <AnimatedStrip
+        text="CUSTOM INTERACTIVE INMMERSION"
+        speed={40}
+        direction="right"
+        className="bg-white dark:bg-black text-black dark:text-white py-4"
+      />
+
       {/* Video Banner */}
       <section className="relative w-full overflow-hidden bg-black">
         <video
@@ -48,14 +56,6 @@ export default function Home() {
           Your browser does not support the video tag.
         </video>
       </section>
-
-      {/* Animated Strip */}
-      <AnimatedStrip
-        text="CUSTOM INTERACTIVE INMMERSION"
-        speed={40}
-        direction="right"
-        className="bg-white dark:bg-black text-black dark:text-white py-4"
-      />
       
       {/* Seamless Hero Background Section */}
       <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-black via-zinc-900 to-black">
