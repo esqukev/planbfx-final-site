@@ -46,33 +46,35 @@ export default function HyperSpaceBackground() {
         positions[i * 3 + 2] = Math.random() * -2000;
 
         // Random colors with low saturation (~20%)
-        const hue = Math.random(); // Random hue
+        const hue = Math.random(); // Random hue (0-1)
         const saturation = 0.2; // Low saturation (20%)
-        const lightness = 0.8 + Math.random() * 0.2; // 80-100% lightness
+        const lightness = 0.85 + Math.random() * 0.15; // 85-100% lightness
 
-        // Convert HSL to RGB (simplified)
+        // Convert HSL to RGB
         const c = (1 - Math.abs(2 * lightness - 1)) * saturation;
         const x = c * (1 - Math.abs(((hue * 6) % 2) - 1));
         const m = lightness - c / 2;
 
         let r = 0, g = 0, b = 0;
-        if (hue < 1/6) {
+        const h = hue * 6;
+        if (h < 1) {
           r = c; g = x; b = 0;
-        } else if (hue < 2/6) {
+        } else if (h < 2) {
           r = x; g = c; b = 0;
-        } else if (hue < 3/6) {
+        } else if (h < 3) {
           r = 0; g = c; b = x;
-        } else if (hue < 4/6) {
+        } else if (h < 4) {
           r = 0; g = x; b = c;
-        } else if (hue < 5/6) {
+        } else if (h < 5) {
           r = x; g = 0; b = c;
         } else {
           r = c; g = 0; b = x;
         }
 
-        colors[i * 3] = r + m;
-        colors[i * 3 + 1] = g + m;
-        colors[i * 3 + 2] = b + m;
+        // Ensure values are in 0-1 range and add lightness
+        colors[i * 3] = Math.max(0, Math.min(1, r + m));
+        colors[i * 3 + 1] = Math.max(0, Math.min(1, g + m));
+        colors[i * 3 + 2] = Math.max(0, Math.min(1, b + m));
       }
 
       const geometry = new THREE.BufferGeometry();
@@ -84,6 +86,7 @@ export default function HyperSpaceBackground() {
         transparent: true,
         opacity: 0.9,
         vertexColors: true, // Enable vertex colors
+        blending: 2, // AdditiveBlending for better color visibility
       });
 
       const stars = new THREE.Points(geometry, material);

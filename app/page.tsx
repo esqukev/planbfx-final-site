@@ -33,6 +33,21 @@ export default function Home() {
         />
       </div>
 
+      {/* Video Banner */}
+      <section className="relative w-full overflow-hidden bg-black">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-full h-auto"
+          style={{ maxHeight: '80vh', objectFit: 'contain' }}
+        >
+          <source src="/videos/plabanfisa.mov" type="video/quicktime" />
+          <source src="/videos/plabanfisa.mov" type="video/mp4" />
+        </video>
+      </section>
+
       {/* Animated Strip */}
       <AnimatedStrip
         text="CUSTOM INTERACTIVE INMMERSION"
