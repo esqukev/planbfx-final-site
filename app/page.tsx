@@ -45,7 +45,7 @@ export default function Home() {
       />
 
       {/* Hero-like Section with Video Banner */}
-      <VideoHero videoUrl="https://res.cloudinary.com/dpplgma25/video/upload/v1769471252/plabanfisa_chrpo2.mp4"/>
+      <VideoHero />
       
       {/* Seamless Hero Background Section */}
       <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-black via-zinc-900 to-black">
@@ -142,6 +142,6 @@ export default function Home() {
       </section>
       
       <Footer />
-    </main>
+      </main>
   );
 }
