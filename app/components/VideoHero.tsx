@@ -17,12 +17,22 @@ export default function VideoHero({ videoUrl }: VideoHeroProps) {
       const height = window.innerHeight;
       setViewportHeight(height);
       if (sectionRef.current) {
-        sectionRef.current.style.height = `${height}px`;
-        sectionRef.current.style.minHeight = `${height}px`;
+        // Forzar altura con !important usando setProperty
+        sectionRef.current.style.setProperty('height', `${height}px`, 'important');
+        sectionRef.current.style.setProperty('min-height', `${height}px`, 'important');
+        sectionRef.current.style.setProperty('max-height', `${height}px`, 'important');
+      }
+      if (videoRef.current) {
+        videoRef.current.style.setProperty('height', `${height}px`, 'important');
+        videoRef.current.style.setProperty('min-height', `${height}px`, 'important');
       }
     };
 
+    // Ejecutar inmediatamente y después de un pequeño delay para asegurar que el DOM esté listo
     setHeight();
+    setTimeout(setHeight, 0);
+    setTimeout(setHeight, 100);
+    
     window.addEventListener('resize', setHeight);
     window.addEventListener('orientationchange', setHeight);
 
@@ -84,12 +94,16 @@ export default function VideoHero({ videoUrl }: VideoHeroProps) {
         width: '100vw',
         height: viewportHeight > 0 ? `${viewportHeight}px` : '100vh',
         minHeight: viewportHeight > 0 ? `${viewportHeight}px` : '100vh',
+        maxHeight: viewportHeight > 0 ? `${viewportHeight}px` : '100vh',
         position: 'relative',
         display: 'block',
-        margin: 0,
-        padding: 0,
+        margin: '0 !important',
+        padding: '0 !important',
         boxSizing: 'border-box',
-        overflow: 'hidden'
+        overflow: 'hidden',
+        left: 0,
+        right: 0,
+        top: 0
       }}
     >
       <video
@@ -108,10 +122,11 @@ export default function VideoHero({ videoUrl }: VideoHeroProps) {
           height: viewportHeight > 0 ? `${viewportHeight}px` : '100vh',
           minWidth: '100vw',
           minHeight: viewportHeight > 0 ? `${viewportHeight}px` : '100vh',
+          maxHeight: viewportHeight > 0 ? `${viewportHeight}px` : '100vh',
           objectFit: 'cover',
           objectPosition: 'center center',
-          margin: 0,
-          padding: 0
+          margin: '0 !important',
+          padding: '0 !important'
         }}
       />
 
