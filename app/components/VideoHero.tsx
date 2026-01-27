@@ -13,14 +13,55 @@ export default function VideoHero({ videoUrl }: VideoHeroProps) {
     const video = videoRef.current;
     if (!video) return;
 
+    // Asegurar que el video esté muted para autoplay
     video.muted = true;
-    video.play().catch(() => {
-      console.warn('Autoplay blocked until user interaction');
-    });
+    video.volume = 0;
+
+    // Función para reproducir el video
+    const playVideo = async () => {
+      try {
+        await video.play();
+      } catch (error) {
+        console.warn('Autoplay blocked until user interaction');
+      }
+    };
+
+    // Handler para asegurar loop infinito
+    const handleEnded = () => {
+      if (video) {
+        video.currentTime = 0;
+        video.play().catch(() => {});
+      }
+    };
+
+    // Handler para cuando el video puede reproducirse
+    const handleCanPlay = () => {
+      playVideo();
+    };
+
+    // Agregar event listeners
+    video.addEventListener('ended', handleEnded);
+    video.addEventListener('canplay', handleCanPlay);
+
+    // Intentar reproducir
+    playVideo();
+
+    // Cleanup
+    return () => {
+      video.removeEventListener('ended', handleEnded);
+      video.removeEventListener('canplay', handleCanPlay);
+    };
   }, []);
 
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-black">
+    <section 
+      className="relative w-full overflow-hidden bg-black"
+      style={{ 
+        height: '100vh',
+        minHeight: '100vh',
+        width: '100%'
+      }}
+    >
       
       {/* Video layer */}
       <div className="absolute inset-0 will-change-transform">
@@ -33,6 +74,14 @@ export default function VideoHero({ videoUrl }: VideoHeroProps) {
           playsInline
           preload="auto"
           className="absolute inset-0 w-full h-full object-cover"
+          style={{
+            width: '100%',
+            height: '100%',
+            minWidth: '100%',
+            minHeight: '100%',
+            objectFit: 'cover',
+            objectPosition: 'center center'
+          }}
         />
       </div>
 
