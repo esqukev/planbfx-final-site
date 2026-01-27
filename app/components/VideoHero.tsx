@@ -103,35 +103,7 @@ export default function VideoHero({ videoUrl }: VideoHeroProps) {
         }}
       >
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-8 max-w-7xl mx-auto">
-          {/* Left - FOR YOUR SPACES */}
-          <div 
-            className="text-white font-bold tracking-[0.3em] uppercase"
-            style={{
-              fontSize: 'clamp(0.65rem, 1.5vw, 0.9rem)',
-              textShadow: '0 0 10px rgba(255,255,255,0.3), 0 0 20px rgba(255,255,255,0.1)',
-              letterSpacing: '0.3em',
-              opacity: 0.95
-            }}
-          >
-            FOR YOUR SPACES
-          </div>
-          
-          {/* Center - PLAN B FX */}
-          <div 
-            className="text-white font-bold"
-            style={{
-              fontSize: 'clamp(1.25rem, 3vw, 2rem)',
-              textShadow: '0 0 15px rgba(255,255,255,0.5), 0 0 30px rgba(255,255,255,0.2), 0 0 45px rgba(255,255,255,0.1)',
-              letterSpacing: '0.15em',
-              fontWeight: 700
-            }}
-          >
-            <span className="opacity-50">-</span>
-            <span className="mx-2 md:mx-4">PLAN B FX</span>
-            <span className="opacity-50">-</span>
-          </div>
-          
-          {/* Right - INTERACTIVE ART */}
+          {/* Left - INTERACTIVE ART (swapped) */}
           <div 
             className="text-white font-bold tracking-[0.3em] uppercase"
             style={{
@@ -142,6 +114,32 @@ export default function VideoHero({ videoUrl }: VideoHeroProps) {
             }}
           >
             INTERACTIVE ART
+          </div>
+          
+          {/* Center - [PLANBFX] */}
+          <div 
+            className="text-white font-bold tracking-[0.3em] uppercase"
+            style={{
+              fontSize: 'clamp(0.65rem, 1.5vw, 0.9rem)',
+              letterSpacing: '0.3em',
+              opacity: 0.95,
+              fontFamily: 'monospace, "Courier New", Courier, monospace'
+            }}
+          >
+            [PLANBFX]
+          </div>
+          
+          {/* Right - FOR YOUR SPACES (swapped) */}
+          <div 
+            className="text-white font-bold tracking-[0.3em] uppercase"
+            style={{
+              fontSize: 'clamp(0.65rem, 1.5vw, 0.9rem)',
+              textShadow: '0 0 10px rgba(255,255,255,0.3), 0 0 20px rgba(255,255,255,0.1)',
+              letterSpacing: '0.3em',
+              opacity: 0.95
+            }}
+          >
+            FOR YOUR SPACES
           </div>
         </div>
       </div>
