@@ -211,8 +211,8 @@ export default function VideoHero({
   }, [videoSource]);
 
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-black" style={{ width: '100%', height: '100vh' }}>
-      {/* Video Background */}
+    <section className="relative min-h-screen w-full overflow-hidden bg-black">
+      {/* Video Background - cubre toda la pantalla */}
       <video
         ref={videoRef}
         src={videoSource}
@@ -222,19 +222,19 @@ export default function VideoHero({
         playsInline
         preload="auto"
         crossOrigin="anonymous"
+        className="absolute inset-0 w-full h-full object-cover will-change-transform"
         style={{ 
           position: 'absolute',
           top: 0,
           left: 0,
-          width: '100vw',
-          height: '100vh',
+          right: 0,
+          bottom: 0,
+          width: '100%',
+          height: '100%',
           minWidth: '100%',
           minHeight: '100%',
-          maxWidth: '100%',
-          maxHeight: '100%',
           objectFit: 'cover',
           objectPosition: 'center center',
-          willChange: 'transform',
           zIndex: 0
         }}
       />
