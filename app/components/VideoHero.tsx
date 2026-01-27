@@ -81,17 +81,27 @@ export default function VideoHero({
             errorMsg = 'Video loading aborted';
             break;
           case error.MEDIA_ERR_NETWORK:
-            errorMsg = 'Network error loading video';
+            errorMsg = 'Network error loading video - verifica tu conexión';
             break;
           case error.MEDIA_ERR_DECODE:
-            errorMsg = 'Video decode error';
+            errorMsg = 'Video decode error - el formato puede no ser compatible';
             break;
           case error.MEDIA_ERR_SRC_NOT_SUPPORTED:
-            errorMsg = 'Video format not supported or file not found';
+            errorMsg = 'Video format not supported or file not found - intenta usar Cloudinary';
             break;
         }
         console.error('❌ Video error:', errorMsg, error);
+        console.error('❌ Video currentSrc:', video.currentSrc);
+        console.error('❌ Video networkState:', video.networkState);
+        console.error('❌ Video readyState:', video.readyState);
         setVideoError(errorMsg);
+      } else {
+        // Si no hay error object, puede ser que ninguna fuente funcionó
+        console.error('❌ Video error event pero sin error object');
+        console.error('❌ Video currentSrc:', video.currentSrc);
+        if (!video.currentSrc || video.currentSrc === '') {
+          setVideoError('No se pudo cargar ninguna fuente de video. Verifica que los archivos existen en public/videos/');
+        }
       }
     };
 
