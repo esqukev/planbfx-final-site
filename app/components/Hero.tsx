@@ -13,14 +13,24 @@ export default function Hero() {
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500 rounded-full blur-3xl animate-pulse delay-1000"></div>
       </div>
 
-      {/* Spirit Particles Background */}
-      <div className="absolute inset-0 z-0">
-        <Canvas camera={{ position: [0, 0, 100], fov: 75 }}>
-          <SpiritParticlesBackground />
+      {/* Spirit Particles Background - Behind logo */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <Canvas 
+          camera={{ position: [0, 0, 1000], fov: 45 }} 
+          gl={{ alpha: true, antialias: true }}
+          style={{ background: 'transparent' }}
+        >
+          <SpiritParticlesBackground 
+            speed={1}
+            dieSpeed={0.015}
+            radius={0.6}
+            curlSize={0.02}
+            attraction={1}
+          />
         </Canvas>
       </div>
 
-      {/* Space for brand banner or animation */}
+      {/* Space for brand banner or animation - In front */}
       <div className="relative z-10 w-full h-full">
         <LogoPointCloud />
       </div>
