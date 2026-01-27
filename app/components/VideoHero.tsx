@@ -1,48 +1,180 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-export default function VideoHero() {
+interface VideoHeroProps {
+  videoUrl?: string; // Opción para URL de Cloudinary o externa
+  localVideoPath?: string; // Ruta local del video
+}
+
+export default function VideoHero({ 
+  videoUrl, 
+  localVideoPath = '/videos/plabanfisa.mp4' 
+}: VideoHeroProps = {}) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [videoError, setVideoError] = useState<string | null>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  // Determinar qué fuente de video usar
+  const videoSource = videoUrl || localVideoPath;
 
   useEffect(() => {
-    // Ensure video plays
-    if (videoRef.current) {
-      videoRef.current.play().catch((error) => {
-        console.log('Video autoplay prevented:', error);
-      });
-    }
+    const video = videoRef.current;
+    if (!video) return;
 
+    // Función para intentar reproducir el video
+    const playVideo = async () => {
+      try {
+        await video.play();
+        setIsPlaying(true);
+        console.log('✅ Video playing successfully');
+      } catch (error: any) {
+        console.error('❌ Error playing video:', error);
+        setVideoError(error.message);
+        
+        // Intentar con user interaction
+        const handleUserInteraction = async () => {
+          try {
+            await video.play();
+            setIsPlaying(true);
+            console.log('✅ Video playing after user interaction');
+          } catch (err) {
+            console.error('❌ Still cannot play video:', err);
+          }
+          document.removeEventListener('click', handleUserInteraction);
+          document.removeEventListener('touchstart', handleUserInteraction);
+        };
+        
+        document.addEventListener('click', handleUserInteraction);
+        document.addEventListener('touchstart', handleUserInteraction);
+      }
+    };
+
+    // Handlers de eventos del video
+    const handleLoadedData = () => {
+      console.log('📹 Video data loaded');
+      playVideo();
+    };
+
+    const handleCanPlay = () => {
+      console.log('📹 Video can play');
+      playVideo();
+    };
+
+    const handleError = (e: Event) => {
+      const error = video.error;
+      if (error) {
+        let errorMsg = 'Unknown error';
+        switch (error.code) {
+          case error.MEDIA_ERR_ABORTED:
+            errorMsg = 'Video loading aborted';
+            break;
+          case error.MEDIA_ERR_NETWORK:
+            errorMsg = 'Network error loading video';
+            break;
+          case error.MEDIA_ERR_DECODE:
+            errorMsg = 'Video decode error';
+            break;
+          case error.MEDIA_ERR_SRC_NOT_SUPPORTED:
+            errorMsg = 'Video format not supported or file not found';
+            break;
+        }
+        console.error('❌ Video error:', errorMsg, error);
+        setVideoError(errorMsg);
+      }
+    };
+
+    const handlePlay = () => {
+      setIsPlaying(true);
+      console.log('▶️ Video started playing');
+    };
+
+    const handlePause = () => {
+      setIsPlaying(false);
+      console.log('⏸️ Video paused');
+    };
+
+    // Agregar event listeners
+    video.addEventListener('loadeddata', handleLoadedData);
+    video.addEventListener('canplay', handleCanPlay);
+    video.addEventListener('error', handleError);
+    video.addEventListener('play', handlePlay);
+    video.addEventListener('pause', handlePause);
+
+    // Intentar cargar y reproducir
+    video.load();
+    playVideo();
+
+    // Parallax scroll handler
     const handleScroll = () => {
-      if (!videoRef.current) return;
-      // Skip parallax on mobile for better performance
+      if (!video) return;
       if (window.innerWidth < 768) return;
       const scrolled = window.scrollY;
-      videoRef.current.style.transform = `translateY(${scrolled * 0.25}px)`;
+      video.style.transform = `translateY(${scrolled * 0.25}px)`;
     };
 
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+
+    // Cleanup
+    return () => {
+      video.removeEventListener('loadeddata', handleLoadedData);
+      video.removeEventListener('canplay', handleCanPlay);
+      video.removeEventListener('error', handleError);
+      video.removeEventListener('play', handlePlay);
+      video.removeEventListener('pause', handlePause);
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [videoSource]);
 
   return (
     <section className="relative h-screen w-full overflow-hidden bg-black">
       {/* Video Background */}
       <video
         ref={videoRef}
-        className="absolute inset-0 w-full h-full object-cover will-change-transform z-0"
-        src="/videos/plabanfisa.mp4"
+        className="absolute inset-0 w-full h-full object-cover will-change-transform"
+        src={videoSource}
         autoPlay
         muted
         loop
         playsInline
         preload="auto"
-        onLoadedData={(e) => {
-          // Force play on load
-          const video = e.target as HTMLVideoElement;
-          video.play().catch(() => {});
-        }}
+        crossOrigin="anonymous"
       />
+
+      {/* Debug info (solo en desarrollo) */}
+      {process.env.NODE_ENV === 'development' && (
+        <div className="absolute top-4 left-4 z-50 bg-black/80 text-white p-4 rounded text-xs font-mono">
+          <div>Source: {videoSource}</div>
+          <div>Playing: {isPlaying ? '✅ Yes' : '❌ No'}</div>
+          {videoError && <div className="text-red-400">Error: {videoError}</div>}
+          {videoRef.current && (
+            <>
+              <div>ReadyState: {videoRef.current.readyState}</div>
+              <div>NetworkState: {videoRef.current.networkState}</div>
+            </>
+          )}
+        </div>
+      )}
+
+      {/* Error message visible */}
+      {videoError && (
+        <div className="absolute inset-0 flex items-center justify-center z-50 bg-black/90 text-white p-8">
+          <div className="text-center max-w-2xl">
+            <h3 className="text-xl font-bold mb-4">Video Error</h3>
+            <p className="mb-4">{videoError}</p>
+            <p className="text-sm text-gray-400 mb-4">
+              Source: {videoSource}
+            </p>
+            <div className="text-xs text-gray-500 mt-4 space-y-2">
+              <p><strong>Opción 1 (Local):</strong> Verifica que el archivo existe en public/videos/plabanfisa.mp4</p>
+              <p><strong>Opción 2 (Cloudinary):</strong> Usa el componente así:</p>
+              <code className="block bg-gray-800 p-2 rounded mt-2 text-left">
+                {'<VideoHero videoUrl="https://res.cloudinary.com/tu-cloud/video/upload/v1234567/plabanfisa.mp4" />'}
+              </code>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
