@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface VideoHeroProps {
   videoUrl: string;
@@ -8,6 +8,29 @@ interface VideoHeroProps {
 
 export default function VideoHero({ videoUrl }: VideoHeroProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [viewportHeight, setViewportHeight] = useState(0);
+
+  // Establecer altura exacta del viewport
+  useEffect(() => {
+    const setHeight = () => {
+      const height = window.innerHeight;
+      setViewportHeight(height);
+      if (sectionRef.current) {
+        sectionRef.current.style.height = `${height}px`;
+        sectionRef.current.style.minHeight = `${height}px`;
+      }
+    };
+
+    setHeight();
+    window.addEventListener('resize', setHeight);
+    window.addEventListener('orientationchange', setHeight);
+
+    return () => {
+      window.removeEventListener('resize', setHeight);
+      window.removeEventListener('orientationchange', setHeight);
+    };
+  }, []);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -54,13 +77,13 @@ export default function VideoHero({ videoUrl }: VideoHeroProps) {
   }, []);
 
   return (
-    <section 
+    <div 
+      ref={sectionRef}
       className="relative overflow-hidden bg-black"
       style={{ 
         width: '100vw',
-        height: '100vh',
-        minHeight: '100vh',
-        maxHeight: 'none',
+        height: viewportHeight > 0 ? `${viewportHeight}px` : '100vh',
+        minHeight: viewportHeight > 0 ? `${viewportHeight}px` : '100vh',
         position: 'relative',
         display: 'block',
         margin: 0,
@@ -82,9 +105,9 @@ export default function VideoHero({ videoUrl }: VideoHeroProps) {
           top: 0,
           left: 0,
           width: '100vw',
-          height: '100vh',
+          height: viewportHeight > 0 ? `${viewportHeight}px` : '100vh',
           minWidth: '100vw',
-          minHeight: '100vh',
+          minHeight: viewportHeight > 0 ? `${viewportHeight}px` : '100vh',
           objectFit: 'cover',
           objectPosition: 'center center',
           margin: 0,
@@ -151,6 +174,6 @@ export default function VideoHero({ videoUrl }: VideoHeroProps) {
       >
         {/* contenido */}
       </div>
-    </section>
+    </div>
   );
 }
