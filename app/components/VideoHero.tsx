@@ -64,8 +64,7 @@ export default function VideoHero({ videoUrl }: VideoHeroProps) {
         display: 'block',
         margin: 0,
         padding: 0,
-        left: 0,
-        right: 0
+        boxSizing: 'border-box'
       }}
     >
       <video
