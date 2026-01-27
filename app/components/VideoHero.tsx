@@ -59,12 +59,29 @@ export default function VideoHero({ videoUrl }: VideoHeroProps) {
       style={{ 
         height: '100vh',
         minHeight: '100vh',
-        width: '100%'
+        width: '100%',
+        margin: 0,
+        padding: 0,
+        position: 'relative',
+        display: 'block'
       }}
     >
       
       {/* Video layer */}
-      <div className="absolute inset-0 will-change-transform">
+      <div 
+        className="absolute will-change-transform" 
+        style={{ 
+          top: 0, 
+          left: 0, 
+          right: 0, 
+          bottom: 0,
+          width: '100%',
+          height: '100%',
+          minHeight: '100%',
+          margin: 0,
+          padding: 0
+        }}
+      >
         <video
           ref={videoRef}
           src={videoUrl}
@@ -73,14 +90,24 @@ export default function VideoHero({ videoUrl }: VideoHeroProps) {
           muted
           playsInline
           preload="auto"
-          className="absolute inset-0 w-full h-full object-cover"
+          className="w-full h-full object-cover"
           style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
             width: '100%',
             height: '100%',
             minWidth: '100%',
             minHeight: '100%',
+            maxWidth: '100%',
+            maxHeight: '100%',
             objectFit: 'cover',
-            objectPosition: 'center center'
+            objectPosition: 'center center',
+            margin: 0,
+            padding: 0,
+            display: 'block'
           }}
         />
       </div>
