@@ -58,15 +58,14 @@ export default function VideoHero({ videoUrl }: VideoHeroProps) {
       className="relative overflow-hidden bg-black"
       style={{ 
         width: '100vw',
-        height: 'calc(100vh + 20px)',
-        minHeight: 'calc(100vh + 20px)',
+        height: '100vh',
+        minHeight: '100vh',
         position: 'relative',
         display: 'block',
         margin: 0,
         padding: 0,
         left: 0,
-        right: 0,
-        top: 0
+        right: 0
       }}
     >
       <video
@@ -82,9 +81,9 @@ export default function VideoHero({ videoUrl }: VideoHeroProps) {
           top: 0,
           left: 0,
           width: '100vw',
-          height: 'calc(100vh + 20px)',
+          height: '100vh',
           minWidth: '100vw',
-          minHeight: 'calc(100vh + 20px)',
+          minHeight: '100vh',
           objectFit: 'cover',
           objectPosition: 'center center',
           margin: 0,
