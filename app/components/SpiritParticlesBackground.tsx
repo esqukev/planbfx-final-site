@@ -195,7 +195,8 @@ void main() {
     vec4 mvPosition = viewMatrix * worldPosition;
 
     vLife = positionInfo.w;
-    gl_PointSize = 1300.0 / length( mvPosition.xyz ) * smoothstep(0.0, 0.2, positionInfo.w);
+    // Increased point size for better visibility
+    gl_PointSize = 2000.0 / length( mvPosition.xyz ) * smoothstep(0.0, 0.2, positionInfo.w) * 1.5;
 
     gl_Position = projectionMatrix * mvPosition;
 }
@@ -208,7 +209,9 @@ uniform vec3 color2;
 
 void main() {
     vec3 outgoingLight = mix(color2, color1, smoothstep(0.0, 0.7, vLife));
-    gl_FragColor = vec4( outgoingLight, 1.0 );
+    // Increased opacity for better visibility
+    float alpha = smoothstep(0.0, 0.2, vLife) * 0.8;
+    gl_FragColor = vec4( outgoingLight, alpha );
 }
 `;
 
@@ -249,6 +252,7 @@ export default function SpiritParticlesBackground({
   const fboCamera = useRef<any>(null);
   const fboMesh = useRef<any>(null);
   const particlesGeometry = useRef<any>(null);
+  const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
     // Check for required WebGL extensions
@@ -435,12 +439,12 @@ export default function SpiritParticlesBackground({
       new THREE.BufferAttribute(particlePositions, 3)
     );
 
-    // Particles material
+    // Particles material - increased visibility
     particlesMaterial.current = new THREE.ShaderMaterial({
       uniforms: {
         texturePosition: { value: positionRenderTarget1.current.texture },
         color1: { value: new THREE.Color('#ffffff') },
-        color2: { value: new THREE.Color('#ffffff') },
+        color2: { value: new THREE.Color('#888888') },
       },
       vertexShader: particlesVertexShader,
       fragmentShader: particlesFragmentShader,
@@ -454,6 +458,8 @@ export default function SpiritParticlesBackground({
       particlesGeometry.current,
       particlesMaterial.current
     );
+
+    setIsInitialized(true);
 
     return () => {
       positionRenderTarget1.current?.dispose();
@@ -519,7 +525,7 @@ export default function SpiritParticlesBackground({
     }
   });
 
-  if (!particlesMesh.current) return null;
+  if (!isInitialized || !particlesMesh.current) return null;
 
   return <primitive object={particlesMesh.current} />;
 }
