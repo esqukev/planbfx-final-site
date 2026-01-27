@@ -108,9 +108,9 @@ export default function VideoHero({ videoUrl }: VideoHeroProps) {
             className="text-white font-bold tracking-[0.3em] uppercase"
             style={{
               fontSize: 'clamp(0.65rem, 1.5vw, 0.9rem)',
-              textShadow: '0 0 10px rgba(255,255,255,0.3), 0 0 20px rgba(255,255,255,0.1)',
               letterSpacing: '0.3em',
-              opacity: 0.95
+              opacity: 0.95,
+              fontFamily: 'monospace, "Courier New", Courier, monospace'
             }}
           >
             INTERACTIVE ART
@@ -134,9 +134,9 @@ export default function VideoHero({ videoUrl }: VideoHeroProps) {
             className="text-white font-bold tracking-[0.3em] uppercase"
             style={{
               fontSize: 'clamp(0.65rem, 1.5vw, 0.9rem)',
-              textShadow: '0 0 10px rgba(255,255,255,0.3), 0 0 20px rgba(255,255,255,0.1)',
               letterSpacing: '0.3em',
-              opacity: 0.95
+              opacity: 0.95,
+              fontFamily: 'monospace, "Courier New", Courier, monospace'
             }}
           >
             FOR YOUR SPACES
