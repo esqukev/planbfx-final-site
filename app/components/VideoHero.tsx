@@ -60,11 +60,13 @@ export default function VideoHero({ videoUrl }: VideoHeroProps) {
         width: '100vw',
         height: '100vh',
         minHeight: '100vh',
+        maxHeight: 'none',
         position: 'relative',
         display: 'block',
         margin: 0,
         padding: 0,
-        boxSizing: 'border-box'
+        boxSizing: 'border-box',
+        overflow: 'hidden'
       }}
     >
       <video
