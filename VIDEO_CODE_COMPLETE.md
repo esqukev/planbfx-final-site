@@ -1,3 +1,8 @@
+# Código Completo del Video Hero
+
+## 1. Componente VideoHero (`app/components/VideoHero.tsx`)
+
+```tsx
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
@@ -337,3 +342,51 @@ export default function VideoHero({
     </section>
   );
 }
+```
+
+## 2. Uso en `app/page.tsx`
+
+```tsx
+// Línea 48
+<VideoHero videoUrl="https://res.cloudinary.com/dpplgma25/video/upload/v1769471252/plabanfisa_chrpo2.mp4"/>
+```
+
+## 3. Configuración de Next.js (`next.config.ts`)
+
+```typescript
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
+  /* config options here */
+  // Asegurar que los videos se sirvan correctamente
+  async headers() {
+    return [
+      {
+        source: '/videos/:path*',
+        headers: [
+          {
+            key: 'Accept-Ranges',
+            value: 'bytes',
+          },
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+    ];
+  },
+};
+
+export default nextConfig;
+```
+
+## Características Implementadas:
+
+1. **Cobertura completa del banner**: Usa `100vw` y `100vh` con posicionamiento absoluto
+2. **Ajuste automático de tamaño**: Calcula el aspect ratio y escala el video para cubrir completamente
+3. **Parallax solo en desktop**: Funciona en pantallas >= 768px, deshabilitado en móvil
+4. **Autoplay con fallback**: Intenta reproducir automáticamente, con fallback a interacción del usuario
+5. **Loop infinito**: El video se reproduce en bucle
+6. **Manejo de errores**: Detecta y muestra errores específicos
+7. **Debug en desarrollo**: Muestra información útil en modo desarrollo
