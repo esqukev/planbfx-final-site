@@ -164,15 +164,35 @@ export default function VideoHero({
       playVideo();
     }, 100);
 
-    // Parallax scroll handler
+    // Parallax scroll handler - solo en desktop
     const handleScroll = () => {
       if (!video) return;
-      if (window.innerWidth < 768) return;
+      // Solo parallax en pantallas grandes (desktop)
+      const isDesktop = window.innerWidth >= 768;
+      if (!isDesktop) {
+        // En móvil, resetear transform
+        video.style.transform = 'translateY(0)';
+        return;
+      }
       const scrolled = window.scrollY;
       video.style.transform = `translateY(${scrolled * 0.25}px)`;
     };
 
-    window.addEventListener('scroll', handleScroll);
+    // Verificar tamaño de pantalla al cargar y en resize
+    const checkScreenSize = () => {
+      if (!video) return;
+      const isDesktop = window.innerWidth >= 768;
+      if (!isDesktop) {
+        video.style.transform = 'translateY(0)';
+      } else {
+        // Si es desktop, aplicar parallax actual
+        handleScroll();
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', checkScreenSize);
+    checkScreenSize();
 
     // Cleanup
     return () => {
@@ -186,28 +206,34 @@ export default function VideoHero({
       video.removeEventListener('pause', handlePause);
       video.removeEventListener('ended', handleEnded);
       window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', checkScreenSize);
     };
   }, [videoSource]);
 
   return (
     <section className="relative h-screen w-full overflow-hidden bg-black">
       {/* Video Background */}
-      <video
-        ref={videoRef}
-        className="absolute inset-0 w-full h-full object-cover will-change-transform"
-        src={videoSource}
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
-        crossOrigin="anonymous"
-        style={{ 
-          width: '100%', 
-          height: '100%',
-          objectFit: 'cover'
-        }}
-      />
+      <div className="absolute inset-0 w-full h-full">
+        <video
+          ref={videoRef}
+          className="absolute inset-0 w-full h-full object-cover will-change-transform"
+          src={videoSource}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          crossOrigin="anonymous"
+          style={{ 
+            width: '100%', 
+            height: '100%',
+            minWidth: '100%',
+            minHeight: '100%',
+            objectFit: 'cover',
+            objectPosition: 'center center'
+          }}
+        />
+      </div>
 
       {/* Debug info (solo en desarrollo) */}
       {process.env.NODE_ENV === 'development' && (
