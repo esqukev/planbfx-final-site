@@ -58,8 +58,8 @@ export default function VideoHero({ videoUrl }: VideoHeroProps) {
       className="relative overflow-hidden bg-black"
       style={{ 
         width: '100vw',
-        height: '100vh',
-        minHeight: '100vh',
+        height: 'calc(100vh + 20px)',
+        minHeight: 'calc(100vh + 20px)',
         position: 'relative',
         display: 'block',
         margin: 0,
@@ -82,9 +82,9 @@ export default function VideoHero({ videoUrl }: VideoHeroProps) {
           top: 0,
           left: 0,
           width: '100vw',
-          height: '100vh',
+          height: 'calc(100vh + 20px)',
           minWidth: '100vw',
-          minHeight: '100vh',
+          minHeight: 'calc(100vh + 20px)',
           objectFit: 'cover',
           objectPosition: 'center center',
           margin: 0,
@@ -94,6 +94,57 @@ export default function VideoHero({ videoUrl }: VideoHeroProps) {
 
       {/* overlay */}
       <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/10 via-black/30 to-black/90" />
+
+      {/* Footer text - Futuristic poster style */}
+      <div 
+        className="absolute bottom-0 left-0 right-0 z-20 px-4 md:px-8 lg:px-12 pb-6 md:pb-8"
+        style={{
+          background: 'linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 50%, transparent 100%)'
+        }}
+      >
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-8 max-w-7xl mx-auto">
+          {/* Left - FOR YOUR SPACES */}
+          <div 
+            className="text-white font-bold tracking-[0.3em] uppercase"
+            style={{
+              fontSize: 'clamp(0.65rem, 1.5vw, 0.9rem)',
+              textShadow: '0 0 10px rgba(255,255,255,0.3), 0 0 20px rgba(255,255,255,0.1)',
+              letterSpacing: '0.3em',
+              opacity: 0.95
+            }}
+          >
+            FOR YOUR SPACES
+          </div>
+          
+          {/* Center - PLAN B FX */}
+          <div 
+            className="text-white font-bold"
+            style={{
+              fontSize: 'clamp(1.25rem, 3vw, 2rem)',
+              textShadow: '0 0 15px rgba(255,255,255,0.5), 0 0 30px rgba(255,255,255,0.2), 0 0 45px rgba(255,255,255,0.1)',
+              letterSpacing: '0.15em',
+              fontWeight: 700
+            }}
+          >
+            <span className="opacity-50">-</span>
+            <span className="mx-2 md:mx-4">PLAN B FX</span>
+            <span className="opacity-50">-</span>
+          </div>
+          
+          {/* Right - INTERACTIVE ART */}
+          <div 
+            className="text-white font-bold tracking-[0.3em] uppercase"
+            style={{
+              fontSize: 'clamp(0.65rem, 1.5vw, 0.9rem)',
+              textShadow: '0 0 10px rgba(255,255,255,0.3), 0 0 20px rgba(255,255,255,0.1)',
+              letterSpacing: '0.3em',
+              opacity: 0.95
+            }}
+          >
+            INTERACTIVE ART
+          </div>
+        </div>
+      </div>
 
       {/* contenido */}
       <div 
