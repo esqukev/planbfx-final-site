@@ -53,12 +53,23 @@ export default function VideoHero({
     // Handlers de eventos del video
     const handleLoadedData = () => {
       console.log('📹 Video data loaded');
+      console.log('📹 Video src:', video.src);
+      console.log('📹 Video currentSrc:', video.currentSrc);
       playVideo();
     };
 
     const handleCanPlay = () => {
       console.log('📹 Video can play');
+      console.log('📹 Video src:', video.src);
+      console.log('📹 Video currentSrc:', video.currentSrc);
       playVideo();
+    };
+
+    const handleLoadedMetadata = () => {
+      console.log('📹 Video metadata loaded');
+      console.log('📹 Video duration:', video.duration);
+      console.log('📹 Video videoWidth:', video.videoWidth);
+      console.log('📹 Video videoHeight:', video.videoHeight);
     };
 
     const handleError = (e: Event) => {
@@ -97,9 +108,12 @@ export default function VideoHero({
     // Agregar event listeners
     video.addEventListener('loadeddata', handleLoadedData);
     video.addEventListener('canplay', handleCanPlay);
+    video.addEventListener('loadedmetadata', handleLoadedMetadata);
     video.addEventListener('error', handleError);
     video.addEventListener('play', handlePlay);
     video.addEventListener('pause', handlePause);
+    video.addEventListener('stalled', () => console.log('⚠️ Video stalled'));
+    video.addEventListener('waiting', () => console.log('⏳ Video waiting for data'));
 
     // Intentar cargar y reproducir
     video.load();
@@ -119,6 +133,7 @@ export default function VideoHero({
     return () => {
       video.removeEventListener('loadeddata', handleLoadedData);
       video.removeEventListener('canplay', handleCanPlay);
+      video.removeEventListener('loadedmetadata', handleLoadedMetadata);
       video.removeEventListener('error', handleError);
       video.removeEventListener('play', handlePlay);
       video.removeEventListener('pause', handlePause);
@@ -132,14 +147,24 @@ export default function VideoHero({
       <video
         ref={videoRef}
         className="absolute inset-0 w-full h-full object-cover will-change-transform"
-        src={videoSource}
         autoPlay
         muted
         loop
         playsInline
         preload="auto"
-        crossOrigin="anonymous"
-      />
+      >
+        {/* Múltiples fuentes para mejor compatibilidad - probar ambos archivos */}
+        {videoUrl ? (
+          <source src={videoUrl} type="video/mp4" />
+        ) : (
+          <>
+            <source src="/videos/plabanfisa.mp4" type="video/mp4" />
+            <source src="/videos/plabanfisa.mov" type="video/quicktime" />
+          </>
+        )}
+        {/* Fallback si ninguna fuente funciona */}
+        Tu navegador no soporta la reproducción de video.
+      </video>
 
       {/* Debug info (solo en desarrollo) */}
       {process.env.NODE_ENV === 'development' && (
