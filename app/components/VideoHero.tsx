@@ -54,7 +54,16 @@ export default function VideoHero({ videoUrl }: VideoHeroProps) {
   }, []);
 
   return (
-    <section className="relative w-full min-h-[100dvh] overflow-hidden bg-black">
+    <section 
+      className="relative w-full overflow-hidden bg-black"
+      style={{ 
+        height: '100dvh',
+        minHeight: '100dvh',
+        maxHeight: '100dvh',
+        position: 'relative',
+        display: 'block'
+      }}
+    >
       <video
         ref={videoRef}
         src={videoUrl}
@@ -64,13 +73,27 @@ export default function VideoHero({ videoUrl }: VideoHeroProps) {
         playsInline
         preload="auto"
         className="absolute inset-0 w-full h-full object-cover"
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          objectPosition: 'center center',
+          minWidth: '100%',
+          minHeight: '100%'
+        }}
       />
 
       {/* overlay */}
       <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/10 via-black/30 to-black/90" />
 
       {/* contenido */}
-      <div className="relative z-20 flex min-h-[100dvh] items-center justify-center text-white">
+      <div 
+        className="relative z-20 flex items-center justify-center text-white"
+        style={{ height: '100%', minHeight: '100%' }}
+      >
         {/* contenido */}
       </div>
     </section>
