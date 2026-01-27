@@ -55,13 +55,18 @@ export default function VideoHero({ videoUrl }: VideoHeroProps) {
 
   return (
     <section 
-      className="relative w-full overflow-hidden bg-black"
+      className="relative overflow-hidden bg-black"
       style={{ 
-        height: '100dvh',
-        minHeight: '100dvh',
-        maxHeight: '100dvh',
+        width: '100vw',
+        height: '100vh',
+        minHeight: '100vh',
         position: 'relative',
-        display: 'block'
+        display: 'block',
+        margin: 0,
+        padding: 0,
+        left: 0,
+        right: 0,
+        top: 0
       }}
     >
       <video
@@ -72,17 +77,18 @@ export default function VideoHero({ videoUrl }: VideoHeroProps) {
         muted
         playsInline
         preload="auto"
-        className="absolute inset-0 w-full h-full object-cover"
         style={{
           position: 'absolute',
           top: 0,
           left: 0,
-          width: '100%',
-          height: '100%',
+          width: '100vw',
+          height: '100vh',
+          minWidth: '100vw',
+          minHeight: '100vh',
           objectFit: 'cover',
           objectPosition: 'center center',
-          minWidth: '100%',
-          minHeight: '100%'
+          margin: 0,
+          padding: 0
         }}
       />
 
