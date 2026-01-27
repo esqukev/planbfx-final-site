@@ -54,7 +54,7 @@ export default function VideoHero({ videoUrl }: VideoHeroProps) {
   }, []);
 
   return (
-    <section className="relative min-h-screen w-full overflow-hidden bg-black">
+    <section className="relative w-full overflow-hidden bg-black" style={{ height: '100vh', minHeight: '100vh' }}>
       <video
         ref={videoRef}
         src={videoUrl}
@@ -64,6 +64,7 @@ export default function VideoHero({ videoUrl }: VideoHeroProps) {
         playsInline
         preload="auto"
         className="absolute inset-0 w-full h-full object-cover"
+        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
       />
 
       <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/10 via-black/30 to-black/90" />

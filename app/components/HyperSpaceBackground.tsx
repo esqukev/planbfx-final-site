@@ -109,7 +109,7 @@ export default function HyperSpaceBackground() {
         const pos = stars.geometry.attributes.position.array as Float32Array;
 
         for (let i = 0; i < starCount; i++) {
-          pos[i * 3 + 2] += 15;
+          pos[i * 3 + 2] += 2.25; // 15% of original speed (15 * 0.15 = 2.25)
           if (pos[i * 3 + 2] > 1000) {
             pos[i * 3 + 2] = -6000;
           }

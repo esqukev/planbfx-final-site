@@ -36,7 +36,7 @@ function PointLogo({ url }: { url: string }) {
           data.paths.forEach((path: any) => {
             const shapes = SVGLoader.createShapes(path);
             shapes.forEach((shape: any) => {
-              const spacedPoints = shape.getSpacedPoints(3000); // Much more points
+              const spacedPoints = shape.getSpacedPoints(3600); // 20% more points (3000 * 1.2 = 3600)
               spacedPoints.forEach((p: any) => {
                 // Flip Y to fix upside-down logo
                 points.push(p.x, -p.y, (Math.random() - 0.5) * 20);
