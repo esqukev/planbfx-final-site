@@ -211,29 +211,33 @@ export default function VideoHero({
   }, [videoSource]);
 
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-black">
+    <section className="relative h-screen w-full overflow-hidden bg-black" style={{ width: '100%', height: '100vh' }}>
       {/* Video Background */}
-      <div className="absolute inset-0 w-full h-full">
-        <video
-          ref={videoRef}
-          className="absolute inset-0 w-full h-full object-cover will-change-transform"
-          src={videoSource}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          crossOrigin="anonymous"
-          style={{ 
-            width: '100%', 
-            height: '100%',
-            minWidth: '100%',
-            minHeight: '100%',
-            objectFit: 'cover',
-            objectPosition: 'center center'
-          }}
-        />
-      </div>
+      <video
+        ref={videoRef}
+        src={videoSource}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        crossOrigin="anonymous"
+        style={{ 
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100vw',
+          height: '100vh',
+          minWidth: '100%',
+          minHeight: '100%',
+          maxWidth: '100%',
+          maxHeight: '100%',
+          objectFit: 'cover',
+          objectPosition: 'center center',
+          willChange: 'transform',
+          zIndex: 0
+        }}
+      />
 
       {/* Debug info (solo en desarrollo) */}
       {process.env.NODE_ENV === 'development' && (
