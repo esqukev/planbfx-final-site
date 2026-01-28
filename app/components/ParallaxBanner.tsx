@@ -113,6 +113,8 @@ export default function ParallaxBanner({
                 className="mb-2 md:mb-3"
                 style={{
                   transform: `translate3d(0, ${offset * (1 + lineIndex * 0.1)}px, 0)`,
+                  whiteSpace: 'nowrap',
+                  display: 'block',
                 }}
               >
                 {line.split(' ').map((word, wordIndex) => {
