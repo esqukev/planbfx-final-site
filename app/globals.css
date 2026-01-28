@@ -52,6 +52,16 @@ html, body {
   height: 100%;
 }
 
+/* No gaps between sections — all sections flush */
+main > * {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+main {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);

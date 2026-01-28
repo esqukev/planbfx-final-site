@@ -17,7 +17,7 @@ export default function AnimatedStrip({
 }: AnimatedStripProps) {
 
   return (
-    <div className={`overflow-hidden whitespace-nowrap ${className}`}>
+    <div className={`overflow-hidden whitespace-nowrap m-0 ${className}`}>
       <div 
         className={`inline-flex ${direction === 'left' ? 'animate-scroll-left' : 'animate-scroll-right'}`}
         style={{

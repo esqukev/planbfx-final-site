@@ -57,8 +57,8 @@ const projects: Project[] = [
 
 export default function ProjectGrid() {
   return (
-    <section className="py-24 px-4 md:px-8 bg-white dark:bg-black">
-      <div className="max-w-7xl mx-auto">
+    <section className="m-0 py-0 px-4 md:px-8 bg-white dark:bg-black">
+      <div className="max-w-7xl mx-auto py-16 md:py-24">
         <div className="mb-16">
           <span className="text-sm uppercase tracking-wider text-zinc-500 mb-4 block">
             Our Works

@@ -36,8 +36,8 @@ function PointLogo({ url }: { url: string }) {
             shapes.forEach((shape: any) => {
               const spacedPoints = shape.getSpacedPoints(4500); // 4500 points for maximum density
               spacedPoints.forEach((p: any) => {
-                // Flip Y to fix upside-down logo
-                points.push(p.x, -p.y, (Math.random() - 0.5) * 20);
+                // Flip Y to fix upside-down logo; Z spread * 1.2 for 20% thicker logo
+                points.push(p.x, -p.y, (Math.random() - 0.5) * 24);
               });
             });
           });
@@ -84,7 +84,7 @@ function PointLogo({ url }: { url: string }) {
 
             const pulseMaterial = new THREE.PointsMaterial({
               color: 0xffffff,
-              size: 0.0325,
+              size: 0.039,
               transparent: true,
               opacity: 0.0,
               blending: 2, // AdditiveBlending
@@ -160,7 +160,7 @@ function PointLogo({ url }: { url: string }) {
       }
 
       const env = phase < 0.55 ? easeInOut(phase / 0.55) : 1 - easeInOut((phase - 0.55) / 0.45);
-      layer.pulseMaterial.size = 0.026 + env * 0.065;
+      layer.pulseMaterial.size = 0.031 + env * 0.078;
       layer.pulseMaterial.opacity = 0.05 + env * 0.45;
       if (group.current) {
         layer.pulseGeometry.attributes.position.needsUpdate = true;
@@ -180,7 +180,7 @@ function PointLogo({ url }: { url: string }) {
       {/* Main points - MORE VISIBLE */}
       <points ref={pointsRef} geometry={geometry}>
         <pointsMaterial
-          size={0.0325}
+          size={0.039}
           color="#ffffff"
           transparent
           opacity={0.85}

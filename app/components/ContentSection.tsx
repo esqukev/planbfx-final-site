@@ -58,7 +58,7 @@ export default function ContentSection({
   return (
     <section 
       ref={sectionRef}
-      className={`py-24 px-4 md:px-8 relative ${backgroundClassName || (reverse ? 'bg-zinc-50 dark:bg-zinc-900' : 'bg-white dark:bg-black')}`}
+      className={`m-0 py-0 px-4 md:px-8 relative ${backgroundClassName || (reverse ? 'bg-zinc-50 dark:bg-zinc-900' : 'bg-white dark:bg-black')}`}
       style={{ 
         background: backgroundClassName?.includes('from-black') 
           ? 'linear-gradient(to bottom, #000000, #18181b, #000000)' 
@@ -66,7 +66,7 @@ export default function ContentSection({
         isolation: 'isolate' // Creates a new stacking context to prevent bleed-through
       }}
     >
-      <div className={`max-w-7xl mx-auto flex flex-col ${reverse ? 'md:flex-row-reverse' : 'md:flex-row'} ${hasRight ? 'items-center' : 'items-start'} gap-10 md:gap-10`}>
+      <div className={`max-w-7xl mx-auto flex flex-col ${reverse ? 'md:flex-row-reverse' : 'md:flex-row'} ${hasRight ? 'items-center' : 'items-start'} gap-10 md:gap-10 py-16 md:py-24`}>
         <div className={`flex-1 ${hasRight ? 'md:max-w-[620px]' : 'max-w-3xl'}`}>
           {subtitle && (
             <span className={`text-sm uppercase tracking-wider text-zinc-500 mb-4 block transition-all duration-1000 ${

@@ -10,24 +10,25 @@ import ScrollTextEffect from './components/ScrollTextEffect';
 import FadeInOnScroll from './components/FadeInOnScroll';
 import VideoHero from './components/VideoHero';
 import ParallaxBanner from './components/ParallaxBanner';
+import ServicesCards from './components/ServicesCards';
 
 export default function Home() {
   return (
-    <main className="relative">
+    <main className="relative m-0 p-0">
       <Navigation />
-      
+
       <Hero />
-      
-      {/* Animated Strip */}
-      <AnimatedStrip 
-        text="CUSTOM INTERACTIVE INMMERSIONS" 
-        speed={40}
-        direction="right"
-        className="bg-white dark:bg-black text-black dark:text-white py-4"
-      />
-      
-      {/* About Section */}
-      <div id="about" className="scroll-section">
+
+      <div className="m-0 p-0">
+        <AnimatedStrip
+          text="CUSTOM INTERACTIVE INMMERSIONS"
+          speed={40}
+          direction="right"
+          className="bg-white dark:bg-black text-black dark:text-white py-0 m-0"
+        />
+      </div>
+
+      <div id="about" className="scroll-section m-0 p-0">
         <ContentSection
           title="Crafting Immersive Visual Experiences"
           description="We create immersive, tailored visuals that push the boundaries of your vision. From concept to execution, we merge creativity, interaction, and technology to build unique visual experiences that engage, evolve, and resonate beyond the screen."
@@ -37,92 +38,66 @@ export default function Home() {
         />
       </div>
 
-      {/* Animated Strip */}
-      <AnimatedStrip
-        text="CUSTOM INTERACTIVE INMMERSION"
-        speed={40}
-        direction="right"
-        className="bg-white dark:bg-black text-black dark:text-white py-4"
-      />
+      <div className="m-0 p-0">
+        <AnimatedStrip
+          text="CUSTOM INTERACTIVE INMMERSION"
+          speed={40}
+          direction="right"
+          className="bg-white dark:bg-black text-black dark:text-white py-0 m-0"
+        />
+      </div>
 
-      {/* Hero-like Section with Video Banner */}
-      <VideoHero videoUrl="https://res.cloudinary.com/dpplgma25/video/upload/v1769541821/plabanfisa_kskqbc.mp4" />
-      
-      {/* Parallax Banner */}
-      <ParallaxBanner
-        title="Where ideas become experiences"
-        subtitle="We don't just create visuals — we craft moments that move"
-      />
-      
-      {/* Works Section */}
-      <div id="works">
+      <div className="m-0 p-0 block leading-none">
+        <VideoHero videoUrl="https://res.cloudinary.com/dpplgma25/video/upload/v1769541821/plabanfisa_kskqbc.mp4" />
+      </div>
+
+      <div className="m-0 p-0">
+        <ParallaxBanner
+          title="We don't just create visuals — we craft moments that move"
+          subtitle="Where art become experiences"
+        />
+      </div>
+
+      <div id="works" className="m-0 p-0">
         <ProjectGrid />
       </div>
-      
-      {/* Animated Strip */}
-      <AnimatedStrip 
-        text="Ready to Create Your Brand Breakthrough?" 
-        speed={45}
-        direction="right"
-        className="bg-black text-white py-4"
-      />
-      
-      {/* Services Section */}
-      <section id="services" className="py-24 px-4 md:px-8 bg-zinc-50 dark:bg-zinc-900">
-        <div className="max-w-7xl mx-auto">
+
+      <div className="m-0 p-0">
+        <AnimatedStrip
+          text="Ready to Create Your Brand Breakthrough?"
+          speed={45}
+          direction="right"
+          className="bg-black text-white py-0 m-0"
+        />
+      </div>
+
+      {/* What we do — same background as Crafting, seamless into CTA */}
+      <section
+        id="services"
+        className="m-0 p-0 py-0 px-4 md:px-8 text-white overflow-hidden"
+        style={{
+          background: 'linear-gradient(to bottom, #000000, #18181b, #000000)',
+        }}
+      >
+        <div className="max-w-7xl mx-auto py-16 md:py-24">
           <div className="mb-16 text-center">
             <span className="text-sm uppercase tracking-wider text-zinc-500 mb-4 block">
               What we do
             </span>
-            <h2 className="text-5xl md:text-6xl font-bold text-black dark:text-white mb-4">
+            <h2 className="text-5xl md:text-6xl font-bold text-white mb-4">
               We create, produce, and design experiences that make your events hit different.
             </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              {
-                number: '01',
-                title: 'Events',
-                description: 'Creative event concept development and full-scale event planning and execution.',
-              },
-              {
-                number: '02',
-                title: 'Integrated Marketing',
-                description: 'Marketing communication strategy development, brand positioning, and high-impact campaigns.',
-              },
-              {
-                number: '03',
-                title: 'Creative Design',
-                description: 'Brand identity development, concept creation and design consultancy.',
-              },
-              {
-                number: '04',
-                title: 'Production',
-                description: 'TVCs, Brand Films, Corporate Video Production, and TV Show Production.',
-              },
-            ].map((service, index) => (
-              <div key={index} className="p-6 bg-white dark:bg-black rounded-lg border border-zinc-200 dark:border-zinc-800 hover:shadow-xl transition-shadow">
-                <div className="text-4xl font-bold text-zinc-300 dark:text-zinc-700 mb-4">
-                  {service.number}
-                </div>
-                <h3 className="text-2xl font-bold text-black dark:text-white mb-3">
-                  {service.title}
-                </h3>
-                <p className="text-zinc-600 dark:text-zinc-400">
-                  {service.description}
-                </p>
-              </div>
-            ))}
-          </div>
+          <ServicesCards />
         </div>
       </section>
-      
-      {/* CTA Section */}
-      <section id="contact" className="relative py-32 px-4 md:px-8 text-white overflow-hidden">
+
+      {/* CTA — seamless from What we do (both black at boundary) */}
+      <section id="contact" className="relative m-0 p-0 py-0 px-4 md:px-8 text-white overflow-hidden">
         {/* HyperSpace Background */}
         <HyperSpaceBackground />
         
-        <div className="relative z-10 max-w-4xl mx-auto text-center">
+        <div className="relative z-10 max-w-4xl mx-auto text-center py-24 md:py-32">
           <ScrollTextEffect className="text-6xl md:text-8xl font-bold mb-8">
             Let´s Create<br />
             Something<br />
