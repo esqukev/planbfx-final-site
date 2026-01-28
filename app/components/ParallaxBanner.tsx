@@ -58,7 +58,7 @@ export default function ParallaxBanner({
   return (
     <section
       ref={sectionRef}
-      className={`relative min-h-[50vh] flex items-center justify-center overflow-hidden m-0 p-0 border-0 ${className}`}
+      className={`relative min-h-[70vh] flex items-center justify-center overflow-hidden m-0 p-0 border-0 ${className}`}
     >
       {/* Diagonal gradient: light from top-right to bottom-left */}
       <div
@@ -74,11 +74,11 @@ export default function ParallaxBanner({
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent" />
       </div>
 
-      <div className="relative z-10 max-w-5xl mx-auto text-center px-8 md:px-12 lg:px-16 py-20 md:py-28">
+      <div className="relative z-10 max-w-5xl mx-auto text-center px-8 md:px-12 lg:px-16 py-24 md:py-32 lg:py-40">
         {/* Subtitle on top with fade in */}
         <p
           ref={subtitleRef}
-          className="text-sm uppercase tracking-[0.3em] text-zinc-400 mb-4 md:mb-6 transition-opacity duration-1000"
+          className="text-sm uppercase tracking-[0.3em] text-zinc-400 mb-6 md:mb-8 transition-opacity duration-1000"
           style={{
             transform: `translate3d(0, ${offset * 0.6}px, 0)`,
             opacity: isVisible ? 1 : 0,
@@ -86,22 +86,27 @@ export default function ParallaxBanner({
         >
           {subtitle}
         </p>
-        {/* Title with letter-by-letter fade in - slower */}
+        {/* Title with word-by-word fade in to prevent word breaking */}
         <p
           ref={titleRef}
           className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight"
-          style={{ transform: `translate3d(0, ${offset}px, 0)` }}
+          style={{
+            transform: `translate3d(0, ${offset}px, 0)`,
+            wordBreak: 'keep-all',
+            overflowWrap: 'break-word',
+          }}
         >
-          {title.split('').map((char, index) => (
+          {title.split(' ').map((word, wordIndex) => (
             <span
-              key={index}
-              className="inline-block"
+              key={wordIndex}
+              className="inline-block mr-2"
               style={{
                 opacity: isVisible ? 1 : 0,
-                transition: `opacity 1s ease ${index * 0.05}s`,
+                transition: `opacity 1.2s ease ${wordIndex * 0.15}s`,
+                display: 'inline-block',
               }}
             >
-              {char === ' ' ? '\u00A0' : char}
+              {word}
             </span>
           ))}
         </p>
