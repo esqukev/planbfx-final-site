@@ -53,7 +53,7 @@ export default function Home() {
 
       <div className="m-0 p-0">
         <ParallaxBanner
-          title="We don't just create visuals — we craft moments that move"
+          title="We don´t just create visuals — we craft moments that move"
           subtitle="Where art become experiences"
         />
       </div>  
@@ -71,20 +71,10 @@ export default function Home() {
         />
       </div>
 
-      {/* What we do — heading: ParallaxBanner-style bg (seamless); cards: Crafting-style bg */}
+      {/* What we do — simple background, seamless transitions */}
       <section id="services" className="m-0 p-0 text-white overflow-hidden">
-        {/* Heading block: same background as "Where art become experiences" — seamless transition from ParallaxBanner */}
-        <div
-          className="relative m-0 p-0 py-16 md:py-20 px-4 md:px-8 overflow-hidden"
-          style={{
-            background: 'linear-gradient(to bottom, #000000, #18181b, #000000)',
-          }}
-        >
-          <div className="absolute inset-0 opacity-30 pointer-events-none">
-            <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-blue-600 rounded-full blur-[120px]" />
-            <div className="absolute bottom-1/3 right-1/4 w-[400px] h-[400px] bg-violet-600 rounded-full blur-[100px]" />
-          </div>
-          <div className="relative z-10 max-w-7xl mx-auto text-center">
+        <div className="m-0 p-0 py-16 md:py-20 px-4 md:px-8 bg-black">
+          <div className="max-w-7xl mx-auto text-center">
             <span className="text-sm uppercase tracking-wider text-zinc-500 mb-4 block">
               What we do
             </span>

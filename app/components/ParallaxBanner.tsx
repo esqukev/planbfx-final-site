@@ -36,12 +36,13 @@ export default function ParallaxBanner({
       ref={sectionRef}
       className={`relative min-h-[50vh] flex items-center justify-center overflow-hidden m-0 p-0 border-0 ${className}`}
     >
-      {/* Seamless with video: black at top, same gradient as video footer */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black via-zinc-900 to-black">
-        <div className="absolute inset-0 opacity-30">
-          <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-blue-600 rounded-full blur-[120px]" />
-          <div className="absolute bottom-1/3 right-1/4 w-[400px] h-[400px] bg-violet-600 rounded-full blur-[100px]" />
-        </div>
+      {/* Simple background without orbs */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black via-zinc-900 to-black" />
+
+      {/* Fade overlays for seamless transitions */}
+      <div className="absolute inset-0 z-20 pointer-events-none">
+        <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-black to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent" />
       </div>
 
       <div className="relative z-10 max-w-4xl mx-auto text-center px-4 py-16 md:py-20">

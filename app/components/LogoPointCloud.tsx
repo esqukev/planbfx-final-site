@@ -34,10 +34,10 @@ function PointLogo({ url }: { url: string }) {
           data.paths.forEach((path: any) => {
             const shapes = SVGLoader.createShapes(path);
             shapes.forEach((shape: any) => {
-              const spacedPoints = shape.getSpacedPoints(4500); // 4500 points for maximum density
+              const spacedPoints = shape.getSpacedPoints(5850); // 30% more points: 4500 * 1.3 = 5850
               spacedPoints.forEach((p: any) => {
-                // Flip Y to fix upside-down logo; Z spread * 1.2 for 20% thicker logo
-                points.push(p.x, -p.y, (Math.random() - 0.5) * 24);
+                // Flip Y to fix upside-down logo; Increased Z spread for thicker logo
+                points.push(p.x, -p.y, (Math.random() - 0.5) * 30);
               });
             });
           });
@@ -84,7 +84,7 @@ function PointLogo({ url }: { url: string }) {
 
             const pulseMaterial = new THREE.PointsMaterial({
               color: 0xffffff,
-              size: 0.039,
+              size: 0.047,
               transparent: true,
               opacity: 0.0,
               blending: 2, // AdditiveBlending
@@ -180,7 +180,7 @@ function PointLogo({ url }: { url: string }) {
       {/* Main points - MORE VISIBLE */}
       <points ref={pointsRef} geometry={geometry}>
         <pointsMaterial
-          size={0.039}
+          size={0.047}
           color="#ffffff"
           transparent
           opacity={0.85}
