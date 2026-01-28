@@ -13,6 +13,12 @@ export default function ParallaxBanner({
   subtitle = "Where art become experiences",
   className = '',
 }: ParallaxBannerProps) {
+  // Split title into lines
+  const titleLines = [
+    "We don't just create visuals",
+    "we craft moments",
+    "that move"
+  ];
   const sectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLParagraphElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
@@ -26,7 +32,7 @@ export default function ParallaxBanner({
       const sectionTop = rect.top;
       const windowHeight = window.innerHeight;
       if (rect.bottom > 0 && rect.top < windowHeight) {
-        setOffset(sectionTop * 0.2);
+        setOffset(sectionTop * 0.4);
       }
     };
     onScroll();
@@ -86,55 +92,67 @@ export default function ParallaxBanner({
         >
           {subtitle}
         </p>
-        {/* Title with letter-by-letter fade in, words kept together */}
-        <p
+        {/* Title with letter-by-letter fade in, split into lines */}
+        <div
           ref={titleRef}
           className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight"
           style={{
-            transform: `translate3d(0, ${offset}px, 0)`,
             wordBreak: 'keep-all',
             overflowWrap: 'break-word',
           }}
         >
-          {title.split(' ').map((word, wordIndex) => {
-            let charIndex = 0;
-            // Calculate total character index including previous words and spaces
-            title.split(' ').slice(0, wordIndex).forEach((w) => {
-              charIndex += w.length + 1; // +1 for space
+          {titleLines.map((line, lineIndex) => {
+            let totalCharIndex = 0;
+            // Calculate starting character index for this line
+            titleLines.slice(0, lineIndex).forEach((l) => {
+              totalCharIndex += l.length + 1; // +1 for line break
             });
             return (
-              <span key={wordIndex} className="inline-block" style={{ whiteSpace: 'nowrap' }}>
-                {word.split('').map((char, idx) => {
-                  const totalCharIndex = charIndex + idx;
+              <p
+                key={lineIndex}
+                className="mb-2 md:mb-3"
+                style={{
+                  transform: `translate3d(0, ${offset * (1 + lineIndex * 0.1)}px, 0)`,
+                }}
+              >
+                {line.split(' ').map((word, wordIndex) => {
+                  const wordStartIndex = totalCharIndex + line.split(' ').slice(0, wordIndex).join(' ').length + wordIndex;
                   return (
-                    <span
-                      key={`${wordIndex}-${idx}`}
-                      className="inline-block"
-                      style={{
-                        opacity: isVisible ? 1 : 0,
-                        transition: `opacity 1s ease ${totalCharIndex * 0.05}s`,
-                      }}
-                    >
-                      {char}
+                    <span key={wordIndex} className="inline-block" style={{ whiteSpace: 'nowrap' }}>
+                      {word.split('').map((char, charIndex) => {
+                        const charTotalIndex = wordStartIndex + charIndex;
+                        return (
+                          <span
+                            key={`${lineIndex}-${wordIndex}-${charIndex}`}
+                            className="inline-block"
+                            style={{
+                              opacity: isVisible ? 1 : 0,
+                              transition: `opacity 1s ease ${charTotalIndex * 0.05}s`,
+                            }}
+                          >
+                            {char}
+                          </span>
+                        );
+                      })}
+                      {wordIndex < line.split(' ').length - 1 && (
+                        <span
+                          className="inline-block"
+                          style={{
+                            opacity: isVisible ? 1 : 0,
+                            transition: `opacity 1s ease ${wordStartIndex + word.length * 0.05}s`,
+                            width: '0.3em',
+                          }}
+                        >
+                          {' '}
+                        </span>
+                      )}
                     </span>
                   );
                 })}
-                {wordIndex < title.split(' ').length - 1 && (
-                  <span
-                    className="inline-block"
-                    style={{
-                      opacity: isVisible ? 1 : 0,
-                      transition: `opacity 1s ease ${charIndex + word.length * 0.05}s`,
-                      width: '0.3em',
-                    }}
-                  >
-                    {' '}
-                  </span>
-                )}
-              </span>
+              </p>
             );
           })}
-        </p>
+        </div>
       </div>
     </section>
   );
