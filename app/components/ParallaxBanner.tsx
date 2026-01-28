@@ -1,5 +1,7 @@
 'use client';
 
+import { useEffect, useRef, useState } from 'react';
+
 type ParallaxBannerProps = {
   title?: string;
   subtitle?: string;
@@ -11,11 +13,31 @@ export default function ParallaxBanner({
   subtitle = "Where art become experiences",
   className = '',
 }: ParallaxBannerProps) {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [offset, setOffset] = useState(0);
+
+  useEffect(() => {
+    const onScroll = () => {
+      if (!sectionRef.current) return;
+      const rect = sectionRef.current.getBoundingClientRect();
+      const sectionTop = rect.top;
+      const windowHeight = window.innerHeight;
+      if (rect.bottom > 0 && rect.top < windowHeight) {
+        setOffset(sectionTop * 0.2);
+      }
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   return (
     <section
+      ref={sectionRef}
       className={`relative min-h-[50vh] flex items-center justify-center overflow-hidden m-0 p-0 border-0 ${className}`}
     >
-      <div className="absolute inset-0 bg-gradient-to-br from-black via-zinc-900 to-black">
+      {/* Seamless with video: black at top, same gradient as video footer */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black via-zinc-900 to-black">
         <div className="absolute inset-0 opacity-30">
           <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-blue-600 rounded-full blur-[120px]" />
           <div className="absolute bottom-1/3 right-1/4 w-[400px] h-[400px] bg-violet-600 rounded-full blur-[100px]" />
@@ -23,11 +45,18 @@ export default function ParallaxBanner({
       </div>
 
       <div className="relative z-10 max-w-4xl mx-auto text-center px-4 py-16 md:py-20">
-        <p className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-4 md:mb-6">
-          {title}
-        </p>
-        <p className="text-sm uppercase tracking-[0.3em] text-zinc-400">
+        {/* Title on top */}
+        <p
+          className="text-sm uppercase tracking-[0.3em] text-zinc-400 mb-4 md:mb-6"
+          style={{ transform: `translate3d(0, ${offset * 0.6}px, 0)` }}
+        >
           {subtitle}
+        </p>
+        <p
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight"
+          style={{ transform: `translate3d(0, ${offset}px, 0)` }}
+        >
+          {title}
         </p>
       </div>
     </section>

@@ -56,7 +56,7 @@ export default function Home() {
           title="We don't just create visuals — we craft moments that move"
           subtitle="Where art become experiences"
         />
-      </div>
+      </div>  
 
       <div id="works" className="m-0 p-0">
         <ProjectGrid />
@@ -71,24 +71,38 @@ export default function Home() {
         />
       </div>
 
-      {/* What we do — same background as Crafting, seamless into CTA */}
-      <section
-        id="services"
-        className="m-0 p-0 py-0 px-4 md:px-8 text-white overflow-hidden"
-        style={{
-          background: 'linear-gradient(to bottom, #000000, #18181b, #000000)',
-        }}
-      >
-        <div className="max-w-7xl mx-auto py-16 md:py-24">
-          <div className="mb-16 text-center">
+      {/* What we do — heading: ParallaxBanner-style bg (seamless); cards: Crafting-style bg */}
+      <section id="services" className="m-0 p-0 text-white overflow-hidden">
+        {/* Heading block: same background as "Where art become experiences" — seamless transition from ParallaxBanner */}
+        <div
+          className="relative m-0 p-0 py-16 md:py-20 px-4 md:px-8 overflow-hidden"
+          style={{
+            background: 'linear-gradient(to bottom, #000000, #18181b, #000000)',
+          }}
+        >
+          <div className="absolute inset-0 opacity-30 pointer-events-none">
+            <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-blue-600 rounded-full blur-[120px]" />
+            <div className="absolute bottom-1/3 right-1/4 w-[400px] h-[400px] bg-violet-600 rounded-full blur-[100px]" />
+          </div>
+          <div className="relative z-10 max-w-7xl mx-auto text-center">
             <span className="text-sm uppercase tracking-wider text-zinc-500 mb-4 block">
               What we do
             </span>
-            <h2 className="text-5xl md:text-6xl font-bold text-white mb-4">
+            <h2 className="text-5xl md:text-6xl font-bold text-white">
               We create, produce, and design experiences that make your events hit different.
             </h2>
           </div>
-          <ServicesCards />
+        </div>
+        {/* Cards block: Crafting Immersive background — seamless transition into CTA */}
+        <div
+          className="m-0 p-0 py-16 md:py-24 px-4 md:px-8"
+          style={{
+            background: 'linear-gradient(to bottom, #000000, #18181b, #000000)',
+          }}
+        >
+          <div className="max-w-7xl mx-auto">
+            <ServicesCards />
+          </div>
         </div>
       </section>
 
