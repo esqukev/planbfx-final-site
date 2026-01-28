@@ -11,6 +11,7 @@ function PointLogo({ url }: { url: string }) {
   const pointsRef = useRef<any>(null);
   const pulseLayersRef = useRef<any[]>([]);
   const ringRef = useRef<any>(null);
+  const eyeRef = useRef<any>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -118,10 +119,30 @@ function PointLogo({ url }: { url: string }) {
           const ring = new THREE.Mesh(ringGeo, ringMat);
           ring.rotation.x = Math.PI / 2.2;
 
+          // Create snake eye point - bright point positioned in upper right area of logo
+          // Position relative to scaled geometry (approximately upper right quadrant)
+          const eyeGeometry = new THREE.BufferGeometry();
+          const eyePosition = new Float32Array([
+            30,   // Upper right area (X) - adjusted for scaled logo
+            25,   // Upper area (Y) - adjusted for scaled logo
+            0     // Center depth (Z)
+          ]);
+          eyeGeometry.setAttribute('position', new THREE.Float32BufferAttribute(eyePosition, 3));
+          const eyeMaterial = new THREE.PointsMaterial({
+            color: 0xffffff,
+            size: 0.12,
+            transparent: true,
+            opacity: 1.0,
+            blending: 2, // AdditiveBlending
+            depthWrite: false,
+          });
+          const eye = new THREE.Points(eyeGeometry, eyeMaterial);
+
           if (!cancelled) {
             setGeometry(geo);
             pulseLayersRef.current = layers;
             ringRef.current = ring;
+            eyeRef.current = eye;
           }
         });
       } catch (e) {
@@ -198,6 +219,9 @@ function PointLogo({ url }: { url: string }) {
 
       {/* Halo ring */}
       {ringRef.current && <primitive object={ringRef.current} />}
+
+      {/* Snake eye - bright point */}
+      {eyeRef.current && <primitive object={eyeRef.current} />}
     </group>
   );
 }

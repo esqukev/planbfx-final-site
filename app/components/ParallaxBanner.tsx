@@ -74,7 +74,7 @@ export default function ParallaxBanner({
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent" />
       </div>
 
-      <div className="relative z-10 max-w-4xl mx-auto text-center px-4 py-16 md:py-20">
+      <div className="relative z-10 max-w-5xl mx-auto text-center px-8 md:px-12 lg:px-16 py-20 md:py-28">
         {/* Subtitle on top with fade in */}
         <p
           ref={subtitleRef}
@@ -86,7 +86,7 @@ export default function ParallaxBanner({
         >
           {subtitle}
         </p>
-        {/* Title with letter-by-letter fade in */}
+        {/* Title with letter-by-letter fade in - slower */}
         <p
           ref={titleRef}
           className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight"
@@ -98,7 +98,7 @@ export default function ParallaxBanner({
               className="inline-block"
               style={{
                 opacity: isVisible ? 1 : 0,
-                transition: `opacity 0.5s ease ${index * 0.03}s`,
+                transition: `opacity 1s ease ${index * 0.05}s`,
               }}
             >
               {char === ' ' ? '\u00A0' : char}
