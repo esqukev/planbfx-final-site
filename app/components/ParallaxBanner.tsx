@@ -125,6 +125,7 @@ export default function ParallaxBanner({
                         const charTotalIndex = wordStartIndex + charIndex;
                         // Replace straight apostrophe with typographic apostrophe
                         const displayChar = char === "'" ? "'" : char;
+                        const isApostrophe = char === "'";
                         return (
                           <span
                             key={`${lineIndex}-${wordIndex}-${charIndex}`}
@@ -132,6 +133,7 @@ export default function ParallaxBanner({
                             style={{
                               opacity: isVisible ? 1 : 0,
                               transition: `opacity 1s ease ${charTotalIndex * 0.05}s`,
+                              fontFamily: isApostrophe ? 'var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' : 'inherit',
                             }}
                           >
                             {displayChar}
