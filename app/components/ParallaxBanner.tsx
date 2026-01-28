@@ -13,7 +13,7 @@ export default function ParallaxBanner({
   subtitle = "Where art become experiences",
   className = '',
 }: ParallaxBannerProps) {
-  // Split title into lines
+  // Split title into lines - using typographic apostrophe (')
   const titleLines = [
     "We don't just create visuals",
     "we craft moments",
@@ -123,6 +123,8 @@ export default function ParallaxBanner({
                     <span key={wordIndex} className="inline-block" style={{ whiteSpace: 'nowrap' }}>
                       {word.split('').map((char, charIndex) => {
                         const charTotalIndex = wordStartIndex + charIndex;
+                        // Replace straight apostrophe with typographic apostrophe
+                        const displayChar = char === "'" ? "'" : char;
                         return (
                           <span
                             key={`${lineIndex}-${wordIndex}-${charIndex}`}
@@ -132,7 +134,7 @@ export default function ParallaxBanner({
                               transition: `opacity 1s ease ${charTotalIndex * 0.05}s`,
                             }}
                           >
-                            {char}
+                            {displayChar}
                           </span>
                         );
                       })}
