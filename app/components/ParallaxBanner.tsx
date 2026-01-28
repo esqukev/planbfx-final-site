@@ -9,7 +9,7 @@ type ParallaxBannerProps = {
 };
 
 export default function ParallaxBanner({
-  title = "We don't just create visuals — we craft moments that move",
+  title = "We don't just create visuals we craft moments that move",
   subtitle = "Where art become experiences",
   className = '',
 }: ParallaxBannerProps) {
@@ -86,7 +86,7 @@ export default function ParallaxBanner({
         >
           {subtitle}
         </p>
-        {/* Title with word-by-word fade in to prevent word breaking */}
+        {/* Title with letter-by-letter fade in, words kept together */}
         <p
           ref={titleRef}
           className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight"
@@ -96,19 +96,44 @@ export default function ParallaxBanner({
             overflowWrap: 'break-word',
           }}
         >
-          {title.split(' ').map((word, wordIndex) => (
-            <span
-              key={wordIndex}
-              className="inline-block mr-2"
-              style={{
-                opacity: isVisible ? 1 : 0,
-                transition: `opacity 1.2s ease ${wordIndex * 0.15}s`,
-                display: 'inline-block',
-              }}
-            >
-              {word}
-            </span>
-          ))}
+          {title.split(' ').map((word, wordIndex) => {
+            let charIndex = 0;
+            // Calculate total character index including previous words and spaces
+            title.split(' ').slice(0, wordIndex).forEach((w) => {
+              charIndex += w.length + 1; // +1 for space
+            });
+            return (
+              <span key={wordIndex} className="inline-block" style={{ whiteSpace: 'nowrap' }}>
+                {word.split('').map((char, idx) => {
+                  const totalCharIndex = charIndex + idx;
+                  return (
+                    <span
+                      key={`${wordIndex}-${idx}`}
+                      className="inline-block"
+                      style={{
+                        opacity: isVisible ? 1 : 0,
+                        transition: `opacity 1s ease ${totalCharIndex * 0.05}s`,
+                      }}
+                    >
+                      {char}
+                    </span>
+                  );
+                })}
+                {wordIndex < title.split(' ').length - 1 && (
+                  <span
+                    className="inline-block"
+                    style={{
+                      opacity: isVisible ? 1 : 0,
+                      transition: `opacity 1s ease ${charIndex + word.length * 0.05}s`,
+                      width: '0.3em',
+                    }}
+                  >
+                    {' '}
+                  </span>
+                )}
+              </span>
+            );
+          })}
         </p>
       </div>
     </section>
