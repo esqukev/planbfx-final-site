@@ -9,6 +9,7 @@ import HyperSpaceBackground from './components/HyperSpaceBackground';
 import ScrollTextEffect from './components/ScrollTextEffect';
 import FadeInOnScroll from './components/FadeInOnScroll';
 import VideoHero from './components/VideoHero';
+import ParallaxBanner from './components/ParallaxBanner';
 
 export default function Home() {
   return (
@@ -47,14 +48,11 @@ export default function Home() {
       {/* Hero-like Section with Video Banner */}
       <VideoHero videoUrl="https://res.cloudinary.com/dpplgma25/video/upload/v1769541821/plabanfisa_kskqbc.mp4" />
       
-      {/* Seamless Hero Background Section */}
-      <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-black via-zinc-900 to-black">
-        {/* Background effects - same as Hero */}
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500 rounded-full blur-3xl animate-pulse"></div>
-        </div>
-        {/* Content can be added here */}
-      </section>
+      {/* Parallax Banner */}
+      <ParallaxBanner
+        title="Where ideas become experiences"
+        subtitle="We don't just create visuals — we craft moments that move"
+      />
       
       {/* Works Section */}
       <div id="works">
