@@ -71,9 +71,14 @@ export default function Home() {
         />
       </div>
 
-      {/* What we do — simple background, seamless transitions */}
+      {/* What we do — same background as cards, seamless transitions */}
       <section id="services" className="m-0 p-0 text-white overflow-hidden">
-        <div className="m-0 p-0 py-16 md:py-20 px-4 md:px-8 bg-black">
+        <div
+          className="m-0 p-0 py-16 md:py-20 px-4 md:px-8"
+          style={{
+            background: 'linear-gradient(to bottom, #000000, #18181b, #000000)',
+          }}
+        >
           <div className="max-w-7xl mx-auto text-center">
             <span className="text-sm uppercase tracking-wider text-zinc-500 mb-4 block">
               What we do
