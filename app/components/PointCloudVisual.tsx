@@ -89,7 +89,7 @@ export default function PointCloudVisual({ className = '' }: PointCloudVisualPro
 
         const pulseMaterial = new THREE.PointsMaterial({
           color: 0xffffff,
-          size: 0.02,
+          size: 0.028,
           transparent: true,
           opacity: 0.0,
           blending: THREE.AdditiveBlending,
