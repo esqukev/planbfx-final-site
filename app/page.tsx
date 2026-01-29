@@ -53,7 +53,7 @@ export default function Home() {
 
       <div className="m-0 p-0">
         <ParallaxBanner
-          title="We don´t just create visuals — we craft moments that move"
+          title="We don't just create visuals we craft moments that are remembered"
           subtitle="Where art become experiences"
         />
       </div>  
