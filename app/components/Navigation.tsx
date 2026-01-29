@@ -35,7 +35,7 @@ export default function Navigation() {
       style={
         scrolled
           ? {
-              background: 'linear-gradient(to bottom, rgba(0,0,0,0.28) 0%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0.06) 85%, transparent 100%)',
+              background: 'linear-gradient(to bottom, rgba(0,0,0,0.24) 0%, rgba(0,0,0,0.22) 25%, rgba(0,0,0,0.18) 45%, rgba(0,0,0,0.12) 62%, rgba(0,0,0,0.07) 78%, rgba(0,0,0,0.03) 90%, transparent 100%)',
             }
           : undefined
       }
