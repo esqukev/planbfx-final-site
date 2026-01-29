@@ -11,6 +11,91 @@ declare global {
   }
 }
 
+// Video URL: replace with your vertical video (e.g. Cloudinary or /videos/about.mp4)
+const ABOUT_VIDEO_URL = 'https://res.cloudinary.com/dpplgma25/video/upload/v1769541821/plabanfisa_kskqbc.mp4';
+
+function AboutContent() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const videoWrapRef = useRef<HTMLDivElement>(null);
+  const [videoOpacity, setVideoOpacity] = useState(0);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    const videoWrap = videoWrapRef.current;
+    if (!section || !videoWrap) return;
+
+    const onScroll = () => {
+      const rect = section.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      const sectionTop = rect.top;
+      const sectionHeight = rect.height;
+      // Video appears when section enters center of viewport, fades out when leaving
+      const visibleStart = windowHeight * 0.3;
+      const visibleEnd = windowHeight * 0.7;
+      const inView = rect.bottom > 0 && sectionTop < windowHeight;
+      if (!inView) {
+        setVideoOpacity(0);
+        return;
+      }
+      // Peak visibility when section is roughly centered
+      const center = sectionTop + sectionHeight / 2;
+      const distFromCenter = Math.abs(center - windowHeight / 2);
+      const maxDist = windowHeight * 0.5;
+      const opacity = Math.max(0, 1 - distFromCenter / maxDist);
+      setVideoOpacity(opacity);
+    };
+
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  return (
+    <section
+      ref={sectionRef}
+      className="relative z-20 py-24 px-4 md:px-8 bg-white dark:bg-black min-h-screen"
+    >
+      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-16 items-start">
+        {/* Left: text */}
+        <div className="flex-1 max-w-2xl">
+          <h1 className="text-5xl md:text-7xl font-bold mb-12 text-black dark:text-white">
+            About Us
+          </h1>
+          <div className="space-y-6 text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed">
+            <p>
+              Plan B began as a collective of local musicians driven by the goal of energizing the scene and elevating the standards of their own events. During this process, we incorporated code-based visual development into our workflow, allowing us to expand our services and provide immersive, memorable experiences for diverse events.
+            </p>
+            <p>
+              We have partnered with local promoters such as 3AM, Soulful Gathering, Xtyle, and Microgarden, providing visual support for world-class artists like Adam Beyer, Donnie Cosmo, and Anfisa Letyago, alongside key local talent.
+            </p>
+            <p>
+              We invite you to explore our vision and become part of the Plan B family.
+            </p>
+          </div>
+        </div>
+
+        {/* Right: vertical video — appears and disappears with scroll */}
+        <div
+          ref={videoWrapRef}
+          className="flex-shrink-0 w-full lg:w-auto flex justify-center lg:justify-end transition-opacity duration-700 ease-out"
+          style={{ opacity: videoOpacity }}
+        >
+          <div className="relative w-[280px] aspect-[9/16] rounded-2xl overflow-hidden bg-black shadow-2xl">
+            <video
+              src={ABOUT_VIDEO_URL}
+              className="absolute inset-0 w-full h-full object-cover"
+              playsInline
+              muted
+              loop
+              autoPlay
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function AboutPage() {
   const vantaRef = useRef<HTMLDivElement>(null);
   const vantaEffect = useRef<any>(null);
@@ -149,17 +234,8 @@ export default function AboutPage() {
         </div>
       </section>
       
-      {/* Content Section */}
-      <section className="relative z-20 py-24 px-4 md:px-8 bg-white dark:bg-black">
-        <div className="max-w-7xl mx-auto">
-          <h1 className="text-6xl md:text-8xl font-bold mb-8 text-black dark:text-white">
-            About Us
-          </h1>
-          <p className="text-xl text-zinc-600 dark:text-zinc-400 max-w-3xl">
-            This is the About page. Content will be added here.
-          </p>
-        </div>
-      </section>
+      {/* Content Section: text left, vertical video right (appears then disappears on scroll) */}
+      <AboutContent />
       
       <Footer />
     </main>
