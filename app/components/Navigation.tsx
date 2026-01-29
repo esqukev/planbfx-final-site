@@ -1,26 +1,13 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
   const pathname = usePathname();
-
-  useEffect(() => {
-    const onScroll = () => {
-      const y = window.scrollY;
-      const max = 120; // qué tan lento entra el efecto
-      const progress = Math.min(y / max, 1);
-      setScrollProgress(progress);
-    };
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
 
   const menuItems = [
     { label: 'Home', href: '/' },
@@ -31,18 +18,8 @@ export default function Navigation() {
   ];
 
   return (
-    <nav
-      className="fixed top-0 left-0 right-0 z-50"
-      style={{
-        backdropFilter: `blur(${scrollProgress * 14}px)`,
-        WebkitBackdropFilter: `blur(${scrollProgress * 14}px)`,
-        backgroundColor: `rgba(0, 0, 0, ${scrollProgress * 0.45})`,
-        borderBottom: `1px solid rgba(255,255,255,${scrollProgress * 0.12})`,
-        boxShadow: `0 8px 30px rgba(0,0,0,${scrollProgress * 0.25})`,
-        transition: 'background-color 0.2s linear',
-      }}
-    >
-      <div className="w-full px-4 md:px-8 lg:px-12 xl:px-16 pt-4 pb-[14px] flex items-center justify-between">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-transparent">
+      <div className="w-full px-4 md:px-8 lg:px-12 xl:px-16 py-4 flex items-center justify-between">
         <Link
           href="/"
           className="relative h-12 w-32 cursor-pointer hover:opacity-80 transition-opacity"
