@@ -1,13 +1,22 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+
+  useEffect(() => {
+    const onScroll = () => {
+      setScrolled(window.scrollY > 40);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   const menuItems = [
     { label: 'Home', href: '/' },
@@ -18,8 +27,37 @@ export default function Navigation() {
   ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-transparent">
-      <div className="w-full px-4 md:px-8 lg:px-12 xl:px-16 py-4 flex items-center justify-between">
+    <nav
+      className={`
+        fixed top-0 left-0 right-0 z-50
+        transition-all duration-700 ease-out
+        ${scrolled
+          ? 'backdrop-blur-xl bg-black/40 shadow-[0_20px_40px_rgba(0,0,0,0.25)]'
+          : 'backdrop-blur-0 bg-transparent'
+        }
+      `}
+    >
+      {/* Fade inferior natural (evita corte brusco) */}
+      <div
+        className={`
+          pointer-events-none absolute bottom-0 left-0 w-full
+          transition-opacity duration-700 ease-out
+          ${scrolled ? 'opacity-100' : 'opacity-0'}
+        `}
+        style={{
+          height: '80px',
+          background: `
+            linear-gradient(
+              to bottom,
+              rgba(0,0,0,0) 0%,
+              rgba(0,0,0,0.25) 50%,
+              rgba(0,0,0,0.6) 100%
+            )
+          `,
+        }}
+      />
+
+      <div className="relative z-10 w-full px-4 md:px-8 lg:px-12 xl:px-16 py-4 flex items-center justify-between max-w-7xl mx-auto">
         <Link
           href="/"
           className="relative h-12 w-32 cursor-pointer hover:opacity-80 transition-opacity"
@@ -59,7 +97,7 @@ export default function Navigation() {
         </button>
       </div>
       {isMenuOpen && (
-        <div className="md:hidden bg-black/95 backdrop-blur-md border-t border-zinc-800">
+        <div className="relative z-10 md:hidden bg-black/95 backdrop-blur-md border-t border-zinc-800">
           {menuItems.map((item) => (
             <Link
               key={item.label}
