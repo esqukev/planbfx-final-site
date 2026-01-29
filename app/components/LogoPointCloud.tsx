@@ -37,8 +37,8 @@ function PointLogo({ url }: { url: string }) {
             shapes.forEach((shape: any) => {
               const spacedPoints = shape.getSpacedPoints(5850); // 30% more points: 4500 * 1.3 = 5850
               spacedPoints.forEach((p: any) => {
-                // Flip Y to fix upside-down logo; Increased Z spread for thicker logo
-                points.push(p.x, -p.y, (Math.random() - 0.5) * 30);
+                // Flip Y to fix upside-down logo; Z spread for thicker profile when facing front
+                points.push(p.x, -p.y, (Math.random() - 0.5) * 48);
               });
             });
           });
@@ -85,7 +85,7 @@ function PointLogo({ url }: { url: string }) {
 
             const pulseMaterial = new THREE.PointsMaterial({
               color: 0xffffff,
-              size: 0.047,
+              size: 0.056,
               transparent: true,
               opacity: 0.0,
               blending: 2, // AdditiveBlending
@@ -181,7 +181,7 @@ function PointLogo({ url }: { url: string }) {
       }
 
       const env = phase < 0.55 ? easeInOut(phase / 0.55) : 1 - easeInOut((phase - 0.55) / 0.45);
-      layer.pulseMaterial.size = 0.031 + env * 0.078;
+      layer.pulseMaterial.size = 0.037 + env * 0.094;
       layer.pulseMaterial.opacity = 0.05 + env * 0.45;
       if (group.current) {
         layer.pulseGeometry.attributes.position.needsUpdate = true;
@@ -201,7 +201,7 @@ function PointLogo({ url }: { url: string }) {
       {/* Main points - MORE VISIBLE */}
       <points ref={pointsRef} geometry={geometry}>
         <pointsMaterial
-          size={0.047}
+          size={0.056}
           color="#ffffff"
           transparent
           opacity={0.85}
