@@ -145,3 +145,21 @@ html {
     background-position: 50px 50px, 50px 50px;
   }
 }
+
+/* About split section – light sweep */
+@keyframes sweep {
+  0% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateX(220%);
+    opacity: 0;
+  }
+}
