@@ -27,11 +27,20 @@ export default function Navigation() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-black/25 backdrop-blur-md' : 'bg-transparent'
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        scrolled
+          ? 'backdrop-blur-md'
+          : 'bg-transparent'
       }`}
+      style={
+        scrolled
+          ? {
+              background: 'linear-gradient(to bottom, rgba(0,0,0,0.28) 0%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0.06) 85%, transparent 100%)',
+            }
+          : undefined
+      }
     >
-      <div className="w-full px-4 md:px-8 lg:px-12 xl:px-16 py-4 flex items-center justify-between">
+      <div className="w-full px-4 md:px-8 lg:px-12 xl:px-16 pt-4 pb-[14px] flex items-center justify-between">
         <Link
           href="/"
           className="relative h-12 w-32 cursor-pointer hover:opacity-80 transition-opacity"
