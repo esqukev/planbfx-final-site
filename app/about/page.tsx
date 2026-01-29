@@ -4,6 +4,10 @@ import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 declare global {
   interface Window {
@@ -11,85 +15,126 @@ declare global {
   }
 }
 
-// Video URL: replace with your vertical video (e.g. Cloudinary or /videos/about.mp4)
 const ABOUT_VIDEO_URL = 'https://res.cloudinary.com/dpplgma25/video/upload/v1769712728/PB_FX_Pilot_1_ijrog5.mp4';
 
 function AboutContent() {
   const sectionRef = useRef<HTMLElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
   const videoWrapRef = useRef<HTMLDivElement>(null);
-  const [videoOpacity, setVideoOpacity] = useState(0);
+  const exitTriggeredRef = useRef(false);
 
   useEffect(() => {
     const section = sectionRef.current;
+    const content = contentRef.current;
+    const textEl = textRef.current;
     const videoWrap = videoWrapRef.current;
-    if (!section || !videoWrap) return;
+    if (!section || !content || !textEl || !videoWrap) return;
 
-    const onScroll = () => {
-      const rect = section.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-      const sectionTop = rect.top;
-      const sectionHeight = rect.height;
-      // Video appears when section enters center of viewport, fades out when leaving
-      const visibleStart = windowHeight * 0.3;
-      const visibleEnd = windowHeight * 0.7;
-      const inView = rect.bottom > 0 && sectionTop < windowHeight;
-      if (!inView) {
-        setVideoOpacity(0);
-        return;
-      }
-      // Peak visibility when section is roughly centered
-      const center = sectionTop + sectionHeight / 2;
-      const distFromCenter = Math.abs(center - windowHeight / 2);
-      const maxDist = windowHeight * 0.5;
-      const opacity = Math.max(0, 1 - distFromCenter / maxDist);
-      setVideoOpacity(opacity);
+    const videoEl = videoWrap.querySelector('video');
+    const runExit = () => {
+      if (exitTriggeredRef.current) return;
+      exitTriggeredRef.current = true;
+
+      const contentWidth = content.offsetWidth;
+      const textWidth = textEl.offsetWidth;
+      const offsetX = (contentWidth - textWidth) / 2;
+
+      gsap.to(videoWrap, {
+        opacity: 0,
+        filter: 'blur(30px)',
+        x: 80,
+        scale: 1.05,
+        duration: 1.8,
+        ease: 'power2.inOut',
+      });
+
+      gsap.to(textEl, {
+        x: offsetX,
+        duration: 1.6,
+        ease: 'power3.inOut',
+      });
+
+      textEl.style.textAlign = 'center';
     };
 
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    gsap.fromTo(
+      videoWrap,
+      {
+        opacity: 0,
+        filter: 'blur(20px)',
+        y: 30,
+        scale: 0.96,
+      },
+      {
+        opacity: 1,
+        filter: 'blur(0px)',
+        y: 0,
+        scale: 1,
+        duration: 1.6,
+        ease: 'power3.out',
+      }
+    );
+
+    ScrollTrigger.create({
+      trigger: section,
+      start: 'top 35%',
+      onEnter: runExit,
+    });
+
+    if (videoEl) {
+      videoEl.addEventListener('ended', runExit);
+    }
+
+    return () => {
+      ScrollTrigger.getAll().forEach((t) => t.kill());
+      if (videoEl) videoEl.removeEventListener('ended', runExit);
+    };
   }, []);
 
   return (
     <section
       ref={sectionRef}
-      className="relative z-20 py-24 px-4 md:px-8 bg-white dark:bg-black min-h-screen"
+      className="about-section relative z-20 py-24 px-4 md:px-8 bg-white dark:bg-black min-h-screen"
     >
-      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-16 items-start">
-        {/* Left: text */}
-        <div className="flex-1 max-w-2xl">
-          <h1 className="text-5xl md:text-7xl font-bold mb-12 text-black dark:text-white">
-            About Us
-          </h1>
-          <div className="space-y-6 text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed">
-            <p>
-              Plan B began as a collective of local musicians driven by the goal of energizing the scene and elevating the standards of their own events. During this process, we incorporated code-based visual development into our workflow, allowing us to expand our services and provide immersive, memorable experiences for diverse events.
-            </p>
-            <p>
-              We have partnered with local promoters such as 3AM, Soulful Gathering, Xtyle, and Microgarden, providing visual support for world-class artists like Adam Beyer, Donnie Cosmo, and Anfisa Letyago, alongside key local talent.
-            </p>
-            <p>
-              We invite you to explore our vision and become part of the Plan B family.
-            </p>
-          </div>
+      <div
+        ref={contentRef}
+        className="about-content max-w-7xl mx-auto flex flex-col lg:flex-row gap-16 items-start"
+      >
+        <div
+          ref={textRef}
+          className="about-text flex-1 max-w-[480px] text-left"
+        >
+          <h2 className="text-5xl md:text-7xl font-bold mb-12 text-black dark:text-white">
+            About Plan B FX
+          </h2>
+          <p className="text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed space-y-6">
+            Plan B began as a collective of local musicians driven by the goal of energizing the scene and elevating the standards of their own events. During this process, we incorporated code-based visual development into our workflow, allowing us to expand our services and provide immersive, memorable experiences for diverse events.
+          </p>
+          <p className="text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed mt-6">
+            We have partnered with local promoters such as 3AM, Soulful Gathering, Xtyle, and Microgarden, providing visual support for world-class artists like Adam Beyer, Donnie Cosmo, and Anfisa Letyago, alongside key local talent.
+          </p>
+          <p className="text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed mt-6">
+            We invite you to explore our vision and become part of the Plan B family.
+          </p>
         </div>
 
-        {/* Right: vertical video — appears and disappears with scroll */}
         <div
           ref={videoWrapRef}
-          className="flex-shrink-0 w-full lg:w-auto flex justify-center lg:justify-end transition-opacity duration-700 ease-out"
-          style={{ opacity: videoOpacity }}
+          className="about-video flex-shrink-0 relative w-[320px] h-[560px] overflow-hidden rounded-2xl bg-black shadow-2xl"
+          style={{
+            filter: 'blur(0px)',
+            maskImage: 'radial-gradient(circle at 50% 50%, rgba(0,0,0,1) 55%, rgba(0,0,0,0.6) 70%, rgba(0,0,0,0) 85%)',
+            WebkitMaskImage: 'radial-gradient(circle at 50% 50%, rgba(0,0,0,1) 55%, rgba(0,0,0,0.6) 70%, rgba(0,0,0,0) 85%)',
+          }}
         >
-          <div className="relative w-[280px] aspect-[9/16] rounded-2xl overflow-hidden bg-black shadow-2xl">
-            <video
-              src={ABOUT_VIDEO_URL}
-              className="absolute inset-0 w-full h-full object-cover"
-              playsInline
-              muted
-              loop
-              autoPlay
-            />
-          </div>
+          <video
+            src={ABOUT_VIDEO_URL}
+            className="absolute inset-0 w-full h-full object-cover"
+            playsInline
+            muted
+            autoPlay
+          />
         </div>
       </div>
     </section>
