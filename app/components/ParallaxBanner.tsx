@@ -16,8 +16,8 @@ export default function ParallaxBanner({
   // Split title into lines - using typographic apostrophe (')
   const titleLines = [
     "We don't just create visuals",
-    "we craft moments",
-    "that move"
+    "we craft moments that",
+    "are remembered"
   ];
   const sectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLParagraphElement>(null);
@@ -110,7 +110,7 @@ export default function ParallaxBanner({
             return (
               <p
                 key={lineIndex}
-                className="mb-2 md:mb-3"
+                className="mb-1.5 md:mb-2"
                 style={{
                   transform: `translate3d(0, ${offset * (1 + lineIndex * 0.1)}px, 0)`,
                   whiteSpace: 'nowrap',
