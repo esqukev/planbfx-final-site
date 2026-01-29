@@ -7,11 +7,16 @@ import { usePathname } from 'next/navigation';
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const pathname = usePathname();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => {
+      const y = window.scrollY;
+      const max = 120; // qué tan lento entra el efecto
+      const progress = Math.min(y / max, 1);
+      setScrollProgress(progress);
+    };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
@@ -27,18 +32,15 @@ export default function Navigation() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? 'backdrop-blur-md'
-          : 'bg-transparent'
-      }`}
-      style={
-        scrolled
-          ? {
-              background: 'linear-gradient(to bottom, rgba(0,0,0,0.24) 0%, rgba(0,0,0,0.22) 25%, rgba(0,0,0,0.18) 45%, rgba(0,0,0,0.12) 62%, rgba(0,0,0,0.07) 78%, rgba(0,0,0,0.03) 90%, transparent 100%)',
-            }
-          : undefined
-      }
+      className="fixed top-0 left-0 right-0 z-50"
+      style={{
+        backdropFilter: `blur(${scrollProgress * 14}px)`,
+        WebkitBackdropFilter: `blur(${scrollProgress * 14}px)`,
+        backgroundColor: `rgba(0, 0, 0, ${scrollProgress * 0.45})`,
+        borderBottom: `1px solid rgba(255,255,255,${scrollProgress * 0.12})`,
+        boxShadow: `0 8px 30px rgba(0,0,0,${scrollProgress * 0.25})`,
+        transition: 'background-color 0.2s linear',
+      }}
     >
       <div className="w-full px-4 md:px-8 lg:px-12 xl:px-16 pt-4 pb-[14px] flex items-center justify-between">
         <Link
