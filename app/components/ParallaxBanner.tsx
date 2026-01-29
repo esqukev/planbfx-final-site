@@ -9,15 +9,15 @@ type ParallaxBannerProps = {
 };
 
 export default function ParallaxBanner({
-  title = "We don't just create visuals we craft moments that are remembered",
+  title = "We don't just create visuals we craft moments that move",
   subtitle = "Where art become experiences",
   className = '',
 }: ParallaxBannerProps) {
   // Split title into lines - using typographic apostrophe (')
   const titleLines = [
     "We don't just create visuals",
-    "we craft moments that",
-    "are remembered"
+    "we craft moments",
+    "that move"
   ];
   const sectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLParagraphElement>(null);
@@ -110,7 +110,7 @@ export default function ParallaxBanner({
             return (
               <p
                 key={lineIndex}
-                className="mb-1.5 md:mb-2"
+                className="mb-2 md:mb-3"
                 style={{
                   transform: `translate3d(0, ${offset * (1 + lineIndex * 0.1)}px, 0)`,
                   whiteSpace: 'nowrap',
@@ -123,17 +123,15 @@ export default function ParallaxBanner({
                     <span key={wordIndex} className="inline-block" style={{ whiteSpace: 'nowrap' }}>
                       {word.split('').map((char, charIndex) => {
                         const charTotalIndex = wordStartIndex + charIndex;
-                        // Replace straight apostrophe with typographic apostrophe
+                        const isApostrophe = char === "'" || char === "'";
                         const displayChar = char === "'" ? "'" : char;
-                        const isApostrophe = char === "'";
                         return (
                           <span
                             key={`${lineIndex}-${wordIndex}-${charIndex}`}
-                            className="inline-block"
+                            className={`inline-block ${isApostrophe ? 'font-fallback' : ''}`}
                             style={{
                               opacity: isVisible ? 1 : 0,
                               transition: `opacity 1s ease ${charTotalIndex * 0.05}s`,
-                              fontFamily: isApostrophe ? 'var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' : 'inherit',
                             }}
                           >
                             {displayChar}
