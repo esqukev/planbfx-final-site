@@ -12,7 +12,7 @@ declare global {
 }
 
 // Video URL: replace with your vertical video (e.g. Cloudinary or /videos/about.mp4)
-const ABOUT_VIDEO_URL = 'https://res.cloudinary.com/dpplgma25/video/upload/v1769541821/plabanfisa_kskqbc.mp4';
+const ABOUT_VIDEO_URL = 'https://res.cloudinary.com/dpplgma25/video/upload/v1769712728/PB_FX_Pilot_1_ijrog5.mp4';
 
 function AboutContent() {
   const sectionRef = useRef<HTMLElement>(null);
