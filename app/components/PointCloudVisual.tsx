@@ -61,9 +61,9 @@ export default function PointCloudVisual({ className = '' }: PointCloudVisualPro
 
       const material = new THREE.PointsMaterial({
         color: 0xffffff,
-        size: 0.015,
+        size: 0.02,
         transparent: true,
-        opacity: 0.55,
+        opacity: 0.8,
         blending: THREE.AdditiveBlending,
         depthWrite: false,
       });
