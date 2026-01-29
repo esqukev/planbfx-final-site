@@ -61,15 +61,24 @@ export default function PointCloudVisual({ className = '' }: PointCloudVisualPro
 
       const material = new THREE.PointsMaterial({
         color: 0xffffff,
-        size: 0.02,
+        size: 0.03,
         transparent: true,
-        opacity: 0.8,
+        opacity: 0.95,
         blending: THREE.AdditiveBlending,
         depthWrite: false,
+        sizeAttenuation: false,
       });
 
       const points = new THREE.Points(geometry, material);
       scene.add(points);
+
+      const materialBack = material.clone();
+    materialBack.opacity = 0.55;
+
+    const pointsBack = new THREE.Points(geometry, materialBack);
+    pointsBack.position.z = -0.01;
+
+    scene.add(pointsBack);
 
       // Pulsing “depth” points: appear (grow) and return on their own
       const makePulseLayer = (layerCount: number, cadenceMs: number) => {
