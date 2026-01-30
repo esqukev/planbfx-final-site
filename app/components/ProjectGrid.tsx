@@ -40,12 +40,28 @@ const processSteps = [
 export default function ProjectGrid() {
   const sectionRef = useRef<HTMLElement>(null);
   const lineRef = useRef<HTMLDivElement>(null);
+  const subtitleRef = useRef<HTMLParagraphElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     const section = sectionRef.current;
+    const subtitle = subtitleRef.current;
     const cards = cardsRef.current.filter(Boolean) as HTMLDivElement[];
     if (!section || cards.length === 0) return;
+
+    if (subtitle) {
+      gsap.fromTo(
+        subtitle,
+        { opacity: 0, scale: 0.92 },
+        {
+          opacity: 1,
+          scale: 1,
+          duration: 1.2,
+          ease: 'power2.out',
+          scrollTrigger: { trigger: subtitle, start: 'top 88%', once: true },
+        }
+      );
+    }
 
     cards.forEach((card) => {
       gsap.fromTo(
@@ -67,7 +83,7 @@ export default function ProjectGrid() {
 
     return () => {
       ScrollTrigger.getAll().forEach((t) => {
-        if (t.trigger === section || cards.some((c) => c && t.trigger === c)) t.kill();
+        if (t.trigger === section || t.trigger === subtitle || cards.some((c) => c && t.trigger === c)) t.kill();
       });
     };
   }, []);
@@ -79,7 +95,10 @@ export default function ProjectGrid() {
     >
       <div className="max-w-4xl mx-auto py-16 md:py-24">
         <div className="mb-20 md:mb-24">
-          <p className="text-sm uppercase tracking-[0.3em] text-zinc-400 max-w-3xl">
+          <p
+            ref={subtitleRef}
+            className="text-sm uppercase tracking-[0.3em] text-zinc-400 max-w-3xl"
+          >
             Discover the process behind our work — from brief to delivery.
           </p>
         </div>
@@ -108,7 +127,7 @@ export default function ProjectGrid() {
                   ${index % 2 === 0 ? 'md:-translate-x-20 md:text-left' : 'md:translate-x-20 md:text-right'}
                 `}
               >
-                <div className="rounded-2xl border border-zinc-200 dark:border-zinc-700 bg-zinc-50/80 dark:bg-zinc-900/80 p-6 md:p-8 shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl">
+                <div className="rounded-2xl border-0 bg-zinc-50/80 dark:bg-zinc-900/80 p-6 md:p-8 shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(255,255,255,0.12)] dark:hover:shadow-[0_0_40px_rgba(255,255,255,0.08)]">
                   <span className="text-xs font-mono uppercase tracking-widest text-zinc-500 dark:text-zinc-400 block mb-2">
                     {step.id} — {step.code}
                   </span>

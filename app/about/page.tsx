@@ -133,8 +133,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 2. Espacio para contenido futuro — solo blanco por ahora */}
-      <section className="relative z-20 min-h-[40vh] w-full bg-white" aria-hidden />
+      {/* 2. Espacio para contenido futuro — fondo negro */}
+      <section className="relative z-20 min-h-[40vh] w-full bg-black" aria-hidden />
 
       {/* 3. Closing: mismo estilo que el primer texto */}
       <section className="relative z-20 bg-white">
