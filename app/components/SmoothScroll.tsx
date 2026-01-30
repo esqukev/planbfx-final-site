@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { usePathname } from 'next/navigation';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -14,6 +15,7 @@ type LenisInstance = {
   destroy: () => void;
   scroll: number;
   scrollTo: (value: number) => void;
+  resize?: () => void;
 };
 
 function rafCallback(time: number, lenis: LenisInstance) {
@@ -23,6 +25,7 @@ function rafCallback(time: number, lenis: LenisInstance) {
 export default function SmoothScroll({ children }: { children: React.ReactNode }) {
   const lenisRef = useRef<LenisInstance | null>(null);
   const rafRef = useRef<(time: number) => void | null>(null);
+  const pathname = usePathname();
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -63,6 +66,15 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
       }
     };
   }, []);
+
+  // Al cambiar de ruta (ej. About → Home), refrescar Lenis y ScrollTrigger para que el scroll funcione
+  useEffect(() => {
+    const t = setTimeout(() => {
+      if (lenisRef.current?.resize) lenisRef.current.resize();
+      ScrollTrigger.refresh();
+    }, 100);
+    return () => clearTimeout(t);
+  }, [pathname]);
 
   return <>{children}</>;
 }

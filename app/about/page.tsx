@@ -119,10 +119,10 @@ export default function AboutPage() {
             <span className="text-sm uppercase tracking-[0.35em] text-white/50 block">
               Who we are
             </span>
-            <h1 className="text-4xl font-light leading-tight text-white md:text-5xl lg:text-6xl">
+            <h1 className="text-4xl font-bold leading-tight text-white md:text-5xl lg:text-6xl">
               About Plan B FX
             </h1>
-            <p className="text-base leading-relaxed text-white/70 md:text-lg">
+            <p className="max-w-4xl mx-auto text-lg leading-relaxed text-white/70 md:text-xl">
               Plan B began as a collective of local musicians driven by the goal of
               energizing the scene and elevating the standards of their own events.
               During this process, we incorporated code-based visual development
@@ -139,14 +139,14 @@ export default function AboutPage() {
       {/* 3. Closing: fondo negro, centrado, mismo estilo que el primer texto */}
       <section className="relative z-20 bg-black">
         <div className="mx-auto max-w-3xl px-8 py-24 md:py-32 lg:py-40 flex flex-col items-center text-center">
-          <div ref={closingRef} className="space-y-8 md:space-y-10">
-            <p className="text-base leading-relaxed text-white/70 md:text-lg">
+          <div ref={closingRef} className="space-y-8 md:space-y-10 max-w-4xl mx-auto">
+            <p className="text-lg leading-relaxed text-white/70 md:text-xl">
               We have partnered with local promoters such as 3AM, Soulful Gathering,
               Xtyle, and Microgarden, providing visual support for world-class
               artists like Adam Beyer, Donnie Cosmo, and Anfisa Letyago, alongside
               key local talent.
             </p>
-            <p className="text-base leading-relaxed text-white/70 md:text-lg">
+            <p className="text-lg leading-relaxed text-white/70 md:text-xl">
               We invite you to explore our vision and become part of the Plan B
               family.
             </p>
