@@ -79,9 +79,9 @@ export default function VideoHero({ videoUrl }: VideoHeroProps) {
   return (
     <div 
       ref={sectionRef}
-      className="relative overflow-hidden bg-black"
+      className="relative overflow-hidden bg-black pointer-events-none"
       style={{ 
-        width: '100vw',
+        width: '100%',
         height: viewportHeight > 0 ? `${viewportHeight}px` : '100vh',
         minHeight: viewportHeight > 0 ? `${viewportHeight}px` : '100vh',
         position: 'relative',
@@ -100,13 +100,14 @@ export default function VideoHero({ videoUrl }: VideoHeroProps) {
         muted
         playsInline
         preload="auto"
+        className="pointer-events-none"
         style={{
           position: 'absolute',
           top: 0,
           left: 0,
-          width: '100vw',
+          width: '100%',
           height: viewportHeight > 0 ? `${viewportHeight}px` : '100vh',
-          minWidth: '100vw',
+          minWidth: '100%',
           minHeight: viewportHeight > 0 ? `${viewportHeight}px` : '100vh',
           objectFit: 'cover',
           objectPosition: 'center center',
@@ -116,11 +117,11 @@ export default function VideoHero({ videoUrl }: VideoHeroProps) {
       />
 
       {/* overlay suave solo para legibilidad del texto del footer */}
-      <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/20 via-transparent to-black/60" />
+      <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/20 via-transparent to-black/60 pointer-events-none" />
 
-      {/* Footer text - Futuristic poster style */}
+      {/* Footer text - Futuristic poster style (pointer-events-none para no bloquear scroll) */}
       <div 
-        className="absolute bottom-0 left-0 right-0 z-20 px-4 md:px-8 lg:px-12 pb-6 md:pb-8"
+        className="absolute bottom-0 left-0 right-0 z-20 px-4 md:px-8 lg:px-12 pb-6 md:pb-8 pointer-events-none"
         style={{
           background: 'linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 50%, transparent 100%)'
         }}
@@ -167,9 +168,8 @@ export default function VideoHero({ videoUrl }: VideoHeroProps) {
         </div>
       </div>
 
-      {/* contenido */}
       <div 
-        className="relative z-20 flex items-center justify-center text-white"
+        className="relative z-20 flex items-center justify-center text-white pointer-events-none"
         style={{ height: '100%', minHeight: '100%' }}
       >
         {/* contenido */}
