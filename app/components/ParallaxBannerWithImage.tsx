@@ -75,19 +75,33 @@ export default function ParallaxBannerWithImage({
       </div>
 
       <div className="relative z-10 max-w-5xl mx-auto text-center px-8 md:px-12 lg:px-16 py-24 md:py-32 lg:py-40">
+        {/* Grande arriba — fade in suave de abajo hacia arriba */}
         <p
-          className="text-sm uppercase tracking-[0.35em] text-zinc-400 mb-6 md:mb-8 transition-opacity duration-1000"
-          style={{ opacity: isVisible ? 1 : 0 }}
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight mb-6 md:mb-8 transition-all duration-[1200ms] ease-out"
+          style={{
+            opacity: isVisible ? 1 : 0,
+            transform: isVisible ? 'translateY(0)' : 'translateY(24px)',
+            transitionDelay: '0s',
+          }}
         >
           - TAKE THE NEXT STEP -
         </p>
-        <Link
-          href="/#services"
-          className="inline-block text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight transition-[transform,font-size] duration-300 hover:scale-[1.06] focus:scale-[1.06] focus:outline-none"
-          style={{ opacity: isVisible ? 1 : 0 }}
+        {/* Pequeño abajo: fade in de abajo hacia arriba; el link tiene hover scale suave */}
+        <div
+          className="transition-all duration-[1200ms] ease-out"
+          style={{
+            opacity: isVisible ? 1 : 0,
+            transform: isVisible ? 'translateY(0)' : 'translateY(24px)',
+            transitionDelay: '0.15s',
+          }}
         >
-          SEE OUR SERVICES
-        </Link>
+          <Link
+            href="/#services"
+            className="inline-block text-sm uppercase tracking-[0.35em] text-zinc-400 hover:text-white focus:outline-none focus:text-white transition-transform duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:scale-[1.04] focus:scale-[1.04]"
+          >
+            SEE OUR SERVICES
+          </Link>
+        </div>
       </div>
     </section>
   );
