@@ -90,12 +90,12 @@ export default function ProjectGrid() {
           </p>
         </div>
 
-        {/* Vertical timeline: line + cards */}
+        {/* Vertical timeline: línea por detrás, cards encima y centradas */}
         <div className="relative">
-          {/* Center line */}
+          {/* Línea central (por detrás de las cards) */}
           <div
             ref={lineRef}
-            className="absolute left-1/2 top-0 bottom-0 w-px bg-zinc-300 dark:bg-zinc-600 -translate-x-1/2"
+            className="absolute left-1/2 top-0 bottom-0 w-px bg-zinc-300 dark:bg-zinc-600 -translate-x-1/2 z-0"
             aria-hidden
           />
 
@@ -105,13 +105,13 @@ export default function ProjectGrid() {
               ref={(el) => {
                 cardsRef.current[index] = el;
               }}
-              className="relative flex items-center gap-8 md:gap-12 py-10 md:py-14 first:pt-0 last:pb-0"
+              className="relative flex justify-center py-10 md:py-14 first:pt-0 last:pb-0"
             >
-              {/* Card: montada sobre la línea, alternando lado */}
+              {/* Card centrada sobre la línea (la línea pasa por detrás), un poquito a un lado */}
               <div
                 className={`
-                  w-full md:w-[calc(50%-0.5rem)] ml-0 md:ml-0 z-10
-                  ${index % 2 === 0 ? 'md:pr-4 md:text-right md:translate-x-2' : 'md:pl-4 md:text-left md:ml-auto md:-translate-x-2'}
+                  w-full max-w-xl relative z-10
+                  ${index % 2 === 0 ? 'md:-translate-x-4 md:text-left' : 'md:translate-x-4 md:text-right'}
                 `}
               >
                 <div className="rounded-2xl border border-zinc-200 dark:border-zinc-700 bg-zinc-50/80 dark:bg-zinc-900/80 p-6 md:p-8 shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl">
@@ -126,9 +126,6 @@ export default function ProjectGrid() {
                   </p>
                 </div>
               </div>
-
-              {/* Spacer para que la card quede a un lado de la línea */}
-              <div className={`hidden md:block w-[calc(50%-0.5rem)] shrink-0 ${index % 2 === 1 ? 'order-first' : ''}`} />
             </div>
           ))}
         </div>
