@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import type { ReactNode } from 'react';
 import { useEffect, useRef, useState } from 'react';
+import GlassCard from './GlassCard';
 
 interface ContentSectionProps {
   title: string;
@@ -68,14 +69,7 @@ export default function ContentSection({
     >
       <div className={`max-w-7xl mx-auto flex flex-col ${reverse ? 'md:flex-row-reverse' : 'md:flex-row'} ${hasRight ? 'items-center' : 'items-start'} gap-10 md:gap-10 py-16 md:py-24`}>
         <div className={`flex-1 ${hasRight ? 'md:max-w-[620px]' : 'max-w-3xl'}`}>
-          {/* Card con efecto glass, bordes redondeados y profundidad */}
-          <div
-            className={`rounded-2xl md:rounded-3xl p-6 md:p-8 lg:p-10 shadow-2xl transition-all duration-1000 ${
-              backgroundClassName?.includes('from-black')
-                ? 'bg-white/5 backdrop-blur-xl border border-white/10 shadow-black/20'
-                : 'bg-black/5 dark:bg-white/5 backdrop-blur-xl border border-zinc-200/80 dark:border-white/10 shadow-black/10'
-            }`}
-          >
+          <GlassCard>
             {subtitle && (
               <span className={`text-sm uppercase tracking-wider text-zinc-500 mb-4 block transition-all duration-1000 ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
@@ -88,7 +82,7 @@ export default function ContentSection({
             }`}>
               {title}
             </h2>
-            <p className={`text-[1.1rem] ${backgroundClassName?.includes('from-black') ? 'text-zinc-300' : 'text-zinc-600 dark:text-zinc-400'} mb-8 leading-relaxed transition-all duration-1000 delay-200 ${
+            <p className={`text-[1.1rem] ${backgroundClassName?.includes('from-black') ? 'text-white/80' : 'text-zinc-600 dark:text-zinc-400'} mb-8 leading-relaxed transition-all duration-1000 delay-200 ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}>
               {description}
@@ -130,7 +124,7 @@ export default function ContentSection({
                 </svg>
               </Link>
             )}
-          </div>
+          </GlassCard>
         </div>
         {hasRight && (
           <div
