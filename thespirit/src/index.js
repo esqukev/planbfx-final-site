@@ -65,14 +65,17 @@ function init() {
     settings.mouse3d = _ray.origin;
 
     _renderer = new THREE.WebGLRenderer({
-        // transparent : true,
-        // premultipliedAlpha : false,
-        antialias : true
+        antialias : true,
+        alpha : true
     });
-    _renderer.setClearColor(settings.bgColor);
+    _renderer.setClearColor(settings.bgColor, 0);
     _renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     _renderer.shadowMap.enabled = true;
-    document.body.appendChild(_renderer.domElement);
+    var container = document.getElementById('spirit-root') || document.body;
+    container.appendChild(_renderer.domElement);
+    _renderer.domElement.style.display = 'block';
+    _renderer.domElement.style.width = '100%';
+    _renderer.domElement.style.height = '100%';
 
     _scene = new THREE.Scene();
     _scene.fog = new THREE.FogExp2( settings.bgColor, 0.001 );
@@ -105,6 +108,9 @@ function init() {
     _control.update();
 
     _gui = new dat.GUI();
+    if (document.getElementById('spirit-root')) {
+        _gui.domElement.style.display = 'none';
+    }
 
     if(settings.isMobile) {
         _gui.close();
@@ -177,8 +183,9 @@ function init() {
 
     _logo = document.querySelector('.logo');
     _instruction = document.querySelector('.instruction');
-    document.querySelector('.footer').style.display = 'block';
-    _footerItems = document.querySelectorAll('.footer span');
+    var footer = document.querySelector('.footer');
+    if (footer) footer.style.display = 'block';
+    _footerItems = document.querySelectorAll('.footer span') || [];
 
     window.addEventListener('resize', _onResize);
     window.addEventListener('mousemove', _onMove);
@@ -213,11 +220,12 @@ function _onMove(evt) {
 }
 
 function _onResize() {
-    _width = window.innerWidth;
-    _height = window.innerHeight;
-
-    postprocessing.resize(_width, _height);
-
+    var container = document.getElementById('spirit-root') || document.body;
+    _width = container.clientWidth || window.innerWidth;
+    _height = container.clientHeight || window.innerHeight;
+    if (_width && _height) {
+        postprocessing.resize(_width, _height);
+    }
 }
 
 function _loop() {
@@ -259,13 +267,15 @@ function _render(dt, newTime) {
 
     ratio = Math.min((1 - Math.abs(_initAnimation - 0.5) * 2) * 1.2, 1);
     var blur = (1 - ratio) * 10;
-    _logo.style.display = ratio ? 'block' : 'none';
-    if(ratio) {
-        _logo.style.opacity = ratio;
-        _logo.style.webkitFilter = 'blur(' + blur + 'px)';
-        ratio = (0.8 + Math.pow(_initAnimation, 1.5) * 0.5);
-        if(_width < 580) ratio *= 0.5;
-        _logo.style.transform = 'scale3d(' + ratio + ',' + ratio + ',1)';
+    if (_logo) {
+        _logo.style.display = ratio ? 'block' : 'none';
+        if(ratio) {
+            _logo.style.opacity = ratio;
+            _logo.style.webkitFilter = 'blur(' + blur + 'px)';
+            var logoRatio = (0.8 + Math.pow(_initAnimation, 1.5) * 0.5);
+            if(_width < 580) logoRatio *= 0.5;
+            _logo.style.transform = 'scale3d(' + logoRatio + ',' + logoRatio + ',1)';
+        }
     }
 
     for(var i = 0, len = _footerItems.length; i < len; i++) {
@@ -274,7 +284,7 @@ function _render(dt, newTime) {
     }
 
     ratio = math.unLerp(0.5, 0.6, _initAnimation);
-    if(!settings.isMobile) {
+    if(_instruction && !settings.isMobile) {
         _instruction.style.display = ratio ? 'block' : 'none';
         _instruction.style.transform = 'translate3d(0,' + ((1 - ratio * ratio) * 50) + 'px,0)';
     }

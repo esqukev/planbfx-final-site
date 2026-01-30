@@ -19,7 +19,7 @@ function init(renderer, scene, camera) {
 
     _renderer = renderer;
     _scene = scene;
-    _camera = _camera;
+    _camera = camera;
 
     effectComposer.init(renderer, scene, camera);
 

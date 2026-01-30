@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "spirit:build": "cd thespirit && npm run build && cd .. && node -e \"const fs=require('fs'); const p='public/spirit'; fs.copyFileSync('thespirit/app/js/index.js', p+'/index.js'); fs.copyFileSync('thespirit/app/js/three.r74.min.js', p+'/three.r74.min.js'); console.log('Spirit copied to public/spirit');\""
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",
