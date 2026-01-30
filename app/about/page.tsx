@@ -2,7 +2,6 @@
 
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
-import PointCloudVisual from '../components/PointCloudVisual';
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import gsap from 'gsap';
@@ -113,17 +112,17 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 1. Intro: Who we are + About Plan B FX + first paragraph */}
-      <section className="relative z-20 bg-black">
-        <div className="mx-auto max-w-4xl px-6 py-24 md:py-32 lg:px-12">
-          <div ref={introRef} className="space-y-8 text-left">
-            <span className="text-xs uppercase tracking-[0.35em] text-white/50">
+      {/* 1. Intro: Who we are + About Plan B FX + first paragraph — fondo blanco, más grande y mejor distribuido */}
+      <section className="relative z-20 bg-white">
+        <div className="mx-auto max-w-5xl px-8 py-28 md:py-36 lg:px-16 lg:py-44">
+          <div ref={introRef} className="space-y-10 md:space-y-12 text-left">
+            <span className="text-sm uppercase tracking-[0.35em] text-zinc-500">
               Who we are
             </span>
-            <h1 className="text-4xl font-light leading-tight text-white md:text-5xl lg:text-6xl">
+            <h1 className="text-5xl font-light leading-tight text-black md:text-6xl lg:text-7xl">
               About Plan B FX
             </h1>
-            <p className="max-w-2xl text-base leading-relaxed text-white/70 md:text-lg">
+            <p className="max-w-2xl text-lg leading-relaxed text-zinc-600 md:text-xl">
               Plan B began as a collective of local musicians driven by the goal of
               energizing the scene and elevating the standards of their own events.
               During this process, we incorporated code-based visual development
@@ -134,31 +133,20 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 2. Interactive moment */}
-      <section className="relative z-20 min-h-[70vh] w-full overflow-hidden bg-gradient-to-b from-black via-zinc-900 to-black">
-        <div className="absolute inset-0 flex items-center justify-center">
-          <PointCloudVisual className="h-full w-full min-h-[400px]" />
-        </div>
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background: 'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.4) 50%, transparent 100%)',
-          }}
-          aria-hidden
-        />
-      </section>
+      {/* 2. Espacio para contenido futuro — solo blanco por ahora */}
+      <section className="relative z-20 min-h-[40vh] w-full bg-white" aria-hidden />
 
-      {/* 3. Closing: partners + invite */}
-      <section className="relative z-20 bg-black">
-        <div className="mx-auto max-w-4xl px-6 py-24 md:py-32 lg:px-12">
-          <div ref={closingRef} className="space-y-6 text-left text-base leading-relaxed text-white/70 md:text-lg">
-            <p>
+      {/* 3. Closing: mismo estilo que el primer texto */}
+      <section className="relative z-20 bg-white">
+        <div className="mx-auto max-w-5xl px-8 py-28 md:py-36 lg:px-16 lg:py-44">
+          <div ref={closingRef} className="space-y-10 md:space-y-12 text-left">
+            <p className="max-w-2xl text-lg leading-relaxed text-zinc-600 md:text-xl">
               We have partnered with local promoters such as 3AM, Soulful Gathering,
               Xtyle, and Microgarden, providing visual support for world-class
               artists like Adam Beyer, Donnie Cosmo, and Anfisa Letyago, alongside
               key local talent.
             </p>
-            <p>
+            <p className="max-w-2xl text-lg leading-relaxed text-zinc-600 md:text-xl">
               We invite you to explore our vision and become part of the Plan B
               family.
             </p>
