@@ -1,4 +1,4 @@
-import AnimatedStrip from './components/AnimatedStrip';
+Perimport AnimatedStrip from './components/AnimatedStrip';
 import Hero from './components/Hero';
 import ContentSection from './components/ContentSection';
 import ProjectGrid from './components/ProjectGrid';
