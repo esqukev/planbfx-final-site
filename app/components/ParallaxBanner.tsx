@@ -110,7 +110,7 @@ export default function ParallaxBanner({
             return (
               <p
                 key={lineIndex}
-                className="mb-0.75 md:mb-1"
+                className="mb-0 md:mb-0.5 leading-none"
                 style={{
                   transform: `translate3d(0, ${offset * (1 + lineIndex * 0.1)}px, 0)`,
                   whiteSpace: 'nowrap',

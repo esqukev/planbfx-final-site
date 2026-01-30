@@ -84,7 +84,7 @@ export default function ParallaxBannerWithImage({
             transitionDelay: '0s',
           }}
         >
-          <span className="font-fallback">-</span> TAKE THE NEXT STEP <span className="font-fallback">-</span>
+          TAKE THE NEXT STEP
         </p>
         {/* Pequeño abajo: fade in de abajo hacia arriba; el link tiene hover scale suave */}
         <div
