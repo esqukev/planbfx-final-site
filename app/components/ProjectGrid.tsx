@@ -79,7 +79,7 @@ export default function ProjectGrid() {
     >
       <div className="max-w-4xl mx-auto py-16 md:py-24">
         <div className="mb-20 md:mb-24">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-black dark:text-white leading-tight max-w-3xl">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-black dark:text-white leading-tight max-w-3xl tracking-tight" style={{ letterSpacing: '-0.03em' }}>
             Discover the process behind our work — from brief to delivery.
           </h2>
         </div>
