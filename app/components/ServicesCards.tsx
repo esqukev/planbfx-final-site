@@ -47,11 +47,11 @@ export default function ServicesCards() {
       {services.map((service, index) => (
         <div
           key={service.number}
-          className="p-6 rounded-lg border border-zinc-700 bg-zinc-900/50 hover:bg-zinc-800/50 hover:border-zinc-600 transition-all duration-500 hover:shadow-xl"
+          className="p-6 rounded-lg border-none bg-zinc-900/50 hover:bg-zinc-800/50 transition-all duration-500 hover:shadow-xl"
           style={{
             opacity: visible ? 1 : 0,
             transform: visible ? 'translateY(0)' : 'translateY(24px)',
-            transition: `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s, background 0.3s, border-color 0.3s, box-shadow 0.3s`,
+            transition: `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s, background 0.3s, box-shadow 0.3s`,
           }}
         >
           <div className="text-4xl font-bold text-zinc-500 mb-4">{service.number}</div>
