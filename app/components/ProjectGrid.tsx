@@ -93,11 +93,11 @@ export default function ProjectGrid() {
       ref={sectionRef}
       className="m-0 py-0 px-4 md:px-8 bg-white dark:bg-black"
     >
-      <div className="max-w-4xl mx-auto py-16 md:py-24">
-        <div className="mb-20 md:mb-24">
+      <div className="max-w-4xl mx-auto py-20 md:py-28 px-6 md:px-10">
+        <div className="mb-20 md:mb-24 flex flex-col items-center text-center">
           <p
             ref={subtitleRef}
-            className="text-sm uppercase tracking-[0.3em] text-zinc-400 max-w-3xl"
+            className="text-sm uppercase tracking-[0.3em] text-zinc-400 max-w-2xl mx-auto"
           >
             Discover the process behind our work — from brief to delivery.
           </p>
