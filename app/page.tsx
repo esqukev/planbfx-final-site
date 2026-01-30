@@ -20,13 +20,21 @@ export default function Home() {
 
       <Hero />
 
-      <div id="about" className="scroll-section m-0 p-0 -mt-px">
+      <div id="about" className="scroll-section m-0 p-0 -mt-px relative">
         <ContentSection
           title="Crafting Immersive Visual Experiences"
           description="We create immersive, tailored visuals that push the boundaries of your vision. From concept to execution, we merge creativity, interaction, and technology to build unique visual experiences that engage, evolve, and resonate beyond the screen."
           learnMoreLink="/about"
           sideVisual={<PointCloudVisual />}
           backgroundClassName="bg-gradient-to-b from-black via-zinc-900 to-black text-white"
+        />
+        {/* Fade suave al negro para transición seamless con VideoHero */}
+        <div
+          className="absolute bottom-0 left-0 right-0 h-24 md:h-32 lg:h-40 pointer-events-none z-10"
+          style={{
+            background: 'linear-gradient(to top, #000000 0%, rgba(0,0,0,0.6) 50%, transparent 100%)',
+          }}
+          aria-hidden
         />
       </div>
 
