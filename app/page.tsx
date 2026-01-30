@@ -61,10 +61,7 @@ export default function Home() {
 
       {/* Misma sección con imagen de fondo */}
       <div className="m-0 p-0">
-        <ParallaxBannerWithImage
-          subtitle="Where art become experiences"
-          imageSrc="/bannerstage.jpg"
-        />
+        <ParallaxBannerWithImage imageSrc="/bannerstage.jpg" />
       </div>
 
       <div id="works" className="m-0 p-0">
