@@ -10,6 +10,7 @@ import ScrollTextEffect from './components/ScrollTextEffect';
 import FadeInOnScroll from './components/FadeInOnScroll';
 import VideoHero from './components/VideoHero';
 import ParallaxBanner from './components/ParallaxBanner';
+import ParallaxBannerWithImage from './components/ParallaxBannerWithImage';
 import ServicesCards from './components/ServicesCards';
 
 export default function Home() {
@@ -56,7 +57,15 @@ export default function Home() {
           title="We don´t just create visuals — we craft moments that move"
           subtitle="Where art become experiences"
         />
-      </div>  
+      </div>
+
+      {/* Misma sección con imagen de fondo */}
+      <div className="m-0 p-0">
+        <ParallaxBannerWithImage
+          subtitle="Where art become experiences"
+          imageSrc="/bannerstage.jpg"
+        />
+      </div>
 
       <div id="works" className="m-0 p-0">
         <ProjectGrid />
