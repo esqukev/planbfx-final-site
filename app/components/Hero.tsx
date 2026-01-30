@@ -36,9 +36,10 @@ export default function Hero() {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black m-0"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black m-0 border-0 outline-none [border:none]"
+      style={{ outline: 'none', boxShadow: 'none' }}
     >
-      <div className="relative z-10 w-full h-full">
+      <div className="relative z-10 w-full h-full min-h-screen border-0 outline-none overflow-hidden">
         <LogoPointCloud />
       </div>
     </section>

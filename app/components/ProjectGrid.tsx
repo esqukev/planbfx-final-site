@@ -79,15 +79,9 @@ export default function ProjectGrid() {
     >
       <div className="max-w-4xl mx-auto py-16 md:py-24">
         <div className="mb-20 md:mb-24">
-          <span className="text-sm uppercase tracking-wider text-zinc-500 mb-4 block">
-            Our Works
-          </span>
-          <h2 className="text-5xl md:text-6xl font-bold text-black dark:text-white mb-4">
-            Selected Cases
-          </h2>
-          <p className="text-lg text-zinc-600 dark:text-zinc-400 max-w-2xl">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-black dark:text-white leading-tight max-w-3xl">
             Discover the process behind our work — from brief to delivery.
-          </p>
+          </h2>
         </div>
 
         {/* Vertical timeline: línea por detrás, cards encima y centradas */}

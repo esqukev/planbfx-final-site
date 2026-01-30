@@ -15,12 +15,12 @@ import ServicesCards from './components/ServicesCards';
 
 export default function Home() {
   return (
-    <main className="relative m-0 p-0">
+    <main className="relative m-0 p-0 bg-black overflow-x-hidden">
       <Navigation />
 
       <Hero />
 
-      <div id="about" className="scroll-section m-0 p-0 -mt-px relative">
+      <div id="about" className="scroll-section m-0 p-0 relative">
         <ContentSection
           title="Crafting Immersive Visual Experiences"
           description="We create immersive, tailored visuals that push the boundaries of your vision. From concept to execution, we merge creativity, interaction, and technology to build unique visual experiences that engage, evolve, and resonate beyond the screen."

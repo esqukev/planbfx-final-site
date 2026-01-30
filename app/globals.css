@@ -136,6 +136,11 @@ html {
   scroll-behavior: smooth;
 }
 
+/* GSAP pin-spacer: no borde/fondo blanco junto al Hero */
+.pin-spacer {
+  background: transparent !important;
+}
+
 /* Grid animation */
 @keyframes gridMove {
   0% {

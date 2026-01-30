@@ -266,11 +266,15 @@ export default function LogoPointCloud() {
         overflow: 'hidden',
         opacity: opacity,
         transition: 'opacity 0.3s ease-out',
+        border: 'none',
+        outline: 'none',
+        background: 'transparent',
       }}
     >
       <Canvas
         camera={{ position: [0, 0, 180], fov: 45 }}
-        style={{ width: '100%', height: '100%' }}
+        style={{ width: '100%', height: '100%', background: 'transparent', border: 'none' }}
+        gl={{ alpha: false, antialias: true }}
       >
         <ambientLight intensity={1} />
         <PointLogo url="/logos/plablandinglogo.svg" />
