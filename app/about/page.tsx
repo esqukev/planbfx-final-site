@@ -2,16 +2,21 @@
 
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
-import AboutSplitSection from '../components/AboutSplitSection';
+import PointCloudVisual from '../components/PointCloudVisual';
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const HERO_VIDEO_URL = 'https://res.cloudinary.com/dpplgma25/video/upload/v1769796195/beyerrandom_lk0ov5.mp4';
 
 export default function AboutPage() {
   const heroRef = useRef<HTMLDivElement>(null);
   const logoWrapRef = useRef<HTMLDivElement>(null);
+  const introRef = useRef<HTMLDivElement>(null);
+  const closingRef = useRef<HTMLDivElement>(null);
   const [videoReady, setVideoReady] = useState(false);
 
   useEffect(() => {
@@ -37,10 +42,44 @@ export default function AboutPage() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    const intro = introRef.current;
+    const closing = closingRef.current;
+    if (!intro) return;
+    gsap.fromTo(
+      intro,
+      { opacity: 0, y: 32, filter: 'blur(12px)' },
+      {
+        opacity: 1,
+        y: 0,
+        filter: 'blur(0px)',
+        duration: 1.2,
+        ease: 'power3.out',
+        scrollTrigger: { trigger: intro, start: 'top 78%' },
+      }
+    );
+    if (closing) {
+      gsap.fromTo(
+        closing,
+        { opacity: 0, y: 28, filter: 'blur(10px)' },
+        {
+          opacity: 1,
+          y: 0,
+          filter: 'blur(0px)',
+          duration: 1.1,
+          ease: 'power3.out',
+          scrollTrigger: { trigger: closing, start: 'top 82%' },
+        }
+      );
+    }
+    return () => ScrollTrigger.getAll().forEach((t) => t.kill());
+  }, []);
+
   return (
     <main className="relative min-h-screen bg-black">
       <Navigation />
 
+      {/* Video hero */}
       <section
         ref={heroRef}
         className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black"
@@ -58,7 +97,6 @@ export default function AboutPage() {
           />
           <div className="absolute inset-0 bg-black/40" aria-hidden />
         </div>
-
         <div
           ref={logoWrapRef}
           className="relative z-20 flex items-center justify-center w-full h-full pointer-events-none"
@@ -75,8 +113,57 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* 1. Intro: Who we are + About Plan B FX + first paragraph */}
       <section className="relative z-20 bg-black">
-        <AboutSplitSection />
+        <div className="mx-auto max-w-4xl px-6 py-24 md:py-32 lg:px-12">
+          <div ref={introRef} className="space-y-8 text-left">
+            <span className="text-xs uppercase tracking-[0.35em] text-white/50">
+              Who we are
+            </span>
+            <h1 className="text-4xl font-light leading-tight text-white md:text-5xl lg:text-6xl">
+              About Plan B FX
+            </h1>
+            <p className="max-w-2xl text-base leading-relaxed text-white/70 md:text-lg">
+              Plan B began as a collective of local musicians driven by the goal of
+              energizing the scene and elevating the standards of their own events.
+              During this process, we incorporated code-based visual development
+              into our workflow, allowing us to expand our services and provide
+              immersive, memorable experiences for diverse events.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* 2. Interactive moment */}
+      <section className="relative z-20 min-h-[70vh] w-full overflow-hidden bg-gradient-to-b from-black via-zinc-900 to-black">
+        <div className="absolute inset-0 flex items-center justify-center">
+          <PointCloudVisual className="h-full w-full min-h-[400px]" />
+        </div>
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: 'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.4) 50%, transparent 100%)',
+          }}
+          aria-hidden
+        />
+      </section>
+
+      {/* 3. Closing: partners + invite */}
+      <section className="relative z-20 bg-black">
+        <div className="mx-auto max-w-4xl px-6 py-24 md:py-32 lg:px-12">
+          <div ref={closingRef} className="space-y-6 text-left text-base leading-relaxed text-white/70 md:text-lg">
+            <p>
+              We have partnered with local promoters such as 3AM, Soulful Gathering,
+              Xtyle, and Microgarden, providing visual support for world-class
+              artists like Adam Beyer, Donnie Cosmo, and Anfisa Letyago, alongside
+              key local talent.
+            </p>
+            <p>
+              We invite you to explore our vision and become part of the Plan B
+              family.
+            </p>
+          </div>
+        </div>
       </section>
 
       <Footer />
