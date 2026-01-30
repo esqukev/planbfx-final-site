@@ -107,20 +107,14 @@ export default function ProjectGrid() {
               }}
               className="relative flex items-center gap-8 md:gap-12 py-10 md:py-14 first:pt-0 last:pb-0"
             >
-              {/* Dot on line */}
-              <div
-                className="absolute left-1/2 top-1/2 w-3 h-3 rounded-full bg-zinc-800 dark:bg-zinc-200 -translate-x-1/2 -translate-y-1/2 z-10 shrink-0"
-                aria-hidden
-              />
-
-              {/* Card: alternate left/right on desktop */}
+              {/* Card: montada sobre la línea, alternando lado */}
               <div
                 className={`
-                  w-full md:w-[calc(50%-2rem)] ml-0 md:ml-0
-                  ${index % 2 === 0 ? 'md:pr-8 md:text-right' : 'md:pl-8 md:text-left md:ml-auto'}
+                  w-full md:w-[calc(50%-0.5rem)] ml-0 md:ml-0 z-10
+                  ${index % 2 === 0 ? 'md:pr-4 md:text-right md:translate-x-2' : 'md:pl-4 md:text-left md:ml-auto md:-translate-x-2'}
                 `}
               >
-                <div className="rounded-2xl border border-zinc-200 dark:border-zinc-700 bg-zinc-50/80 dark:bg-zinc-900/80 p-6 md:p-8 shadow-lg hover:shadow-xl transition-shadow">
+                <div className="rounded-2xl border border-zinc-200 dark:border-zinc-700 bg-zinc-50/80 dark:bg-zinc-900/80 p-6 md:p-8 shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl">
                   <span className="text-xs font-mono uppercase tracking-widest text-zinc-500 dark:text-zinc-400 block mb-2">
                     {step.id} — {step.code}
                   </span>
@@ -133,8 +127,8 @@ export default function ProjectGrid() {
                 </div>
               </div>
 
-              {/* Spacer so card sits on one side of the line */}
-              <div className={`hidden md:block w-[calc(50%-2rem)] shrink-0 ${index % 2 === 1 ? 'order-first' : ''}`} />
+              {/* Spacer para que la card quede a un lado de la línea */}
+              <div className={`hidden md:block w-[calc(50%-0.5rem)] shrink-0 ${index % 2 === 1 ? 'order-first' : ''}`} />
             </div>
           ))}
         </div>

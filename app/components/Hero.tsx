@@ -13,14 +13,22 @@ export default function Hero() {
   useEffect(() => {
     const section = sectionRef.current;
     if (!section) return;
+
+    // Pinning según docs GSAP: trigger = section a pinear, end explícito, anticipatePin y refresh en React
     const st = ScrollTrigger.create({
       trigger: section,
       start: 'top top',
       end: 'bottom top',
       pin: true,
       pinSpacing: true,
+      anticipatePin: 1,
+      pinReparent: true,
     });
+
+    // En React/Next el layout puede no estar listo; refrescar posiciones
+    const t = setTimeout(() => ScrollTrigger.refresh(), 100);
     return () => {
+      clearTimeout(t);
       st.kill();
     };
   }, []);
