@@ -27,37 +27,19 @@ export default function Navigation() {
   ];
 
   return (
-    <nav
-      className={`
-        fixed top-0 left-0 right-0 z-50
-        transition-all duration-700 ease-out
-        ${scrolled
-          ? 'backdrop-blur-xl bg-black/40 shadow-[0_20px_40px_rgba(0,0,0,0.25)]'
-          : 'backdrop-blur-0 bg-transparent'
-        }
-      `}
-    >
-      {/* Fade inferior natural (evita corte brusco) */}
+    <nav className="fixed top-0 left-0 right-0 z-50 pt-3 px-3 md:pt-4 md:px-4">
+      {/* Blur bar: con margen, no pegado a los bordes */}
       <div
         className={`
-          pointer-events-none absolute bottom-0 left-0 w-full
-          transition-opacity duration-700 ease-out
-          ${scrolled ? 'opacity-100' : 'opacity-0'}
+          w-full rounded-2xl
+          transition-all duration-700 ease-out
+          ${scrolled
+            ? 'backdrop-blur-xl bg-black/40 shadow-[0_20px_40px_rgba(0,0,0,0.25)]'
+            : 'backdrop-blur-0 bg-transparent'
+          }
         `}
-        style={{
-          height: '80px',
-          background: `
-            linear-gradient(
-              to bottom,
-              rgba(0,0,0,0) 0%,
-              rgba(0,0,0,0.25) 50%,
-              rgba(0,0,0,0.6) 100%
-            )
-          `,
-        }}
-      />
-
-      <div className="relative z-10 w-full px-4 md:px-8 lg:px-12 xl:px-16 py-4 flex items-center justify-between">
+      >
+        <div className="relative z-10 w-full px-4 md:px-8 lg:px-12 xl:px-16 py-4 flex items-center justify-between">
         <Link
           href="/"
           className="relative h-12 w-32 cursor-pointer hover:opacity-80 transition-opacity"
@@ -97,7 +79,7 @@ export default function Navigation() {
         </button>
       </div>
       {isMenuOpen && (
-        <div className="relative z-10 md:hidden bg-black/95 backdrop-blur-md border-t border-zinc-800">
+        <div className="relative z-10 md:hidden rounded-b-2xl bg-black/95 backdrop-blur-md border-t border-zinc-800">
           {menuItems.map((item) => (
             <Link
               key={item.label}
@@ -110,6 +92,7 @@ export default function Navigation() {
           ))}
         </div>
       )}
+      </div>
     </nav>
   );
 }

@@ -6,89 +6,11 @@ import AboutSplitSection from '../components/AboutSplitSection';
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 
-declare global {
-  interface Window {
-    VANTA: any;
-  }
-}
+const HERO_VIDEO_URL = 'https://res.cloudinary.com/dpplgma25/video/upload/v1769796195/beyerrandom_lk0ov5.mp4';
 
 export default function AboutPage() {
-  const vantaRef = useRef<HTMLDivElement>(null);
-  const vantaEffect = useRef<any>(null);
   const heroRef = useRef<HTMLDivElement>(null);
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  useEffect(() => {
-    if (!vantaRef.current) return;
-
-    // Load Vanta.js from CDN
-    const loadVanta = () => {
-      // Check if already loaded
-      if (window.VANTA && window.VANTA.HALO) {
-        if (vantaEffect.current) {
-          vantaEffect.current.destroy();
-        }
-
-        vantaEffect.current = window.VANTA.HALO({
-          el: vantaRef.current,
-          mouseControls: true,
-          touchControls: true,
-          gyroControls: false,
-          minHeight: 200.00,
-          minWidth: 200.00,
-          baseColor: 0x0,
-          backgroundColor: 0x0,
-          amplitudeFactor: 1.5,
-          xOffset: 0,
-          yOffset: 0,
-          size: 1.5,
-        });
-        setIsLoaded(true);
-        return;
-      }
-
-      // Load scripts if not already loaded
-      if (!document.querySelector('script[src*="three"]')) {
-        const threeScript = document.createElement('script');
-        threeScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js';
-        threeScript.onload = () => {
-          const vantaScript = document.createElement('script');
-          vantaScript.src = 'https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.halo.min.js';
-          vantaScript.onload = () => {
-            if (vantaEffect.current) {
-              vantaEffect.current.destroy();
-            }
-
-            vantaEffect.current = window.VANTA.HALO({
-              el: vantaRef.current,
-              mouseControls: true,
-              touchControls: true,
-              gyroControls: false,
-              minHeight: 200.00,
-              minWidth: 200.00,
-              baseColor: 0x0,
-              backgroundColor: 0x0,
-              amplitudeFactor: 1.5,
-              xOffset: 0,
-              yOffset: 0,
-              size: 1.5,
-            });
-            setIsLoaded(true);
-          };
-          document.body.appendChild(vantaScript);
-        };
-        document.body.appendChild(threeScript);
-      }
-    };
-
-    loadVanta();
-
-    return () => {
-      if (vantaEffect.current) {
-        vantaEffect.current.destroy();
-      }
-    };
-  }, []);
+  const [videoReady, setVideoReady] = useState(false);
 
   // Parallax effect on scroll
   useEffect(() => {
@@ -98,7 +20,6 @@ export default function AboutPage() {
       const scrolled = window.pageYOffset;
       const hero = heroRef.current;
       
-      // Parallax effect - move slower than scroll
       hero.style.transform = `translateY(${scrolled * 0.5}px)`;
       hero.style.opacity = `${1 - scrolled / 800}`;
     };
@@ -111,29 +32,30 @@ export default function AboutPage() {
     <main className="relative min-h-screen">
       <Navigation />
       
-      {/* Hero Section with Vanta HALO effect and Parallax */}
+      {/* Hero Section with video background and Parallax */}
       <section 
         ref={heroRef}
-        className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-black via-zinc-900 to-black"
+        className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black"
         style={{ willChange: 'transform' }}
       >
-        {/* Background effects - same as Hero */}
-        <div className="absolute inset-0 opacity-20 z-0">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        {/* Video background */}
+        <div className="absolute inset-0 z-10">
+          <video
+            src={HERO_VIDEO_URL}
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover"
+            onLoadedData={() => setVideoReady(true)}
+          />
+          <div className="absolute inset-0 bg-black/40" aria-hidden />
         </div>
         
-        {/* Vanta HALO effect container */}
-        <div 
-          ref={vantaRef}
-          className="absolute inset-0 w-full h-full z-10"
-          style={{ minHeight: '100vh' }}
-        />
-        
-        {/* Logo image centered on top with fade-in from bottom */}
+        {/* Logo centered with fade-in */}
         <div 
           className={`relative z-20 flex items-center justify-center w-full h-full transition-all duration-1000 ease-out ${
-            isLoaded 
+            videoReady 
               ? 'opacity-100 translate-y-0' 
               : 'opacity-0 translate-y-16'
           }`}
