@@ -115,8 +115,8 @@ export default function VideoHero({ videoUrl }: VideoHeroProps) {
         }}
       />
 
-      {/* overlay — más oscuro arriba para transición seamless desde ContentSection */}
-      <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/85 via-black/40 to-black/90" />
+      {/* overlay suave solo para legibilidad del texto del footer */}
+      <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/20 via-transparent to-black/60" />
 
       {/* Footer text - Futuristic poster style */}
       <div 
