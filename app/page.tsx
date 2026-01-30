@@ -1,4 +1,4 @@
-Perimport AnimatedStrip from './components/AnimatedStrip';
+import AnimatedStrip from './components/AnimatedStrip';
 import Hero from './components/Hero';
 import ContentSection from './components/ContentSection';
 import ProjectGrid from './components/ProjectGrid';
@@ -58,6 +58,15 @@ export default function Home() {
         <ProjectGrid />
       </div>
 
+      <div className="m-0 p-0">
+        <AnimatedStrip
+          text="Ready to Create Your Brand Breakthrough?"
+          speed={45}
+          direction="right"
+          className="bg-black text-white py-0 m-0"
+        />
+      </div>
+
       {/* What we do — single container with Crafting background, no gap */}
       <section
         id="services"
@@ -78,15 +87,6 @@ export default function Home() {
           <ServicesCards />
         </div>
       </section>
-
-      <div className="m-0 p-0">
-        <AnimatedStrip
-          text="Ready to Create Your Brand Breakthrough?"
-          speed={45}
-          direction="right"
-          className="bg-black text-white py-0 m-0"
-        />
-      </div>
 
       {/* CTA — seamless from What we do (both black at boundary) */}
       <section id="contact" className="relative m-0 p-0 py-0 px-4 md:px-8 text-white overflow-hidden">
