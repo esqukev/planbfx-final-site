@@ -20,16 +20,7 @@ export default function Home() {
 
       <Hero />
 
-      <div className="m-0 p-0">
-        <AnimatedStrip
-          text="CUSTOM INTERACTIVE INMMERSIONS"
-          speed={40}
-          direction="right"
-          className="bg-white dark:bg-black text-black dark:text-white py-0 m-0"
-        />
-      </div>
-
-      <div id="about" className="scroll-section m-0 p-0">
+      <div id="about" className="scroll-section m-0 p-0 -mt-px">
         <ContentSection
           title="Crafting Immersive Visual Experiences"
           description="We create immersive, tailored visuals that push the boundaries of your vision. From concept to execution, we merge creativity, interaction, and technology to build unique visual experiences that engage, evolve, and resonate beyond the screen."
@@ -39,16 +30,7 @@ export default function Home() {
         />
       </div>
 
-      <div className="m-0 p-0">
-        <AnimatedStrip
-          text="CUSTOM INTERACTIVE INMMERSION"
-          speed={40}
-          direction="right"
-          className="bg-white dark:bg-black text-black dark:text-white py-0 m-0"
-        />
-      </div>
-
-      <div className="m-0 p-0 block leading-none">
+      <div className="m-0 p-0 block leading-none -mt-px">
         <VideoHero videoUrl="https://res.cloudinary.com/dpplgma25/video/upload/v1769541821/plabanfisa_kskqbc.mp4" />
       </div>
 
