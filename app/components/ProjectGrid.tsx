@@ -107,11 +107,11 @@ export default function ProjectGrid() {
               }}
               className="relative flex justify-center py-10 md:py-14 first:pt-0 last:pb-0"
             >
-              {/* Card centrada sobre la línea (la línea pasa por detrás), un poquito a un lado */}
+              {/* Card apenas encima de la línea, un poco más al lado */}
               <div
                 className={`
                   w-full max-w-xl relative z-10
-                  ${index % 2 === 0 ? 'md:-translate-x-4 md:text-left' : 'md:translate-x-4 md:text-right'}
+                  ${index % 2 === 0 ? 'md:-translate-x-20 md:text-left' : 'md:translate-x-20 md:text-right'}
                 `}
               >
                 <div className="rounded-2xl border border-zinc-200 dark:border-zinc-700 bg-zinc-50/80 dark:bg-zinc-900/80 p-6 md:p-8 shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl">
