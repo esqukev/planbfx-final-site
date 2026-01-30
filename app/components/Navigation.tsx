@@ -57,7 +57,7 @@ export default function Navigation() {
         }}
       />
 
-      <div className="relative z-10 w-full px-4 md:px-8 lg:px-12 xl:px-16 py-4 flex items-center justify-between max-w-7xl mx-auto">
+      <div className="relative z-10 w-full px-4 md:px-8 lg:px-12 xl:px-16 py-4 flex items-center justify-between">
         <Link
           href="/"
           className="relative h-12 w-32 cursor-pointer hover:opacity-80 transition-opacity"
