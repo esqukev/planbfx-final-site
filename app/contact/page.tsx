@@ -2,7 +2,6 @@
 
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
-import HyperSpaceBackground from '../components/HyperSpaceBackground';
 import CursorTiltFigure from '../components/CursorTiltFigure';
 
 export default function ContactPage() {
@@ -11,16 +10,14 @@ export default function ContactPage() {
       <Navigation />
 
       <section className="relative min-h-screen py-24 md:py-32 px-4 md:px-8">
-        <HyperSpaceBackground />
-
-        <div className="relative z-10 max-w-3xl mx-auto">
+        <div className="relative max-w-3xl mx-auto">
           {/* Figura 3D interactiva: cursor-driven perspective tilt (GSAP) */}
           <CursorTiltFigure
             className="mb-16 flex justify-center"
             maxTilt={36}
             perspective={1000}
           >
-            <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-center text-white leading-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-center text-white leading-tight">
               Wanna work with us?
             </h1>
           </CursorTiltFigure>
