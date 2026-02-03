@@ -24,7 +24,7 @@ export default function ContactPage() {
           </CursorTiltFigure>
 
           {/* Intro — símbolos con tipografía fallback */}
-          <p className="text-2xl md:text-3xl font-light text-white/90 mb-10 text-center">
+          <p className="text-2xl md:text-3xl font-light text-white/90 mb-10">
             Let<span className="font-fallback">&apos;</span>s turn ideas into impact.
           </p>
           <p className="text-lg text-white/70 leading-relaxed mb-6">
