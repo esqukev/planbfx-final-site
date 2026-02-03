@@ -1,25 +1,18 @@
+'use client';
+
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
-import Image from 'next/image';
+import ImageHero from '../components/ImageHero';
 
 export default function ServicesPage() {
   return (
     <main className="relative min-h-screen bg-black text-white">
       <Navigation />
 
-      {/* Banner con imagen tomybanner */}
-      <section className="relative w-full aspect-[21/9] min-h-[200px] md:min-h-[280px] overflow-hidden">
-        <Image
-          src="/tomybanner.jpg"
-          alt="Services"
-          fill
-          className="object-cover"
-          priority
-          sizes="100vw"
-        />
-      </section>
+      {/* Banner igual a About pero con foto, sin logo */}
+      <ImageHero imageSrc="/tomybanner.jpg" imageAlt="Services" />
 
-      <section className="py-16 md:py-24 px-4 md:px-8">
+      <section className="relative z-20 py-16 md:py-24 px-4 md:px-8 bg-black">
         <div className="max-w-7xl mx-auto">
           <h1 className="text-6xl md:text-8xl font-bold mb-8 text-white">
             Services
