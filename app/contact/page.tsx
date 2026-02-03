@@ -13,26 +13,26 @@ export default function ContactPage() {
         <HyperSpaceBackground />
 
         <div className="relative z-10 max-w-3xl mx-auto">
-          {/* Intro */}
+          {/* Intro — símbolos con tipografía fallback */}
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
             Wanna work with us?
           </h1>
           <p className="text-2xl md:text-3xl font-light text-white/90 mb-10">
-            Let&apos;s turn ideas into impact.
+            Let<span className="font-fallback">&apos;</span>s turn ideas into impact.
           </p>
           <p className="text-lg text-white/70 leading-relaxed mb-6">
-            Whether you have a clear vision or just a spark, we&apos;re here to help shape it.
-            Reach out and let&apos;s create something that actually stands out.
+            Whether you have a clear vision or just a spark, we<span className="font-fallback">&apos;</span>re here to help shape it.
+            Reach out and let<span className="font-fallback">&apos;</span>s create something that actually stands out.
           </p>
           <p className="text-lg font-semibold text-white/90 mb-16">
             Get in contact.
           </p>
 
-          {/* Phone, WhatsApp, Email */}
-          <div className="flex flex-wrap gap-8 md:gap-12 mb-20">
+          {/* Phone, WhatsApp, Email — botones */}
+          <div className="flex flex-wrap gap-4 md:gap-6 mb-20">
             <a
               href="tel:+1234567890"
-              className="text-white/80 hover:text-white transition-colors text-lg"
+              className="inline-flex items-center justify-center px-6 py-3 rounded-full border-2 border-white/40 text-white hover:bg-white/10 hover:border-white/70 transition-all text-base font-medium"
             >
               Phone
             </a>
@@ -40,13 +40,13 @@ export default function ContactPage() {
               href="https://wa.me/1234567890"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white/80 hover:text-white transition-colors text-lg"
+              className="inline-flex items-center justify-center px-6 py-3 rounded-full border-2 border-white/40 text-white hover:bg-white/10 hover:border-white/70 transition-all text-base font-medium"
             >
               WhatsApp
             </a>
             <a
               href="mailto:hello@planbfx.com"
-              className="text-white/80 hover:text-white transition-colors text-lg"
+              className="inline-flex items-center justify-center px-6 py-3 rounded-full border-2 border-white/40 text-white hover:bg-white/10 hover:border-white/70 transition-all text-base font-medium"
             >
               Email
             </a>

@@ -113,17 +113,17 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 1. Intro: Who we are + About Plan B FX + first paragraph — fondo negro, centrado */}
+      {/* 1. Intro: Who we are + About Plan B FX + first paragraph — textos más grandes */}
       <section className="relative z-20 bg-black">
-        <div className="mx-auto max-w-3xl px-8 py-24 md:py-32 lg:py-40 flex flex-col items-center text-center">
-          <div ref={introRef} className="space-y-8 md:space-y-10">
-            <span className="text-sm uppercase tracking-[0.35em] text-white/50 block">
+        <div className="mx-auto max-w-4xl px-8 py-28 md:py-36 lg:py-44 flex flex-col items-center text-center">
+          <div ref={introRef} className="space-y-10 md:space-y-12">
+            <span className="text-base uppercase tracking-[0.35em] text-white/50 block">
               Who we are
             </span>
-            <h1 className="text-4xl font-bold leading-tight text-white md:text-5xl lg:text-6xl">
+            <h1 className="text-5xl font-bold leading-tight text-white md:text-6xl lg:text-7xl">
               About Plan B FX
             </h1>
-            <p className="max-w-4xl mx-auto text-lg leading-relaxed text-white/70 md:text-xl">
+            <p className="max-w-4xl mx-auto text-xl leading-relaxed text-white/70 md:text-2xl">
               Plan B began as a collective of local musicians driven by the goal of
               energizing the scene and elevating the standards of their own events.
               During this process, we incorporated code-based visual development
@@ -137,17 +137,17 @@ export default function AboutPage() {
       {/* 2. Espacio para contenido futuro — fondo negro */}
       <section className="relative z-20 min-h-[40vh] w-full bg-black" aria-hidden />
 
-      {/* 3. Closing: fondo negro, centrado, mismo estilo que el primer texto */}
+      {/* 3. Closing: mismos tamaños que el intro */}
       <section className="relative z-20 bg-black">
-        <div className="mx-auto max-w-3xl px-8 py-24 md:py-32 lg:py-40 flex flex-col items-center text-center">
-          <div ref={closingRef} className="space-y-8 md:space-y-10 max-w-4xl mx-auto">
-            <p className="text-lg leading-relaxed text-white/70 md:text-xl">
+        <div className="mx-auto max-w-4xl px-8 py-28 md:py-36 lg:py-44 flex flex-col items-center text-center">
+          <div ref={closingRef} className="space-y-10 md:space-y-12 max-w-4xl mx-auto">
+            <p className="text-xl leading-relaxed text-white/70 md:text-2xl">
               We have partnered with local promoters such as 3AM, Soulful Gathering,
               Xtyle, and Microgarden, providing visual support for world-class
               artists like Adam Beyer, Donnie Cosmo, and Anfisa Letyago, alongside
               key local talent.
             </p>
-            <p className="text-lg leading-relaxed text-white/70 md:text-xl">
+            <p className="text-xl leading-relaxed text-white/70 md:text-2xl">
               We invite you to explore our vision and become part of the Plan B
               family.
             </p>
