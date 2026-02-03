@@ -22,7 +22,7 @@ export default function Navigation() {
     { label: 'Home', href: '/' },
     { label: 'About', href: '/about' },
     { label: 'Services', href: '/services' },
-    { label: 'Works', href: '/works' },
+    // Works oculto por ahora (sin contenido)
     { label: 'Contact', href: '/contact' },
   ];
 

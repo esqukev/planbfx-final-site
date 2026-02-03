@@ -2,7 +2,6 @@
 
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
-import ScrollDrawPath from '../components/ScrollDrawPath';
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import gsap from 'gsap';
@@ -134,9 +133,6 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-
-      {/* Scroll observer: path draw on scroll (stagger + sync) */}
-      <ScrollDrawPath />
 
       {/* 2. Espacio para contenido futuro — fondo negro */}
       <section className="relative z-20 min-h-[40vh] w-full bg-black" aria-hidden />
