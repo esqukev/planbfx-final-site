@@ -3,6 +3,7 @@
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import HyperSpaceBackground from '../components/HyperSpaceBackground';
+import CursorTiltText from '../components/CursorTiltText';
 
 export default function ContactPage() {
   return (
@@ -13,11 +14,19 @@ export default function ContactPage() {
         <HyperSpaceBackground />
 
         <div className="relative z-10 max-w-3xl mx-auto">
+          {/* Título interactivo: cursor-driven perspective tilt (GSAP) */}
+          <CursorTiltText
+            className="mb-16 flex justify-center"
+            maxTilt={14}
+            perspective={1000}
+          >
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-center">
+              Wanna work with us?
+            </h1>
+          </CursorTiltText>
+
           {/* Intro — símbolos con tipografía fallback */}
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-            Wanna work with us?
-          </h1>
-          <p className="text-2xl md:text-3xl font-light text-white/90 mb-10">
+          <p className="text-2xl md:text-3xl font-light text-white/90 mb-10 text-center">
             Let<span className="font-fallback">&apos;</span>s turn ideas into impact.
           </p>
           <p className="text-lg text-white/70 leading-relaxed mb-6">
@@ -129,7 +138,7 @@ export default function ContactPage() {
                 Details
               </label>
               <p className="text-xs text-white/50 mb-2">
-                This form is designated to facilitate our process and yours. If not enough details are provided we could not consider your inquiry.
+                If not enough details are provided we could not consider your inquiry.
               </p>
               <textarea
                 id="details"
