@@ -2,6 +2,7 @@
 
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
+import PointCloudVisual from '../components/PointCloudVisual';
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import gsap from 'gsap';
@@ -134,8 +135,19 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 2. Espacio para contenido futuro — fondo negro */}
-      <section className="relative z-20 min-h-[40vh] w-full bg-black" aria-hidden />
+      {/* 2. Figura interactiva (tipo esfera Home) */}
+      <section className="relative z-20 min-h-[60vh] w-full overflow-hidden bg-gradient-to-b from-black via-zinc-900 to-black">
+        <div className="absolute inset-0 flex items-center justify-center">
+          <PointCloudVisual className="h-full w-full min-h-[400px]" />
+        </div>
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: 'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.35) 50%, transparent 100%)',
+          }}
+          aria-hidden
+        />
+      </section>
 
       {/* 3. Closing: mismos tamaños que el intro */}
       <section className="relative z-20 bg-black">
@@ -153,6 +165,20 @@ export default function AboutPage() {
             </p>
           </div>
         </div>
+      </section>
+
+      {/* 4. Segunda figura interactiva */}
+      <section className="relative z-20 min-h-[60vh] w-full overflow-hidden bg-gradient-to-b from-black via-zinc-800 to-black">
+        <div className="absolute inset-0 flex items-center justify-center">
+          <PointCloudVisual className="h-full w-full min-h-[400px]" />
+        </div>
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: 'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.4) 50%, transparent 100%)',
+          }}
+          aria-hidden
+        />
       </section>
 
       <Footer />
