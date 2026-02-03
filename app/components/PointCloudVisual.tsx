@@ -257,8 +257,7 @@ export default function PointCloudVisual({ className = '' }: PointCloudVisualPro
   return (
     <div
       ref={mountRef}
-      className={`relative mx-auto w-full max-w-[min(85vw,420px)] min-w-0 aspect-square flex-shrink-0 ${className}`}
-      style={{ maxHeight: 'min(70vh, 85vw, 420px)', minHeight: 'min(50vh, 280px)' }}
+      className={`relative mx-auto w-full max-w-[min(75vw,380px)] max-h-[55vh] min-h-[45vh] min-w-0 aspect-square flex-shrink-0 md:max-w-[min(85vw,420px)] md:max-h-[min(70vh,85vw,420px)] md:min-h-[min(50vh,280px)] ${className}`}
       aria-hidden="true"
     />
   );

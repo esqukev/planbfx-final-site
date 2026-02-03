@@ -14,7 +14,6 @@ export default function ContactPage() {
       <ScrollZoomHero
         imageSrc="/anfisabanner.jpg"
         imageAlt="Contact hero"
-        logoSrc="/logos/planb-variant3.svg"
       />
 
       {/* Mismo fondo que ParallaxBanner (We don't just create visuals...) para transición seamless */}

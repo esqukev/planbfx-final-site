@@ -11,14 +11,12 @@ type ScrollZoomHeroProps = {
 };
 
 /**
- * Hero con efecto de zoom, fade a negro y texto overlay al hacer scroll (Framer Motion).
- * Mismo efecto que otros banners: al hacer scroll se va poniendo negro.
- * Overlay con "Let's Elevate" / "Your Game" que hace fade out natural.
+ * Hero con fade a negro y texto overlay al hacer scroll (Framer Motion).
+ * Solo letras "Let's Elevate" / "Your Game" (sin logo).
  */
 export default function ScrollZoomHero({
   imageSrc,
   imageAlt = '',
-  logoSrc,
 }: ScrollZoomHeroProps) {
   const ref = useRef<HTMLElement>(null);
 
@@ -26,9 +24,6 @@ export default function ScrollZoomHero({
     target: ref,
     offset: ['start end', 'end start'],
   });
-
-  const scale = useTransform(scrollYProgress, [0, 1], [1.5, 1]);
-  const logoOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
 
   // Fade a negro: overlay negro que gana opacidad al hacer scroll (como otros banners)
   const blackOverlayOpacity = useTransform(scrollYProgress, [0, 0.5], [0, 1]);
@@ -51,24 +46,6 @@ export default function ScrollZoomHero({
           sizes="100vw"
         />
       </div>
-
-      {/* Logo centrado con zoom + fade */}
-      <motion.div
-        className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none"
-        style={{ scale, opacity: logoOpacity }}
-      >
-        {logoSrc && (
-          <div className="relative w-48 h-48 md:w-64 md:h-64 drop-shadow-2xl">
-            <Image
-              src={logoSrc}
-              alt="Plan B FX"
-              fill
-              className="object-contain"
-              priority
-            />
-          </div>
-        )}
-      </motion.div>
 
       {/* Overlay de texto: Let's Elevate / Your Game (indentado), fade out al scroll */}
       <motion.div
