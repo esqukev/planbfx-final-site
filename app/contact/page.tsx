@@ -3,7 +3,7 @@
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import HyperSpaceBackground from '../components/HyperSpaceBackground';
-import CursorTiltText from '../components/CursorTiltText';
+import CursorTiltFigure from '../components/CursorTiltFigure';
 
 export default function ContactPage() {
   return (
@@ -14,16 +14,16 @@ export default function ContactPage() {
         <HyperSpaceBackground />
 
         <div className="relative z-10 max-w-3xl mx-auto">
-          {/* Título interactivo: cursor-driven perspective tilt (GSAP) */}
-          <CursorTiltText
+          {/* Figura 3D interactiva: cursor-driven perspective tilt (GSAP) */}
+          <CursorTiltFigure
             className="mb-16 flex justify-center"
             maxTilt={14}
             perspective={1000}
           >
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-center">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-center text-white">
               Wanna work with us?
             </h1>
-          </CursorTiltText>
+          </CursorTiltFigure>
 
           {/* Intro — símbolos con tipografía fallback */}
           <p className="text-2xl md:text-3xl font-light text-white/90 mb-10 text-center">
