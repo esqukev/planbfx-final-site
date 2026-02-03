@@ -99,6 +99,7 @@ export default function AboutPage() {
         <div
           ref={logoWrapRef}
           className="relative z-20 flex items-center justify-center w-full h-full pointer-events-none"
+          style={{ opacity: 0 }}
         >
           <div className="relative w-64 h-64 md:w-96 md:h-96">
             <Image
