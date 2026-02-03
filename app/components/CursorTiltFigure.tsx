@@ -73,7 +73,7 @@ export default function CursorTiltFigure({
     >
       <div
         ref={tiltRef}
-        className="cursor-tilt-figure inline-block rounded-[2rem] min-w-[min(100%,22rem)] px-11 py-10 md:px-20 md:py-14 lg:px-24 lg:py-16 outline-none border border-white/15 transition-[border-color,box-shadow] duration-[1.1s] ease-[cubic-bezier(0.4,0,0.2,1)] hover:border-white/25"
+        className="cursor-tilt-figure inline-block rounded-[2rem] min-w-[min(100%,22rem)] px-11 py-10 md:px-20 md:py-14 lg:px-24 lg:py-16 outline-none border-none bg-zinc-900/90 shadow-[0_0_0_0_rgba(255,255,255,0)] transition-[box-shadow] duration-[1.2s] ease-[cubic-bezier(0.4,0,0.2,1)] hover:shadow-[0_0_40px_8px_rgba(255,255,255,0.12),0_0_80px_24px_rgba(255,255,255,0.06)]"
         style={{
           transformStyle: 'preserve-3d',
           willChange: 'transform',
