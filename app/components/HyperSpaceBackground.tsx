@@ -33,13 +33,13 @@ export default function HyperSpaceBackground() {
       );
       camera.position.z = 800;
 
-      const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+      const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: false });
       renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setPixelRatio(Math.min(2, window.devicePixelRatio));
       mount.appendChild(renderer.domElement);
 
-      // ⭐ STARFIELD
-      const starCount = 4000;
+      // ⭐ STARFIELD (reducido para rendimiento y que se vean las estrellas)
+      const starCount = 1800;
       const positions = new Float32Array(starCount * 3);
       const colors = new Float32Array(starCount * 3);
 
@@ -163,11 +163,12 @@ export default function HyperSpaceBackground() {
   return (
     <div
       ref={mountRef}
+      className="hyper-space-bg"
       style={{
         position: 'absolute',
         inset: 0,
-        zIndex: -1,
-        background: 'black', // Black background always visible
+        zIndex: 0,
+        background: '#000',
       }}
     />
   );

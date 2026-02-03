@@ -35,7 +35,7 @@ function PointLogo({ url }: { url: string }) {
           data.paths.forEach((path: any) => {
             const shapes = SVGLoader.createShapes(path);
             shapes.forEach((shape: any) => {
-              const spacedPoints = shape.getSpacedPoints(5850); // 30% more points: 4500 * 1.3 = 5850
+              const spacedPoints = shape.getSpacedPoints(2600); // Optimizado: menos puntos para fluidez
               spacedPoints.forEach((p: any) => {
                 // Flip Y to fix upside-down logo; Z spread for thicker profile when facing front
                 points.push(p.x, -p.y, (Math.random() - 0.5) * 48);
@@ -274,7 +274,8 @@ export default function LogoPointCloud() {
       <Canvas
         camera={{ position: [0, 0, 180], fov: 45 }}
         style={{ width: '100%', height: '100%', background: 'transparent', border: 'none' }}
-        gl={{ alpha: false, antialias: true }}
+        gl={{ alpha: false, antialias: true, powerPreference: 'high-performance', stencil: false }}
+        dpr={[1, 2]}
       >
         <ambientLight intensity={1} />
         <PointLogo url="/logos/plablandinglogo.svg" />

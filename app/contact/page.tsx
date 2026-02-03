@@ -20,7 +20,7 @@ export default function ContactPage() {
             maxTilt={36}
             perspective={1000}
           >
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-center text-white">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-center text-white leading-tight">
               Wanna work with us?
             </h1>
           </CursorTiltFigure>
