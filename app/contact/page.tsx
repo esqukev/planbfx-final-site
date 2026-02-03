@@ -17,7 +17,7 @@ export default function ContactPage() {
           {/* Figura 3D interactiva: cursor-driven perspective tilt (GSAP) */}
           <CursorTiltFigure
             className="mb-16 flex justify-center"
-            maxTilt={24}
+            maxTilt={36}
             perspective={1000}
           >
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-center text-white">

@@ -88,11 +88,9 @@ export default function Home() {
         />
       </div>
 
-      {/* CTA — seamless from What we do (both black at boundary) */}
-      <section id="contact" className="relative m-0 p-0 py-0 px-4 md:px-8 text-white overflow-hidden">
-        {/* HyperSpace Background */}
+      {/* CTA — seamless from What we do (both black at boundary); fondo estrellas HyperSpace */}
+      <section id="contact" className="relative min-h-screen m-0 p-0 py-0 px-4 md:px-8 text-white overflow-hidden">
         <HyperSpaceBackground />
-        
         <div className="relative z-10 max-w-4xl mx-auto text-center py-24 md:py-32">
           <ScrollTextEffect className="text-6xl md:text-8xl font-bold mb-8">
             Let´s Create<br />
