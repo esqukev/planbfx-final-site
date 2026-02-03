@@ -173,6 +173,8 @@ export default function PointCloudVisual({ className = '' }: PointCloudVisualPro
 
       resize();
       window.addEventListener('resize', resize);
+      const resizeObserver = new ResizeObserver(() => resize());
+      resizeObserver.observe(mount);
 
       const easeInOut = (x: number) =>
         x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
@@ -226,6 +228,7 @@ export default function PointCloudVisual({ className = '' }: PointCloudVisualPro
       cleanup = () => {
         window.cancelAnimationFrame(raf);
         window.removeEventListener('resize', resize);
+        resizeObserver.disconnect();
         mount.removeEventListener('pointermove', onPointerMove);
         mount.removeEventListener('pointerleave', onPointerLeave);
 
@@ -254,7 +257,8 @@ export default function PointCloudVisual({ className = '' }: PointCloudVisualPro
   return (
     <div
       ref={mountRef}
-      className={`relative mx-auto w-full max-w-[420px] aspect-square ${className}`}
+      className={`relative mx-auto w-full max-w-[420px] min-w-0 aspect-square ${className}`}
+      style={{ maxHeight: 'min(90vw, 420px)' }}
       aria-hidden="true"
     />
   );

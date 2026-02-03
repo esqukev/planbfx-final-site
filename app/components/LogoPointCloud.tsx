@@ -260,11 +260,9 @@ export default function LogoPointCloud() {
 
   return (
     <div
+      className="w-full aspect-square max-h-[100vh] overflow-hidden"
       style={{
-        width: '100%',
-        height: '1000px',
-        overflow: 'hidden',
-        opacity: opacity,
+        opacity,
         transition: 'opacity 0.3s ease-out',
         border: 'none',
         outline: 'none',

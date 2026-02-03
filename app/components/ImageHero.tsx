@@ -30,7 +30,7 @@ export default function ImageHero({ imageSrc, imageAlt = '' }: ImageHeroProps) {
   return (
     <section
       ref={heroRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black"
+      className="relative min-h-[60vh] sm:min-h-[70vh] md:min-h-screen flex items-center justify-center overflow-hidden bg-black"
       style={{ willChange: 'transform' }}
     >
       <div className="absolute inset-0 z-10">
@@ -38,7 +38,7 @@ export default function ImageHero({ imageSrc, imageAlt = '' }: ImageHeroProps) {
           src={imageSrc}
           alt={imageAlt}
           fill
-          className="object-cover"
+          className="object-cover object-center"
           priority
           sizes="100vw"
         />

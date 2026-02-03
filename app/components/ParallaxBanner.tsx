@@ -80,11 +80,11 @@ export default function ParallaxBanner({
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent" />
       </div>
 
-      <div className="relative z-10 max-w-5xl mx-auto text-center px-8 md:px-12 lg:px-16 py-24 md:py-32 lg:py-40">
+      <div className="relative z-10 max-w-5xl mx-auto text-center px-4 sm:px-8 md:px-12 lg:px-16 py-16 sm:py-24 md:py-32 lg:py-40">
         {/* Subtitle on top with fade in */}
         <p
           ref={subtitleRef}
-          className="text-sm uppercase tracking-[0.3em] text-zinc-400 mb-6 md:mb-8 transition-opacity duration-1000"
+          className="text-xs sm:text-sm uppercase tracking-[0.2em] sm:tracking-[0.3em] text-zinc-400 mb-4 sm:mb-6 md:mb-8 transition-opacity duration-1000"
           style={{
             transform: `translate3d(0, ${offset * 0.6}px, 0)`,
             opacity: isVisible ? 1 : 0,
@@ -92,35 +92,33 @@ export default function ParallaxBanner({
         >
           {subtitle}
         </p>
-        {/* Title with letter-by-letter fade in, split into lines */}
+        {/* Title with letter-by-letter fade in, split into lines — responsive: wrap en móvil */}
         <div
           ref={titleRef}
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight"
+          className="text-2xl min-[480px]:text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight max-w-full"
           style={{
-            wordBreak: 'keep-all',
+            wordBreak: 'break-word',
             overflowWrap: 'break-word',
           }}
         >
           {titleLines.map((line, lineIndex) => {
             let totalCharIndex = 0;
-            // Calculate starting character index for this line
             titleLines.slice(0, lineIndex).forEach((l) => {
-              totalCharIndex += l.length + 1; // +1 for line break
+              totalCharIndex += l.length + 1;
             });
             return (
               <p
                 key={lineIndex}
-                className="mb-0 md:mb-0.5 leading-none"
+                className="mb-0 md:mb-0.5 leading-tight sm:leading-none whitespace-normal sm:whitespace-nowrap"
                 style={{
                   transform: `translate3d(0, ${offset * (1 + lineIndex * 0.1)}px, 0)`,
-                  whiteSpace: 'nowrap',
                   display: 'block',
                 }}
               >
                 {line.split(' ').map((word, wordIndex) => {
                   const wordStartIndex = totalCharIndex + line.split(' ').slice(0, wordIndex).join(' ').length + wordIndex;
                   return (
-                    <span key={wordIndex} className="inline-block" style={{ whiteSpace: 'nowrap' }}>
+                    <span key={wordIndex} className="inline-block whitespace-nowrap">
                       {word.split('').map((char, charIndex) => {
                         const charTotalIndex = wordStartIndex + charIndex;
                         const isApostrophe = char === "'" || char === "'";
@@ -140,11 +138,10 @@ export default function ParallaxBanner({
                       })}
                       {wordIndex < line.split(' ').length - 1 && (
                         <span
-                          className="inline-block"
+                          className="inline-block w-1 sm:w-[0.3em]"
                           style={{
                             opacity: isVisible ? 1 : 0,
                             transition: `opacity 1s ease ${wordStartIndex + word.length * 0.05}s`,
-                            width: '0.3em',
                           }}
                         >
                           {' '}

@@ -33,7 +33,7 @@ export default function Navigation() {
         className={`
           w-full rounded-2xl
           transition-all duration-700 ease-out
-          ${scrolled
+          ${scrolled || isMenuOpen
             ? 'backdrop-blur-xl bg-black/40 shadow-[0_20px_40px_rgba(0,0,0,0.25)]'
             : 'backdrop-blur-0 bg-transparent'
           }
@@ -79,12 +79,12 @@ export default function Navigation() {
         </button>
       </div>
       {isMenuOpen && (
-        <div className="relative z-10 md:hidden rounded-b-2xl bg-black/95 backdrop-blur-md border-t border-zinc-800">
+        <div className="relative z-10 md:hidden rounded-b-2xl backdrop-blur-xl bg-black/40 shadow-[0_20px_40px_rgba(0,0,0,0.25)]">
           {menuItems.map((item) => (
             <Link
               key={item.label}
               href={item.href}
-              className="block px-4 py-3 text-zinc-300 hover:text-white hover:bg-zinc-900 transition-colors"
+              className="block px-4 py-3 text-white/90 hover:text-white hover:bg-white/5 transition-colors text-sm uppercase tracking-wider"
               onClick={() => setIsMenuOpen(false)}
             >
               {item.label}
