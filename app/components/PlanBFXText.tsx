@@ -37,7 +37,9 @@ export default function PlanBFXText() {
       '+=1.2'
     );
 
-    return () => tl.kill();
+    return () => {
+      tl.kill();
+    };
   }, []);
 
   return (
