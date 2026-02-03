@@ -80,6 +80,8 @@ export default function PlanBFXText() {
         viewBox="0 0 800 140"
         className="w-full max-w-2xl min-h-[7rem] h-28 md:h-32 lg:h-36 overflow-visible"
         aria-hidden
+        stroke="rgba(255,255,255,0.15)"
+        strokeWidth={1}
       >
         <defs>
           <linearGradient id="planb-grad-1" x1="0" y1="140" x2="400" y2="0" gradientUnits="userSpaceOnUse">
@@ -91,23 +93,31 @@ export default function PlanBFXText() {
             <stop offset="0.5" stopColor="#fb8305" />
           </linearGradient>
           {/* Letter paths: block letters legibles para P L A N B F X */}
-          <path id="letter-p" d="M20 25 L20 115 L45 115 L75 85 L75 55 L45 25 Z" />
-          <path id="letter-l" d="M105 25 L105 115 L145 115 L145 95 L125 95 L125 25 Z" />
-          <path id="letter-a" d="M165 115 L195 25 L225 115 Z" />
-          <path id="letter-n" d="M245 25 L245 115 L275 115 L335 55 L335 115 L365 115 L365 25 L335 25 L275 85 L275 25 Z" />
-          <path id="letter-b" d="M385 25 L385 115 L490 115 L490 95 L415 95 L415 70 L490 70 L490 50 L415 50 L415 25 Z" />
-          <path id="letter-f" d="M545 25 L545 115 L625 115 L625 95 L575 95 L575 70 L615 70 L615 50 L575 50 L575 25 Z" />
-          <path id="letter-x" d="M655 25 L695 70 L735 25 L765 25 L715 70 L765 115 L735 115 L695 70 L655 115 L625 115 L675 70 L625 25 Z" />
+          <path id="letter-p" d="M20 20 H70 Q100 20 100 55 Q100 90 70 90 H45 V120 H20 Z M45 40 V70 H65 Q80 70 80 55 Q80 40 65 40 Z" />
+
+        <path id="letter-l" d="M115 20 V120 H175 V100 H140 V20 Z" />
+
+        <path id="letter-a" d="M195 120 L225 20 H255 L285 120 H260 L252 95 H228 L220 120 Z M235 75 H245 L240 50 Z" />
+
+        <path id="letter-n" d="M305 120 V20 H335 L380 80 V20 H410 V120 H380 L335 60 V120 Z" />
+
+        <path id="letter-b" d="M430 20 V120 H480 Q515 120 515 95 Q515 75 495 70 Q520 65 520 40 Q520 20 480 20 Z 
+        M455 40 H475 Q490 40 490 55 Q490 70 475 70 H455 Z 
+        M455 85 H480 Q495 85 495 100 Q495 115 480 115 H455 Z" />
+
+       <path id="letter-f" d="M555 20 V120 H620 V100 H580 V75 H615 V55 H580 V20 Z" />
+
+       <path id="letter-x" d="M655 20 L695 70 L735 20 H765 L715 70 L765 120 H735 L695 75 L655 120 H625 L675 70 L625 20 Z" />
         </defs>
         {/* Shapes: circles que morph a letras */}
         <g style={{ visibility: useMorph === false ? 'hidden' : 'visible' }}>
-          <circle id="shape-p" className="morph-shape" cx="55" cy="70" r="35" fill="url(#planb-grad-1)" />
-          <circle id="shape-l" className="morph-shape" cx="125" cy="70" r="35" fill="url(#planb-grad-1)" />
-          <circle id="shape-a" className="morph-shape" cx="195" cy="70" r="35" fill="url(#planb-grad-1)" />
-          <circle id="shape-n" className="morph-shape" cx="305" cy="70" r="35" fill="url(#planb-grad-1)" />
-          <circle id="shape-b" className="morph-shape" cx="420" cy="70" r="35" fill="url(#planb-grad-1)" />
-          <circle id="shape-f" className="morph-shape" cx="585" cy="70" r="35" fill="url(#planb-grad-2)" />
-          <circle id="shape-x" className="morph-shape" cx="695" cy="70" r="35" fill="url(#planb-grad-2)" />
+          <circle id="shape-p" className="morph-shape" cx="55" cy="70" r="35" fill="url(#planb-grad-1)" stroke="rgba(255,255,255,0.15)" strokeWidth={1} />
+          <circle id="shape-l" className="morph-shape" cx="125" cy="70" r="35" fill="url(#planb-grad-1)" stroke="rgba(255,255,255,0.15)" strokeWidth={1} />
+          <circle id="shape-a" className="morph-shape" cx="195" cy="70" r="35" fill="url(#planb-grad-1)" stroke="rgba(255,255,255,0.15)" strokeWidth={1} />
+          <circle id="shape-n" className="morph-shape" cx="305" cy="70" r="35" fill="url(#planb-grad-1)" stroke="rgba(255,255,255,0.15)" strokeWidth={1} />
+          <circle id="shape-b" className="morph-shape" cx="420" cy="70" r="35" fill="url(#planb-grad-1)" stroke="rgba(255,255,255,0.15)" strokeWidth={1} />
+          <circle id="shape-f" className="morph-shape" cx="585" cy="70" r="35" fill="url(#planb-grad-2)" stroke="rgba(255,255,255,0.15)" strokeWidth={1} />
+          <circle id="shape-x" className="morph-shape" cx="695" cy="70" r="35" fill="url(#planb-grad-2)" stroke="rgba(255,255,255,0.15)" strokeWidth={1} />
         </g>
         {/* Fallback: texto cuando no hay MorphSVGPlugin */}
         {useMorph === false && (
