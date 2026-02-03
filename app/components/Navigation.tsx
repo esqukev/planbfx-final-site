@@ -79,7 +79,7 @@ export default function Navigation() {
         </button>
       </div>
       {isMenuOpen && (
-        <div className="relative z-10 md:hidden rounded-b-2xl backdrop-blur-xl bg-black/40 shadow-[0_20px_40px_rgba(0,0,0,0.25)]">
+        <div className="relative z-10 md:hidden rounded-b-2xl backdrop-blur-xl bg-black/40">
           {menuItems.map((item) => (
             <Link
               key={item.label}

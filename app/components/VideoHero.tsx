@@ -126,39 +126,34 @@ export default function VideoHero({ videoUrl }: VideoHeroProps) {
           background: 'linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 50%, transparent 100%)'
         }}
       >
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-8 max-w-7xl mx-auto">
-          {/* Left - INTERACTIVE ART (swapped) */}
+        <div className="flex flex-row flex-nowrap items-center justify-center md:justify-between gap-1 sm:gap-2 md:gap-8 max-w-7xl mx-auto overflow-x-auto">
           <div 
-            className="text-white font-bold tracking-[0.3em] uppercase"
+            className="text-white font-bold uppercase whitespace-nowrap shrink-0"
             style={{
-              fontSize: 'clamp(0.65rem, 1.5vw, 0.9rem)',
-              letterSpacing: '0.3em',
+              fontSize: 'clamp(0.4rem, 1.8vw, 0.9rem)',
+              letterSpacing: '0.15em',
               opacity: 0.95,
               fontFamily: 'monospace, "Courier New", Courier, monospace'
             }}
           >
             INTERACTIVE ART
           </div>
-          
-          {/* Center - [PLANBFX] */}
           <div 
-            className="text-white font-bold tracking-[0.3em] uppercase"
+            className="text-white font-bold uppercase whitespace-nowrap shrink-0"
             style={{
-              fontSize: 'clamp(0.65rem, 1.5vw, 0.9rem)',
-              letterSpacing: '0.3em',
+              fontSize: 'clamp(0.4rem, 1.8vw, 0.9rem)',
+              letterSpacing: '0.15em',
               opacity: 0.95,
               fontFamily: 'monospace, "Courier New", Courier, monospace'
             }}
           >
             [PLANBFX]
           </div>
-          
-          {/* Right - FOR YOUR SPACES (swapped) */}
           <div 
-            className="text-white font-bold tracking-[0.3em] uppercase"
+            className="text-white font-bold uppercase whitespace-nowrap shrink-0"
             style={{
-              fontSize: 'clamp(0.65rem, 1.5vw, 0.9rem)',
-              letterSpacing: '0.3em',
+              fontSize: 'clamp(0.4rem, 1.8vw, 0.9rem)',
+              letterSpacing: '0.15em',
               opacity: 0.95,
               fontFamily: 'monospace, "Courier New", Courier, monospace'
             }}

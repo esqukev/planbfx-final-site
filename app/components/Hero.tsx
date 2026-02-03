@@ -21,10 +21,10 @@ export default function Hero() {
   return (
     <section
       ref={heroRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black m-0 border-0 outline-none"
-      style={{ willChange: 'transform' }}
+      className="relative min-h-screen h-screen flex items-center justify-center overflow-hidden bg-black m-0 border-0 outline-none"
+      style={{ willChange: 'transform', minHeight: '100dvh' }}
     >
-      <div className="relative z-10 w-full h-full min-h-screen border-0 outline-none overflow-hidden">
+      <div className="relative z-10 w-full h-full min-h-0 flex items-center justify-center border-0 outline-none overflow-hidden">
         <LogoPointCloud />
       </div>
     </section>

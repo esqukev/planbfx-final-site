@@ -17,7 +17,13 @@ export default function ContactPage() {
         logoSrc="/logos/planb-variant3.svg"
       />
 
-      <section className="relative min-h-screen py-24 md:py-32 px-4 md:px-8">
+      {/* Mismo fondo que ParallaxBanner (We don't just create visuals...) para transición seamless */}
+      <section
+        className="relative min-h-screen py-24 md:py-32 px-4 md:px-8"
+        style={{
+          background: 'linear-gradient(to bottom left, #000000 0%, #18181b 50%, #000000 100%)',
+        }}
+      >
         <div className="relative max-w-3xl mx-auto">
           {/* Figura 3D interactiva: cursor-driven perspective tilt (GSAP) */}
           <CursorTiltFigure

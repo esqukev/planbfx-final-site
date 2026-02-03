@@ -70,7 +70,7 @@ export default function Home() {
             <span className="text-sm uppercase tracking-wider text-zinc-500 mb-4 block">
               What we do
             </span>
-            <h2 className="text-5xl md:text-6xl font-bold text-white">
+            <h2 className="text-4xl md:text-6xl font-bold text-white">
               We create, produce, and design experiences that make your events hit different.
             </h2>
           </div>

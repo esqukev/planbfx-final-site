@@ -125,7 +125,7 @@ export default function ContentSection({
         </div>
         {hasRight && (
           <div
-            className={`flex-1 w-full md:max-w-[420px] transition-all duration-1000 delay-300 ${
+            className={`flex-1 w-full md:max-w-[420px] flex justify-center items-center min-h-[min(70vh,400px)] md:min-h-0 transition-all duration-1000 delay-300 ${
               isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
             }`}
           >

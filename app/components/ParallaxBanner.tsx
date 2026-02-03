@@ -95,7 +95,7 @@ export default function ParallaxBanner({
         {/* Title with letter-by-letter fade in, split into lines — responsive: wrap en móvil */}
         <div
           ref={titleRef}
-          className="text-2xl min-[480px]:text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight max-w-full"
+          className="text-4xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight max-w-full"
           style={{
             wordBreak: 'break-word',
             overflowWrap: 'break-word',
