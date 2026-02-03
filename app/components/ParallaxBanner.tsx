@@ -92,14 +92,10 @@ export default function ParallaxBanner({
         >
           {subtitle}
         </p>
-        {/* Title: 3 líneas fijas (We don't just create visuals / we craft moments that / are remembered), ajustado a mobile */}
+        {/* Title with letter-by-letter fade in, split into lines */}
         <div
           ref={titleRef}
-          className="text-2xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight max-w-full overflow-x-auto overflow-y-hidden"
-          style={{
-            wordBreak: 'break-word',
-            overflowWrap: 'break-word',
-          }}
+          className="text-4xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight max-w-full"
         >
           {titleLines.map((line, lineIndex) => {
             let totalCharIndex = 0;
@@ -109,7 +105,7 @@ export default function ParallaxBanner({
             return (
               <p
                 key={lineIndex}
-                className="mb-0 md:mb-0.5 leading-tight whitespace-nowrap"
+                className="mb-0 md:mb-0.5 leading-tight whitespace-normal sm:whitespace-nowrap"
                 style={{
                   transform: `translate3d(0, ${offset * (1 + lineIndex * 0.1)}px, 0)`,
                   display: 'block',

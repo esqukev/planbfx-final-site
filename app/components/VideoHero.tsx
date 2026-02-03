@@ -126,12 +126,12 @@ export default function VideoHero({ videoUrl }: VideoHeroProps) {
           background: 'linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 50%, transparent 100%)'
         }}
       >
-        <div className="flex flex-row flex-nowrap items-center justify-center md:justify-between gap-1 sm:gap-2 md:gap-8 max-w-7xl mx-auto overflow-x-auto px-2">
+        <div className="flex flex-row items-center justify-between w-full max-w-7xl mx-auto gap-2 md:gap-8 px-3 md:px-0">
           <div 
-            className="text-white font-bold uppercase whitespace-nowrap shrink-0 -ml-3 md:ml-0"
+            className="text-white font-bold uppercase shrink-0 text-left flex-1 min-w-0"
             style={{
-              fontSize: 'clamp(0.4rem, 1.8vw, 0.9rem)',
-              letterSpacing: '0.15em',
+              fontSize: 'clamp(0.5rem, 2vw, 0.9rem)',
+              letterSpacing: '0.12em',
               opacity: 0.95,
               fontFamily: 'monospace, "Courier New", Courier, monospace'
             }}
@@ -139,10 +139,10 @@ export default function VideoHero({ videoUrl }: VideoHeroProps) {
             INTERACTIVE ART
           </div>
           <div 
-            className="text-white font-bold uppercase whitespace-nowrap shrink-0"
+            className="text-white font-bold uppercase shrink-0 text-center flex-1 min-w-0"
             style={{
-              fontSize: 'clamp(0.4rem, 1.8vw, 0.9rem)',
-              letterSpacing: '0.15em',
+              fontSize: 'clamp(0.5rem, 2vw, 0.9rem)',
+              letterSpacing: '0.12em',
               opacity: 0.95,
               fontFamily: 'monospace, "Courier New", Courier, monospace'
             }}
@@ -150,10 +150,10 @@ export default function VideoHero({ videoUrl }: VideoHeroProps) {
             [PLANBFX]
           </div>
           <div 
-            className="text-white font-bold uppercase whitespace-nowrap shrink-0 -mr-3 md:mr-0 ml-auto md:ml-0"
+            className="text-white font-bold uppercase shrink-0 text-right flex-1 min-w-0"
             style={{
-              fontSize: 'clamp(0.4rem, 1.8vw, 0.9rem)',
-              letterSpacing: '0.15em',
+              fontSize: 'clamp(0.5rem, 2vw, 0.9rem)',
+              letterSpacing: '0.12em',
               opacity: 0.95,
               fontFamily: 'monospace, "Courier New", Courier, monospace'
             }}

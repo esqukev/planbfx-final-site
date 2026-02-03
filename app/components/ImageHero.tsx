@@ -38,7 +38,7 @@ export default function ImageHero({ imageSrc, imageAlt = '' }: ImageHeroProps) {
           src={imageSrc}
           alt={imageAlt}
           fill
-          className="object-contain object-center md:object-cover"
+          className="object-cover object-center"
           priority
           sizes="100vw"
         />
