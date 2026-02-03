@@ -11,7 +11,6 @@ import FadeInOnScroll from './components/FadeInOnScroll';
 import VideoHero from './components/VideoHero';
 import ParallaxBanner from './components/ParallaxBanner';
 import ParallaxBannerWithImage from './components/ParallaxBannerWithImage';
-import ServicesCards from './components/ServicesCards';
 
 export default function Home() {
   return (
@@ -58,7 +57,7 @@ export default function Home() {
         <ProjectGrid />
       </div>
 
-      {/* What we do — single container with Crafting background, no gap */}
+      {/* What we do — solo título, sin tarjetas */}
       <section
         id="services"
         className="m-0 p-0 text-white overflow-hidden"
@@ -67,7 +66,7 @@ export default function Home() {
         }}
       >
         <div className="max-w-7xl mx-auto px-4 md:px-8 py-16 md:py-20">
-          <div className="text-center mb-16">
+          <div className="text-center">
             <span className="text-sm uppercase tracking-wider text-zinc-500 mb-4 block">
               What we do
             </span>
@@ -75,7 +74,6 @@ export default function Home() {
               We create, produce, and design experiences that make your events hit different.
             </h2>
           </div>
-          <ServicesCards />
         </div>
       </section>
 

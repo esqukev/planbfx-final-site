@@ -3,6 +3,7 @@
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import CursorTiltFigure from '../components/CursorTiltFigure';
+import PlanBFXText from '../components/PlanBFXText';
 
 export default function ContactPage() {
   return (
@@ -57,6 +58,9 @@ export default function ContactPage() {
               Email
             </a>
           </div>
+
+          {/* [PLANB FX] — efecto tipo convertToPath / revelado por caracteres (GSAP) */}
+          <PlanBFXText />
 
           {/* Second text block */}
           <h2 className="text-2xl md:text-3xl font-bold mb-6">

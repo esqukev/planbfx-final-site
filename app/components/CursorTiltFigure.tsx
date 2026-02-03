@@ -73,12 +73,11 @@ export default function CursorTiltFigure({
     >
       <div
         ref={tiltRef}
-        className="cursor-tilt-figure inline-block rounded-[2rem] min-w-[min(100%,22rem)] px-11 py-10 md:px-20 md:py-14 lg:px-24 lg:py-16 [border:none] outline-none"
+        className="cursor-tilt-figure inline-block rounded-[2rem] min-w-[min(100%,22rem)] px-11 py-10 md:px-20 md:py-14 lg:px-24 lg:py-16 outline-none border border-white/15"
         style={{
           transformStyle: 'preserve-3d',
           willChange: 'transform',
           backfaceVisibility: 'hidden',
-          border: 'none',
         }}
       >
         <div className="cursor-tilt-figure-inner" style={{ transform: 'translateZ(24px)' }}>
