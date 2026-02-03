@@ -101,11 +101,9 @@ export default function PlanBFXText() {
 
         <path id="letter-n" d="M305 120 V20 H335 L380 80 V20 H410 V120 H380 L335 60 V120 Z" />
 
-        <path id="letter-b" d="M430 20 V120 H480 Q515 120 515 95 Q515 75 495 70 Q520 65 520 40 Q520 20 480 20 Z 
-        M455 40 H475 Q490 40 490 55 Q490 70 475 70 H455 Z 
-        M455 85 H480 Q495 85 495 100 Q495 115 480 115 H455 Z" />
+        <path id="letter-b" d="M430 20 V120 H480 Q515 120 515 95 Q515 75 495 70 Q520 65 520 40 Q520 20 480 20 Z M455 40 H475 Q490 40 490 55 Q490 70 475 70 H455 Z M455 85 H480 Q495 85 495 100 Q495 115 480 115 H455 Z" transform="scale(1 -1) translate(0 -140)" />
 
-       <path id="letter-f" d="M555 20 V120 H620 V100 H580 V75 H615 V55 H580 V20 Z" />
+        <path id="letter-f" d="M555 20 V120 H620 V100 H580 V75 H615 V55 H580 V20 Z" transform="scale(1 -1) translate(0 -140)" />
 
        <path id="letter-x" d="M655 20 L695 70 L735 20 H765 L715 70 L765 120 H735 L695 75 L655 120 H625 L675 70 L625 20 Z" />
         </defs>
