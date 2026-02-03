@@ -20,7 +20,7 @@ type CursorTiltFigureProps = {
 export default function CursorTiltFigure({
   children,
   className = '',
-  maxTilt = 14,
+  maxTilt = 22,
   perspective = 1000,
 }: CursorTiltFigureProps) {
   const wrapRef = useRef<HTMLDivElement>(null);
