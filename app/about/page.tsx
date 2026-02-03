@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { motion } from 'framer-motion';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -130,6 +131,25 @@ export default function AboutPage() {
               into our workflow, allowing us to expand our services and provide
               immersive, memorable experiences for diverse events.
             </p>
+            {/* Logo Plan B arrastrable (Property 1 = Variant3) */}
+            <div className="flex justify-center pt-16 md:pt-20">
+              <motion.div
+                drag
+                dragConstraints={{ left: -120, right: 120, top: -80, bottom: 80 }}
+                dragElastic={0.1}
+                className="relative w-40 h-40 md:w-52 md:h-52 cursor-grab active:cursor-grabbing touch-none select-none"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <Image
+                  src="/logos/planb-variant3.svg"
+                  alt="Plan B FX"
+                  fill
+                  className="object-contain pointer-events-none"
+                  draggable={false}
+                />
+              </motion.div>
+            </div>
           </div>
         </div>
       </section>

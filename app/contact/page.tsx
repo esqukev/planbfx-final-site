@@ -4,11 +4,18 @@ import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import CursorTiltFigure from '../components/CursorTiltFigure';
 import PlanBFXText from '../components/PlanBFXText';
+import ScrollZoomHero from '../components/ScrollZoomHero';
 
 export default function ContactPage() {
   return (
     <main className="relative min-h-screen bg-black text-white overflow-hidden">
       <Navigation />
+
+      <ScrollZoomHero
+        imageSrc="/anfisabanner.jpg"
+        imageAlt="Contact hero"
+        logoSrc="/logos/planb-variant3.svg"
+      />
 
       <section className="relative min-h-screen py-24 md:py-32 px-4 md:px-8">
         <div className="relative max-w-3xl mx-auto">
