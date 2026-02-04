@@ -118,6 +118,18 @@ export default function ServicesPage() {
 
       <ImageHero imageSrc="/tomybanner.jpg" imageAlt="Services" />
 
+      {/* Texto intro antes de los productos */}
+      <section className="relative z-20 bg-black text-white py-16 md:py-24 px-4 md:px-8">
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">
+            Explore our Interactive Creations
+          </h2>
+          <p className="text-lg md:text-xl text-white/70 leading-relaxed">
+            Discover the unique blend of art and technology to create those immersive experiences you seek.
+          </p>
+        </div>
+      </section>
+
       <div className="relative z-20">
         {PRODUCTS.map((product, index) => (
           <ProductSection

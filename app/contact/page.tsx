@@ -1,12 +1,33 @@
 'use client';
 
+import { useState } from 'react';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import CursorTiltFigure from '../components/CursorTiltFigure';
 import PlanBFXText from '../components/PlanBFXText';
 import ScrollZoomHero from '../components/ScrollZoomHero';
 
+const FAQ_ITEMS = [
+  {
+    question: 'What kind of events do you work with?',
+    answer: 'We work with a wide range of events including festivals, concerts, corporate events, brand activations, art installations, and private parties. Our visual experiences are tailored to each occasion.',
+  },
+  {
+    question: 'How far in advance should I book?',
+    answer: 'We recommend reaching out at least 4–8 weeks before your event to allow time for concept development and technical setup. For larger or custom projects, earlier is better.',
+  },
+  {
+    question: 'Do you provide equipment or do we need to supply it?',
+    answer: 'We can work with your existing setup or provide recommendations. Depending on the project, we can handle projection, screens, and technical integration—just ask when you get in touch.',
+  },
+  {
+    question: 'What information do you need to get started?',
+    answer: 'Share your event date, venue, vision, and any references or mood boards. The more detail you provide in the form, the faster we can propose a tailored solution.',
+  },
+];
+
 export default function ContactPage() {
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
   return (
     <main className="relative min-h-screen bg-black text-white overflow-hidden">
       <Navigation />
@@ -170,6 +191,41 @@ export default function ContactPage() {
               Send
             </button>
           </form>
+
+          {/* Common Questions */}
+          <div className="mt-24 pt-16 border-t border-white/20">
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-10">
+              Common Questions
+            </h2>
+            <div className="space-y-3">
+              {FAQ_ITEMS.map((item, index) => (
+                <div
+                  key={index}
+                  className="rounded-xl bg-white/5 border border-white/10 overflow-hidden"
+                >
+                  <button
+                    type="button"
+                    onClick={() => setOpenFaq(openFaq === index ? null : index)}
+                    className="w-full px-5 py-4 text-left flex items-center justify-between gap-4 text-white font-medium hover:bg-white/5 transition-colors"
+                  >
+                    <span>{item.question}</span>
+                    <span
+                      className={`shrink-0 text-white/70 transition-transform ${
+                        openFaq === index ? 'rotate-180' : ''
+                      }`}
+                    >
+                      ▼
+                    </span>
+                  </button>
+                  {openFaq === index && (
+                    <div className="px-5 pb-4 pt-0">
+                      <p className="text-white/70 leading-relaxed">{item.answer}</p>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 

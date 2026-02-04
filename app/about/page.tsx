@@ -2,6 +2,8 @@
 
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
+import ParallaxBannerWithImage from '../components/ParallaxBannerWithImage';
+import CTAFinalBanner from '../components/CTAFinalBanner';
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import gsap from 'gsap';
@@ -133,6 +135,11 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Banner parallax TAKE THE NEXT STEP / SEE OUR SERVICES con imagen andresabout */}
+      <div className="m-0 p-0">
+        <ParallaxBannerWithImage imageSrc="/andresabout.jpg" />
+      </div>
+
       {/* 2. Espacio para contenido futuro — fondo negro */}
       <section className="relative z-20 min-h-[40vh] w-full bg-black" aria-hidden />
 
@@ -153,6 +160,9 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+
+      {/* Banner final: foto + Art Meets Innovation, texto y botones Get in Touch / Explore Our Art */}
+      <CTAFinalBanner imageSrc="/bannerstage.jpg" />
 
       <Footer />
     </main>

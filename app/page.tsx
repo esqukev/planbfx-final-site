@@ -1,4 +1,3 @@
-import AnimatedStrip from './components/AnimatedStrip';
 import Hero from './components/Hero';
 import ContentSection from './components/ContentSection';
 import ProjectGrid from './components/ProjectGrid';
@@ -57,7 +56,7 @@ export default function Home() {
         <ProjectGrid />
       </div>
 
-      {/* What we do — solo título, sin tarjetas */}
+      {/* Art Meets Innovation */}
       <section
         id="services"
         className="m-0 p-0 text-white overflow-hidden"
@@ -67,26 +66,14 @@ export default function Home() {
       >
         <div className="max-w-7xl mx-auto px-4 md:px-8 py-16 md:py-20">
           <div className="text-center">
-            <span className="text-sm uppercase tracking-wider text-zinc-500 mb-4 block">
-              What we do
-            </span>
             <h2 className="text-4xl md:text-6xl font-bold text-white">
-              We create, produce, and design experiences that make your events hit different.
+              Art Meets Innovation
             </h2>
           </div>
         </div>
       </section>
 
-      <div className="m-0 p-0">
-        <AnimatedStrip
-          text="Ready to Create Your Brand Breakthrough?"
-          speed={45}
-          direction="right"
-          className="bg-black text-white py-0 m-0"
-        />
-      </div>
-
-      {/* CTA — seamless from What we do (both black at boundary); fondo estrellas HyperSpace */}
+      {/* CTA — fondo estrellas HyperSpace */}
       <section id="contact" className="relative min-h-screen m-0 p-0 py-0 px-4 md:px-8 text-white overflow-hidden">
         <HyperSpaceBackground />
         <div className="relative z-10 max-w-4xl mx-auto text-center py-24 md:py-32">
