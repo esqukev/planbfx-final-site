@@ -60,13 +60,13 @@ export default function ParallaxBannerWithImage({
     return () => clearInterval(interval);
   }, [rotatingTitle]);
 
-  // Efecto rebote al cambiar la palabra (GSAP bounce)
+  // Efecto rebote al cambiar la palabra: aparece desde arriba (GSAP bounce)
   useEffect(() => {
     if (!rotatingTitle || !wordRef.current) return;
     const el = wordRef.current;
     gsap.fromTo(
       el,
-      { opacity: 0, y: 28, scale: 0.92 },
+      { opacity: 0, y: -28, scale: 0.92 },
       {
         opacity: 1,
         y: 0,
@@ -119,7 +119,8 @@ export default function ParallaxBannerWithImage({
             }}
           >
             <span className="inline-flex flex-wrap justify-center items-baseline gap-0 whitespace-nowrap">
-              {rotatingTitle.prefix}
+              {rotatingTitle.prefix.trim()}
+              <span className="inline-block w-[0.3em] shrink-0" aria-hidden />
               <span
                 ref={wordRef}
                 className="inline-block text-left align-bottom transition-[width] duration-500 ease-in-out overflow-visible"
