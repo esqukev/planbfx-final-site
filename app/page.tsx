@@ -72,9 +72,9 @@ export default function Home() {
           </FadeInFromRight>
           <a
             href="/contact#contact-form"
-            className="mt-6 block text-sm text-white/60 hover:text-white/90 transition-colors"
+            className="mt-6 inline-block text-sm uppercase tracking-[0.35em] text-zinc-400 hover:text-white focus:outline-none focus:text-white transition-transform duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:scale-[1.04] focus:scale-[1.04]"
           >
-            Book your call now
+            BOOK YOUR CALL NOW
           </a>
         </div>
       </section>

@@ -72,52 +72,70 @@ export default function HomeCTABanner({ imageSrc }: HomeCTABannerProps) {
       </div>
 
       <div className="relative z-10 max-w-3xl mx-auto text-center px-8 md:px-12 lg:px-16 py-24 md:py-32 lg:py-40">
-        <span
-          className="text-sm uppercase tracking-[0.3em] text-zinc-400 block mb-4 transition-all duration-[1000ms] ease-out"
-          style={{
-            opacity: isVisible ? 1 : 0,
-            transform: isVisible ? 'translateY(0)' : 'translateY(16px)',
-          }}
-        >
-          Crafting Moments
-        </span>
-        <h2
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight mb-6 md:mb-8 transition-all duration-[1000ms] ease-out"
-          style={{
-            opacity: isVisible ? 1 : 0,
-            transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-            transitionDelay: '0.1s',
-          }}
-        >
-          Innovative Art Meets Technology
+        {/* Subtitle: letter-by-letter fade-in (typewriter) */}
+        <p className="text-sm uppercase tracking-[0.3em] text-zinc-400 block mb-4">
+          {'Crafting Moments'.split('').map((char, i) => (
+            <span
+              key={`st-${i}`}
+              className="inline-block"
+              style={{
+                opacity: isVisible ? 1 : 0,
+                transition: `opacity 1s ease ${i * 0.05}s`,
+              }}
+            >
+              {char === ' ' ? '\u00A0' : char}
+            </span>
+          ))}
+        </p>
+        {/* Title: letter-by-letter fade-in */}
+        <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight mb-6 md:mb-8">
+          {'Innovative Art Meets Technology'.split('').map((char, i) => (
+            <span
+              key={`tt-${i}`}
+              className="inline-block"
+              style={{
+                opacity: isVisible ? 1 : 0,
+                transition: `opacity 1s ease ${(16 + i) * 0.05}s`,
+              }}
+            >
+              {char === ' ' ? '\u00A0' : char}
+            </span>
+          ))}
         </h2>
-        <p
-          className="text-base md:text-lg text-white/80 leading-relaxed mb-10 max-w-2xl mx-auto transition-all duration-[1000ms] ease-out"
-          style={{
-            opacity: isVisible ? 1 : 0,
-            transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-            transitionDelay: '0.2s',
-          }}
-        >
-          Welcome to PlanB FX, where creativity and technology converge. We breathe life into events through interactive art, smart coding, and AI-driven experiences. Let us elevate your vision into a captivating reality.
+        {/* Paragraph: letter-by-letter fade-in */}
+        <p className="text-base md:text-lg text-white/80 leading-relaxed mb-10 max-w-2xl mx-auto">
+          {'Welcome to PlanB FX, where creativity and technology converge. We breathe life into events through interactive art, smart coding, and AI-driven experiences. Let us elevate your vision into a captivating reality.'
+            .split('')
+            .map((char, i) => (
+              <span
+                key={`p-${i}`}
+                className="inline-block"
+                style={{
+                  opacity: isVisible ? 1 : 0,
+                  transition: `opacity 1s ease ${(48 + i) * 0.05}s`,
+                }}
+              >
+                {char === ' ' ? '\u00A0' : char}
+              </span>
+            ))}
         </p>
         <div
-          className="flex flex-wrap items-center justify-center gap-4 md:gap-6 transition-all duration-[1000ms] ease-out"
+          className="flex flex-wrap items-center justify-center gap-4 md:gap-6"
           style={{
             opacity: isVisible ? 1 : 0,
             transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-            transitionDelay: '0.3s',
+            transition: 'opacity 1s ease 10.5s, transform 1s ease 10.5s',
           }}
         >
           <Link
             href="/services"
-            className="inline-flex items-center justify-center px-8 py-4 bg-white text-black font-semibold rounded-full hover:bg-zinc-200 transition-all text-base"
+            className="inline-flex items-center justify-center px-5 py-2.5 bg-white text-black font-semibold rounded-full hover:bg-zinc-200 transition-all text-sm"
           >
             Explore services
           </Link>
           <Link
             href="/contact"
-            className="inline-flex items-center justify-center px-8 py-4 border-2 border-white/60 text-white font-semibold rounded-full hover:bg-white/10 transition-all text-base"
+            className="inline-flex items-center justify-center px-5 py-2.5 border-2 border-white/60 text-white font-semibold rounded-full hover:bg-white/10 transition-all text-sm"
           >
             Get in touch
           </Link>
