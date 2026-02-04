@@ -56,7 +56,7 @@ export default function Home() {
         <ProjectGrid />
       </div>
 
-      {/* Art Meets Innovation */}
+      {/* Art Meets Innovation — más padding y efecto de texto */}
       <section
         id="services"
         className="m-0 p-0 text-white overflow-hidden"
@@ -64,12 +64,10 @@ export default function Home() {
           background: 'linear-gradient(to bottom, #000000, #18181b, #000000)',
         }}
       >
-        <div className="max-w-7xl mx-auto px-4 md:px-8 py-16 md:py-20">
-          <div className="text-center">
-            <h2 className="text-4xl md:text-6xl font-bold text-white">
-              Art Meets Innovation
-            </h2>
-          </div>
+        <div className="max-w-7xl mx-auto px-4 md:px-8 py-24 md:py-32 lg:py-40 text-center">
+          <ScrollTextEffect className="text-4xl md:text-6xl lg:text-7xl font-bold text-white">
+            Art Meets Innovation
+          </ScrollTextEffect>
         </div>
       </section>
 

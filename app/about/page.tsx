@@ -114,10 +114,10 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 1. Intro: Who we are + About Plan B FX + first paragraph — textos más grandes */}
+      {/* 1. Intro: Who we are + About Plan B FX + first paragraph */}
       <section className="relative z-20 bg-black">
-        <div className="mx-auto max-w-4xl px-8 py-28 md:py-36 lg:py-44 flex flex-col items-center text-center">
-          <div ref={introRef} className="space-y-10 md:space-y-12">
+        <div className="mx-auto max-w-4xl px-8 py-16 md:py-24 lg:py-28 flex flex-col items-center text-center">
+          <div ref={introRef} className="space-y-8 md:space-y-10">
             <span className="text-base uppercase tracking-[0.35em] text-white/50 block">
               Who we are
             </span>
@@ -135,18 +135,24 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Banner parallax TAKE THE NEXT STEP / SEE OUR SERVICES con imagen andresabout */}
+      {/* Banner parallax WE CREATE + palabra rotando (ART / EXPERIENCE / INNOVATION / etc.) */}
       <div className="m-0 p-0">
-        <ParallaxBannerWithImage imageSrc="/andresabout.jpg" />
+        <ParallaxBannerWithImage
+          imageSrc="/andresabout.jpg"
+          rotatingTitle={{
+            prefix: 'WE CREATE ',
+            words: ['ART', 'EXPERIENCE', 'INNOVATION', 'TECHNOLOGY', 'INTERACTION'],
+          }}
+        />
       </div>
 
-      {/* 2. Espacio para contenido futuro — fondo negro */}
-      <section className="relative z-20 min-h-[40vh] w-full bg-black" aria-hidden />
+      {/* 2. Espacio mínimo entre banners */}
+      <section className="relative z-20 min-h-[10vh] w-full bg-black" aria-hidden />
 
-      {/* 3. Closing: mismos tamaños que el intro */}
+      {/* 3. Closing */}
       <section className="relative z-20 bg-black">
-        <div className="mx-auto max-w-4xl px-8 py-28 md:py-36 lg:py-44 flex flex-col items-center text-center">
-          <div ref={closingRef} className="space-y-10 md:space-y-12 max-w-4xl mx-auto">
+        <div className="mx-auto max-w-4xl px-8 py-16 md:py-24 lg:py-28 flex flex-col items-center text-center">
+          <div ref={closingRef} className="space-y-8 md:space-y-10 max-w-4xl mx-auto">
             <p className="text-xl leading-relaxed text-white/70 md:text-2xl">
               We have partnered with local promoters such as 3AM, Soulful Gathering,
               Xtyle, and Microgarden, providing visual support for world-class
