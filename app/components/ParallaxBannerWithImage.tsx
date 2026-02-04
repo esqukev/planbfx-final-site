@@ -63,7 +63,7 @@ export default function ParallaxBannerWithImage({
   useEffect(() => {
     if (!rotatingTitle || !wordRef.current) return;
     const el = wordRef.current;
-    gsap.fromTo(el, { opacity: 0 }, { opacity: 1, duration: 0.5, ease: 'power2.out' });
+    gsap.fromTo(el, { opacity: 0 }, { opacity: 1, duration: 0.7, ease: 'power2.inOut' });
   }, [wordIndex, rotatingTitle]);
 
   const words = rotatingTitle?.words ?? [];
@@ -99,7 +99,7 @@ export default function ParallaxBannerWithImage({
       <div className="relative z-10 max-w-5xl mx-auto text-center px-8 md:px-12 lg:px-16 py-24 md:py-32 lg:py-40">
         {rotatingTitle ? (
           <p
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight transition-all duration-[1200ms] ease-out"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight whitespace-nowrap transition-all duration-[1200ms] ease-out"
             style={{
               opacity: isVisible ? 1 : 0,
               transform: isVisible ? 'translateY(0)' : 'translateY(24px)',
@@ -110,7 +110,7 @@ export default function ParallaxBannerWithImage({
             <span
               ref={wordRef}
               key={wordIndex}
-              className="inline-block min-w-[14ch] text-left align-bottom transition-opacity duration-300"
+              className="inline-block min-w-[14ch] text-left align-bottom"
             >
               {currentWord}
             </span>

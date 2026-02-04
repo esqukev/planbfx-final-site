@@ -33,7 +33,7 @@ export default function CTAFinalBanner({ imageSrc }: CTAFinalBannerProps) {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-[70vh] flex items-center justify-center overflow-hidden"
+      className="relative min-h-[70vh] flex items-center justify-start overflow-hidden"
     >
       <div ref={bgRef} className="absolute inset-0 z-0 overflow-hidden">
         <div
@@ -57,13 +57,14 @@ export default function CTAFinalBanner({ imageSrc }: CTAFinalBannerProps) {
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent" />
       </div>
 
-      <div className="relative z-10 max-w-3xl mx-auto text-left px-6 md:px-12 lg:px-16 py-20 md:py-28">
+      <div className="relative z-10 w-full max-w-3xl text-left pl-6 pr-6 md:pl-16 md:pr-12 lg:pl-24 lg:pr-16 py-20 md:py-28">
         <span className="text-base uppercase tracking-[0.35em] text-zinc-400 block mb-6">
           Art Meets Innovation
         </span>
         <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight mb-6">
-          Transforming Events with<br />
-          Digital Brilliance.
+          <span className="whitespace-nowrap">Transforming Events with</span>
+          <br />
+          <span className="whitespace-nowrap">Digital Brilliance.</span>
         </h2>
         <p className="text-base md:text-lg text-white/80 leading-relaxed mb-10">
           Connect with us to elevate your event. Our unique blend of art, technology,

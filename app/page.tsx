@@ -7,7 +7,7 @@ import PointCloudVisual from './components/PointCloudVisual';
 import HyperSpaceBackground from './components/HyperSpaceBackground';
 import ScrollTextEffect from './components/ScrollTextEffect';
 import FadeInFromRight from './components/FadeInFromRight';
-import HomeCTABanner from './components/CTAFinalBanner';
+import HomeCTABanner from './components/HomeCTABanner';
 import FadeInOnScroll from './components/FadeInOnScroll';
 import VideoHero from './components/VideoHero';
 import ParallaxBanner from './components/ParallaxBanner';
@@ -70,12 +70,18 @@ export default function Home() {
           <FadeInFromRight className="text-4xl md:text-6xl lg:text-7xl font-bold text-white">
             Art Meets Innovation
           </FadeInFromRight>
+          <a
+            href="/contact#contact-form"
+            className="mt-6 block text-sm text-white/60 hover:text-white/90 transition-colors"
+          >
+            Book your call now
+          </a>
         </div>
       </section>
 
-      {/* Banner parallax: Crafting Moments / Innovative Art Meets Technology + CTAs */}
+      {/* Banner parallax: Crafting Moments / Innovative Art Meets Technology + CTAs (julietbanner1) */}
       <div className="m-0 p-0">
-        <HomeCTABanner imageSrc="/bannerstage.jpg" />
+        <HomeCTABanner imageSrc="/julietbanner1.jpg" />
       </div>
 
       {/* CTA — fondo estrellas HyperSpace */}
