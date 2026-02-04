@@ -60,10 +60,22 @@ export default function ParallaxBannerWithImage({
     return () => clearInterval(interval);
   }, [rotatingTitle]);
 
+  // Efecto rebote al cambiar la palabra (GSAP bounce)
   useEffect(() => {
     if (!rotatingTitle || !wordRef.current) return;
     const el = wordRef.current;
-    gsap.fromTo(el, { opacity: 0 }, { opacity: 1, duration: 0.7, ease: 'power2.inOut' });
+    gsap.fromTo(
+      el,
+      { opacity: 0, y: 28, scale: 0.92 },
+      {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 0.7,
+        ease: 'back.out(1.6)',
+        overwrite: true,
+      }
+    );
   }, [wordIndex, rotatingTitle]);
 
   const words = rotatingTitle?.words ?? [];
@@ -96,23 +108,25 @@ export default function ParallaxBannerWithImage({
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent" />
       </div>
 
-      <div className="relative z-10 max-w-5xl mx-auto text-center px-8 md:px-12 lg:px-16 py-24 md:py-32 lg:py-40">
+      <div className="relative z-10 w-full flex items-center justify-center px-8 md:px-12 lg:px-16 py-24 md:py-32 lg:py-40">
         {rotatingTitle ? (
           <p
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight whitespace-nowrap transition-all duration-[1200ms] ease-out"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight transition-all duration-[1200ms] ease-out text-center"
             style={{
               opacity: isVisible ? 1 : 0,
               transform: isVisible ? 'translateY(0)' : 'translateY(24px)',
               transitionDelay: '0s',
             }}
           >
-            {rotatingTitle.prefix}
-            <span
-              ref={wordRef}
-              key={wordIndex}
-              className="inline-block min-w-[14ch] text-left align-bottom"
-            >
-              {currentWord}
+            <span className="inline-flex flex-wrap justify-center items-baseline gap-0 whitespace-nowrap">
+              {rotatingTitle.prefix}
+              <span
+                ref={wordRef}
+                className="inline-block text-left align-bottom transition-[width] duration-500 ease-in-out overflow-visible"
+                style={{ width: `${currentWord.length}ch` }}
+              >
+                {currentWord}
+              </span>
             </span>
           </p>
         ) : (

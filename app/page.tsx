@@ -12,6 +12,7 @@ import FadeInOnScroll from './components/FadeInOnScroll';
 import VideoHero from './components/VideoHero';
 import ParallaxBanner from './components/ParallaxBanner';
 import ParallaxBannerWithImage from './components/ParallaxBannerWithImage';
+import ParallaxLink from './components/ParallaxLink';
 
 export default function Home() {
   return (
@@ -70,12 +71,12 @@ export default function Home() {
           <FadeInFromRight className="text-4xl md:text-6xl lg:text-7xl font-bold text-white">
             Art Meets Innovation
           </FadeInFromRight>
-          <a
+          <ParallaxLink
             href="/contact#contact-form"
             className="mt-6 inline-block text-sm uppercase tracking-[0.35em] text-zinc-400 hover:text-white focus:outline-none focus:text-white transition-transform duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:scale-[1.04] focus:scale-[1.04]"
           >
             BOOK YOUR CALL NOW
-          </a>
+          </ParallaxLink>
         </div>
       </section>
 
@@ -89,14 +90,14 @@ export default function Home() {
         <HyperSpaceBackground />
         <div className="relative z-10 max-w-4xl mx-auto text-center py-24 md:py-32">
           <ScrollTextEffect className="text-6xl md:text-8xl font-bold mb-8">
-            Let´s Create<br />
+            Let<span className="font-fallback">´</span>s Create<br />
             Something<br />
             Extraordinary
           </ScrollTextEffect>
           <FadeInOnScroll 
             className="text-xl text-zinc-400 mb-12"
           >
-            Got A Project? Let´s Talk
+            Got A Project? Let<span className="font-fallback">´</span>s Talk
           </FadeInOnScroll>
           <button className="px-12 py-6 bg-white text-black font-semibold rounded-full hover:bg-zinc-200 transition-all transform hover:scale-105 text-lg">
             Contact Us

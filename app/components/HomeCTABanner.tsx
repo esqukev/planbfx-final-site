@@ -3,6 +3,10 @@
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 type HomeCTABannerProps = {
   imageSrc: string;
@@ -14,6 +18,7 @@ type HomeCTABannerProps = {
 export default function HomeCTABanner({ imageSrc }: HomeCTABannerProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
   const [imageOffset, setImageOffset] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -44,6 +49,33 @@ export default function HomeCTABanner({ imageSrc }: HomeCTABannerProps) {
     return () => observer.unobserve(el);
   }, []);
 
+  // Efecto scroll: de grande a pequeño (como Let's Create Something Extraordinary)
+  useEffect(() => {
+    if (!contentRef.current) return;
+
+    const tween = gsap.fromTo(
+      contentRef.current,
+      { opacity: 0, scale: 2.5, y: 120 },
+      {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: contentRef.current,
+          start: 'top 100%',
+          end: 'top 25%',
+          scrub: true,
+        },
+      }
+    );
+
+    return () => {
+      tween.kill();
+      if (tween.scrollTrigger) tween.scrollTrigger.kill();
+    };
+  }, []);
+
   return (
     <section
       ref={sectionRef}
@@ -71,48 +103,67 @@ export default function HomeCTABanner({ imageSrc }: HomeCTABannerProps) {
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent" />
       </div>
 
-      <div className="relative z-10 max-w-3xl mx-auto text-center px-8 md:px-12 lg:px-16 py-24 md:py-32 lg:py-40">
+      <div
+        ref={contentRef}
+        className="relative z-10 max-w-3xl mx-auto text-center px-8 md:px-12 lg:px-16 py-24 md:py-32 lg:py-40"
+      >
         {/* Subtitle: letter-by-letter fade-in (typewriter) */}
         <p className="text-sm uppercase tracking-[0.3em] text-zinc-400 block mb-4">
           {'Crafting Moments'.split('').map((char, i) => (
             <span
               key={`st-${i}`}
-              className="inline-block"
+              className={['\'', '"', '-', '–', '—', '+', '/'].includes(char) ? 'inline-block font-fallback' : 'inline-block'}
               style={{
                 opacity: isVisible ? 1 : 0,
-                transition: `opacity 1s ease ${i * 0.05}s`,
+                transition: `opacity 0.6s ease ${i * 0.03}s`,
               }}
             >
               {char === ' ' ? '\u00A0' : char}
             </span>
           ))}
         </p>
-        {/* Title: letter-by-letter fade-in */}
+        {/* Title: dos líneas — Innovative Art / Meets Technology */}
         <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight mb-6 md:mb-8">
-          {'Innovative Art Meets Technology'.split('').map((char, i) => (
-            <span
-              key={`tt-${i}`}
-              className="inline-block"
-              style={{
-                opacity: isVisible ? 1 : 0,
-                transition: `opacity 1s ease ${(16 + i) * 0.05}s`,
-              }}
-            >
-              {char === ' ' ? '\u00A0' : char}
-            </span>
-          ))}
+          <span className="block">
+            {'Innovative Art'.split('').map((char, i) => (
+              <span
+                key={`t1-${i}`}
+                className={['\'', '"', '-', '–', '—', '+', '/'].includes(char) ? 'inline-block font-fallback' : 'inline-block'}
+                style={{
+                  opacity: isVisible ? 1 : 0,
+                  transition: `opacity 0.6s ease ${(16 + i) * 0.03}s`,
+                }}
+              >
+                {char === ' ' ? '\u00A0' : char}
+              </span>
+            ))}
+          </span>
+          <span className="block">
+            {'Meets Technology'.split('').map((char, i) => (
+              <span
+                key={`t2-${i}`}
+                className={['\'', '"', '-', '–', '—', '+', '/'].includes(char) ? 'inline-block font-fallback' : 'inline-block'}
+                style={{
+                  opacity: isVisible ? 1 : 0,
+                  transition: `opacity 0.6s ease ${(32 + i) * 0.03}s`,
+                }}
+              >
+                {char === ' ' ? '\u00A0' : char}
+              </span>
+            ))}
+          </span>
         </h2>
-        {/* Paragraph: letter-by-letter fade-in */}
+        {/* Paragraph: letter-by-letter más rápido + símbolos en font-fallback */}
         <p className="text-base md:text-lg text-white/80 leading-relaxed mb-10 max-w-2xl mx-auto">
           {'Welcome to PlanB FX, where creativity and technology converge. We breathe life into events through interactive art, smart coding, and AI-driven experiences. Let us elevate your vision into a captivating reality.'
             .split('')
             .map((char, i) => (
               <span
                 key={`p-${i}`}
-                className="inline-block"
+                className={['\'', '"', '-', '–', '—', '+', '/'].includes(char) ? 'inline-block font-fallback' : 'inline-block'}
                 style={{
                   opacity: isVisible ? 1 : 0,
-                  transition: `opacity 1s ease ${(48 + i) * 0.05}s`,
+                  transition: `opacity 0.6s ease ${(48 + i) * 0.02}s`,
                 }}
               >
                 {char === ' ' ? '\u00A0' : char}
@@ -124,7 +175,7 @@ export default function HomeCTABanner({ imageSrc }: HomeCTABannerProps) {
           style={{
             opacity: isVisible ? 1 : 0,
             transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-            transition: 'opacity 1s ease 10.5s, transform 1s ease 10.5s',
+            transition: 'opacity 0.6s ease 4.2s, transform 0.6s ease 4.2s',
           }}
         >
           <Link
