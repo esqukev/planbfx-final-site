@@ -142,12 +142,6 @@ export default function ProjectGrid() {
             </div>
           ))}
         </div>
-
-        <div className="mt-16 md:mt-20 text-center">
-          <button className="px-8 py-4 border-2 border-black dark:border-white text-black dark:text-white font-semibold rounded-full hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">
-            All Projects
-          </button>
-        </div>
       </div>
     </section>
   );

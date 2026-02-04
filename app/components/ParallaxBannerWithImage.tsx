@@ -63,7 +63,7 @@ export default function ParallaxBannerWithImage({
   useEffect(() => {
     if (!rotatingTitle || !wordRef.current) return;
     const el = wordRef.current;
-    gsap.fromTo(el, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' });
+    gsap.fromTo(el, { opacity: 0 }, { opacity: 1, duration: 0.5, ease: 'power2.out' });
   }, [wordIndex, rotatingTitle]);
 
   const words = rotatingTitle?.words ?? [];
@@ -98,36 +98,23 @@ export default function ParallaxBannerWithImage({
 
       <div className="relative z-10 max-w-5xl mx-auto text-center px-8 md:px-12 lg:px-16 py-24 md:py-32 lg:py-40">
         {rotatingTitle ? (
-          <>
-            <p
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight mb-6 md:mb-8 transition-all duration-[1200ms] ease-out"
-              style={{
-                opacity: isVisible ? 1 : 0,
-                transform: isVisible ? 'translateY(0)' : 'translateY(24px)',
-                transitionDelay: '0s',
-              }}
+          <p
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight transition-all duration-[1200ms] ease-out"
+            style={{
+              opacity: isVisible ? 1 : 0,
+              transform: isVisible ? 'translateY(0)' : 'translateY(24px)',
+              transitionDelay: '0s',
+            }}
+          >
+            {rotatingTitle.prefix}
+            <span
+              ref={wordRef}
+              key={wordIndex}
+              className="inline-block min-w-[14ch] text-left align-bottom transition-opacity duration-300"
             >
-              {rotatingTitle.prefix}
-              <span ref={wordRef} key={wordIndex} className="inline-block min-w-[4ch]">
-                {currentWord}
-              </span>
-            </p>
-            <div
-              className="transition-all duration-[1200ms] ease-out"
-              style={{
-                opacity: isVisible ? 1 : 0,
-                transform: isVisible ? 'translateY(0)' : 'translateY(24px)',
-                transitionDelay: '0.15s',
-              }}
-            >
-              <Link
-                href="/services"
-                className="inline-block text-sm uppercase tracking-[0.35em] text-zinc-400 hover:text-white focus:outline-none focus:text-white transition-transform duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:scale-[1.04] focus:scale-[1.04]"
-              >
-                SEE OUR SERVICES
-              </Link>
-            </div>
-          </>
+              {currentWord}
+            </span>
+          </p>
         ) : (
           <>
             <p

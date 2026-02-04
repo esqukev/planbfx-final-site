@@ -6,6 +6,8 @@ import Footer from './components/Footer';
 import PointCloudVisual from './components/PointCloudVisual';
 import HyperSpaceBackground from './components/HyperSpaceBackground';
 import ScrollTextEffect from './components/ScrollTextEffect';
+import FadeInFromRight from './components/FadeInFromRight';
+import HomeCTABanner from './components/CTAFinalBanner';
 import FadeInOnScroll from './components/FadeInOnScroll';
 import VideoHero from './components/VideoHero';
 import ParallaxBanner from './components/ParallaxBanner';
@@ -56,7 +58,7 @@ export default function Home() {
         <ProjectGrid />
       </div>
 
-      {/* Art Meets Innovation — más padding y efecto de texto */}
+      {/* Art Meets Innovation — fade in de derecha a izquierda */}
       <section
         id="services"
         className="m-0 p-0 text-white overflow-hidden"
@@ -65,11 +67,16 @@ export default function Home() {
         }}
       >
         <div className="max-w-7xl mx-auto px-4 md:px-8 py-24 md:py-32 lg:py-40 text-center">
-          <ScrollTextEffect className="text-4xl md:text-6xl lg:text-7xl font-bold text-white">
+          <FadeInFromRight className="text-4xl md:text-6xl lg:text-7xl font-bold text-white">
             Art Meets Innovation
-          </ScrollTextEffect>
+          </FadeInFromRight>
         </div>
       </section>
+
+      {/* Banner parallax: Crafting Moments / Innovative Art Meets Technology + CTAs */}
+      <div className="m-0 p-0">
+        <HomeCTABanner imageSrc="/bannerstage.jpg" />
+      </div>
 
       {/* CTA — fondo estrellas HyperSpace */}
       <section id="contact" className="relative min-h-screen m-0 p-0 py-0 px-4 md:px-8 text-white overflow-hidden">

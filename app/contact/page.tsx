@@ -71,7 +71,7 @@ export default function ContactPage() {
                 Get in contact.
               </p>
 
-              <div className="flex flex-wrap gap-4 md:gap-6">
+              <div className="flex flex-wrap gap-4 md:gap-6 mb-12">
                 <a
                   href="tel:+1234567890"
                   className="inline-flex items-center justify-center px-6 py-3 rounded-full border-2 border-white/40 text-white hover:bg-white/10 hover:border-white/70 transition-all text-base font-medium"
@@ -92,6 +92,9 @@ export default function ContactPage() {
                 >
                   Email
                 </a>
+              </div>
+              <div className="flex justify-start">
+                <PlanBFXText />
               </div>
             </div>
 
@@ -189,13 +192,8 @@ export default function ContactPage() {
             </div>
           </div>
 
-          {/* Efecto morph para separar secciones */}
-          <div className="mt-24 md:mt-32 flex justify-center">
-            <PlanBFXText />
-          </div>
-
           {/* Common Questions: título grande izquierda, subtítulo pequeño, botón Get in touch, preguntas a la derecha */}
-          <div className="mt-24 pt-16 border-t border-white/20 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+          <div className="mt-24 pt-16 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
             <div className="text-left">
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
                 Common Questions

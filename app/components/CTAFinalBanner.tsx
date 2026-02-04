@@ -57,21 +57,20 @@ export default function CTAFinalBanner({ imageSrc }: CTAFinalBannerProps) {
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent" />
       </div>
 
-      <div className="relative z-10 max-w-3xl mx-auto text-center px-6 py-20 md:py-28">
+      <div className="relative z-10 max-w-3xl mx-auto text-left px-6 md:px-12 lg:px-16 py-20 md:py-28">
         <span className="text-base uppercase tracking-[0.35em] text-zinc-400 block mb-6">
           Art Meets Innovation
         </span>
         <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight mb-6">
-          Transforming Events with
-          <br />
-          Digital Brilliance
+          Transforming Events with<br />
+          Digital Brilliance.
         </h2>
         <p className="text-base md:text-lg text-white/80 leading-relaxed mb-10">
           Connect with us to elevate your event. Our unique blend of art, technology,
           and creativity brings a stunning visual experience to every occasion. Discover
           how we can transform your vision into reality.
         </p>
-        <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6">
+        <div className="flex flex-wrap items-center gap-4 md:gap-6">
           <Link
             href="/contact"
             className="inline-flex items-center justify-center px-8 py-4 border-2 border-white/60 text-white font-semibold rounded-full hover:bg-white/10 transition-all text-base"
