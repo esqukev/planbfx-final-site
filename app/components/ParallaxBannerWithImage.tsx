@@ -132,7 +132,7 @@ export default function ParallaxBannerWithImage({
             </span>
           </p>
         ) : (
-          <>
+          <div className="flex flex-col items-center text-center">
             <p
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight mb-6 md:mb-8 transition-all duration-[1200ms] ease-out"
               style={{
@@ -158,7 +158,7 @@ export default function ParallaxBannerWithImage({
                 SEE OUR SERVICES
               </Link>
             </div>
-          </>
+          </div>
         )}
       </div>
     </section>

@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import Link from 'next/link';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import CursorTiltFigure from '../components/CursorTiltFigure';
@@ -31,7 +30,7 @@ export default function ContactPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   return (
-    <main className="relative min-h-screen bg-black text-white overflow-hidden">
+    <main className="relative min-h-screen bg-black text-white overflow-x-hidden overflow-y-auto">
       <Navigation />
 
       <ImageHero
@@ -201,12 +200,6 @@ export default function ContactPage() {
               <p className="text-sm md:text-base text-white/60 mb-8">
                 Your questions answered simply and clearly.
               </p>
-              <Link
-                href="#contact-form"
-                className="inline-flex items-center justify-center px-8 py-4 border-2 border-white/60 text-white font-semibold rounded-full hover:bg-white/10 transition-all text-base"
-              >
-                Get in touch
-              </Link>
             </div>
             <div className="space-y-3">
               {FAQ_ITEMS.map((item, index) => (
