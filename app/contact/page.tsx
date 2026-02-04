@@ -6,7 +6,7 @@ import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import CursorTiltFigure from '../components/CursorTiltFigure';
 import PlanBFXText from '../components/PlanBFXText';
-import ScrollZoomHero from '../components/ScrollZoomHero';
+import ImageHero from '../components/ImageHero';
 
 const FAQ_ITEMS = [
   {
@@ -34,9 +34,9 @@ export default function ContactPage() {
     <main className="relative min-h-screen bg-black text-white overflow-hidden">
       <Navigation />
 
-      <ScrollZoomHero
+      <ImageHero
         imageSrc="/anfisabanner.jpg"
-        imageAlt="Contact hero"
+        imageAlt="Contact"
       />
 
       <section
@@ -225,7 +225,7 @@ export default function ContactPage() {
                         openFaq === index ? 'rotate-45' : ''
                       }`}
                     >
-                      +
+                      <span className="font-fallback" aria-hidden>+</span>
                     </span>
                   </button>
                   {openFaq === index && (
