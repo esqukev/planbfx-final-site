@@ -9,28 +9,27 @@ type ScrollZoomHeroProps = {
 };
 
 /**
- * Banner de Contact: imagen con overlay que se oscurece al hacer scroll (como otros banners).
+ * Banner de Contact: mismo efecto que Services (ImageHero) — fade out al hacer scroll.
+ * Overlay reducido 50% (máx 0.25).
  */
 export default function ScrollZoomHero({
   imageSrc,
   imageAlt = '',
 }: ScrollZoomHeroProps) {
   const sectionRef = useRef<HTMLElement>(null);
+  const [opacity, setOpacity] = useState(1);
   const [overlayOpacity, setOverlayOpacity] = useState(0);
 
   useEffect(() => {
     const onScroll = () => {
-      if (!sectionRef.current) return;
-      const rect = sectionRef.current.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-      // Más oscuro cuanto más ha salido la sección por arriba (scroll down)
-      if (rect.bottom < 0) {
-        setOverlayOpacity(0.5);
-      } else if (rect.top < windowHeight) {
-        const progress = 1 - rect.top / windowHeight;
-        setOverlayOpacity(Math.min(0.5, progress * 0.5));
+      const scrolled = window.pageYOffset;
+      // Mismo efecto que ImageHero (Services): fade out al hacer scroll
+      setOpacity(Math.max(0, 1 - scrolled / 800));
+      // Overlay reducido 50%: máx 0.25
+      if (scrolled > 400) {
+        setOverlayOpacity(0.25);
       } else {
-        setOverlayOpacity(0);
+        setOverlayOpacity((scrolled / 400) * 0.25);
       }
     };
     onScroll();
@@ -42,6 +41,7 @@ export default function ScrollZoomHero({
     <section
       ref={sectionRef}
       className="relative h-[100vh] min-h-[100dvh] w-full overflow-hidden bg-black"
+      style={{ opacity }}
     >
       <div className="absolute inset-0 z-0">
         <Image

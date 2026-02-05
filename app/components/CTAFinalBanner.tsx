@@ -58,7 +58,7 @@ export default function CTAFinalBanner({ imageSrc }: CTAFinalBannerProps) {
       </div>
 
       <div className="relative z-10 w-full max-w-3xl text-left pl-6 pr-6 md:pl-16 md:pr-12 lg:pl-24 lg:pr-16 py-20 md:py-28">
-        <span className="text-base uppercase tracking-[0.35em] text-zinc-400 block mb-6">
+        <span className="text-sm uppercase tracking-[0.3em] text-zinc-400 block mb-4">
           Art Meets Innovation
         </span>
         <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight mb-6">
