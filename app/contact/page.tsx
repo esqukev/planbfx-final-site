@@ -55,7 +55,7 @@ export default function ContactPage() {
                 perspective={1000}
               >
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
-                  Wanna work with us?
+                  Want to work with us?
                 </h1>
               </CursorTiltFigure>
 
@@ -72,13 +72,13 @@ export default function ContactPage() {
 
               <div className="flex flex-wrap gap-4 md:gap-6 mb-12">
                 <a
-                  href="tel:+1234567890"
+                  href="tel:+50686201212"
                   className="inline-flex items-center justify-center px-6 py-3 rounded-full border-2 border-white/40 text-white hover:bg-white/10 hover:border-white/70 transition-all text-base font-medium"
                 >
                   Phone
                 </a>
                 <a
-                  href="https://wa.me/1234567890"
+                  href="https://wa.me/50686201212"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center px-6 py-3 rounded-full border-2 border-white/40 text-white hover:bg-white/10 hover:border-white/70 transition-all text-base font-medium"
@@ -140,6 +140,18 @@ export default function ContactPage() {
                   />
                 </div>
                 <div>
+                  <label htmlFor="location" className="block text-sm font-medium text-white/80 mb-2">
+                    Ubicación
+                  </label>
+                  <input
+                    id="location"
+                    name="location"
+                    type="text"
+                    className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-transparent transition font-fallback"
+                    placeholder="Ubicación"
+                  />
+                </div>
+                <div>
                   <label htmlFor="phone" className="block text-sm font-medium text-white/80 mb-2">
                     Phone Number
                   </label>
@@ -149,7 +161,7 @@ export default function ContactPage() {
                     type="tel"
                     required
                     className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-transparent transition font-fallback"
-                    placeholder="+1 234 567 8900"
+                    placeholder="+506 8620 1212"
                   />
                 </div>
                 <div>
@@ -191,11 +203,11 @@ export default function ContactPage() {
             </div>
           </div>
 
-          {/* Common Questions: título grande izquierda, subtítulo pequeño, botón Get in touch, preguntas a la derecha */}
+          {/* FAQ: título grande izquierda, subtítulo pequeño, preguntas a la derecha */}
           <div className="mt-24 pt-16 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
             <div className="text-left">
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
-                Common Questions
+                FAQ
               </h2>
               <p className="text-sm md:text-base text-white/60 mb-8">
                 Your questions answered simply and clearly.

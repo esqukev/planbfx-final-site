@@ -70,7 +70,7 @@ export default function Navigation() {
                 {item.label}
                 {isActive && (
                   <span
-                    className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-6 h-px bg-white shrink-0 nav-indicator"
+                    className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-3 h-px bg-white shrink-0 nav-indicator"
                     aria-hidden
                   />
                 )}

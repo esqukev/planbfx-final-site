@@ -24,7 +24,7 @@ export default function Footer() {
             <h4 className="text-lg font-semibold mb-4 uppercase tracking-wider">Contact</h4>
             <ul className="space-y-2 text-zinc-400">
               <li>info<span className="font-fallback">@</span>planbfx.com</li>
-              <li>Phone: <span className="font-fallback">+1 (555) 123 4567</span></li>
+              <li>Phone: <span className="font-fallback">+506 8620 1212</span></li>
             </ul>
             <div className="flex gap-4 mt-6 items-center">
               <a 

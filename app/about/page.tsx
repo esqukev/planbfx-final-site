@@ -96,12 +96,8 @@ export default function AboutPage() {
             <p className="text-xl leading-relaxed text-white/70 md:text-2xl">
               We have partnered with local promoters such as 3AM, Soulful Gathering,
               Xtyle, and Microgarden, providing visual support for world-class
-              artists like Adam Beyer, Donnie Cosmo, and Anfisa Letyago, alongside
+              artists like Adam Beyer, Anfisa Letyago and Donnie Cosmo, alongside
               key local talent.
-            </p>
-            <p className="text-xl leading-relaxed text-white/70 md:text-2xl">
-              We invite you to explore our vision and become part of the Plan B
-              family.
             </p>
           </div>
         </div>

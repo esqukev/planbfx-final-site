@@ -92,12 +92,12 @@ export default function Home() {
           <ScrollTextEffect className="text-6xl md:text-8xl font-bold mb-8">
             Let<span className="font-fallback">´</span>s Create<br />
             Something<br />
-            Extraordinary
+            Different
           </ScrollTextEffect>
           <FadeInOnScroll 
             className="text-xl text-zinc-400 mb-12"
           >
-            Got A Project? Let<span className="font-fallback">´</span>s Talk
+            Do you have an idea? Let<span className="font-fallback">´</span>s talk
           </FadeInOnScroll>
           <a
             href="/contact#contact-form"
