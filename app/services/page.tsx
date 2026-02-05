@@ -157,10 +157,11 @@ export default function ServicesPage() {
         subtitle="Innovate Your Experience"
         title="Art and Technology Unite at PlanB FX"
         paragraph="Discover how we blend creativity with technology to create stunning interactive art. Explore our imaginative solutions designed for events that leave a lasting impression. Experience art like never before!"
-        ctaText="Let's talk"
+        ctaText={<>Let<span className="font-fallback">&apos;</span>s talk</>}
         ctaHref="/contact"
         secondaryText=""
         secondaryHref=""
+        centered
       />
 
       <Footer />

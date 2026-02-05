@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import type { ReactNode } from 'react';
 
 type CTAFinalBannerProps = {
   imageSrc: string;
@@ -10,10 +11,12 @@ type CTAFinalBannerProps = {
   subtitle?: string;
   title?: string;
   paragraph?: string;
-  ctaText?: string;
+  ctaText?: ReactNode;
   ctaHref?: string;
   secondaryText?: string;
   secondaryHref?: string;
+  /** Center content (Services banner) */
+  centered?: boolean;
 };
 
 /**
@@ -21,13 +24,14 @@ type CTAFinalBannerProps = {
  */
 export default function CTAFinalBanner({
   imageSrc,
-  subtitle = 'Art Meets Innovation',
+  subtitle = 'Art Greets Innovation',
   title = 'Transforming Events with\nDigital Brilliance.',
   paragraph = 'Connect with us to elevate your event. Our unique blend of art, technology, and creativity brings a stunning visual experience to every occasion. Discover how we can transform your vision into reality.',
   ctaText = 'Get in touch',
   ctaHref = '/contact',
   secondaryText = 'Explore Our Art',
   secondaryHref = '/services',
+  centered = false,
 }: CTAFinalBannerProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
@@ -74,7 +78,11 @@ export default function CTAFinalBanner({
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent" />
       </div>
 
-      <div className="relative z-10 w-full max-w-3xl text-left pl-6 pr-6 md:pl-16 md:pr-12 lg:pl-24 lg:pr-16 py-20 md:py-28">
+      <div
+        className={`relative z-10 w-full max-w-3xl py-20 md:py-28 pl-6 pr-6 md:pl-16 md:pr-12 lg:pl-24 lg:pr-16 ${
+          centered ? 'mx-auto text-center flex flex-col items-center' : 'text-left'
+        }`}
+      >
         <span className="text-sm uppercase tracking-[0.3em] text-zinc-400 block mb-4">
           {subtitle}
         </span>
@@ -84,7 +92,7 @@ export default function CTAFinalBanner({
         <p className="text-base md:text-lg text-white/80 leading-relaxed mb-10">
           {paragraph}
         </p>
-        <div className="flex flex-wrap items-center gap-4 md:gap-6">
+        <div className={`flex flex-wrap items-center gap-4 md:gap-6 ${centered ? 'justify-center' : ''}`}>
           <Link
             href={ctaHref}
             className="inline-flex items-center justify-center px-8 py-4 border-2 border-white/60 text-white font-semibold rounded-full hover:bg-white/10 transition-all duration-300 ease-out hover:scale-[1.03] text-base"
@@ -94,7 +102,7 @@ export default function CTAFinalBanner({
           {secondaryText && secondaryHref && (
             <Link
               href={secondaryHref}
-              className="inline-flex items-center gap-2 text-white font-medium hover:text-white/90 transition-colors group"
+              className="inline-flex items-center gap-2 text-white font-medium hover:text-white/90 transition-all duration-300 ease-out hover:scale-[1.04] group"
             >
               {secondaryText}
               <span className="transition-transform group-hover:translate-x-1">→</span>

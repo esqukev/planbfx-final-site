@@ -59,7 +59,7 @@ export default function Home() {
         <ProjectGrid />
       </div>
 
-      {/* Art Meets Innovation — fade in de derecha a izquierda */}
+      {/* Art Greets Innovation — fade in de derecha a izquierda */}
       <section
         id="services"
         className="m-0 p-0 text-white overflow-hidden"
@@ -69,11 +69,11 @@ export default function Home() {
       >
         <div className="max-w-7xl mx-auto px-4 md:px-8 py-24 md:py-32 lg:py-40 text-center">
           <FadeInFromRight className="text-4xl md:text-6xl lg:text-7xl font-bold text-white">
-            Art Meets Innovation
+            Art Greets Innovation
           </FadeInFromRight>
           <ParallaxLink
             href="/contact#contact-form"
-            className="mt-6 inline-block text-sm uppercase tracking-[0.35em] text-zinc-400 hover:text-white focus:outline-none focus:text-white transition-transform duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:scale-[1.04] focus:scale-[1.04]"
+            className="mt-6 inline-block text-sm uppercase tracking-[0.35em] text-zinc-400 hover:text-white focus:outline-none focus:text-white transition-all duration-300 ease-out hover:scale-[1.04] focus:scale-[1.04]"
           >
             BOOK YOUR CALL NOW
           </ParallaxLink>

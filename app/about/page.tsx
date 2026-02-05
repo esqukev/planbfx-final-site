@@ -103,7 +103,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Banner final: foto + Art Meets Innovation, texto y botones Get in Touch / Explore Our Art */}
+      {/* Banner final: foto + Art Greets Innovation, texto y botones Get in Touch / Explore Our Art */}
       <CTAFinalBanner imageSrc="/bannerstage.jpg" />
 
       <Footer />
