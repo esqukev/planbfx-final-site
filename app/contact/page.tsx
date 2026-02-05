@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import CursorTiltFigure from '../components/CursorTiltFigure';
-import PlanBFXText from '../components/PlanBFXText';
+import GLBViewer from '../components/GLBViewer';
 import ImageHero from '../components/ImageHero';
 import HyperSpaceBackground from '../components/HyperSpaceBackground';
 
@@ -102,7 +102,7 @@ export default function ContactPage() {
                 </a>
               </div>
               <div className="flex justify-start">
-                <PlanBFXText />
+                <GLBViewer />
               </div>
             </div>
 

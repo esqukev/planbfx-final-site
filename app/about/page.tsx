@@ -5,7 +5,6 @@ import Footer from '../components/Footer';
 import ParallaxBannerWithImage from '../components/ParallaxBannerWithImage';
 import CTAFinalBanner from '../components/CTAFinalBanner';
 import ImageHero from '../components/ImageHero';
-import MeshGradientBackground from '../components/MeshGradientBackground';
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -49,15 +48,14 @@ export default function AboutPage() {
   }, []);
 
   return (
-    <main className="relative min-h-screen overflow-x-hidden">
-      <MeshGradientBackground />
+    <main className="relative min-h-screen bg-black overflow-x-hidden">
       <Navigation />
 
       {/* Banner hero (mismo que Services: ImageHero) */}
       <ImageHero imageSrc="/tomybanner.jpg" imageAlt="About" />
 
       {/* 1. Intro: Who we are + About Plan B FX + first paragraph */}
-      <section className="relative z-20">
+      <section className="relative z-20 bg-black">
         <div className="mx-auto max-w-4xl px-8 py-16 md:py-24 lg:py-28 flex flex-col items-center text-center">
           <div ref={introRef} className="space-y-8 md:space-y-10">
             <span className="text-base uppercase tracking-[0.35em] text-white/50 block">
@@ -80,7 +78,7 @@ export default function AboutPage() {
       {/* Banner parallax WE CREATE + palabra rotando (ART / EXPERIENCE / INNOVATION / etc.) */}
       <div className="m-0 p-0">
         <ParallaxBannerWithImage
-          imageSrc="/andresabout.jpg"
+          imageSrc="/tomandres.jpg"
           rotatingTitle={{
             prefix: 'WE CREATE ',
             words: ['ART', 'EXPERIENCE', 'INNOVATION', 'TECHNOLOGY', 'INTERACTION', 'MEMORIES'],
@@ -89,10 +87,10 @@ export default function AboutPage() {
       </div>
 
       {/* 2. Espacio mínimo entre banners */}
-      <section className="relative z-20 min-h-[10vh] w-full" aria-hidden />
+      <section className="relative z-20 min-h-[10vh] w-full bg-black" aria-hidden />
 
       {/* 3. Closing */}
-      <section className="relative z-20">
+      <section className="relative z-20 bg-black">
         <div className="mx-auto max-w-4xl px-8 py-16 md:py-24 lg:py-28 flex flex-col items-center text-center">
           <div ref={closingRef} className="space-y-8 md:space-y-10 max-w-4xl mx-auto">
             <p className="text-xl leading-relaxed text-white/70 md:text-2xl">
