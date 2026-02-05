@@ -129,7 +129,7 @@ export default function ProjectGrid() {
               >
                 <div className="rounded-2xl border-0 bg-zinc-50/80 dark:bg-zinc-900/80 p-6 md:p-8 shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(255,255,255,0.12)] dark:hover:shadow-[0_0_40px_rgba(255,255,255,0.08)]">
                   <span className="text-xs font-mono uppercase tracking-widest text-zinc-500 dark:text-zinc-400 block mb-2">
-                    ({step.subtitle})
+                    {step.subtitle}
                   </span>
                   <h3 className="text-xl md:text-2xl font-semibold text-black dark:text-white mb-3">
                     {step.code}

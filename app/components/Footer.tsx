@@ -1,10 +1,11 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Footer() {
   return (
     <footer className="bg-black text-white py-16 px-4 md:px-8 m-0">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12 items-start">
           <div>
             <h3 className="text-2xl font-bold mb-4">PlanB FX</h3>
             <p className="text-zinc-400">
@@ -55,6 +56,16 @@ export default function Footer() {
                 </svg>
               </a>
             </div>
+          </div>
+          <div className="flex justify-end md:justify-end items-center">
+            <Link href="/" className="block relative w-24 h-10 md:w-28 md:h-11">
+              <Image
+                src="/logos/planb-variant3.svg"
+                alt="PlanB FX"
+                fill
+                className="object-contain object-right"
+              />
+            </Link>
           </div>
         </div>
         <div className="border-t border-zinc-800 pt-8 text-center text-zinc-400 text-sm">

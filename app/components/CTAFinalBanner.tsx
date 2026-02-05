@@ -6,12 +6,29 @@ import Link from 'next/link';
 
 type CTAFinalBannerProps = {
   imageSrc: string;
+  /** Optional custom content (Services uses custom copy) */
+  subtitle?: string;
+  title?: string;
+  paragraph?: string;
+  ctaText?: string;
+  ctaHref?: string;
+  secondaryText?: string;
+  secondaryHref?: string;
 };
 
 /**
  * Banner final con imagen parallax, subtítulo gris, título grande, párrafo y CTAs.
  */
-export default function CTAFinalBanner({ imageSrc }: CTAFinalBannerProps) {
+export default function CTAFinalBanner({
+  imageSrc,
+  subtitle = 'Art Meets Innovation',
+  title = 'Transforming Events with\nDigital Brilliance.',
+  paragraph = 'Connect with us to elevate your event. Our unique blend of art, technology, and creativity brings a stunning visual experience to every occasion. Discover how we can transform your vision into reality.',
+  ctaText = 'Get in touch',
+  ctaHref = '/contact',
+  secondaryText = 'Explore Our Art',
+  secondaryHref = '/services',
+}: CTAFinalBannerProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
   const [imageOffset, setImageOffset] = useState(0);
@@ -59,32 +76,30 @@ export default function CTAFinalBanner({ imageSrc }: CTAFinalBannerProps) {
 
       <div className="relative z-10 w-full max-w-3xl text-left pl-6 pr-6 md:pl-16 md:pr-12 lg:pl-24 lg:pr-16 py-20 md:py-28">
         <span className="text-sm uppercase tracking-[0.3em] text-zinc-400 block mb-4">
-          Art Meets Innovation
+          {subtitle}
         </span>
-        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight mb-6">
-          <span className="whitespace-nowrap">Transforming Events with</span>
-          <br />
-          <span className="whitespace-nowrap">Digital Brilliance.</span>
+        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight mb-6 whitespace-pre-line">
+          {title}
         </h2>
         <p className="text-base md:text-lg text-white/80 leading-relaxed mb-10">
-          Connect with us to elevate your event. Our unique blend of art, technology,
-          and creativity brings a stunning visual experience to every occasion. Discover
-          how we can transform your vision into reality.
+          {paragraph}
         </p>
         <div className="flex flex-wrap items-center gap-4 md:gap-6">
           <Link
-            href="/contact"
-            className="inline-flex items-center justify-center px-8 py-4 border-2 border-white/60 text-white font-semibold rounded-full hover:bg-white/10 transition-all text-base"
+            href={ctaHref}
+            className="inline-flex items-center justify-center px-8 py-4 border-2 border-white/60 text-white font-semibold rounded-full hover:bg-white/10 transition-all duration-300 ease-out hover:scale-[1.03] text-base"
           >
-            Get in touch
+            {ctaText}
           </Link>
-          <Link
-            href="/services"
-            className="inline-flex items-center gap-2 text-white font-medium hover:text-white/90 transition-colors group"
-          >
-            Explore Our Art
-            <span className="transition-transform group-hover:translate-x-1">→</span>
-          </Link>
+          {secondaryText && secondaryHref && (
+            <Link
+              href={secondaryHref}
+              className="inline-flex items-center gap-2 text-white font-medium hover:text-white/90 transition-colors group"
+            >
+              {secondaryText}
+              <span className="transition-transform group-hover:translate-x-1">→</span>
+            </Link>
+          )}
         </div>
       </div>
     </section>

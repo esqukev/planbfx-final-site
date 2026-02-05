@@ -101,7 +101,7 @@ export default function Home() {
           </FadeInOnScroll>
           <a
             href="/contact#contact-form"
-            className="inline-block px-12 py-6 bg-white text-black font-semibold rounded-full hover:bg-zinc-200 transition-all transform hover:scale-105 text-lg"
+            className="inline-flex items-center justify-center px-8 py-4 bg-white text-black font-semibold rounded-full hover:bg-zinc-200 transition-all duration-300 ease-out hover:scale-[1.03] text-base"
           >
             Contact Us
           </a>

@@ -82,7 +82,7 @@ export default function ContactPage() {
               <div className="flex flex-wrap gap-4 md:gap-6 mb-12">
                 <a
                   href="tel:+50686201212"
-                  className="inline-flex items-center justify-center px-6 py-3 rounded-full border-2 border-white/40 text-white hover:bg-white/10 hover:border-white/70 transition-all text-base font-medium"
+                  className="inline-flex items-center justify-center px-8 py-4 rounded-full border-2 border-white/60 text-white font-semibold hover:bg-white/10 transition-all duration-300 ease-out hover:scale-[1.03] text-base"
                 >
                   Phone
                 </a>
@@ -90,13 +90,13 @@ export default function ContactPage() {
                   href="https://wa.me/50686201212"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center px-6 py-3 rounded-full border-2 border-white/40 text-white hover:bg-white/10 hover:border-white/70 transition-all text-base font-medium"
+                  className="inline-flex items-center justify-center px-8 py-4 rounded-full border-2 border-white/60 text-white font-semibold hover:bg-white/10 transition-all duration-300 ease-out hover:scale-[1.03] text-base"
                 >
                   WhatsApp
                 </a>
                 <a
                   href="mailto:hello@planbfx.com"
-                  className="inline-flex items-center justify-center px-6 py-3 rounded-full border-2 border-white/40 text-white hover:bg-white/10 hover:border-white/70 transition-all text-base font-medium"
+                  className="inline-flex items-center justify-center px-8 py-4 rounded-full border-2 border-white/60 text-white font-semibold hover:bg-white/10 transition-all duration-300 ease-out hover:scale-[1.03] text-base"
                 >
                   Email
                 </a>
@@ -150,14 +150,14 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <label htmlFor="location" className="block text-sm font-medium text-white/80 mb-2">
-                    Ubicación
+                    Location
                   </label>
                   <input
                     id="location"
                     name="location"
                     type="text"
                     className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-transparent transition font-fallback"
-                    placeholder="Ubicación"
+                    placeholder="City, Country"
                   />
                 </div>
                 <div>
@@ -170,7 +170,7 @@ export default function ContactPage() {
                     type="tel"
                     required
                     className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-transparent transition font-fallback"
-                    placeholder="+506 8620 1212"
+                    placeholder="+1 555 123 4567"
                   />
                 </div>
                 <div>
@@ -204,7 +204,7 @@ export default function ContactPage() {
                 </div>
                 <button
                   type="submit"
-                  className="w-full md:w-auto px-12 py-4 bg-white text-black font-semibold rounded-full hover:bg-zinc-200 transition-all text-lg"
+                  className="w-full md:w-auto px-8 py-4 bg-white text-black font-semibold rounded-full hover:bg-zinc-200 transition-all duration-300 ease-out hover:scale-[1.03] text-base"
                 >
                   Send
                 </button>

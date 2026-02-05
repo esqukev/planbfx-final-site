@@ -190,13 +190,13 @@ export default function HomeCTABanner({ imageSrc }: HomeCTABannerProps) {
         >
           <Link
             href="/services"
-            className="inline-flex items-center justify-center px-5 py-2.5 bg-white text-black font-semibold rounded-full hover:bg-zinc-200 transition-all text-sm"
+            className="inline-flex items-center justify-center px-8 py-4 bg-white text-black font-semibold rounded-full hover:bg-zinc-200 transition-all duration-300 ease-out hover:scale-[1.03] text-base"
           >
             Explore services
           </Link>
           <Link
             href="/contact#contact-form"
-            className="inline-flex items-center justify-center px-5 py-2.5 border-2 border-white/60 text-white font-semibold rounded-full hover:bg-white/10 transition-all text-sm"
+            className="inline-flex items-center justify-center px-8 py-4 border-2 border-white/60 text-white font-semibold rounded-full hover:bg-white/10 transition-all duration-300 ease-out hover:scale-[1.03] text-base"
           >
             Get in touch
           </Link>
