@@ -81,7 +81,7 @@ export default function AboutPage() {
           imageSrc="/tomandres.jpg"
           rotatingTitle={{
             prefix: 'WE CREATE ',
-            words: ['ART', 'EXPERIENCE', 'INNOVATION', 'TECHNOLOGY', 'INTERACTION'],
+            words: ['ART', 'EXPERIENCE', 'INNOVATION', 'TECHNOLOGY', 'INTERACTION', 'MEMORIES'],
           }}
         />
       </div>

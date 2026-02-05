@@ -26,41 +26,45 @@ export default function Navigation() {
     { label: 'Contact', href: '/contact' },
   ];
 
+  const blurClass = scrolled || isMenuOpen
+    ? 'backdrop-blur-xl bg-black/40 shadow-[0_20px_40px_rgba(0,0,0,0.25)]'
+    : 'backdrop-blur-0 bg-transparent';
+
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 pt-3 px-3 md:pt-4 md:px-4">
-      {/* Blur bar: con margen, no pegado a los bordes */}
-      <div
-        className={`
-          w-full rounded-2xl
-          transition-all duration-700 ease-out
-          ${scrolled || isMenuOpen
-            ? 'backdrop-blur-xl bg-black/40 shadow-[0_20px_40px_rgba(0,0,0,0.25)]'
-            : 'backdrop-blur-0 bg-transparent'
-          }
-        `}
-      >
-        <div className="relative z-10 w-full px-4 md:px-8 lg:px-12 xl:px-16 py-4 flex items-center justify-between">
-        <Link
-          href="/"
-          className="relative h-12 w-32 cursor-pointer hover:opacity-80 transition-opacity"
-          onClick={(e) => {
-            if (pathname === '/') {
-              e.preventDefault();
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-          }}
+      {/* Blur solo a izquierda (logo) y derecha (links), no en el centro */}
+      <div className="w-full rounded-2xl flex overflow-hidden transition-all duration-700 ease-out">
+        {/* Zona izquierda con blur */}
+        <div
+          className={`flex items-center shrink-0 rounded-l-2xl pl-4 md:pl-8 py-4 pr-6 md:pr-8 transition-all duration-700 ${blurClass}`}
         >
-          <Image
-            src="/planb-logo.svg"
-            alt="PlanB FX"
-            fill
-            className="object-contain"
-            priority
-          />
-        </Link>
-        <div className="hidden md:flex items-center gap-8 lg:gap-12">
+          <Link
+            href="/"
+            className="relative h-12 w-32 cursor-pointer hover:opacity-80 transition-opacity block"
+            onClick={(e) => {
+              if (pathname === '/') {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }
+            }}
+          >
+            <Image
+              src="/planb-logo.svg"
+              alt="PlanB FX"
+              fill
+              className="object-contain"
+              priority
+            />
+          </Link>
+        </div>
+        {/* Centro sin blur */}
+        <div className="flex-1 min-w-0" />
+        {/* Zona derecha con blur (desktop) */}
+        <div
+          className={`hidden md:flex items-center gap-8 lg:gap-12 shrink-0 rounded-r-2xl pr-8 lg:pr-12 xl:pr-16 py-4 pl-6 transition-all duration-700 ${blurClass}`}
+        >
           {menuItems.map((item) => {
-            const isActive = pathname === '/' ? item.href === '/' : (pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href + '/')));
+            const isActive = pathname === '/' ? item.href === '/' : (pathname === item.href || (pathname !== '/' && pathname.startsWith(item.href + '/')));
             return (
               <Link
                 key={item.label}
@@ -78,17 +82,20 @@ export default function Navigation() {
             );
           })}
         </div>
-        <button
-          className="md:hidden text-white"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </button>
+        {/* Mobile: hamburger con blur */}
+        <div className={`flex md:hidden items-center shrink-0 rounded-r-2xl py-4 pl-4 pr-4 transition-all duration-700 ${blurClass}`}>
+          <button
+            className="text-white"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
       </div>
       {isMenuOpen && (
-        <div className="relative z-10 md:hidden rounded-b-2xl">
+        <div className={`relative z-10 md:hidden rounded-b-2xl overflow-hidden transition-all duration-700 ${blurClass}`}>
           {menuItems.map((item) => {
             const isActive = pathname === '/' ? item.href === '/' : pathname.startsWith(item.href);
             return (
@@ -107,7 +114,6 @@ export default function Navigation() {
           })}
         </div>
       )}
-      </div>
     </nav>
   );
 }

@@ -25,16 +25,19 @@ export default function HyperSpaceBackground() {
       // Fog for smooth star fade-out
       scene.fog = new THREE.Fog(0x000000, 800, 5000);
 
+      const width = mount.clientWidth || window.innerWidth;
+      const height = mount.clientHeight || window.innerHeight;
+
       const camera = new THREE.PerspectiveCamera(
         75,
-        window.innerWidth / window.innerHeight,
+        width / height,
         1,
         2000
       );
       camera.position.z = 800;
 
       const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: false });
-      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setSize(width, height);
       renderer.setPixelRatio(Math.min(2, window.devicePixelRatio));
       mount.appendChild(renderer.domElement);
 
@@ -130,18 +133,24 @@ export default function HyperSpaceBackground() {
 
       animate();
 
-      // 📐 Resize
-      const onResize = () => {
-        if (disposed) return;
-        camera.aspect = window.innerWidth / window.innerHeight;
+      // 📐 Resize (use mount dimensions when available for section usage)
+      const updateSize = () => {
+        if (disposed || !mount.parentElement) return;
+        const w = mount.clientWidth || window.innerWidth;
+        const h = mount.clientHeight || window.innerHeight;
+        camera.aspect = w / h;
         camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setSize(w, h);
       };
 
-      window.addEventListener('resize', onResize);
+      updateSize();
+      window.addEventListener('resize', updateSize);
+      const ro = new ResizeObserver(updateSize);
+      ro.observe(mount);
 
       cleanup = () => {
-        window.removeEventListener('resize', onResize);
+        ro.disconnect();
+        window.removeEventListener('resize', updateSize);
         window.cancelAnimationFrame(raf);
         geometry.dispose();
         material.dispose();

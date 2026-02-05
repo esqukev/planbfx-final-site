@@ -100,7 +100,7 @@ export default function ParallaxBannerWithImage({
             priority={false}
           />
         </div>
-        <div className="absolute inset-0 bg-black/50" aria-hidden />
+        <div className="absolute inset-0 bg-black/30" aria-hidden />
       </div>
 
       <div className="absolute inset-0 z-20 pointer-events-none">

@@ -1,11 +1,12 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import CursorTiltFigure from '../components/CursorTiltFigure';
 import PlanBFXText from '../components/PlanBFXText';
 import ImageHero from '../components/ImageHero';
+import HyperSpaceBackground from '../components/HyperSpaceBackground';
 
 const FAQ_ITEMS = [
   {
@@ -33,6 +34,14 @@ const FAQ_ITEMS = [
 export default function ContactPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
+  // Scroll al formulario cuando se entra con #contact-form (ej. desde Home "Contact Us")
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.location.hash === '#contact-form') {
+      const el = document.getElementById('contact-form');
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, []);
+
   return (
     <main className="relative min-h-screen bg-black text-white overflow-x-hidden overflow-y-auto">
       <Navigation />
@@ -42,13 +51,9 @@ export default function ContactPage() {
         imageAlt="Contact"
       />
 
-      <section
-        className="relative py-24 md:py-32 px-4 md:px-8"
-        style={{
-          background: 'linear-gradient(to bottom left, #000000 0%, #18181b 50%, #000000 100%)',
-        }}
-      >
-        <div className="max-w-7xl mx-auto">
+      <section className="relative py-24 md:py-32 px-4 md:px-8 overflow-hidden min-h-screen">
+        <HyperSpaceBackground />
+        <div className="relative z-10 max-w-7xl mx-auto">
           {/* Dos columnas: izquierda = texto + contact; derecha = form */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
             {/* Columna izquierda — justificado a la izquierda */}
@@ -102,7 +107,7 @@ export default function ContactPage() {
             </div>
 
             {/* Columna derecha — Ready to move forward + form */}
-            <div className="text-left">
+            <div id="contact-form" className="text-left scroll-mt-24">
               <h2 className="text-2xl md:text-3xl font-bold mb-6">
                 Ready to move forward?
               </h2>

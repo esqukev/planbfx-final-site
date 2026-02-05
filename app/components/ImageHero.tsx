@@ -43,6 +43,7 @@ export default function ImageHero({ imageSrc, imageAlt = '' }: ImageHeroProps) {
           sizes="100vw"
         />
       </div>
+      <div className="absolute inset-0 z-10 bg-black/25" aria-hidden />
     </section>
   );
 }
