@@ -52,7 +52,7 @@ export default function AboutPage() {
       <Navigation />
 
       {/* Banner hero (mismo que Services: ImageHero) */}
-      <ImageHero imageSrc="/tomybanner.jpg" imageAlt="About" />
+      <ImageHero imageSrc="/andresabout.jpg" imageAlt="About" />
 
       {/* 1. Intro: Who we are + About Plan B FX + first paragraph */}
       <section className="relative z-20 bg-black">
