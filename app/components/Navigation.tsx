@@ -26,18 +26,28 @@ export default function Navigation() {
     { label: 'Contact', href: '/contact' },
   ];
 
-  const blurClass = scrolled || isMenuOpen
-    ? 'backdrop-blur-xl bg-black/40 shadow-[0_20px_40px_rgba(0,0,0,0.25)]'
-    : 'backdrop-blur-0 bg-transparent';
+  // Desktop: active = exact match for Home, otherwise path matches or starts with href
+  const isActiveDesktop = (href: string) =>
+    href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(href + '/');
+
+  // Mobile: same logic — solo iluminar la página actual, sin rayita
+  const isActiveMobile = (href: string) =>
+    href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(href + '/');
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 pt-3 px-3 md:pt-4 md:px-4">
-      {/* Blur solo a izquierda (logo) y derecha (links), no en el centro */}
-      <div className="w-full rounded-2xl flex overflow-hidden transition-all duration-700 ease-out">
-        {/* Zona izquierda con blur */}
-        <div
-          className={`flex items-center shrink-0 rounded-l-2xl pl-4 md:pl-8 py-4 pr-6 md:pr-8 transition-all duration-700 ${blurClass}`}
-        >
+      {/* Blur bar: una sola barra con blur */}
+      <div
+        className={`
+          w-full rounded-2xl
+          transition-all duration-700 ease-out
+          ${scrolled || isMenuOpen
+            ? 'backdrop-blur-xl bg-black/40 shadow-[0_20px_40px_rgba(0,0,0,0.25)]'
+            : 'backdrop-blur-0 bg-transparent'
+          }
+        `}
+      >
+        <div className="relative z-10 w-full px-4 md:px-8 lg:px-12 xl:px-16 py-4 flex items-center justify-between">
           <Link
             href="/"
             className="relative h-12 w-32 cursor-pointer hover:opacity-80 transition-opacity block"
@@ -56,36 +66,25 @@ export default function Navigation() {
               priority
             />
           </Link>
-        </div>
-        {/* Centro sin blur */}
-        <div className="flex-1 min-w-0" />
-        {/* Zona derecha con blur (desktop) */}
-        <div
-          className={`hidden md:flex items-center gap-8 lg:gap-12 shrink-0 rounded-r-2xl pr-8 lg:pr-12 xl:pr-16 py-4 pl-6 transition-all duration-700 ${blurClass}`}
-        >
-          {menuItems.map((item) => {
-            const isActive = pathname === '/' ? item.href === '/' : (pathname === item.href || (pathname !== '/' && pathname.startsWith(item.href + '/')));
-            return (
+          <div className="hidden md:flex items-center gap-8 lg:gap-12">
+            {menuItems.map((item) => (
               <Link
                 key={item.label}
                 href={item.href}
                 className="relative flex flex-col items-center text-white hover:text-zinc-300 transition-colors text-sm uppercase tracking-wider py-1"
               >
                 {item.label}
-                {isActive && (
+                {isActiveDesktop(item.href) && (
                   <span
                     className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-3 h-px bg-white shrink-0 nav-indicator"
                     aria-hidden
                   />
                 )}
               </Link>
-            );
-          })}
-        </div>
-        {/* Mobile: hamburger con blur */}
-        <div className={`flex md:hidden items-center shrink-0 rounded-r-2xl py-4 pl-4 pr-4 transition-all duration-700 ${blurClass}`}>
+            ))}
+          </div>
           <button
-            className="text-white"
+            className="md:hidden text-white"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -93,27 +92,24 @@ export default function Navigation() {
             </svg>
           </button>
         </div>
-      </div>
-      {isMenuOpen && (
-        <div className={`relative z-10 md:hidden rounded-b-2xl overflow-hidden transition-all duration-700 ${blurClass}`}>
-          {menuItems.map((item) => {
-            const isActive = pathname === '/' ? item.href === '/' : pathname.startsWith(item.href);
-            return (
+        {/* Mobile: solo iluminar la página actual, sin rayita */}
+        {isMenuOpen && (
+          <div className="relative z-10 md:hidden rounded-b-2xl">
+            {menuItems.map((item) => (
               <Link
                 key={item.label}
                 href={item.href}
-                className={`flex items-center gap-2 px-4 py-3 text-sm uppercase tracking-wider ${isActive ? 'text-white bg-white/10' : 'text-white/90 hover:text-white hover:bg-white/5'} transition-colors`}
+                className={`flex items-center gap-2 px-4 py-3 text-sm uppercase tracking-wider transition-colors ${
+                  isActiveMobile(item.href) ? 'text-white bg-white/10' : 'text-white/90 hover:text-white hover:bg-white/5'
+                }`}
                 onClick={() => setIsMenuOpen(false)}
               >
-                {isActive && (
-                  <span className="w-1.5 h-px bg-white shrink-0 nav-indicator" aria-hidden />
-                )}
                 {item.label}
               </Link>
-            );
-          })}
-        </div>
-      )}
+            ))}
+          </div>
+        )}
+      </div>
     </nav>
   );
 }

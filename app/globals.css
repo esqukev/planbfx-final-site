@@ -160,6 +160,38 @@ html {
   }
 }
 
+/* Mesh gradient blobs – soft moving background */
+@keyframes mesh-blob-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(3%, 2%) scale(1.02); }
+  66% { transform: translate(-2%, -1%) scale(0.98); }
+}
+@keyframes mesh-blob-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-2%, 3%) scale(1.01); }
+  66% { transform: translate(2%, -2%) scale(0.99); }
+}
+@keyframes mesh-blob-3 {
+  0%, 100% { transform: translate(-50%, 0) scale(1); }
+  50% { transform: translate(-50%, -1%) scale(1.03); }
+}
+@keyframes mesh-blob-4 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(1%, -2%) scale(1.02); }
+}
+.animate-mesh-blob-1 {
+  animation: mesh-blob-1 18s ease-in-out infinite;
+}
+.animate-mesh-blob-2 {
+  animation: mesh-blob-2 22s ease-in-out infinite;
+}
+.animate-mesh-blob-3 {
+  animation: mesh-blob-3 20s ease-in-out infinite;
+}
+.animate-mesh-blob-4 {
+  animation: mesh-blob-4 16s ease-in-out infinite;
+}
+
 /* About split section – light sweep */
 @keyframes sweep {
   0% {
