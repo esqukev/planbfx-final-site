@@ -3,12 +3,14 @@
 import React, { useEffect, useRef } from 'react';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
-import ImageHero from '../components/ImageHero';
+import VideoHeroWithScroll from '../components/VideoHeroWithScroll';
 import CTAFinalBanner from '../components/CTAFinalBanner';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
+
+const SERVICES_VIDEO_URL = 'https://res.cloudinary.com/dpplgma25/video/upload/v1769796195/beyerrandom_lk0ov5.mp4';
 
 const SYMBOL_FALLBACK = ["'", "'", "´", "-", "–", "—", "+", "/"];
 
@@ -135,7 +137,7 @@ export default function ServicesPage() {
     <main className="relative min-h-screen bg-black text-white">
       <Navigation />
 
-      <ImageHero imageSrc="/tomybanner.jpg" imageAlt="Services" />
+      <VideoHeroWithScroll videoUrl={SERVICES_VIDEO_URL} />
 
       <div className="relative z-20">
         {PRODUCTS.map((product, index) => (

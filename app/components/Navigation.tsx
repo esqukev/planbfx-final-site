@@ -60,7 +60,7 @@ export default function Navigation() {
         </Link>
         <div className="hidden md:flex items-center gap-8 lg:gap-12">
           {menuItems.map((item) => {
-            const isActive = pathname === '/' ? item.href === '/' : pathname.startsWith(item.href);
+            const isActive = pathname === '/' ? item.href === '/' : (pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href + '/')));
             return (
               <Link
                 key={item.label}
@@ -69,7 +69,10 @@ export default function Navigation() {
               >
                 {item.label}
                 {isActive && (
-                  <span className="absolute -bottom-1.5 w-1.5 h-1.5 rounded-full bg-white shrink-0" aria-hidden />
+                  <span
+                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-white shrink-0 nav-indicator"
+                    aria-hidden
+                  />
                 )}
               </Link>
             );
@@ -95,7 +98,9 @@ export default function Navigation() {
                 className={`flex items-center gap-2 px-4 py-3 text-sm uppercase tracking-wider ${isActive ? 'text-white bg-white/10' : 'text-white/90 hover:text-white hover:bg-white/5'} transition-colors`}
                 onClick={() => setIsMenuOpen(false)}
               >
-                {isActive && <span className="w-1.5 h-1.5 rounded-full bg-white shrink-0" aria-hidden />}
+                {isActive && (
+                  <span className="w-4 h-0.5 bg-white shrink-0 animate-[fadeIn_0.3s_ease-out]" aria-hidden style={{ animation: 'fadeIn 0.3s ease-out' }} />
+                )}
                 {item.label}
               </Link>
             );

@@ -153,46 +153,27 @@ export default function HomeCTABanner({ imageSrc }: HomeCTABannerProps) {
             ))}
           </span>
         </h2>
-        {/* Paragraph: letter-by-letter más rápido; "breathe" en una sola línea */}
+        {/* Paragraph: cada palabra en una línea (ninguna se corta); letter-by-letter */}
         <p className="text-base md:text-lg text-white/80 leading-relaxed mb-10 max-w-2xl mx-auto">
           {(() => {
             const full = 'Welcome to PlanB FX, where creativity and technology converge. We breathe life into events through interactive art, smart coding, and AI-driven experiences. Let us elevate your vision into a captivating reality.';
-            const breatheStart = full.indexOf('breathe');
-            const breatheEnd = breatheStart + 7;
-            const before = full.slice(0, breatheStart);
-            const breathe = full.slice(breatheStart, breatheEnd);
-            const after = full.slice(breatheEnd);
+            const words = full.split(' ');
             const sym = ["'", '"', '-', '–', '—', '+', '/'];
-            let idx = 48;
+            let charIdx = 48;
             return (
               <>
-                {before.split('').map((char, i) => (
-                  <span
-                    key={`p-b-${i}`}
-                    className={sym.includes(char) ? 'inline-block font-fallback' : 'inline-block'}
-                    style={{ opacity: isVisible ? 1 : 0, transition: `opacity 0.6s ease ${(idx++) * 0.02}s` }}
-                  >
-                    {char === ' ' ? '\u00A0' : char}
-                  </span>
-                ))}
-                <span className="whitespace-nowrap inline-block">
-                  {breathe.split('').map((char, i) => (
-                    <span
-                      key={`p-br-${i}`}
-                      className={sym.includes(char) ? 'inline-block font-fallback' : 'inline-block'}
-                      style={{ opacity: isVisible ? 1 : 0, transition: `opacity 0.6s ease ${(idx++) * 0.02}s` }}
-                    >
-                      {char === ' ' ? '\u00A0' : char}
-                    </span>
-                  ))}
-                </span>
-                {after.split('').map((char, i) => (
-                  <span
-                    key={`p-a-${i}`}
-                    className={sym.includes(char) ? 'inline-block font-fallback' : 'inline-block'}
-                    style={{ opacity: isVisible ? 1 : 0, transition: `opacity 0.6s ease ${(idx++) * 0.02}s` }}
-                  >
-                    {char === ' ' ? '\u00A0' : char}
+                {words.map((word, wi) => (
+                  <span key={`w-${wi}`} className="whitespace-nowrap inline-block">
+                    {word.split('').map((char, ci) => (
+                      <span
+                        key={`c-${wi}-${ci}`}
+                        className={sym.includes(char) ? 'inline-block font-fallback' : 'inline-block'}
+                        style={{ opacity: isVisible ? 1 : 0, transition: `opacity 0.6s ease ${(charIdx++) * 0.02}s` }}
+                      >
+                        {char}
+                      </span>
+                    ))}
+                    {wi < words.length - 1 ? '\u00A0' : null}
                   </span>
                 ))}
               </>
@@ -214,7 +195,7 @@ export default function HomeCTABanner({ imageSrc }: HomeCTABannerProps) {
             Explore services
           </Link>
           <Link
-            href="/contact"
+            href="/contact#contact-form"
             className="inline-flex items-center justify-center px-5 py-2.5 border-2 border-white/60 text-white font-semibold rounded-full hover:bg-white/10 transition-all text-sm"
           >
             Get in touch
