@@ -70,7 +70,7 @@ export default function Navigation() {
                 {item.label}
                 {isActive && (
                   <span
-                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-white shrink-0 nav-indicator"
+                    className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2/5 h-px bg-white shrink-0 nav-indicator"
                     aria-hidden
                   />
                 )}
@@ -99,7 +99,7 @@ export default function Navigation() {
                 onClick={() => setIsMenuOpen(false)}
               >
                 {isActive && (
-                  <span className="w-4 h-0.5 bg-white shrink-0 animate-[fadeIn_0.3s_ease-out]" aria-hidden style={{ animation: 'fadeIn 0.3s ease-out' }} />
+                  <span className="w-1.5 h-px bg-white shrink-0 nav-indicator" aria-hidden />
                 )}
                 {item.label}
               </Link>
