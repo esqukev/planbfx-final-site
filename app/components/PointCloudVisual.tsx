@@ -58,6 +58,8 @@ export default function PointCloudVisual({ className = '' }: PointCloudVisualPro
       }
 
       geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      geometry.computeBoundingSphere();
+      geometry.center();
 
       const material = new THREE.PointsMaterial({
         color: 0xffffff,
@@ -257,7 +259,8 @@ export default function PointCloudVisual({ className = '' }: PointCloudVisualPro
   return (
     <div
       ref={mountRef}
-      className={`relative mx-auto w-full max-w-[min(75vw,380px)] max-h-[55vh] min-h-[45vh] min-w-0 aspect-square flex-shrink-0 md:max-w-[min(85vw,420px)] md:max-h-[min(70vh,85vw,420px)] md:min-h-[min(50vh,280px)] ${className}`}
+      className={`relative mx-auto flex items-center justify-center w-full max-w-[min(90vw,400px)] aspect-square flex-shrink-0 md:max-w-[min(85vw,440px)] ${className}`}
+      style={{ minHeight: '280px' }}
       aria-hidden="true"
     />
   );

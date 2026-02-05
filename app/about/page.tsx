@@ -78,7 +78,7 @@ export default function AboutPage() {
       {/* Banner parallax WE CREATE + palabra rotando (ART / EXPERIENCE / INNOVATION / etc.) */}
       <div className="m-0 p-0">
         <ParallaxBannerWithImage
-          imageSrc="/andresabout.jpg"
+          imageSrc="/tomandres.jpg"
           rotatingTitle={{
             prefix: 'WE CREATE ',
             words: ['ART', 'EXPERIENCE', 'INNOVATION', 'TECHNOLOGY', 'INTERACTION'],

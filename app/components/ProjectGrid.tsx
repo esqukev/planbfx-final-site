@@ -9,31 +9,31 @@ gsap.registerPlugin(ScrollTrigger);
 const processSteps = [
   {
     id: '01',
-    code: 'DISCOVERY',
-    title: 'Discovery & Brief',
+    subtitle: 'Meeting & Vision',
+    code: 'ALIGN',
     description:
-      'We map your goals, audience, and constraints. From kickoff to creative brief, we align on vision so every step builds toward the same outcome.',
+      'We meet to capture your goals. From the first call, we align our vision to ensure every step builds toward the same outcome.',
   },
   {
     id: '02',
-    code: 'CONCEPT',
-    title: 'Concept & Design',
+    subtitle: 'Product Selection',
+    code: 'CURATE',
     description:
-      'We explore concepts and visual directions. Storyboards, style frames, and interactive prototypes bring the idea to life before production.',
+      'We pinpoint the ideal technical and artistic solution for your needs, selecting the tools that will maximize your event\'s impact.',
   },
   {
     id: '03',
-    code: 'PRODUCTION',
-    title: 'Production & Craft',
+    subtitle: 'Pre-Production & Testing',
+    code: 'ARCHITECT',
     description:
-      'We produce the experience: film, 3D, motion, and tech. Every asset is crafted to match the creative vision and technical requirements.',
+      'Asset management, development, and technical testing. We prepare every digital detail to guarantee a flawless execution.',
   },
   {
     id: '04',
-    code: 'DELIVERY',
-    title: 'Delivery & Launch',
+    subtitle: 'Production & Launch',
+    code: 'EXECUTE',
     description:
-      'We integrate, test, and deploy. From stage to screen, we ensure the experience runs flawlessly and stays on brand.',
+      'Deployment and live execution. We take control of the visuals live to breathe life into the event, powering the experience in real-time to ensure a high-impact atmosphere that lingers with the audience.',
   },
 ];
 
@@ -129,10 +129,10 @@ export default function ProjectGrid() {
               >
                 <div className="rounded-2xl border-0 bg-zinc-50/80 dark:bg-zinc-900/80 p-6 md:p-8 shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(255,255,255,0.12)] dark:hover:shadow-[0_0_40px_rgba(255,255,255,0.08)]">
                   <span className="text-xs font-mono uppercase tracking-widest text-zinc-500 dark:text-zinc-400 block mb-2">
-                    {step.id} — {step.code}
+                    ({step.subtitle})
                   </span>
                   <h3 className="text-xl md:text-2xl font-semibold text-black dark:text-white mb-3">
-                    {step.title}
+                    {step.code}
                   </h3>
                   <p className="text-zinc-600 dark:text-zinc-400 text-sm md:text-base leading-relaxed">
                     {step.description}

@@ -9,6 +9,10 @@ import ImageHero from '../components/ImageHero';
 
 const FAQ_ITEMS = [
   {
+    question: 'Where are you based?',
+    answer: 'Headquartered in San José, Costa Rica, we bring our visual expertise to every corner of the country with forward planning. Contact us to learn more about our availability and reach.',
+  },
+  {
     question: 'What kind of events do you work with?',
     answer: 'We work with a wide range of events including festivals, concerts, corporate events, brand activations, art installations, and private parties. Our visual experiences are tailored to each occasion.',
   },
@@ -34,7 +38,7 @@ export default function ContactPage() {
       <Navigation />
 
       <ImageHero
-        imageSrc="/anfisabanner.jpg"
+        imageSrc="/letyago.jpg"
         imageAlt="Contact"
       />
 
@@ -207,7 +211,7 @@ export default function ContactPage() {
           <div className="mt-24 pt-16 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
             <div className="text-left">
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
-                FAQ
+                Frequently Asked Questions
               </h2>
               <p className="text-sm md:text-base text-white/60 mb-8">
                 Your questions answered simply and clearly.
