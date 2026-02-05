@@ -59,15 +59,21 @@ export default function Navigation() {
           />
         </Link>
         <div className="hidden md:flex items-center gap-8 lg:gap-12">
-          {menuItems.map((item) => (
-            <Link
-              key={item.label}
-              href={item.href}
-              className="text-white hover:text-zinc-300 transition-colors text-sm uppercase tracking-wider"
-            >
-              {item.label}
-            </Link>
-          ))}
+          {menuItems.map((item) => {
+            const isActive = pathname === '/' ? item.href === '/' : pathname.startsWith(item.href);
+            return (
+              <Link
+                key={item.label}
+                href={item.href}
+                className="relative flex flex-col items-center text-white hover:text-zinc-300 transition-colors text-sm uppercase tracking-wider py-1"
+              >
+                {item.label}
+                {isActive && (
+                  <span className="absolute -bottom-1.5 w-1.5 h-1.5 rounded-full bg-white shrink-0" aria-hidden />
+                )}
+              </Link>
+            );
+          })}
         </div>
         <button
           className="md:hidden text-white"
@@ -80,16 +86,20 @@ export default function Navigation() {
       </div>
       {isMenuOpen && (
         <div className="relative z-10 md:hidden rounded-b-2xl">
-          {menuItems.map((item) => (
-            <Link
-              key={item.label}
-              href={item.href}
-              className="block px-4 py-3 text-white/90 hover:text-white hover:bg-white/5 transition-colors text-sm uppercase tracking-wider"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              {item.label}
-            </Link>
-          ))}
+          {menuItems.map((item) => {
+            const isActive = pathname === '/' ? item.href === '/' : pathname.startsWith(item.href);
+            return (
+              <Link
+                key={item.label}
+                href={item.href}
+                className={`flex items-center gap-2 px-4 py-3 text-sm uppercase tracking-wider ${isActive ? 'text-white bg-white/10' : 'text-white/90 hover:text-white hover:bg-white/5'} transition-colors`}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {isActive && <span className="w-1.5 h-1.5 rounded-full bg-white shrink-0" aria-hidden />}
+                {item.label}
+              </Link>
+            );
+          })}
         </div>
       )}
       </div>

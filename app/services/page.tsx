@@ -1,13 +1,35 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import ImageHero from '../components/ImageHero';
+import CTAFinalBanner from '../components/CTAFinalBanner';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
+
+const SYMBOL_FALLBACK = ["'", "'", "´", "-", "–", "—", "+", "/"];
+
+function textWithSymbolFallback(text: string): React.ReactNode {
+  const parts: React.ReactNode[] = [];
+  let key = 0;
+  let run = '';
+  for (const char of text) {
+    if (SYMBOL_FALLBACK.includes(char)) {
+      if (run) {
+        parts.push(run);
+        run = '';
+      }
+      parts.push(<span key={key++} className="font-fallback">{char}</span>);
+    } else {
+      run += char;
+    }
+  }
+  if (run) parts.push(run);
+  return parts.length === 1 ? parts[0] : <>{parts.map((p, i) => <React.Fragment key={i}>{p}</React.Fragment>)}</>;
+}
 
 const PRODUCTS = [
   {
@@ -79,14 +101,11 @@ function ProductSection({
           </div>
         </div>
         <div className={isEven ? 'lg:order-1' : ''}>
-          <span className="text-xs uppercase tracking-[0.3em] text-white/40">
-            {String(index + 1).padStart(2, '0')} / {String(PRODUCTS.length).padStart(2, '0')}
-          </span>
-          <h2 className="mt-2 text-3xl font-bold text-white md:text-4xl lg:text-5xl">
-            {product.title}
+          <h2 className="text-3xl font-bold text-white md:text-4xl lg:text-5xl">
+            {textWithSymbolFallback(product.title)}
           </h2>
           <p className="mt-6 text-lg leading-relaxed text-white/70 md:text-xl">
-            {product.description}
+            {textWithSymbolFallback(product.description)}
           </p>
         </div>
       </div>
@@ -130,6 +149,8 @@ export default function ServicesPage() {
           />
         ))}
       </div>
+
+      <CTAFinalBanner imageSrc="/bannerstage.jpg" />
 
       <Footer />
     </main>

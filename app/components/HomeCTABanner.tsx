@@ -153,22 +153,51 @@ export default function HomeCTABanner({ imageSrc }: HomeCTABannerProps) {
             ))}
           </span>
         </h2>
-        {/* Paragraph: letter-by-letter más rápido + símbolos en font-fallback */}
+        {/* Paragraph: letter-by-letter más rápido; "breathe" en una sola línea */}
         <p className="text-base md:text-lg text-white/80 leading-relaxed mb-10 max-w-2xl mx-auto">
-          {'Welcome to PlanB FX, where creativity and technology converge. We breathe life into events through interactive art, smart coding, and AI-driven experiences. Let us elevate your vision into a captivating reality.'
-            .split('')
-            .map((char, i) => (
-              <span
-                key={`p-${i}`}
-                className={['\'', '"', '-', '–', '—', '+', '/'].includes(char) ? 'inline-block font-fallback' : 'inline-block'}
-                style={{
-                  opacity: isVisible ? 1 : 0,
-                  transition: `opacity 0.6s ease ${(48 + i) * 0.02}s`,
-                }}
-              >
-                {char === ' ' ? '\u00A0' : char}
-              </span>
-            ))}
+          {(() => {
+            const full = 'Welcome to PlanB FX, where creativity and technology converge. We breathe life into events through interactive art, smart coding, and AI-driven experiences. Let us elevate your vision into a captivating reality.';
+            const breatheStart = full.indexOf('breathe');
+            const breatheEnd = breatheStart + 7;
+            const before = full.slice(0, breatheStart);
+            const breathe = full.slice(breatheStart, breatheEnd);
+            const after = full.slice(breatheEnd);
+            const sym = ["'", '"', '-', '–', '—', '+', '/'];
+            let idx = 48;
+            return (
+              <>
+                {before.split('').map((char, i) => (
+                  <span
+                    key={`p-b-${i}`}
+                    className={sym.includes(char) ? 'inline-block font-fallback' : 'inline-block'}
+                    style={{ opacity: isVisible ? 1 : 0, transition: `opacity 0.6s ease ${(idx++) * 0.02}s` }}
+                  >
+                    {char === ' ' ? '\u00A0' : char}
+                  </span>
+                ))}
+                <span className="whitespace-nowrap inline-block">
+                  {breathe.split('').map((char, i) => (
+                    <span
+                      key={`p-br-${i}`}
+                      className={sym.includes(char) ? 'inline-block font-fallback' : 'inline-block'}
+                      style={{ opacity: isVisible ? 1 : 0, transition: `opacity 0.6s ease ${(idx++) * 0.02}s` }}
+                    >
+                      {char === ' ' ? '\u00A0' : char}
+                    </span>
+                  ))}
+                </span>
+                {after.split('').map((char, i) => (
+                  <span
+                    key={`p-a-${i}`}
+                    className={sym.includes(char) ? 'inline-block font-fallback' : 'inline-block'}
+                    style={{ opacity: isVisible ? 1 : 0, transition: `opacity 0.6s ease ${(idx++) * 0.02}s` }}
+                  >
+                    {char === ' ' ? '\u00A0' : char}
+                  </span>
+                ))}
+              </>
+            );
+          })()}
         </p>
         <div
           className="flex flex-wrap items-center justify-center gap-4 md:gap-6"

@@ -99,9 +99,12 @@ export default function Home() {
           >
             Got A Project? Let<span className="font-fallback">´</span>s Talk
           </FadeInOnScroll>
-          <button className="px-12 py-6 bg-white text-black font-semibold rounded-full hover:bg-zinc-200 transition-all transform hover:scale-105 text-lg">
+          <a
+            href="/contact#contact-form"
+            className="inline-block px-12 py-6 bg-white text-black font-semibold rounded-full hover:bg-zinc-200 transition-all transform hover:scale-105 text-lg"
+          >
             Contact Us
-          </button>
+          </a>
         </div>
       </section>
       
