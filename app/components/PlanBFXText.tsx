@@ -26,15 +26,13 @@ export default function PlanBFXText() {
       gsap.set(container, { visibility: 'visible' });
 
       const width = typeof window !== 'undefined' ? window.innerWidth : 1200;
-      const depth = -width / 8;
+      const depth = -width / 4;
       const transformOrigin = `50% 50% ${depth}px`;
 
-      gsap.set(lines, {
-        perspective: 700,
-        transformStyle: 'preserve-3d',
-      });
+      gsap.set(lines, { transformStyle: 'preserve-3d' });
 
-      const animTime = 0.9;
+      const animTime = 1.8;
+      const lineStagger = 0.7;
       tl = gsap.timeline({ repeat: -1 });
 
       lines.forEach((line, index) => {
@@ -45,12 +43,12 @@ export default function PlanBFXText() {
           { rotationX: -90 },
           {
             rotationX: 90,
-            stagger: 0.08,
+            stagger: 0.12,
             duration: animTime,
             ease: 'none',
             transformOrigin,
           },
-          index * 0.45
+          index * lineStagger
         );
       });
     };
@@ -70,15 +68,14 @@ export default function PlanBFXText() {
       style={{ visibility: 'hidden' }}
       aria-hidden
     >
-      <div className="relative w-full h-[20vw] sm:h-[24vw] max-h-[120px] sm:max-h-[140px] flex items-center justify-center">
+      <div className="rolling-tube relative w-full h-[20vw] sm:h-[24vw] max-h-[120px] sm:max-h-[140px] flex items-center justify-center" style={{ perspective: 1200 }}>
         {Array.from({ length: LINE_COUNT }).map((_, i) => (
           <h1
             key={i}
             className="rolling-line absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 leading-none m-0 whitespace-nowrap text-center font-bold tracking-[-0.6vw] select-none"
             style={{
               fontSize: 'clamp(2rem, 12vw, 120px)',
-              color: '#fb8305',
-              WebkitTextStroke: '1px rgba(251, 131, 5, 0.5)',
+              color: '#ffffff',
             }}
           >
             {TEXT.split('').map((char, j) => (

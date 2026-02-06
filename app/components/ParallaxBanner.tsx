@@ -80,7 +80,7 @@ export default function ParallaxBanner({
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent" />
       </div>
 
-      <div className="relative z-10 max-w-5xl mx-auto text-center px-6 sm:px-8 md:px-12 lg:px-16 py-16 sm:py-24 md:py-32 lg:py-40 w-full">
+      <div className="relative z-10 max-w-5xl mx-auto text-center px-8 sm:px-8 md:px-12 lg:px-16 py-16 sm:py-24 md:py-32 lg:py-40">
         {/* Subtitle on top with fade in */}
         <p
           ref={subtitleRef}
@@ -95,7 +95,7 @@ export default function ParallaxBanner({
         {/* Title: 3 lines; on mobile each line stays together (no mid-word break) */}
         <div
           ref={titleRef}
-          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight max-w-full w-full text-center overflow-x-hidden"
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight max-w-full"
         >
           {titleLines.map((line, lineIndex) => {
             let totalCharIndex = 0;
@@ -105,7 +105,7 @@ export default function ParallaxBanner({
             return (
               <p
                 key={lineIndex}
-                className="mb-0 md:mb-0.5 leading-tight whitespace-nowrap text-center block w-full"
+                className="mb-0 md:mb-0.5 leading-tight whitespace-nowrap"
                 style={{
                   transform: `translate3d(0, ${offset * (1 + lineIndex * 0.1)}px, 0)`,
                   display: 'block',
@@ -134,7 +134,7 @@ export default function ParallaxBanner({
                       })}
                       {wordIndex < line.split(' ').length - 1 && (
                         <span
-                          className="inline-block w-1 sm:w-[0.3em]"
+                          className="inline-block w-[0.3em]"
                           style={{
                             opacity: isVisible ? 1 : 0,
                             transition: `opacity 1s ease ${wordStartIndex + line.split(' ')[wordIndex].length * 0.05}s`,
