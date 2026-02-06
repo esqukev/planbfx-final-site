@@ -65,14 +65,13 @@ void main() {
   float t = n2 * 0.5 + n * 0.5 + 0.5;
   t = fract(t + u_time * 0.05);
 
-  vec3 col;
-  if (t < 0.33) {
-    col = mix(vec3(0., 0., 0.), vec3(0.25, 0.25, 0.25), t * 3.0);
-  } else if (t < 0.66) {
-    col = mix(vec3(0.25, 0.25, 0.25), vec3(0.7, 0.7, 0.7), (t - 0.33) * 3.0);
-  } else {
-    col = mix(vec3(0.7, 0.7, 0.7), vec3(1., 1., 1.), (t - 0.66) * 3.0);
-  }
+  // Dark palette only (black, dark grays) so white logo stands out
+  vec3 col = mix(
+    vec3(0.0, 0.0, 0.0),
+    vec3(0.18, 0.18, 0.18),
+    t
+  );
+  col = mix(col, vec3(0.06, 0.06, 0.06), smoothstep(0.4, 0.6, t));
 
   out_color = vec4(col, 1.0);
 }
