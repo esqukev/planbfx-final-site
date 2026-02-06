@@ -15,9 +15,9 @@ export default function ParallaxBanner({
 }: ParallaxBannerProps) {
   // Three lines on desktop; on mobile only avoid awkward mid-word breaks (whitespace-nowrap per line)
   const titleLines = [
-    "We Don't Just Create Visuals",
-    "We Craft Moments That",
-    "Are Remembered",
+    "We don't just create visuals",
+    "We craft moments that",
+    "Are remembered",
   ];
   const sectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLParagraphElement>(null);
@@ -80,7 +80,7 @@ export default function ParallaxBanner({
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent" />
       </div>
 
-      <div className="relative z-10 max-w-5xl mx-auto text-center px-4 sm:px-8 md:px-12 lg:px-16 py-16 sm:py-24 md:py-32 lg:py-40">
+      <div className="relative z-10 max-w-5xl mx-auto text-center px-8 sm:px-8 md:px-12 lg:px-16 py-16 sm:py-24 md:py-32 lg:py-40">
         {/* Subtitle on top with fade in */}
         <p
           ref={subtitleRef}

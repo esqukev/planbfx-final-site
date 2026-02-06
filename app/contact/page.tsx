@@ -191,7 +191,7 @@ export default function ContactPage() {
                     Details
                   </label>
                   <p className="text-xs text-white/50 mb-2">
-                    If not enough details are provided we could not consider your inquiry.
+                    If not enough details are provided we could not consider your inquiry
                   </p>
                   <textarea
                     id="details"

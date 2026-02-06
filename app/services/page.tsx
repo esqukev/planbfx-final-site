@@ -33,7 +33,12 @@ function textWithSymbolFallback(text: string): React.ReactNode {
   return parts.length === 1 ? parts[0] : <>{parts.map((p, i) => <React.Fragment key={i}>{p}</React.Fragment>)}</>;
 }
 
-const PRODUCTS = [
+const PRODUCTS: Array<{
+  id: string;
+  title: string;
+  description: string;
+  videoUrl?: string;
+}> = [
   {
     id: 'live-painting',
     title: 'Live Painting',
@@ -45,6 +50,7 @@ const PRODUCTS = [
     title: 'Artificial Mirage',
     description:
       'Reality as an infinite canvas. We transform live video feeds into any imaginable concept, from familiar characters to abstract scenes. Here, the limit isn\'t the technology, but your imagination; we turn the environment and its subjects into a surreal, real-time visual experience.',
+    videoUrl: 'https://res.cloudinary.com/dpplgma25/video/upload/v1770338148/insterstellar_style_buv9dk.mp4',
   },
   {
     id: 'audio-reactive-art',
@@ -57,6 +63,7 @@ const PRODUCTS = [
     title: 'Interactive Branding / Advertising',
     description:
       'Dynamic text overlays and generative typography that react live to the environment, creating a smart, customized visual narrative for every brand.',
+    videoUrl: 'https://res.cloudinary.com/dpplgma25/video/upload/v1770338141/CYRIX_jcsd8k.mp4',
   },
   {
     id: 'logo-waterfall',
@@ -69,6 +76,7 @@ const PRODUCTS = [
     title: 'Projection Mapping + Visual Control Performance',
     description:
       'Surface intervention and live visual direction. We alter the perception of physical space through precision mapping, guided by a real-time visual performance that ensures a cohesive, high-impact atmosphere.',
+    videoUrl: 'https://res.cloudinary.com/dpplgma25/video/upload/v1770338660/IMG_3202_k8sfmw.mp4',
   },
   {
     id: 'customized-experience',
@@ -97,9 +105,20 @@ function ProductSection({
       <div className="grid w-full max-w-7xl grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16 lg:items-center">
         <div className={isEven ? 'lg:order-2' : ''}>
           <div className="aspect-video w-full overflow-hidden rounded-2xl bg-zinc-900/80 ring-1 ring-white/10">
-            <div className="flex h-full w-full items-center justify-center text-zinc-500 text-sm uppercase tracking-wider">
-              Preview
-            </div>
+            {product.videoUrl ? (
+              <video
+                src={product.videoUrl}
+                className="h-full w-full object-cover"
+                playsInline
+                muted
+                loop
+                autoPlay
+              />
+            ) : (
+              <div className="flex h-full w-full items-center justify-center text-zinc-500 text-sm uppercase tracking-wider">
+                Preview
+              </div>
+            )}
           </div>
         </div>
         <div className={isEven ? 'lg:order-1' : ''}>
@@ -153,10 +172,10 @@ export default function ServicesPage() {
       </div>
 
       <CTAFinalBanner
-        imageSrc="/bannerstage.jpg"
+        imageSrc="/Untitled-9580.jpg"
         subtitle="Innovate Your Experience"
         title="Art and technology unite at PlanB FX"
-        paragraph="Discover how we blend creativity with technology to create stunning interactive art. Explore our imaginative solutions designed for events that leave a lasting impression. Experience art like never before!"
+        paragraph="Discover how we blend creativity with technology to create stunning interactive art. Explore our imaginative solutions designed for events that leave a lasting impression. Experience art like never before."
         ctaText={<>Let<span className="font-fallback">&apos;</span>s talk</>}
         ctaHref="/contact"
         secondaryText=""
