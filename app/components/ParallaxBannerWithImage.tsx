@@ -108,29 +108,35 @@ export default function ParallaxBannerWithImage({
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent" />
       </div>
 
-      <div className="relative z-10 w-full flex items-center justify-center px-8 sm:px-8 md:px-12 lg:px-16 py-24 md:py-32 lg:py-40 text-center">
+      <div className="relative z-10 w-full min-h-[50vh] sm:min-h-[60vh] flex items-center justify-center px-6 sm:px-8 md:px-12 lg:px-16 py-20 sm:py-24 md:py-32 lg:py-40">
         {rotatingTitle ? (
-          <p
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white tracking-tight transition-all duration-[1200ms] ease-out w-full max-w-full flex flex-col items-center justify-center text-center"
+          <div
+            className="w-full flex justify-center items-center"
             style={{
               opacity: isVisible ? 1 : 0,
               transform: isVisible ? 'translateY(0)' : 'translateY(24px)',
-              transitionDelay: '0s',
-              textShadow: '0 2px 12px rgba(0,0,0,0.9), 0 4px 24px rgba(0,0,0,0.7), 0 0 40px rgba(0,0,0,0.4)',
+              transition: 'opacity 1200ms ease-out, transform 1200ms ease-out',
             }}
           >
-            <span className="inline-flex flex-wrap justify-center items-baseline gap-x-0 text-center w-full max-w-full">
-              <span className="text-center">{rotatingTitle.prefix.trim()}</span>
-              <span className="inline-block w-[0.3em] shrink-0" aria-hidden />
-              <span
-                ref={wordRef}
-                className="inline-block text-center align-baseline transition-[width] duration-500 ease-in-out overflow-visible min-w-[1ch] mx-auto"
-                style={{ width: `${currentWord.length}ch` }}
-              >
-                {currentWord}
+            <p
+              className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white tracking-tight w-full text-center"
+              style={{
+                textShadow: '0 2px 12px rgba(0,0,0,0.9), 0 4px 24px rgba(0,0,0,0.7), 0 0 40px rgba(0,0,0,0.4)',
+              }}
+            >
+              <span className="block text-center w-full">
+                <span>{rotatingTitle.prefix.trim()}</span>
+                <span className="inline-block w-[0.2em]" aria-hidden />
+                <span
+                  ref={wordRef}
+                  className="inline-block text-center min-w-[1ch] transition-[width] duration-500 ease-in-out"
+                  style={{ width: `${currentWord.length}ch` }}
+                >
+                  {currentWord}
+                </span>
               </span>
-            </span>
-          </p>
+            </p>
+          </div>
         ) : (
           <div className="flex flex-col items-center text-center">
             <p
