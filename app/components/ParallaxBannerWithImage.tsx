@@ -108,10 +108,10 @@ export default function ParallaxBannerWithImage({
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent" />
       </div>
 
-      <div className="relative z-10 w-full flex items-center justify-center px-8 md:px-12 lg:px-16 py-24 md:py-32 lg:py-40">
+      <div className="relative z-10 w-full flex items-center justify-center px-4 sm:px-8 md:px-12 lg:px-16 py-24 md:py-32 lg:py-40 text-center">
         {rotatingTitle ? (
           <p
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight transition-all duration-[1200ms] ease-out text-center"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white tracking-tight transition-all duration-[1200ms] ease-out w-full flex flex-col items-center justify-center"
             style={{
               opacity: isVisible ? 1 : 0,
               transform: isVisible ? 'translateY(0)' : 'translateY(24px)',
@@ -119,12 +119,11 @@ export default function ParallaxBannerWithImage({
               textShadow: '0 2px 12px rgba(0,0,0,0.9), 0 4px 24px rgba(0,0,0,0.7), 0 0 40px rgba(0,0,0,0.4)',
             }}
           >
-            <span className="inline-flex flex-wrap justify-center items-baseline gap-0 whitespace-nowrap">
-              {rotatingTitle.prefix.trim()}
-              <span className="inline-block w-[0.3em] shrink-0" aria-hidden />
+            <span className="inline-flex flex-wrap justify-center items-baseline gap-x-1 text-center">
+              <span className="text-center">{rotatingTitle.prefix.trim()}</span>
               <span
                 ref={wordRef}
-                className="inline-block text-left align-bottom transition-[width] duration-500 ease-in-out overflow-visible"
+                className="inline-block text-center align-baseline transition-[width] duration-500 ease-in-out overflow-visible min-w-[1ch]"
                 style={{ width: `${currentWord.length}ch` }}
               >
                 {currentWord}

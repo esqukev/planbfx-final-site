@@ -13,12 +13,8 @@ export default function ParallaxBanner({
   subtitle = "Where art becomes experiences",
   className = '',
 }: ParallaxBannerProps) {
-  // Split title into lines - using typographic apostrophe (')
-  const titleLines = [
-    "We don't just create visuals",
-    "we craft moments that",
-    "are remembered"
-  ];
+  // Single line so it wraps naturally on all viewports (no forced line breaks on mobile)
+  const titleText = "We don't just create visuals we craft moments that are remembered";
   const sectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLParagraphElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
@@ -92,63 +88,30 @@ export default function ParallaxBanner({
         >
           {subtitle}
         </p>
-        {/* Title with letter-by-letter fade in, split into lines */}
+        {/* Title: single block so it wraps naturally on mobile (no awkward line breaks) */}
         <div
           ref={titleRef}
-          className="text-4xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight max-w-full"
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight max-w-full"
+          style={{ transform: `translate3d(0, ${offset * 0.5}px, 0)` }}
         >
-          {titleLines.map((line, lineIndex) => {
-            let totalCharIndex = 0;
-            titleLines.slice(0, lineIndex).forEach((l) => {
-              totalCharIndex += l.length + 1;
-            });
-            return (
-              <p
-                key={lineIndex}
-                className="mb-0 md:mb-0.5 leading-tight whitespace-normal sm:whitespace-nowrap"
-                style={{
-                  transform: `translate3d(0, ${offset * (1 + lineIndex * 0.1)}px, 0)`,
-                  display: 'block',
-                }}
-              >
-                {line.split(' ').map((word, wordIndex) => {
-                  const wordStartIndex = totalCharIndex + line.split(' ').slice(0, wordIndex).join(' ').length + wordIndex;
-                  return (
-                    <span key={wordIndex} className="inline-block whitespace-nowrap">
-                      {word.split('').map((char, charIndex) => {
-                        const charTotalIndex = wordStartIndex + charIndex;
-                        const needsFallback = ["'", "'", "´", "-", "–", "—", "+", "/"].includes(char);
-                        const displayChar = char === "'" ? "'" : char;
-                        return (
-                          <span
-                            key={`${lineIndex}-${wordIndex}-${charIndex}`}
-                            className={`inline-block ${needsFallback ? 'font-fallback' : ''}`}
-                            style={{
-                              opacity: isVisible ? 1 : 0,
-                              transition: `opacity 1s ease ${charTotalIndex * 0.05}s`,
-                            }}
-                          >
-                            {displayChar}
-                          </span>
-                        );
-                      })}
-                      {wordIndex < line.split(' ').length - 1 && (
-                        <span
-                          className="inline-block w-1 sm:w-[0.3em]"
-                          style={{
-                            opacity: isVisible ? 1 : 0,
-                            transition: `opacity 1s ease ${wordStartIndex + word.length * 0.05}s`,
-                          }}
-                        >
-                          {' '}
-                        </span>
-                      )}
-                    </span>
-                  );
-                })}
-              </p>
-            );
-          })}
+          <p className="leading-tight break-words">
+            {titleText.split('').map((char, charIndex) => {
+              const needsFallback = ["'", "'", "´", "-", "–", "—", "+", "/", " "].includes(char);
+              const displayChar = char === " " ? "\u00A0" : char;
+              return (
+                <span
+                  key={charIndex}
+                  className={`inline-block ${needsFallback && char !== " " ? "font-fallback" : ""}`}
+                  style={{
+                    opacity: isVisible ? 1 : 0,
+                    transition: `opacity 1s ease ${charIndex * 0.04}s`,
+                  }}
+                >
+                  {displayChar}
+                </span>
+              );
+            })}
+          </p>
         </div>
       </div>
     </section>

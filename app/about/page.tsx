@@ -103,8 +103,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Banner final: foto + Art Greets Innovation, texto y botones Get in Touch / Explore Our Art */}
-      <CTAFinalBanner imageSrc="/bannerstage.jpg" />
+      {/* Banner final: foto + CUSTOM EXPERIENCES., texto y botones Get in Touch / Explore Our Art */}
+      <CTAFinalBanner imageSrc="/bannerstage.jpg" subtitle="CUSTOM EXPERIENCES." />
 
       <Footer />
     </main>
