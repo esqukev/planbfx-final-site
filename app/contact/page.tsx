@@ -5,7 +5,6 @@ import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import CursorTiltFigure from '../components/CursorTiltFigure';
 import PlanBFXText from '../components/PlanBFXText';
-import PlanBFXShaderBackground from '../components/PlanBFXShaderBackground';
 import ImageHero from '../components/ImageHero';
 import HyperSpaceBackground from '../components/HyperSpaceBackground';
 
@@ -102,11 +101,8 @@ export default function ContactPage() {
                   Email
                 </a>
               </div>
-              <div className="relative flex justify-start min-h-[240px] rounded-2xl overflow-hidden">
-                <PlanBFXShaderBackground />
-                <div className="relative z-10">
-                  <PlanBFXText />
-                </div>
+              <div className="flex justify-start">
+                <PlanBFXText />
               </div>
             </div>
 
