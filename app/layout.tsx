@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import Script from "next/script";
 import "./globals.css";
 import SmoothScroll from "./components/SmoothScroll";
 
@@ -40,10 +39,6 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-[100dvh] w-full m-0 p-0 bg-black overflow-x-hidden`}
       >
-        <Script
-          src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/MorphSVGPlugin.min.js"
-          strategy="beforeInteractive"
-        />
         <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>

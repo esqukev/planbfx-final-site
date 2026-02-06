@@ -104,11 +104,11 @@ function ProductSection({
     >
       <div className="grid w-full max-w-7xl grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16 lg:items-center">
         <div className={isEven ? 'lg:order-2' : ''}>
-          <div className="aspect-video w-full overflow-hidden rounded-2xl bg-zinc-900/80 ring-1 ring-white/10">
+          <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-zinc-900/80">
             {product.videoUrl ? (
               <video
                 src={product.videoUrl}
-                className="h-full w-full object-cover"
+                className="absolute inset-0 w-full h-full object-cover min-w-full min-h-full"
                 playsInline
                 muted
                 loop
