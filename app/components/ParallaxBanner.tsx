@@ -92,10 +92,10 @@ export default function ParallaxBanner({
         >
           {subtitle}
         </p>
-        {/* Title: 3 lines; on mobile each line stays together (no mid-word break) */}
+        {/* Title: 3 lines; on mobile smaller font + tighter tracking to fit; no line breaks */}
         <div
           ref={titleRef}
-          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight max-w-full"
+          className="text-xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight max-w-full tracking-[-0.02em] sm:tracking-normal"
         >
           {titleLines.map((line, lineIndex) => {
             let totalCharIndex = 0;
@@ -134,7 +134,7 @@ export default function ParallaxBanner({
                       })}
                       {wordIndex < line.split(' ').length - 1 && (
                         <span
-                          className="inline-block w-[0.3em]"
+                          className="inline-block w-[0.25em] sm:w-[0.3em]"
                           style={{
                             opacity: isVisible ? 1 : 0,
                             transition: `opacity 1s ease ${wordStartIndex + line.split(' ')[wordIndex].length * 0.05}s`,

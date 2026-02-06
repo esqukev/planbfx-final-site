@@ -104,11 +104,11 @@ function ProductSection({
     >
       <div className="grid w-full max-w-7xl grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16 lg:items-center">
         <div className={isEven ? 'lg:order-2' : ''}>
-          <div className="group relative aspect-video w-full overflow-hidden rounded-2xl bg-zinc-900/80 transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] hover:scale-[1.03]">
+          <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-zinc-900/80 md:transition-transform md:duration-500 md:ease-[cubic-bezier(0.4,0,0.2,1)] md:hover:scale-[1.25]">
             {product.videoUrl ? (
               <video
                 src={product.videoUrl}
-                className="absolute inset-0 w-full h-full object-cover min-w-full min-h-full rounded-2xl"
+                className="absolute inset-0 w-full h-full object-cover min-w-full min-h-full"
                 playsInline
                 muted
                 loop
