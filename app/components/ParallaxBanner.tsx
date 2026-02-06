@@ -92,10 +92,10 @@ export default function ParallaxBanner({
         >
           {subtitle}
         </p>
-        {/* Title: 3 lines; on mobile smaller font + tighter tracking to fit; no line breaks */}
+        {/* Title: 3 lines; mobile ~40% larger than before; no line breaks */}
         <div
           ref={titleRef}
-          className="text-xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight max-w-full tracking-[-0.02em] sm:tracking-normal"
+          className="text-[1.75rem] sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight max-w-full tracking-[-0.02em] sm:tracking-normal"
         >
           {titleLines.map((line, lineIndex) => {
             let totalCharIndex = 0;

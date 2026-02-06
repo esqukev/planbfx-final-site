@@ -36,9 +36,18 @@ export default function Navigation() {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 pt-3 px-3 md:pt-4 md:px-4">
+      {/* Mobile: overlay to close menu when clicking outside */}
+      {isMenuOpen && (
+        <button
+          type="button"
+          aria-label="Close menu"
+          className="fixed inset-0 z-[45] md:hidden bg-transparent"
+          onClick={() => setIsMenuOpen(false)}
+        />
+      )}
       {/* Blur bar: una sola barra con blur */}
       <div
-        className={`
+        className={`relative z-50
           w-full rounded-2xl
           transition-all duration-700 ease-out
           ${scrolled || isMenuOpen
