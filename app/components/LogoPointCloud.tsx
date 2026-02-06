@@ -224,7 +224,7 @@ export default function LogoPointCloud() {
       <Canvas
         camera={{ position: [0, 0, 180], fov: 45 }}
         style={{ width: '100%', height: '100%', background: 'transparent', border: 'none' }}
-        gl={{ alpha: false, antialias: true, powerPreference: 'high-performance', stencil: false }}
+        gl={{ alpha: true, antialias: true, powerPreference: 'high-performance', stencil: false }}
         dpr={[1, 2]}
       >
         <ambientLight intensity={1} />

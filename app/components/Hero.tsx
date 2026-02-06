@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import LogoPointCloud from './LogoPointCloud';
+import HeroShaderBackground from './HeroShaderBackground';
 
 export default function Hero() {
   const heroRef = useRef<HTMLElement>(null);
@@ -24,6 +25,7 @@ export default function Hero() {
       className="relative min-h-screen h-screen flex items-center justify-center overflow-hidden bg-black m-0 border-0 outline-none"
       style={{ willChange: 'transform', minHeight: '100dvh' }}
     >
+      <HeroShaderBackground />
       <div className="relative z-10 w-full h-full min-h-0 flex items-center justify-center border-0 outline-none overflow-hidden translate-y-[-50px] md:translate-y-0">
         <LogoPointCloud />
       </div>
