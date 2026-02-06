@@ -9,7 +9,8 @@ void main() {
 }
 `;
 
-// Adapted from warp/FBM concept - neutral colors (black, gray, white)
+// Adapted from shift3/PixelSort concept - simple UV + horizontal banding
+// Dark palette so white logo stands out
 const FRAGMENT_SHADER = `#version 300 es
 precision highp float;
 
@@ -33,37 +34,19 @@ float noise(vec2 p) {
   return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);
 }
 
-float fbm(vec2 p) {
-  float v = 0.0;
-  float f = 1.0;
-  float a = 0.5;
-  for (int i = 0; i < 5; i++) {
-    v += a * noise(p * f);
-    f *= 2.0;
-    a *= 0.5;
-  }
-  return v;
-}
-
-vec2 rot(vec2 v, float a) {
-  return mat2(cos(a), -sin(a), sin(a), cos(a)) * v;
-}
-
 void main() {
   vec2 uv = gl_FragCoord.xy / u_resolution.xy;
   vec2 st = uv * vec2(u_resolution.x / u_resolution.y, 1.0);
-  st = st - 0.5;
+  vec2 _uv = st - 0.5;
 
-  vec2 rotatedUV = rot(st, 3.14159 * 0.25);
-  float len = length(st);
-  vec2 warpedUV = (st + 0.25) * len * rotatedUV * 2.0;
+  // Horizontal banding (PixelSort horizontal direction + rectInner feel)
+  float bandY = floor(st.y * 35.0 + u_time * 2.0) * 0.0286;
+  float bandX = floor(st.x * 25.0) * 0.04;
+  float n = noise(vec2(bandX, bandY) * 10.0);
+  float n2 = noise(_uv * 4.0 + vec2(u_time * 0.5, 0.));
 
-  float n = fbm(warpedUV + vec2(0., u_time * 0.15));
-  vec2 warpedUV2 = warpedUV + warpedUV * n * 0.1;
-  float n2 = fbm(warpedUV2 * 2.0 + vec2(u_time * 0.1, 0.));
-
-  float t = n2 * 0.5 + n * 0.5 + 0.5;
-  t = fract(t + u_time * 0.05);
+  float t = n * 0.6 + n2 * 0.4;
+  t = fract(t + bandY);
 
   // Dark palette only (black, dark grays) so white logo stands out
   vec3 col = mix(
@@ -71,7 +54,7 @@ void main() {
     vec3(0.18, 0.18, 0.18),
     t
   );
-  col = mix(col, vec3(0.06, 0.06, 0.06), smoothstep(0.4, 0.6, t));
+  col = mix(col, vec3(0.06, 0.06, 0.06), smoothstep(0.3, 0.7, t));
 
   out_color = vec4(col, 1.0);
 }
