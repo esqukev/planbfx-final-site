@@ -31,8 +31,10 @@ export default function PlanBFXText() {
 
       gsap.set(lines, { perspective: 700, transformStyle: 'preserve-3d' });
 
-      const animTime = 0.9;
-      const lineStagger = 0.45;
+      const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 768;
+      const animTime = isDesktop ? 1.8 : 0.9;
+      const lineStagger = isDesktop ? 0.9 : 0.45;
+      const charStagger = isDesktop ? 0.16 : 0.08;
       tl = gsap.timeline({ repeat: -1 });
 
       lines.forEach((line, index) => {
@@ -43,7 +45,7 @@ export default function PlanBFXText() {
           { rotationX: -90 },
           {
             rotationX: 90,
-            stagger: 0.08,
+            stagger: charStagger,
             duration: animTime,
             ease: 'none',
             transformOrigin,
