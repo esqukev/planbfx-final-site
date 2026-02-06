@@ -50,7 +50,7 @@ const PRODUCTS: Array<{
     title: 'Artificial Mirage',
     description:
       'Reality as an infinite canvas. We transform live video feeds into any imaginable concept, from familiar characters to abstract scenes. Here, the limit isn\'t the technology, but your imagination; we turn the environment and its subjects into a surreal, real-time visual experience.',
-    videoUrl: 'https://res.cloudinary.com/dpplgma25/video/upload/v1770338148/insterstellar_style_buv9dk.mp4',
+    videoUrl: 'https://res.cloudinary.com/dpplgma25/video/upload/v1770338141/CYRIX_jcsd8k.mp4',
   },
   {
     id: 'audio-reactive-art',
