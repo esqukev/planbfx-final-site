@@ -155,7 +155,7 @@ export default function ServicesPage() {
       <CTAFinalBanner
         imageSrc="/bannerstage.jpg"
         subtitle="Innovate Your Experience"
-        title="Art and Technology Unite at PlanB FX"
+        title="Art and technology unite at PlanB FX"
         paragraph="Discover how we blend creativity with technology to create stunning interactive art. Explore our imaginative solutions designed for events that leave a lasting impression. Experience art like never before!"
         ctaText={<>Let<span className="font-fallback">&apos;</span>s talk</>}
         ctaHref="/contact"

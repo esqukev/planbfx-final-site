@@ -16,20 +16,20 @@ interface ParallaxLinkProps {
  * Enlace con efecto parallax al scroll: se mueve suavemente con el scroll (de abajo hacia arriba).
  */
 export default function ParallaxLink({ href, children, className = '' }: ParallaxLinkProps) {
-  const ref = useRef<HTMLAnchorElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!ref.current) return;
+    if (!wrapperRef.current) return;
 
     const tween = gsap.fromTo(
-      ref.current,
+      wrapperRef.current,
       { y: 40, opacity: 0.7 },
       {
         y: 0,
         opacity: 1,
         ease: 'none',
         scrollTrigger: {
-          trigger: ref.current,
+          trigger: wrapperRef.current,
           start: 'top 90%',
           end: 'top 30%',
           scrub: true,
@@ -44,8 +44,10 @@ export default function ParallaxLink({ href, children, className = '' }: Paralla
   }, []);
 
   return (
-    <a ref={ref} href={href} className={className}>
-      {children}
-    </a>
+    <div ref={wrapperRef} className="inline-block">
+      <a href={href} className={className}>
+        {children}
+      </a>
+    </div>
   );
 }

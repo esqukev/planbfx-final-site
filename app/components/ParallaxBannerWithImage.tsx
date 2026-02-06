@@ -119,8 +119,9 @@ export default function ParallaxBannerWithImage({
               textShadow: '0 2px 12px rgba(0,0,0,0.9), 0 4px 24px rgba(0,0,0,0.7), 0 0 40px rgba(0,0,0,0.4)',
             }}
           >
-            <span className="inline-flex flex-wrap justify-center items-baseline gap-x-1 text-center">
+            <span className="inline-flex flex-wrap justify-center items-baseline gap-x-0 text-center">
               <span className="text-center">{rotatingTitle.prefix.trim()}</span>
+              <span className="inline-block w-[0.3em] shrink-0" aria-hidden />
               <span
                 ref={wordRef}
                 className="inline-block text-center align-baseline transition-[width] duration-500 ease-in-out overflow-visible min-w-[1ch]"

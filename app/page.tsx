@@ -59,7 +59,7 @@ export default function Home() {
         <ProjectGrid />
       </div>
 
-      {/* Art Greets Innovation — fade in de derecha a izquierda */}
+      {/* Art In Motion — fade in de derecha a izquierda */}
       <section
         id="services"
         className="m-0 p-0 text-white overflow-hidden"
@@ -69,7 +69,7 @@ export default function Home() {
       >
         <div className="max-w-7xl mx-auto px-4 md:px-8 py-24 md:py-32 lg:py-40 text-center">
           <FadeInFromRight className="text-4xl md:text-6xl lg:text-7xl font-bold text-white">
-            Art Greets Innovation
+            Art In Motion
           </FadeInFromRight>
           <ParallaxLink
             href="/contact#contact-form"
