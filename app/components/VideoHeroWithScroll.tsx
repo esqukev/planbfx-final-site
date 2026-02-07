@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 
 type VideoHeroWithScrollProps = {
   videoUrl: string;
@@ -8,10 +9,11 @@ type VideoHeroWithScrollProps = {
 
 /**
  * Banner con video y mismo efecto que ImageHero: fade out al hacer scroll.
- * (El video que estaba en About, para usar en Services.)
+ * Logo centrado que aparece y desaparece.
  */
 export default function VideoHeroWithScroll({ videoUrl }: VideoHeroWithScrollProps) {
   const heroRef = useRef<HTMLElement>(null);
+  const [logoVisible, setLogoVisible] = useState(true);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,6 +25,13 @@ export default function VideoHeroWithScroll({ videoUrl }: VideoHeroWithScrollPro
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setLogoVisible((v) => !v);
+    }, 3000);
+    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -41,6 +50,25 @@ export default function VideoHeroWithScroll({ videoUrl }: VideoHeroWithScrollPro
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/40" aria-hidden />
+      </div>
+      <div
+        className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none"
+        aria-hidden
+      >
+        <div
+          className="relative w-48 h-24 md:w-64 md:h-32 opacity-90"
+          style={{
+            opacity: logoVisible ? 0.9 : 0,
+            transition: 'opacity 1.2s ease-in-out',
+          }}
+        >
+          <Image
+            src="/planb-logo.svg"
+            alt=""
+            fill
+            className="object-contain"
+          />
+        </div>
       </div>
     </section>
   );
