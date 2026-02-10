@@ -3,17 +3,16 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Trans from './Trans';
 import { useLanguage } from '../context/LanguageContext';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const STEP_KEYS = [
-  { id: '01', subtitle: 'works.step1subtitle', code: 'works.step1code', desc: 'works.step1desc' },
-  { id: '02', subtitle: 'works.step2subtitle', code: 'works.step2code', desc: 'works.step2desc' },
-  { id: '03', subtitle: 'works.step3subtitle', code: 'works.step3code', desc: 'works.step3desc' },
-  { id: '04', subtitle: 'works.step4subtitle', code: 'works.step4code', desc: 'works.step4desc' },
-] as const;
+const processStepKeys = [
+  { id: '01', subtitleKey: 'home.process.step1sub', codeKey: 'home.process.step1code', descKey: 'home.process.step1desc' },
+  { id: '02', subtitleKey: 'home.process.step2sub', codeKey: 'home.process.step2code', descKey: 'home.process.step2desc' },
+  { id: '03', subtitleKey: 'home.process.step3sub', codeKey: 'home.process.step3code', descKey: 'home.process.step3desc' },
+  { id: '04', subtitleKey: 'home.process.step4sub', codeKey: 'home.process.step4code', descKey: 'home.process.step4desc' },
+];
 
 export default function ProjectGrid() {
   const { t } = useLanguage();
@@ -78,20 +77,18 @@ export default function ProjectGrid() {
             ref={subtitleRef}
             className="text-sm uppercase tracking-[0.3em] text-zinc-400 max-w-2xl mx-auto"
           >
-            <Trans>{t('works.subtitle')}</Trans>
+            {t('home.process.discover')}
           </p>
         </div>
 
-        {/* Vertical timeline: línea por detrás, cards encima y centradas */}
         <div className="relative">
-          {/* Línea central (por detrás de las cards) */}
           <div
             ref={lineRef}
             className="absolute left-1/2 top-0 bottom-0 w-px bg-zinc-600 -translate-x-1/2 z-0"
             aria-hidden
           />
 
-          {STEP_KEYS.map((step, index) => (
+          {processStepKeys.map((step, index) => (
             <div
               key={step.id}
               ref={(el) => {
@@ -107,13 +104,13 @@ export default function ProjectGrid() {
               >
                 <div className="rounded-2xl border-0 bg-zinc-900/80 p-6 md:p-8 shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(255,255,255,0.08)]">
                   <span className="text-xs font-mono uppercase tracking-widest text-zinc-400 block mb-2">
-                    {t(step.subtitle)}
+                    {t(step.subtitleKey)}
                   </span>
                   <h3 className="text-xl md:text-2xl font-semibold text-white mb-3">
-                    {t(step.code)}
+                    {t(step.codeKey)}
                   </h3>
                   <p className="text-zinc-400 text-sm md:text-base leading-relaxed text-justify">
-                    {t(step.desc)}
+                    {t(step.descKey)}
                   </p>
                 </div>
               </div>

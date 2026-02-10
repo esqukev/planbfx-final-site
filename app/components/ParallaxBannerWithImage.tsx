@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import gsap from 'gsap';
+import { useLanguage } from '../context/LanguageContext';
 
 type ParallaxBannerWithImageProps = {
   imageSrc?: string;
@@ -17,6 +18,7 @@ export default function ParallaxBannerWithImage({
   className = '',
   rotatingTitle,
 }: ParallaxBannerWithImageProps) {
+  const { t } = useLanguage();
   const sectionRef = useRef<HTMLElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
   const wordRef = useRef<HTMLSpanElement>(null);
@@ -147,7 +149,7 @@ export default function ParallaxBannerWithImage({
                 transitionDelay: '0s',
               }}
             >
-              TAKE THE NEXT STEP
+              {t('home.takeNextStep')}
             </p>
             <div
               className="transition-all duration-[1200ms] ease-out"
@@ -161,7 +163,7 @@ export default function ParallaxBannerWithImage({
                 href="/services"
                 className="inline-block text-sm uppercase tracking-[0.35em] text-zinc-400 hover:text-white focus:outline-none focus:text-white transition-all duration-300 ease-out hover:scale-[1.04] focus:scale-[1.04]"
               >
-                SEE OUR SERVICES
+                {t('home.seeOurServices')}
               </Link>
             </div>
           </div>

@@ -8,8 +8,6 @@ type VantaHaloProps = {
   logoSrc?: string;
   /** Optional class for the container (min-height, etc.) */
   className?: string;
-  /** Optional class for the logo wrapper (e.g. larger size) */
-  logoClassName?: string;
 };
 
 function loadScript(src: string): Promise<void> {
@@ -27,7 +25,7 @@ function loadScript(src: string): Promise<void> {
   });
 }
 
-export default function VantaHalo({ logoSrc, className = '', logoClassName = 'w-32 h-16 sm:w-40 sm:h-20 md:w-48 md:h-24' }: VantaHaloProps) {
+export default function VantaHalo({ logoSrc, className = '' }: VantaHaloProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const effectRef = useRef<{ destroy: () => void } | null>(null);
 
@@ -81,7 +79,7 @@ export default function VantaHalo({ logoSrc, className = '', logoClassName = 'w-
     >
       {logoSrc && (
         <div className="absolute inset-0 z-[100] flex items-center justify-center pointer-events-none">
-          <div className={`relative opacity-95 ${logoClassName}`}>
+          <div className="relative w-32 h-16 sm:w-40 sm:h-20 md:w-48 md:h-24 opacity-95 scale-125">
             <Image
               src={logoSrc}
               alt=""

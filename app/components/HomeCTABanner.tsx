@@ -5,36 +5,28 @@ import Image from 'next/image';
 import Link from 'next/link';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useLanguage } from '../context/LanguageContext';
 
 gsap.registerPlugin(ScrollTrigger);
 
 type HomeCTABannerProps = {
   imageSrc: string;
-  subtitle?: string;
-  titleLine1?: string;
-  titleLine2?: string;
-  paragraph?: string;
-  exploreServicesText?: string;
-  getInTouchText?: string;
 };
 
 /**
  * Banner parallax debajo de Art Meets Innovation: Crafting Moments, Innovative Art Meets Technology, párrafo y botones.
  */
-export default function HomeCTABanner({
-  imageSrc,
-  subtitle = 'Crafting Moments',
-  titleLine1 = 'Innovative Art',
-  titleLine2 = 'Meets Technology',
-  paragraph = 'Welcome to PlanB FX, where creativity and technology converge. We breathe life into events through interactive art, smart coding, and AI-driven experiences. Let us elevate your vision into a captivating reality.',
-  exploreServicesText = 'Explore services',
-  getInTouchText = 'Get in touch',
-}: HomeCTABannerProps) {
+export default function HomeCTABanner({ imageSrc }: HomeCTABannerProps) {
+  const { t } = useLanguage();
   const sectionRef = useRef<HTMLElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const [imageOffset, setImageOffset] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
+  const craftingMoments = t('home.ctaBanner.craftingMoments');
+  const innovativeArt = t('home.ctaBanner.innovativeArt');
+  const meetsTechnology = t('home.ctaBanner.meetsTechnology');
+  const paragraph = t('home.ctaBanner.paragraph');
 
   useEffect(() => {
     const onScroll = () => {
@@ -121,9 +113,8 @@ export default function HomeCTABanner({
         ref={contentRef}
         className="relative z-10 max-w-3xl mx-auto text-center px-8 md:px-12 lg:px-16 py-24 md:py-32 lg:py-40"
       >
-        {/* Subtitle: letter-by-letter fade-in (typewriter) */}
         <p className="text-sm uppercase tracking-[0.3em] text-zinc-400 block mb-4">
-          {subtitle.split('').map((char, i) => (
+          {craftingMoments.split('').map((char, i) => (
             <span
               key={`st-${i}`}
               className={['\'', '"', '-', '–', '—', '+', '/'].includes(char) ? 'inline-block font-fallback' : 'inline-block'}
@@ -136,16 +127,15 @@ export default function HomeCTABanner({
             </span>
           ))}
         </p>
-        {/* Title: dos líneas — Innovative Art / Meets Technology */}
         <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight mb-6 md:mb-8">
           <span className="block">
-            {titleLine1.split('').map((char, i) => (
+            {innovativeArt.split('').map((char, i) => (
               <span
                 key={`t1-${i}`}
                 className={['\'', '"', '-', '–', '—', '+', '/'].includes(char) ? 'inline-block font-fallback' : 'inline-block'}
                 style={{
                   opacity: isVisible ? 1 : 0,
-                  transition: `opacity 0.6s ease ${(16 + i) * 0.03}s`,
+                  transition: `opacity 0.6s ease ${(innovativeArt.length + 1 + i) * 0.03}s`,
                 }}
               >
                 {char === ' ' ? '\u00A0' : char}
@@ -153,13 +143,13 @@ export default function HomeCTABanner({
             ))}
           </span>
           <span className="block">
-            {titleLine2.split('').map((char, i) => (
+            {meetsTechnology.split('').map((char, i) => (
               <span
                 key={`t2-${i}`}
                 className={['\'', '"', '-', '–', '—', '+', '/'].includes(char) ? 'inline-block font-fallback' : 'inline-block'}
                 style={{
                   opacity: isVisible ? 1 : 0,
-                  transition: `opacity 0.6s ease ${(32 + i) * 0.03}s`,
+                  transition: `opacity 0.6s ease ${(innovativeArt.length + meetsTechnology.length + 2 + i) * 0.03}s`,
                 }}
               >
                 {char === ' ' ? '\u00A0' : char}
@@ -167,13 +157,11 @@ export default function HomeCTABanner({
             ))}
           </span>
         </h2>
-        {/* Paragraph: cada palabra en una línea (ninguna se corta); letter-by-letter */}
         <p className="text-base md:text-lg text-white/80 leading-relaxed mb-10 max-w-2xl mx-auto">
           {(() => {
-            const full = paragraph;
-            const words = full.split(' ');
+            const words = paragraph.split(' ');
             const sym = ["'", '"', '-', '–', '—', '+', '/'];
-            let charIdx = 48;
+            let charIdx = 0;
             return (
               <>
                 {words.map((word, wi) => (
@@ -206,13 +194,13 @@ export default function HomeCTABanner({
             href="/services"
             className="inline-flex items-center justify-center px-8 py-4 border-2 border-white/60 text-white font-semibold rounded-full hover:bg-white/10 transition-all duration-300 ease-out hover:scale-[1.03] text-base"
           >
-            {exploreServicesText}
+            {t('home.ctaBanner.exploreServices')}
           </Link>
           <Link
             href="/contact#contact-form"
             className="inline-flex items-center justify-center px-8 py-4 border-2 border-white/60 text-white font-semibold rounded-full hover:bg-white/10 transition-all duration-300 ease-out hover:scale-[1.03] text-base"
           >
-            {getInTouchText}
+            {t('home.ctaBanner.getInTouch')}
           </Link>
         </div>
       </div>

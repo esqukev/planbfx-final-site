@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { useLanguage } from '../context/LanguageContext';
 
 type ParallaxBannerProps = {
   title?: string;
@@ -9,16 +10,17 @@ type ParallaxBannerProps = {
 };
 
 export default function ParallaxBanner({
-  title = "We don't just create visuals we craft moments that move",
-  subtitle = "Where art becomes experiences",
+  title,
+  subtitle,
   className = '',
 }: ParallaxBannerProps) {
-  // Three lines on desktop; on mobile only avoid awkward mid-word breaks (whitespace-nowrap per line)
+  const { t } = useLanguage();
   const titleLines = [
-    "We don't just create visuals,",
-    "we craft moments that",
-    "are remembered",
+    t('home.parallax.line1'),
+    t('home.parallax.line2'),
+    t('home.parallax.line3'),
   ];
+  const subtitleText = subtitle ?? t('home.parallax.subtitle');
   const sectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLParagraphElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
@@ -90,7 +92,7 @@ export default function ParallaxBanner({
             opacity: isVisible ? 1 : 0,
           }}
         >
-          {subtitle}
+          {subtitleText}
         </p>
         {/* Title: 3 lines; mobile ~40% larger than before; no line breaks */}
         <div

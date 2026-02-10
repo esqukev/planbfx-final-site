@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useLanguage } from '../context/LanguageContext';
 
 export default function Footer() {
-  const { t } = useLanguage();
+  const { t, tf } = useLanguage();
   return (
     <footer className="bg-black text-white py-16 px-4 md:px-8 m-0">
       <div className="max-w-7xl mx-auto">
@@ -18,10 +18,10 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-semibold mb-4 uppercase tracking-wider">{t('footer.quickLinks')}</h4>
             <ul className="space-y-2 text-zinc-400">
-              <li><Link href="/" className="hover:text-white transition-colors">{t('nav.home')}</Link></li>
-              <li><Link href="/about" className="hover:text-white transition-colors">{t('nav.about')}</Link></li>
-              <li><Link href="/services" className="hover:text-white transition-colors">{t('nav.services')}</Link></li>
-              <li><Link href="/contact" className="hover:text-white transition-colors">{t('nav.contact')}</Link></li>
+              <li><Link href="/" className="hover:text-white transition-colors">{t('footer.home')}</Link></li>
+              <li><Link href="/about" className="hover:text-white transition-colors">{t('footer.about')}</Link></li>
+              <li><Link href="/services" className="hover:text-white transition-colors">{t('footer.services')}</Link></li>
+              <li><Link href="/contact" className="hover:text-white transition-colors">{t('footer.contactLink')}</Link></li>
             </ul>
           </div>
           <div>
@@ -62,7 +62,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="border-t border-zinc-800 pt-8 text-center text-zinc-400 text-sm">
-          <span className="font-fallback">©</span> 2025 PlanB FX. {t('footer.rights')}
+          {tf('footer.rights')}
         </div>
       </div>
     </footer>

@@ -1,15 +1,14 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { useLanguage } from '../context/LanguageContext';
 
 interface VideoHeroProps {
   videoUrl: string;
-  line1?: string;
-  line2?: string;
-  line3?: string;
 }
 
-export default function VideoHero({ videoUrl, line1 = 'INTERACTIVE ART', line2 = '[PLANBFX]', line3 = 'FOR YOUR SPACES' }: VideoHeroProps) {
+export default function VideoHero({ videoUrl }: VideoHeroProps) {
+  const { t } = useLanguage();
   const videoRef = useRef<HTMLVideoElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
   const [viewportHeight, setViewportHeight] = useState(0);
@@ -139,7 +138,7 @@ export default function VideoHero({ videoUrl, line1 = 'INTERACTIVE ART', line2 =
               fontFamily: 'monospace, "Courier New", Courier, monospace'
             }}
           >
-            {line1}
+            {t('home.video.1')}
           </div>
           <div 
             className="text-white font-bold uppercase shrink-0 text-center flex-1 min-w-0"
@@ -150,7 +149,7 @@ export default function VideoHero({ videoUrl, line1 = 'INTERACTIVE ART', line2 =
               fontFamily: 'monospace, "Courier New", Courier, monospace'
             }}
           >
-            {line2}
+            {t('home.video.2')}
           </div>
           <div 
             className="text-white font-bold uppercase shrink-0 text-right flex-1 min-w-0"
@@ -161,7 +160,7 @@ export default function VideoHero({ videoUrl, line1 = 'INTERACTIVE ART', line2 =
               fontFamily: 'monospace, "Courier New", Courier, monospace'
             }}
           >
-            {line3}
+            {t('home.video.3')}
           </div>
         </div>
       </div>

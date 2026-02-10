@@ -4,7 +4,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import type { ReactNode } from 'react';
 import { useEffect, useRef, useState } from 'react';
-import Trans from './Trans';
 
 interface ContentSectionProps {
   title: string;
@@ -15,7 +14,7 @@ interface ContentSectionProps {
   reverse?: boolean;
   stats?: Array<{ number: string; numberSuffix?: string; label: string }>;
   learnMoreLink?: string;
-  learnMoreLabel?: string;
+  learnMoreText?: string;
   backgroundClassName?: string;
 }
 
@@ -28,7 +27,7 @@ export default function ContentSection({
   reverse = false,
   stats,
   learnMoreLink,
-  learnMoreLabel = 'Learn More',
+  learnMoreText = 'Learn More',
   backgroundClassName,
 }: ContentSectionProps) {
   const sectionRef = useRef<HTMLElement>(null);
@@ -88,7 +87,7 @@ export default function ContentSection({
             <p className={`text-[1.1rem] ${isDarkSection ? 'text-zinc-300' : 'text-zinc-600 dark:text-zinc-400'} mb-8 leading-relaxed transition-all duration-1000 delay-200 ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}>
-              <Trans>{description}</Trans>
+              {description}
             </p>
             {stats && (
               <div className="grid grid-cols-3 gap-8 mt-12">
@@ -115,7 +114,7 @@ export default function ContentSection({
                 }`}
               >
                 <span className="inline-block group-hover:scale-110 transition-transform duration-300">
-                  {learnMoreLabel}
+                  {learnMoreText}
                 </span>
                 <svg 
                   className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" 

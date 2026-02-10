@@ -7,42 +7,43 @@ import CursorTiltFigure from '../components/CursorTiltFigure';
 import VantaHalo from '../components/VantaHalo';
 import ImageHero from '../components/ImageHero';
 import HyperSpaceBackground from '../components/HyperSpaceBackground';
-import Trans from '../components/Trans';
 import { useLanguage } from '../context/LanguageContext';
 
-const VALIDATION: Record<string, string> = {
-  name: 'Please enter your name.',
-  email: 'Please enter a valid email address.',
-  phone: 'Please enter your phone number.',
-  details: 'Please provide details about your inquiry.',
-};
-
-const FAQ_KEYS = [
-  { q: 'contact.faq1q', a: 'contact.faq1a' },
-  { q: 'contact.faq2q', a: 'contact.faq2a' },
-  { q: 'contact.faq3q', a: 'contact.faq3a' },
-  { q: 'contact.faq4q', a: 'contact.faq4a' },
-  { q: 'contact.faq5q', a: 'contact.faq5a' },
-] as const;
+const FAQ_ITEMS = [
+  { questionKey: 'contact.faq1q', answerKey: 'contact.faq1a' },
+  { questionKey: 'contact.faq2q', answerKey: 'contact.faq2a' },
+  { questionKey: 'contact.faq3q', answerKey: 'contact.faq3a' },
+  { questionKey: 'contact.faq4q', answerKey: 'contact.faq4a' },
+  { questionKey: 'contact.faq5q', answerKey: 'contact.faq5a' },
+];
 
 export default function ContactPage() {
-  const { t } = useLanguage();
+  const { t, tf } = useLanguage();
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const [modal, setModal] = useState<'errors' | 'success' | null>(null);
-  const [errors, setErrors] = useState<string[]>([]);
+  const [formErrors, setFormErrors] = useState<Record<string, string>>({});
+
+  const clearError = (field: string) => {
+    setFormErrors((prev) => {
+      const next = { ...prev };
+      delete next[field];
+      return next;
+    });
+  };
 
   const validate = (form: HTMLFormElement): boolean => {
-    const d = new FormData(form);
-    const list: string[] = [];
-    if (!(d.get('name') as string)?.trim()) list.push(VALIDATION.name);
-    if (!(d.get('phone') as string)?.trim()) list.push(VALIDATION.phone);
-    const email = (d.get('email') as string)?.trim();
-    if (!email) list.push(VALIDATION.email);
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) list.push(VALIDATION.email);
-    if (!(d.get('details') as string)?.trim()) list.push(VALIDATION.details);
-    setErrors(list);
-    if (list.length) setModal('errors');
-    return list.length === 0;
+    const data = new FormData(form);
+    const errors: Record<string, string> = {};
+    const name = (data.get('name') as string)?.trim();
+    const email = (data.get('email') as string)?.trim();
+    const phone = (data.get('phone') as string)?.trim();
+    const details = (data.get('details') as string)?.trim();
+    if (!name) errors.name = t('contact.validation.name');
+    if (!email) errors.email = t('contact.validation.email');
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errors.email = t('contact.validation.emailInvalid');
+    if (!phone) errors.phone = t('contact.validation.phone');
+    if (!details) errors.details = t('contact.validation.details');
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
   };
 
   useEffect(() => {
@@ -52,39 +53,27 @@ export default function ContactPage() {
     }
   }, []);
 
+  const inputBase = 'w-full px-4 py-3 rounded-xl bg-white/10 border text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-transparent transition font-fallback';
+  const inputError = 'border-red-500/60 focus:ring-red-500/40';
+
   return (
     <main className="relative min-h-screen bg-black text-white overflow-x-hidden overflow-y-auto">
       <Navigation />
+      <ImageHero imageSrc="/letyago.jpg" imageAlt="Contact" />
 
-      <ImageHero
-        imageSrc="/letyago.jpg"
-        imageAlt="Contact"
-      />
-
-      <section className="relative py-24 md:py-32 px-4 md:px-8 min-h-screen">
+      <section className="relative py-24 md:py-32 px-4 md:px-8 overflow-x-hidden min-h-screen">
         <HyperSpaceBackground />
         <div className="relative z-10 max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
             <div className="text-left">
-              <CursorTiltFigure
-                className="mb-12 flex justify-start"
-                maxTilt={36}
-                perspective={1000}
-              >
+              <CursorTiltFigure className="mb-12 flex justify-start" maxTilt={36} perspective={1000}>
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
-                  {t('contact.title')}
+                  {tf('contact.title')}
                 </h1>
               </CursorTiltFigure>
-
-              <p className="text-2xl md:text-3xl font-light text-white/90 mb-8">
-                {t('contact.subtitle')}
-              </p>
-              <p className="text-lg text-white/70 leading-relaxed mb-6 text-justify">
-                <Trans>{t('contact.intro')}</Trans>
-              </p>
-              <p className="text-lg font-semibold text-white/90 mb-10">
-                {t('contact.getInContact')}
-              </p>
+              <p className="text-2xl md:text-3xl font-light text-white/90 mb-8">{tf('contact.subtitle')}</p>
+              <p className="text-lg text-white/70 leading-relaxed mb-6 text-justify">{t('contact.intro')}</p>
+              <p className="text-lg font-semibold text-white/90 mb-10">{t('contact.getInContact')}</p>
 
               <div className="flex flex-wrap gap-4 md:gap-6">
                 <a
@@ -108,30 +97,29 @@ export default function ContactPage() {
                   Email
                 </a>
               </div>
-              <div className="mt-10 flex justify-start w-full overflow-visible py-6">
-                <div className="w-full max-w-2xl overflow-visible" style={{ minHeight: 480 }}>
-                  <VantaHalo logoSrc="/logos/Property-1-Variant4.svg" className="min-h-[480px] w-full bg-transparent overflow-visible" logoClassName="w-40 h-20 sm:w-52 sm:h-28 md:w-60 md:h-30" />
+
+              {/* VantaHalo just below buttons, 25% larger, no clipping */}
+              <div className="flex justify-center w-full overflow-visible mt-8 md:mt-10 py-6">
+                <div className="relative w-full max-w-2xl min-h-[480px] overflow-visible rounded-2xl">
+                  <VantaHalo
+                    logoSrc="/logos/Property-1-Variant4.svg"
+                    className="min-h-[480px] w-full bg-transparent overflow-visible"
+                  />
                 </div>
               </div>
             </div>
 
             <div id="contact-form" className="text-left scroll-mt-24">
-              <h2 className="text-2xl md:text-3xl font-bold mb-6">
-                {t('contact.readyTitle')}
-              </h2>
-              <p className="text-lg text-white/70 leading-relaxed mb-4">
-                {t('contact.readyDesc1')}
-              </p>
-              <p className="text-lg text-white/70 leading-relaxed mb-8">
-                {t('contact.readyDesc2')}
-              </p>
+              <h2 className="text-2xl md:text-3xl font-bold mb-6">{t('contact.readyTitle')}</h2>
+              <p className="text-lg text-white/70 leading-relaxed mb-4">{t('contact.readyDesc1')}</p>
+              <p className="text-lg text-white/70 leading-relaxed mb-8">{t('contact.readyDesc2')}</p>
 
               <form
                 noValidate
                 className="space-y-6"
                 onSubmit={(e) => {
                   e.preventDefault();
-                  if (validate(e.currentTarget)) setModal('success');
+                  validate(e.currentTarget);
                 }}
               >
                 <div>
@@ -142,10 +130,16 @@ export default function ContactPage() {
                     id="name"
                     name="name"
                     type="text"
-                    required
-                    className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-transparent transition font-fallback"
-                    placeholder="Your name"
+                    className={`${inputBase} ${formErrors.name ? inputError : 'border-white/20'}`}
+                    placeholder={t('contact.name')}
+                    onBlur={() => clearError('name')}
+                    onChange={() => clearError('name')}
                   />
+                  {formErrors.name && (
+                    <p className="mt-1.5 text-sm text-red-400 rounded-lg bg-red-500/10 border border-red-500/20 backdrop-blur-sm px-2 py-1" role="alert">
+                      {formErrors.name}
+                    </p>
+                  )}
                 </div>
                 <div>
                   <label htmlFor="company" className="block text-sm font-medium text-white/80 mb-2">
@@ -155,33 +149,21 @@ export default function ContactPage() {
                     id="company"
                     name="company"
                     type="text"
-                    className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-transparent transition font-fallback"
-                    placeholder="Company or event name"
+                    className={`${inputBase} border-white/20`}
+                    placeholder={t('contact.company')}
                   />
                 </div>
                 <div>
                   <label htmlFor="city" className="block text-sm font-medium text-white/80 mb-2">
                     {t('contact.city')}
                   </label>
-                  <input
-                    id="city"
-                    name="city"
-                    type="text"
-                    className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-transparent transition font-fallback"
-                    placeholder="City"
-                  />
+                  <input id="city" name="city" type="text" className={`${inputBase} border-white/20`} placeholder={t('contact.city')} />
                 </div>
                 <div>
                   <label htmlFor="country" className="block text-sm font-medium text-white/80 mb-2">
                     {t('contact.country')}
                   </label>
-                  <input
-                    id="country"
-                    name="country"
-                    type="text"
-                    className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-transparent transition font-fallback"
-                    placeholder="Country"
-                  />
+                  <input id="country" name="country" type="text" className={`${inputBase} border-white/20`} placeholder={t('contact.country')} />
                 </div>
                 <div>
                   <label htmlFor="phone" className="block text-sm font-medium text-white/80 mb-2">
@@ -191,10 +173,16 @@ export default function ContactPage() {
                     id="phone"
                     name="phone"
                     type="tel"
-                    required
-                    className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-transparent transition font-fallback"
+                    className={`${inputBase} ${formErrors.phone ? inputError : 'border-white/20'}`}
                     placeholder="+1 555 123 4567"
+                    onBlur={() => clearError('phone')}
+                    onChange={() => clearError('phone')}
                   />
+                  {formErrors.phone && (
+                    <p className="mt-1.5 text-sm text-red-400 rounded-lg bg-red-500/10 border border-red-500/20 backdrop-blur-sm px-2 py-1" role="alert">
+                      {formErrors.phone}
+                    </p>
+                  )}
                 </div>
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-white/80 mb-2">
@@ -204,26 +192,36 @@ export default function ContactPage() {
                     id="email"
                     name="email"
                     type="email"
-                    required
-                    className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-transparent transition font-fallback"
+                    className={`${inputBase} ${formErrors.email ? inputError : 'border-white/20'}`}
                     placeholder="you@example.com"
+                    onBlur={() => clearError('email')}
+                    onChange={() => clearError('email')}
                   />
+                  {formErrors.email && (
+                    <p className="mt-1.5 text-sm text-red-400 rounded-lg bg-red-500/10 border border-red-500/20 backdrop-blur-sm px-2 py-1" role="alert">
+                      {formErrors.email}
+                    </p>
+                  )}
                 </div>
                 <div>
                   <label htmlFor="details" className="block text-sm font-medium text-white/80 mb-2">
                     {t('contact.details')}
                   </label>
-                  <p className="text-xs text-white/50 mb-2">
-                    {t('contact.detailsHint')}
-                  </p>
+                  <p className="text-xs text-white/50 mb-2">{t('contact.detailsHint')}</p>
                   <textarea
                     id="details"
                     name="details"
                     rows={6}
-                    required
-                    className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-transparent transition resize-y min-h-[140px] font-fallback"
-                    placeholder="Describe your project, goals, timeline, and any references or mood boards..."
+                    className={`${inputBase} resize-y min-h-[140px] ${formErrors.details ? inputError : 'border-white/20'}`}
+                    placeholder={t('contact.details')}
+                    onBlur={() => clearError('details')}
+                    onChange={() => clearError('details')}
                   />
+                  {formErrors.details && (
+                    <p className="mt-1.5 text-sm text-red-400 rounded-lg bg-red-500/10 border border-red-500/20 backdrop-blur-sm px-2 py-1" role="alert">
+                      {formErrors.details}
+                    </p>
+                  )}
                 </div>
                 <button
                   type="submit"
@@ -240,33 +238,24 @@ export default function ContactPage() {
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
                 {t('contact.faqTitle')}
               </h2>
-              <p className="text-sm md:text-base text-white/60 mb-8">
-                {t('contact.faqSubtitle')}
-              </p>
+              <p className="text-sm md:text-base text-white/60 mb-8">{t('contact.faqSubtitle')}</p>
             </div>
             <div className="space-y-3">
-              {FAQ_KEYS.map((item, index) => (
-                <div
-                  key={index}
-                  className="rounded-xl bg-white/5 border border-white/10 overflow-hidden"
-                >
+              {FAQ_ITEMS.map((item, index) => (
+                <div key={index} className="rounded-xl bg-white/5 border border-white/10 overflow-hidden">
                   <button
                     type="button"
                     onClick={() => setOpenFaq(openFaq === index ? null : index)}
                     className="w-full px-5 py-4 text-left flex items-center justify-between gap-4 text-white font-medium hover:bg-white/5 transition-colors"
                   >
-                    <span>{t(item.q)}</span>
-                    <span
-                      className={`shrink-0 w-6 h-6 flex items-center justify-center text-white/80 text-lg font-light transition-transform ${
-                        openFaq === index ? 'rotate-45' : ''
-                      }`}
-                    >
+                    <span>{t(item.questionKey)}</span>
+                    <span className={`shrink-0 w-6 h-6 flex items-center justify-center text-white/80 text-lg font-light transition-transform ${openFaq === index ? 'rotate-45' : ''}`}>
                       <span className="font-fallback" aria-hidden>+</span>
                     </span>
                   </button>
                   {openFaq === index && (
                     <div className="px-5 pb-4 pt-0">
-                      <p className="text-white/70 leading-relaxed text-justify">{t(item.a)}</p>
+                      <p className="text-white/70 leading-relaxed text-justify">{t(item.answerKey)}</p>
                     </div>
                   )}
                 </div>
@@ -275,47 +264,6 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
-
-      {modal && (
-        <div
-          className="fixed inset-0 z-[200] flex items-center justify-center p-4 backdrop-blur-md bg-black/40"
-          onClick={() => setModal(null)}
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="modal-title"
-        >
-          <div
-            className="rounded-2xl border border-white/10 bg-black/70 shadow-2xl max-w-md w-full p-6 md:p-8"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <h3 id="modal-title" className="text-xl font-bold text-white mb-4">
-              {modal === 'errors' ? t('contact.modalErrorsTitle') : t('contact.modalSuccessTitle')}
-            </h3>
-            {modal === 'errors' ? (
-              <>
-                <p className="text-white/80 mb-3">{t('contact.modalErrorsIntro')}</p>
-                <ul className="list-disc list-inside text-red-300/90 space-y-1 mb-6">
-                  {errors.map((msg, i) => (
-                    <li key={i}>{msg}</li>
-                  ))}
-                </ul>
-              </>
-            ) : (
-              <p className="text-white/80 mb-6">
-                {t('contact.modalSuccessMessage')}
-              </p>
-            )}
-            <button
-              type="button"
-              onClick={() => setModal(null)}
-              className="w-full md:w-auto px-6 py-3 rounded-full border-2 border-white/60 text-white font-semibold hover:bg-white/10 transition-all"
-            >
-              {t('contact.modalClose')}
-            </button>
-          </div>
-        </div>
-      )}
-
       <Footer />
     </main>
   );

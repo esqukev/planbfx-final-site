@@ -12,7 +12,7 @@ import { useLanguage } from '../context/LanguageContext';
 gsap.registerPlugin(ScrollTrigger);
 
 export default function AboutPage() {
-  const { t } = useLanguage();
+  const { t, tf } = useLanguage();
   const introRef = useRef<HTMLDivElement>(null);
   const closingRef = useRef<HTMLDivElement>(null);
   const introParaRef = useRef<HTMLParagraphElement>(null);
@@ -101,7 +101,7 @@ export default function AboutPage() {
                 {t('about.intro1')}
               </p>
               <p className="text-xl leading-relaxed text-white/70 md:text-2xl">
-                {t('about.intro2')}
+                {tf('about.intro2')}
               </p>
             </div>
           </div>
@@ -115,12 +115,12 @@ export default function AboutPage() {
           rotatingTitle={{
             prefix: t('about.weCreatePrefix'),
             words: [
-              t('about.rotatingWord1'),
-              t('about.rotatingWord2'),
-              t('about.rotatingWord3'),
-              t('about.rotatingWord4'),
-              t('about.rotatingWord5'),
-              t('about.rotatingWord6'),
+              t('about.weCreateWord1'),
+              t('about.weCreateWord2'),
+              t('about.weCreateWord3'),
+              t('about.weCreateWord4'),
+              t('about.weCreateWord5'),
+              t('about.weCreateWord6'),
             ],
           }}
         />
@@ -134,14 +134,14 @@ export default function AboutPage() {
         <div className="mx-auto max-w-4xl px-8 py-16 md:py-24 lg:py-28 flex flex-col items-center text-center">
           <div ref={closingRef} className="space-y-8 md:space-y-10 max-w-4xl mx-auto">
             <p ref={closingParaRef} className="text-xl leading-relaxed text-white/70 md:text-2xl">
-              {t('about.closing')}
+              {tf('about.closing')}
             </p>
           </div>
         </div>
       </section>
 
       {/* Banner final: foto + CUSTOM EXPERIENCES, texto y botones Get in Touch / Explore Our Art */}
-      <CTAFinalBanner imageSrc="/portilla.jpg" subtitle={t('about.ctaSubtitle')} title={t('cta.defaultTitle')} paragraph={t('cta.defaultParagraph')} ctaText={t('cta.getInTouch')} ctaHref="/contact" secondaryText={t('cta.exploreArt')} secondaryHref="/services" />
+      <CTAFinalBanner imageSrc="/portilla.jpg" subtitle={t('about.customExperiences')} />
 
       <Footer />
     </main>
