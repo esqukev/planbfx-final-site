@@ -71,7 +71,7 @@ export default function ContactPage() {
               <p className="text-2xl md:text-3xl font-light text-white/90 mb-8">
                 Let<span className="font-fallback">&apos;</span>s turn ideas into impact.
               </p>
-              <p className="text-lg text-white/70 leading-relaxed mb-6">
+              <p className="text-lg text-white/70 leading-relaxed mb-6 text-justify">
                 Whether you have a clear vision or just a spark, we<span className="font-fallback">&apos;</span>re here to help shape it.
                 Reach out and let<span className="font-fallback">&apos;</span>s create something that actually stands out.
               </p>
@@ -256,7 +256,7 @@ export default function ContactPage() {
                   </button>
                   {openFaq === index && (
                     <div className="px-5 pb-4 pt-0">
-                      <p className="text-white/70 leading-relaxed">{item.answer}</p>
+                      <p className="text-white/70 leading-relaxed text-justify">{item.answer}</p>
                     </div>
                   )}
                 </div>

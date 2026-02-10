@@ -134,7 +134,7 @@ export default function ProjectGrid() {
                   <h3 className="text-xl md:text-2xl font-semibold text-white mb-3">
                     {step.code}
                   </h3>
-                  <p className="text-zinc-400 text-sm md:text-base leading-relaxed">
+                  <p className="text-zinc-400 text-sm md:text-base leading-relaxed text-justify">
                     {step.description}
                   </p>
                 </div>

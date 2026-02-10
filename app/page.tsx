@@ -1,5 +1,4 @@
 import Hero from './components/Hero';
-import ContentSection from './components/ContentSection';
 import ProjectGrid from './components/ProjectGrid';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
@@ -22,14 +21,9 @@ export default function Home() {
       <Hero />
 
       <div id="about" className="scroll-section m-0 p-0 relative">
-        <ContentSection
-          title="Crafting Immersive Visual Experiences"
-          description="We create immersive, tailored visuals that push the boundaries of your vision. From concept to execution, we merge creativity, interaction, and technology to build unique visual experiences that engage, evolve, and resonate beyond the screen."
-          learnMoreLink="/about"
-          sideVisual={<PointCloudVisual />}
-          backgroundClassName="bg-black text-white"
-        />
-        {/* Fade suave al negro para transición seamless con VideoHero */}
+        <section className="relative flex min-h-[70vh] items-center justify-center py-16 md:py-24">
+          <PointCloudVisual />
+        </section>
         <div
           className="absolute bottom-0 left-0 right-0 h-24 md:h-32 lg:h-40 pointer-events-none z-10"
           style={{
