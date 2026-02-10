@@ -94,13 +94,17 @@ export default function AboutPage() {
             <h1 className="text-5xl font-bold leading-tight text-white md:text-6xl lg:text-7xl">
               About Plan B FX
             </h1>
-            <p ref={introParaRef} className="max-w-4xl mx-auto text-xl leading-relaxed text-white/70 md:text-2xl">
-              Plan B began as a collective of local musicians driven by the goal of
-              energizing the scene and elevating the standards of their own events.
-              During this process, we incorporated code<span className="font-fallback">-</span>based visual development
-              into our workflow, allowing us to expand our services and provide
-              immersive, memorable experiences for diverse events.
-            </p>
+            <div className="max-w-4xl mx-auto space-y-6">
+              <p ref={introParaRef} className="text-xl leading-relaxed text-white/70 md:text-2xl">
+                Plan B began as a collective of local musicians driven by the goal of
+                energizing the scene and elevating the standards of their own events.
+              </p>
+              <p className="text-xl leading-relaxed text-white/70 md:text-2xl">
+                During this process, we incorporated code<span className="font-fallback">-</span>based visual development
+                into our workflow, allowing us to expand our services and provide
+                immersive, memorable experiences for diverse events.
+              </p>
+            </div>
           </div>
         </div>
       </section>

@@ -7,15 +7,6 @@ import CursorTiltFigure from '../components/CursorTiltFigure';
 import VantaHalo from '../components/VantaHalo';
 import ImageHero from '../components/ImageHero';
 import HyperSpaceBackground from '../components/HyperSpaceBackground';
-import { useLanguage } from '../context/LanguageContext';
-
-const VALIDATION_MESSAGES = {
-  nameRequired: 'Please enter your name.',
-  emailRequired: 'Please enter your email address.',
-  emailInvalid: 'Please enter a valid email address.',
-  phoneRequired: 'Please enter your phone number.',
-  detailsRequired: 'Please provide details about your inquiry.',
-};
 
 const FAQ_ITEMS = [
   {
@@ -41,35 +32,8 @@ const FAQ_ITEMS = [
 ];
 
 export default function ContactPage() {
-  const { t } = useLanguage();
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const [formErrors, setFormErrors] = useState<Record<string, string>>({});
 
-  const clearError = (field: string) => {
-    setFormErrors((prev) => {
-      const next = { ...prev };
-      delete next[field];
-      return next;
-    });
-  };
-
-  const validateForm = (form: HTMLFormElement): boolean => {
-    const data = new FormData(form);
-    const errors: Record<string, string> = {};
-    const name = (data.get('name') as string)?.trim();
-    const email = (data.get('email') as string)?.trim();
-    const phone = (data.get('phone') as string)?.trim();
-    const details = (data.get('details') as string)?.trim();
-    if (!name) errors.name = VALIDATION_MESSAGES.nameRequired;
-    if (!email) errors.email = VALIDATION_MESSAGES.emailRequired;
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errors.email = VALIDATION_MESSAGES.emailInvalid;
-    if (!phone) errors.phone = VALIDATION_MESSAGES.phoneRequired;
-    if (!details) errors.details = VALIDATION_MESSAGES.detailsRequired;
-    setFormErrors(errors);
-    return Object.keys(errors).length === 0;
-  };
-
-  // Scroll to form when entering with #contact-form
   useEffect(() => {
     if (typeof window !== 'undefined' && window.location.hash === '#contact-form') {
       const el = document.getElementById('contact-form');
@@ -89,9 +53,7 @@ export default function ContactPage() {
       <section className="relative py-24 md:py-32 px-4 md:px-8 overflow-x-hidden min-h-screen">
         <HyperSpaceBackground />
         <div className="relative z-10 max-w-7xl mx-auto">
-          {/* Dos columnas: izquierda = texto + contact; derecha = form */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-            {/* Columna izquierda — justificado a la izquierda */}
             <div className="text-left">
               <CursorTiltFigure
                 className="mb-12 flex justify-start"
@@ -99,21 +61,22 @@ export default function ContactPage() {
                 perspective={1000}
               >
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
-                  {t('contact.title')}
+                  Want to work with us?
                 </h1>
               </CursorTiltFigure>
 
               <p className="text-2xl md:text-3xl font-light text-white/90 mb-8">
-                {t('contact.subtitle')}
+                Let<span className="font-fallback">&apos;</span>s turn ideas into impact.
               </p>
               <p className="text-lg text-white/70 leading-relaxed mb-6 text-justify">
-                {t('contact.intro')}
+                Whether you have a clear vision or just a spark, we<span className="font-fallback">&apos;</span>re here to help shape it.
+                Reach out and let<span className="font-fallback">&apos;</span>s create something that actually stands out.
               </p>
               <p className="text-lg font-semibold text-white/90 mb-10">
-                {t('contact.getInContact')}
+                Get in contact.
               </p>
 
-              <div className="flex flex-wrap gap-4 md:gap-6">
+              <div className="flex flex-wrap gap-4 md:gap-6 mb-12">
                 <a
                   href="tel:+50686201212"
                   className="inline-flex items-center justify-center px-8 py-4 rounded-full border-2 border-white/60 text-white font-semibold hover:bg-white/10 transition-all duration-300 ease-out hover:scale-[1.03] text-base"
@@ -135,58 +98,43 @@ export default function ContactPage() {
                   Email
                 </a>
               </div>
-            </div>
-
-            {/* VantaHalo centered below contact block, ~25% larger, unclipped */}
-            <div className="lg:col-span-2 flex justify-center w-full overflow-visible mt-12 lg:mt-16 py-8">
-              <div className="relative w-full max-w-2xl min-h-[525px] overflow-visible">
-                <VantaHalo logoSrc="/logos/Property-1-Variant4.svg" className="min-h-[525px] w-full max-w-full bg-transparent overflow-visible" />
+              <div className="flex justify-start w-full max-w-2xl bg-transparent overflow-visible py-8">
+                <VantaHalo logoSrc="/logos/Property-1-Variant4.svg" className="min-h-[384px] w-full bg-transparent overflow-visible" />
               </div>
             </div>
 
-            {/* Columna derecha — Ready to move forward + form */}
             <div id="contact-form" className="text-left scroll-mt-24">
               <h2 className="text-2xl md:text-3xl font-bold mb-6">
-                {t('contact.readyTitle')}
+                Ready to move forward?
               </h2>
               <p className="text-lg text-white/70 leading-relaxed mb-4">
-                {t('contact.readyDesc1')}
+                This form is designed for clients who already have a clear vision, goals, and references.
+                The more detail you provide, the faster and more accurately we can move forward.
               </p>
               <p className="text-lg text-white/70 leading-relaxed mb-8">
-                {t('contact.readyDesc2')}
+                Book a meeting and walk us through your ideas and expectations.
               </p>
 
               <form
-                noValidate
                 className="space-y-6"
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  const valid = validateForm(e.currentTarget);
-                  if (valid) {
-                    // Form is valid; handle submit (e.g. send to API) here
-                  }
-                }}
+                onSubmit={(e) => e.preventDefault()}
               >
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-white/80 mb-2">
-                    {t('contact.name')}
+                    Name
                   </label>
                   <input
                     id="name"
                     name="name"
                     type="text"
-                    className={`w-full px-4 py-3 rounded-xl bg-white/10 border text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-transparent transition font-fallback ${formErrors.name ? 'border-red-500 focus:ring-red-500/50' : 'border-white/20'}`}
+                    required
+                    className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-transparent transition font-fallback"
                     placeholder="Your name"
-                    onBlur={() => clearError('name')}
-                    onChange={() => clearError('name')}
                   />
-                  {formErrors.name && (
-                    <p className="mt-1.5 text-sm font-medium text-red-400" role="alert">{formErrors.name}</p>
-                  )}
                 </div>
                 <div>
                   <label htmlFor="company" className="block text-sm font-medium text-white/80 mb-2">
-                    {t('contact.company')}
+                    Company or event name
                   </label>
                   <input
                     id="company"
@@ -198,7 +146,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <label htmlFor="city" className="block text-sm font-medium text-white/80 mb-2">
-                    {t('contact.city')}
+                    City
                   </label>
                   <input
                     id="city"
@@ -210,7 +158,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <label htmlFor="country" className="block text-sm font-medium text-white/80 mb-2">
-                    {t('contact.country')}
+                    Country
                   </label>
                   <input
                     id="country"
@@ -222,76 +170,63 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <label htmlFor="phone" className="block text-sm font-medium text-white/80 mb-2">
-                    {t('contact.phone')}
+                    Phone Number
                   </label>
                   <input
                     id="phone"
                     name="phone"
                     type="tel"
-                    className={`w-full px-4 py-3 rounded-xl bg-white/10 border text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-transparent transition font-fallback ${formErrors.phone ? 'border-red-500 focus:ring-red-500/50' : 'border-white/20'}`}
+                    required
+                    className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-transparent transition font-fallback"
                     placeholder="+1 555 123 4567"
-                    onBlur={() => clearError('phone')}
-                    onChange={() => clearError('phone')}
                   />
-                  {formErrors.phone && (
-                    <p className="mt-1.5 text-sm font-medium text-red-400" role="alert">{formErrors.phone}</p>
-                  )}
                 </div>
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-white/80 mb-2">
-                    {t('contact.email')}
+                    Email
                   </label>
                   <input
                     id="email"
                     name="email"
                     type="email"
-                    className={`w-full px-4 py-3 rounded-xl bg-white/10 border text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-transparent transition font-fallback ${formErrors.email ? 'border-red-500 focus:ring-red-500/50' : 'border-white/20'}`}
+                    required
+                    className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-transparent transition font-fallback"
                     placeholder="you@example.com"
-                    onBlur={() => clearError('email')}
-                    onChange={() => clearError('email')}
                   />
-                  {formErrors.email && (
-                    <p className="mt-1.5 text-sm font-medium text-red-400" role="alert">{formErrors.email}</p>
-                  )}
                 </div>
                 <div>
                   <label htmlFor="details" className="block text-sm font-medium text-white/80 mb-2">
-                    {t('contact.details')}
+                    Details
                   </label>
                   <p className="text-xs text-white/50 mb-2">
-                    {t('contact.detailsHint')}
+                    If not enough details are provided we could not consider your inquiry
                   </p>
                   <textarea
                     id="details"
                     name="details"
                     rows={6}
-                    className={`w-full px-4 py-3 rounded-xl bg-white/10 border resize-y min-h-[140px] font-fallback text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-transparent transition ${formErrors.details ? 'border-red-500 focus:ring-red-500/50' : 'border-white/20'}`}
+                    required
+                    className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-transparent transition resize-y min-h-[140px] font-fallback"
                     placeholder="Describe your project, goals, timeline, and any references or mood boards..."
-                    onBlur={() => clearError('details')}
-                    onChange={() => clearError('details')}
                   />
-                  {formErrors.details && (
-                    <p className="mt-1.5 text-sm font-medium text-red-400" role="alert">{formErrors.details}</p>
-                  )}
                 </div>
                 <button
                   type="submit"
                   className="w-full md:w-auto px-8 py-4 bg-white text-black font-semibold rounded-full hover:bg-zinc-200 transition-all duration-300 ease-out hover:scale-[1.03] text-base"
                 >
-                  {t('contact.send')}
+                  Send
                 </button>
               </form>
             </div>
           </div>
 
-          {/* FAQ: título grande izquierda, subtítulo pequeño, preguntas a la derecha */}
           <div className="mt-24 pt-16 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
             <div className="text-left">
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
-                {t('contact.faqTitle')}
+                Frequently Asked Questions
               </h2>
               <p className="text-sm md:text-base text-white/60 mb-8">
-                {t('contact.faqSubtitle')}
+                Your questions answered simply and clearly.
               </p>
             </div>
             <div className="space-y-3">
