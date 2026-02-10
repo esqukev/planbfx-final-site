@@ -91,7 +91,7 @@ export default function ProjectGrid() {
   return (
     <section
       ref={sectionRef}
-      className="m-0 py-0 px-4 md:px-8 bg-white dark:bg-black"
+      className="m-0 py-0 px-4 md:px-8 bg-black"
     >
       <div className="max-w-4xl mx-auto py-20 md:py-28 px-6 md:px-10">
         <div className="mb-20 md:mb-24 flex flex-col items-center text-center">
@@ -108,7 +108,7 @@ export default function ProjectGrid() {
           {/* Línea central (por detrás de las cards) */}
           <div
             ref={lineRef}
-            className="absolute left-1/2 top-0 bottom-0 w-px bg-zinc-300 dark:bg-zinc-600 -translate-x-1/2 z-0"
+            className="absolute left-1/2 top-0 bottom-0 w-px bg-zinc-600 -translate-x-1/2 z-0"
             aria-hidden
           />
 
@@ -127,14 +127,14 @@ export default function ProjectGrid() {
                   ${index % 2 === 0 ? 'md:-translate-x-20 md:text-left' : 'md:translate-x-20 md:text-right'}
                 `}
               >
-                <div className="rounded-2xl border-0 bg-zinc-50/80 dark:bg-zinc-900/80 p-6 md:p-8 shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(255,255,255,0.12)] dark:hover:shadow-[0_0_40px_rgba(255,255,255,0.08)]">
-                  <span className="text-xs font-mono uppercase tracking-widest text-zinc-500 dark:text-zinc-400 block mb-2">
+                <div className="rounded-2xl border-0 bg-zinc-900/80 p-6 md:p-8 shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(255,255,255,0.08)]">
+                  <span className="text-xs font-mono uppercase tracking-widest text-zinc-400 block mb-2">
                     {step.subtitle}
                   </span>
-                  <h3 className="text-xl md:text-2xl font-semibold text-black dark:text-white mb-3">
+                  <h3 className="text-xl md:text-2xl font-semibold text-white mb-3">
                     {step.code}
                   </h3>
-                  <p className="text-zinc-600 dark:text-zinc-400 text-sm md:text-base leading-relaxed">
+                  <p className="text-zinc-400 text-sm md:text-base leading-relaxed">
                     {step.description}
                   </p>
                 </div>

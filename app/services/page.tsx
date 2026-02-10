@@ -44,13 +44,14 @@ const PRODUCTS: Array<{
     title: 'Live Painting',
     description:
       'A real-time fusion of human touch and AI. Using precision digital tools, we transform live illustrations into dynamic visual streams, crafting an organic piece of art that evolves before the audience\'s eyes.',
+    videoUrl: 'https://res.cloudinary.com/dpplgma25/video/upload/v1770746569/Live_painting_PB_FX_vosurw.mp4',
   },
   {
     id: 'artificial-mirage',
     title: 'Artificial Mirage',
     description:
       'Reality as an infinite canvas. We transform live video feeds into any imaginable concept, from familiar characters to abstract scenes. Here, the limit isn\'t the technology, but your imagination; we turn the environment and its subjects into a surreal, real-time visual experience.',
-    videoUrl: '/videos/egypt.mp4',
+    videoUrl: 'https://res.cloudinary.com/dpplgma25/video/upload/v1770745183/egypt_q9pz1j.mp4',
   },
   {
     id: 'audio-reactive-art',
@@ -70,6 +71,7 @@ const PRODUCTS: Array<{
     title: 'Logo Waterfall',
     description:
       'A dynamic flow of brand identity. We leverage GPU power to create waterfalls composed of logos that react organically to the audience\'s movement via optical sensors. An elegant and playful way to embed branding into the audience\'s memory.',
+    videoUrl: 'https://res.cloudinary.com/dpplgma25/video/upload/v1770746759/logo_rain_tyohaa.mp4',
   },
   {
     id: 'projection-mapping',
@@ -83,6 +85,7 @@ const PRODUCTS: Array<{
     title: 'Customized Experience',
     description:
       'Tailored Experiences. We collaborate closely with our clients to design and develop exclusive interactive installations and visual solutions, specifically adapted to the identity and needs of each project.',
+    videoUrl: 'https://res.cloudinary.com/dpplgma25/video/upload/v1770746128/Custom_Experience_clip_xgf2i6.mp4',
   },
 ];
 

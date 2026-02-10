@@ -13,7 +13,6 @@ type VideoHeroWithScrollProps = {
  */
 const FADE_MS = 1200;
 const VISIBLE_MS = 2000;
-const HIDDEN_MS = 2000;
 
 export default function VideoHeroWithScroll({ videoUrl }: VideoHeroWithScrollProps) {
   const heroRef = useRef<HTMLElement>(null);
@@ -35,16 +34,16 @@ export default function VideoHeroWithScroll({ videoUrl }: VideoHeroWithScrollPro
     let t1: ReturnType<typeof setTimeout>;
     let t2: ReturnType<typeof setTimeout>;
     let cancelled = false;
-    const show = () => {
+    const runLoop = () => {
       if (cancelled) return;
       setLogoVisible(true);
       t1 = setTimeout(() => {
         if (cancelled) return;
         setLogoVisible(false);
-        t2 = setTimeout(show, FADE_MS + HIDDEN_MS);
+        t2 = setTimeout(runLoop, FADE_MS);
       }, FADE_MS + VISIBLE_MS);
     };
-    t2 = setTimeout(show, 400);
+    t2 = setTimeout(runLoop, 400);
     return () => {
       cancelled = true;
       clearTimeout(t1);
