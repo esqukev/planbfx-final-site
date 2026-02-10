@@ -141,7 +141,12 @@ export default function AboutPage() {
       </section>
 
       {/* Banner final: foto + CUSTOM EXPERIENCES, texto y botones Get in Touch / Explore Our Art */}
-      <CTAFinalBanner imageSrc="/portilla.jpg" subtitle={t('about.customExperiences')} />
+      <CTAFinalBanner
+        imageSrc="/portilla.jpg"
+        subtitle={t('about.customExperiences')}
+        title={t('about.cta.title')}
+        paragraph={t('about.cta.paragraph')}
+      />
 
       <Footer />
     </main>

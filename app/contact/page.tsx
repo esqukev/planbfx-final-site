@@ -34,10 +34,16 @@ export default function ContactPage() {
     const data = new FormData(form);
     const errors: Record<string, string> = {};
     const name = (data.get('name') as string)?.trim();
+    const company = (data.get('company') as string)?.trim();
+    const city = (data.get('city') as string)?.trim();
+    const country = (data.get('country') as string)?.trim();
     const email = (data.get('email') as string)?.trim();
     const phone = (data.get('phone') as string)?.trim();
     const details = (data.get('details') as string)?.trim();
     if (!name) errors.name = t('contact.validation.name');
+    if (!company) errors.company = t('contact.validation.company');
+    if (!city) errors.city = t('contact.validation.city');
+    if (!country) errors.country = t('contact.validation.country');
     if (!email) errors.email = t('contact.validation.email');
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errors.email = t('contact.validation.emailInvalid');
     if (!phone) errors.phone = t('contact.validation.phone');
@@ -149,21 +155,54 @@ export default function ContactPage() {
                     id="company"
                     name="company"
                     type="text"
-                    className={`${inputBase} border-white/20`}
+                    className={`${inputBase} ${formErrors.company ? inputError : 'border-white/20'}`}
                     placeholder={t('contact.company')}
+                    onBlur={() => clearError('company')}
+                    onChange={() => clearError('company')}
                   />
+                  {formErrors.company && (
+                    <p className="mt-1.5 text-sm text-red-400 rounded-lg bg-red-500/10 border border-red-500/20 backdrop-blur-sm px-2 py-1" role="alert">
+                      {formErrors.company}
+                    </p>
+                  )}
                 </div>
                 <div>
                   <label htmlFor="city" className="block text-sm font-medium text-white/80 mb-2">
                     {t('contact.city')}
                   </label>
-                  <input id="city" name="city" type="text" className={`${inputBase} border-white/20`} placeholder={t('contact.city')} />
+                  <input
+                    id="city"
+                    name="city"
+                    type="text"
+                    className={`${inputBase} ${formErrors.city ? inputError : 'border-white/20'}`}
+                    placeholder={t('contact.city')}
+                    onBlur={() => clearError('city')}
+                    onChange={() => clearError('city')}
+                  />
+                  {formErrors.city && (
+                    <p className="mt-1.5 text-sm text-red-400 rounded-lg bg-red-500/10 border border-red-500/20 backdrop-blur-sm px-2 py-1" role="alert">
+                      {formErrors.city}
+                    </p>
+                  )}
                 </div>
                 <div>
                   <label htmlFor="country" className="block text-sm font-medium text-white/80 mb-2">
                     {t('contact.country')}
                   </label>
-                  <input id="country" name="country" type="text" className={`${inputBase} border-white/20`} placeholder={t('contact.country')} />
+                  <input
+                    id="country"
+                    name="country"
+                    type="text"
+                    className={`${inputBase} ${formErrors.country ? inputError : 'border-white/20'}`}
+                    placeholder={t('contact.country')}
+                    onBlur={() => clearError('country')}
+                    onChange={() => clearError('country')}
+                  />
+                  {formErrors.country && (
+                    <p className="mt-1.5 text-sm text-red-400 rounded-lg bg-red-500/10 border border-red-500/20 backdrop-blur-sm px-2 py-1" role="alert">
+                      {formErrors.country}
+                    </p>
+                  )}
                 </div>
                 <div>
                   <label htmlFor="phone" className="block text-sm font-medium text-white/80 mb-2">
@@ -225,7 +264,7 @@ export default function ContactPage() {
                 </div>
                 <button
                   type="submit"
-                  className="w-full md:w-auto px-8 py-4 bg-white text-black font-semibold rounded-full hover:bg-zinc-200 transition-all duration-300 ease-out hover:scale-[1.03] text-base"
+                  className="w-full md:w-auto inline-flex items-center justify-center px-8 py-4 rounded-full border-2 border-white/60 text-white font-semibold hover:bg-white/10 transition-all duration-300 ease-out hover:scale-[1.03] text-base"
                 >
                   {t('contact.send')}
                 </button>
