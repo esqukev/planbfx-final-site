@@ -11,9 +11,13 @@ type VideoHeroWithScrollProps = {
  * Banner con video y mismo efecto que ImageHero: fade out al hacer scroll.
  * Logo centrado que aparece y desaparece.
  */
+const FADE_MS = 1200;
+const VISIBLE_MS = 2000;
+const HIDDEN_MS = 2000;
+
 export default function VideoHeroWithScroll({ videoUrl }: VideoHeroWithScrollProps) {
   const heroRef = useRef<HTMLElement>(null);
-  const [logoVisible, setLogoVisible] = useState(true);
+  const [logoVisible, setLogoVisible] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,10 +32,24 @@ export default function VideoHeroWithScroll({ videoUrl }: VideoHeroWithScrollPro
   }, []);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setLogoVisible((v) => !v);
-    }, 3000);
-    return () => clearInterval(interval);
+    let t1: ReturnType<typeof setTimeout>;
+    let t2: ReturnType<typeof setTimeout>;
+    let cancelled = false;
+    const show = () => {
+      if (cancelled) return;
+      setLogoVisible(true);
+      t1 = setTimeout(() => {
+        if (cancelled) return;
+        setLogoVisible(false);
+        t2 = setTimeout(show, FADE_MS + HIDDEN_MS);
+      }, FADE_MS + VISIBLE_MS);
+    };
+    t2 = setTimeout(show, 400);
+    return () => {
+      cancelled = true;
+      clearTimeout(t1);
+      clearTimeout(t2);
+    };
   }, []);
 
   return (
@@ -59,7 +77,7 @@ export default function VideoHeroWithScroll({ videoUrl }: VideoHeroWithScrollPro
           className="relative w-48 h-24 md:w-64 md:h-32 opacity-90"
           style={{
             opacity: logoVisible ? 0.9 : 0,
-            transition: 'opacity 1.2s ease-in-out',
+            transition: `opacity ${FADE_MS / 1000}s ease-in-out`,
           }}
         >
           <Image

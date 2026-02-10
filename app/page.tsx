@@ -82,7 +82,7 @@ export default function Home() {
 
       {/* Banner parallax: Crafting Moments / Innovative Art Meets Technology + CTAs (julietbanner1) */}
       <div className="m-0 p-0">
-        <HomeCTABanner imageSrc="/julietbanner1.jpg" />
+        <HomeCTABanner imageSrc="/afnisabanner2.jpg" />
       </div>
 
       {/* CTA — fondo estrellas HyperSpace */}

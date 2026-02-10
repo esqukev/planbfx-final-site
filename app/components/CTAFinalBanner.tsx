@@ -25,7 +25,7 @@ type CTAFinalBannerProps = {
 export default function CTAFinalBanner({
   imageSrc,
   subtitle = 'Art In Motion',
-  title = 'Transforming Events with\nDigital Brilliance.',
+  title = 'Transforming Events with\nDigital Brilliance',
   paragraph = 'Connect with us to elevate your event. Our unique blend of art, technology, and creativity brings a stunning visual experience to every occasion. Discover how we can transform your vision into reality.',
   ctaText = 'Get in touch',
   ctaHref = '/contact',

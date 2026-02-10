@@ -15,8 +15,8 @@ export default function ParallaxBanner({
 }: ParallaxBannerProps) {
   // Three lines on desktop; on mobile only avoid awkward mid-word breaks (whitespace-nowrap per line)
   const titleLines = [
-    "We don't just create visuals",
-    "we create moments that",
+    "We don't just create visuals,",
+    "we craft moments that",
     "are remembered",
   ];
   const sectionRef = useRef<HTMLElement>(null);

@@ -149,15 +149,27 @@ export default function ContactPage() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="location" className="block text-sm font-medium text-white/80 mb-2">
-                    Location
+                  <label htmlFor="city" className="block text-sm font-medium text-white/80 mb-2">
+                    City
                   </label>
                   <input
-                    id="location"
-                    name="location"
+                    id="city"
+                    name="city"
                     type="text"
                     className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-transparent transition font-fallback"
-                    placeholder="City, Country"
+                    placeholder="City"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="country" className="block text-sm font-medium text-white/80 mb-2">
+                    Country
+                  </label>
+                  <input
+                    id="country"
+                    name="country"
+                    type="text"
+                    className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-transparent transition font-fallback"
+                    placeholder="Country"
                   />
                 </div>
                 <div>
