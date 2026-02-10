@@ -4,11 +4,13 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const { lang, setLang, t } = useLanguage();
 
   useEffect(() => {
     const onScroll = () => {
@@ -19,11 +21,10 @@ export default function Navigation() {
   }, []);
 
   const menuItems = [
-    { label: 'Home', href: '/' },
-    { label: 'About', href: '/about' },
-    { label: 'Services', href: '/services' },
-    // Works oculto por ahora (sin contenido)
-    { label: 'Contact', href: '/contact' },
+    { labelKey: 'nav.home', href: '/' },
+    { labelKey: 'nav.about', href: '/about' },
+    { labelKey: 'nav.services', href: '/services' },
+    { labelKey: 'nav.contact', href: '/contact' },
   ];
 
   // Desktop: active = exact match for Home, otherwise path matches or starts with href
@@ -78,11 +79,11 @@ export default function Navigation() {
           <div className="hidden md:flex items-center gap-8 lg:gap-12">
             {menuItems.map((item) => (
               <Link
-                key={item.label}
+                key={item.labelKey}
                 href={item.href}
                 className="relative flex flex-col items-center text-white hover:text-zinc-300 transition-colors text-sm uppercase tracking-wider py-1"
               >
-                {item.label}
+                {t(item.labelKey)}
                 {isActiveDesktop(item.href) && (
                   <span
                     className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-3 h-px bg-white shrink-0 nav-indicator"
@@ -91,6 +92,15 @@ export default function Navigation() {
                 )}
               </Link>
             ))}
+            <button
+              type="button"
+              onClick={() => setLang(lang === 'en' ? 'es' : 'en')}
+              className="text-white/80 hover:text-white transition-colors text-xs uppercase tracking-wider py-1"
+              title={lang === 'en' ? 'Switch to Spanish' : 'Switch to English'}
+              aria-label={lang === 'en' ? 'Switch to Spanish' : 'Switch to English'}
+            >
+              {lang === 'en' ? t('nav.langToEs') : t('nav.langToEn')}
+            </button>
           </div>
           <button
             className="md:hidden text-white"
@@ -106,16 +116,23 @@ export default function Navigation() {
           <div className="relative z-10 md:hidden rounded-b-2xl">
             {menuItems.map((item) => (
               <Link
-                key={item.label}
+                key={item.labelKey}
                 href={item.href}
                 className={`flex items-center gap-2 px-4 py-3 text-sm uppercase tracking-wider transition-colors ${
                   isActiveMobile(item.href) ? 'text-white bg-white/10' : 'text-white/90 hover:text-white hover:bg-white/5'
                 }`}
                 onClick={() => setIsMenuOpen(false)}
               >
-                {item.label}
+                {t(item.labelKey)}
               </Link>
             ))}
+            <button
+              type="button"
+              onClick={() => { setLang(lang === 'en' ? 'es' : 'en'); setIsMenuOpen(false); }}
+              className="flex items-center gap-2 px-4 py-3 text-xs uppercase tracking-wider text-white/80 hover:text-white hover:bg-white/5 transition-colors"
+            >
+              {lang === 'en' ? t('nav.langToEs') : t('nav.langToEn')}
+            </button>
           </div>
         )}
       </div>

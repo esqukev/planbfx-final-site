@@ -7,6 +7,15 @@ import CursorTiltFigure from '../components/CursorTiltFigure';
 import VantaHalo from '../components/VantaHalo';
 import ImageHero from '../components/ImageHero';
 import HyperSpaceBackground from '../components/HyperSpaceBackground';
+import { useLanguage } from '../context/LanguageContext';
+
+const VALIDATION_MESSAGES = {
+  nameRequired: 'Please enter your name.',
+  emailRequired: 'Please enter your email address.',
+  emailInvalid: 'Please enter a valid email address.',
+  phoneRequired: 'Please enter your phone number.',
+  detailsRequired: 'Please provide details about your inquiry.',
+};
 
 const FAQ_ITEMS = [
   {
@@ -32,9 +41,35 @@ const FAQ_ITEMS = [
 ];
 
 export default function ContactPage() {
+  const { t } = useLanguage();
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [formErrors, setFormErrors] = useState<Record<string, string>>({});
 
-  // Scroll al formulario cuando se entra con #contact-form (ej. desde Home "Contact Us")
+  const clearError = (field: string) => {
+    setFormErrors((prev) => {
+      const next = { ...prev };
+      delete next[field];
+      return next;
+    });
+  };
+
+  const validateForm = (form: HTMLFormElement): boolean => {
+    const data = new FormData(form);
+    const errors: Record<string, string> = {};
+    const name = (data.get('name') as string)?.trim();
+    const email = (data.get('email') as string)?.trim();
+    const phone = (data.get('phone') as string)?.trim();
+    const details = (data.get('details') as string)?.trim();
+    if (!name) errors.name = VALIDATION_MESSAGES.nameRequired;
+    if (!email) errors.email = VALIDATION_MESSAGES.emailRequired;
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errors.email = VALIDATION_MESSAGES.emailInvalid;
+    if (!phone) errors.phone = VALIDATION_MESSAGES.phoneRequired;
+    if (!details) errors.details = VALIDATION_MESSAGES.detailsRequired;
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
+  // Scroll to form when entering with #contact-form
   useEffect(() => {
     if (typeof window !== 'undefined' && window.location.hash === '#contact-form') {
       const el = document.getElementById('contact-form');
@@ -64,22 +99,21 @@ export default function ContactPage() {
                 perspective={1000}
               >
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
-                  Want to work with us?
+                  {t('contact.title')}
                 </h1>
               </CursorTiltFigure>
 
               <p className="text-2xl md:text-3xl font-light text-white/90 mb-8">
-                Let<span className="font-fallback">&apos;</span>s turn ideas into impact.
+                {t('contact.subtitle')}
               </p>
               <p className="text-lg text-white/70 leading-relaxed mb-6 text-justify">
-                Whether you have a clear vision or just a spark, we<span className="font-fallback">&apos;</span>re here to help shape it.
-                Reach out and let<span className="font-fallback">&apos;</span>s create something that actually stands out.
+                {t('contact.intro')}
               </p>
               <p className="text-lg font-semibold text-white/90 mb-10">
-                Get in contact.
+                {t('contact.getInContact')}
               </p>
 
-              <div className="flex flex-wrap gap-4 md:gap-6 mb-12">
+              <div className="flex flex-wrap gap-4 md:gap-6">
                 <a
                   href="tel:+50686201212"
                   className="inline-flex items-center justify-center px-8 py-4 rounded-full border-2 border-white/60 text-white font-semibold hover:bg-white/10 transition-all duration-300 ease-out hover:scale-[1.03] text-base"
@@ -101,44 +135,58 @@ export default function ContactPage() {
                   Email
                 </a>
               </div>
-              <div className="flex justify-start w-full max-w-2xl bg-transparent overflow-visible py-8">
-                <VantaHalo logoSrc="/logos/Property-1-Variant4.svg" className="min-h-[420px] w-full max-w-full bg-transparent overflow-visible" />
+            </div>
+
+            {/* VantaHalo centered below contact block, ~25% larger, unclipped */}
+            <div className="lg:col-span-2 flex justify-center w-full overflow-visible mt-12 lg:mt-16 py-8">
+              <div className="relative w-full max-w-2xl min-h-[525px] overflow-visible">
+                <VantaHalo logoSrc="/logos/Property-1-Variant4.svg" className="min-h-[525px] w-full max-w-full bg-transparent overflow-visible" />
               </div>
             </div>
 
             {/* Columna derecha — Ready to move forward + form */}
             <div id="contact-form" className="text-left scroll-mt-24">
               <h2 className="text-2xl md:text-3xl font-bold mb-6">
-                Ready to move forward?
+                {t('contact.readyTitle')}
               </h2>
               <p className="text-lg text-white/70 leading-relaxed mb-4">
-                This form is designed for clients who already have a clear vision, goals, and references.
-                The more detail you provide, the faster and more accurately we can move forward.
+                {t('contact.readyDesc1')}
               </p>
               <p className="text-lg text-white/70 leading-relaxed mb-8">
-                Book a meeting and walk us through your ideas and expectations.
+                {t('contact.readyDesc2')}
               </p>
 
               <form
+                noValidate
                 className="space-y-6"
-                onSubmit={(e) => e.preventDefault()}
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  const valid = validateForm(e.currentTarget);
+                  if (valid) {
+                    // Form is valid; handle submit (e.g. send to API) here
+                  }
+                }}
               >
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-white/80 mb-2">
-                    Name
+                    {t('contact.name')}
                   </label>
                   <input
                     id="name"
                     name="name"
                     type="text"
-                    required
-                    className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-transparent transition font-fallback"
+                    className={`w-full px-4 py-3 rounded-xl bg-white/10 border text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-transparent transition font-fallback ${formErrors.name ? 'border-red-500 focus:ring-red-500/50' : 'border-white/20'}`}
                     placeholder="Your name"
+                    onBlur={() => clearError('name')}
+                    onChange={() => clearError('name')}
                   />
+                  {formErrors.name && (
+                    <p className="mt-1.5 text-sm font-medium text-red-400" role="alert">{formErrors.name}</p>
+                  )}
                 </div>
                 <div>
                   <label htmlFor="company" className="block text-sm font-medium text-white/80 mb-2">
-                    Company or event name
+                    {t('contact.company')}
                   </label>
                   <input
                     id="company"
@@ -150,7 +198,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <label htmlFor="city" className="block text-sm font-medium text-white/80 mb-2">
-                    City
+                    {t('contact.city')}
                   </label>
                   <input
                     id="city"
@@ -162,7 +210,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <label htmlFor="country" className="block text-sm font-medium text-white/80 mb-2">
-                    Country
+                    {t('contact.country')}
                   </label>
                   <input
                     id="country"
@@ -174,51 +222,63 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <label htmlFor="phone" className="block text-sm font-medium text-white/80 mb-2">
-                    Phone Number
+                    {t('contact.phone')}
                   </label>
                   <input
                     id="phone"
                     name="phone"
                     type="tel"
-                    required
-                    className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-transparent transition font-fallback"
+                    className={`w-full px-4 py-3 rounded-xl bg-white/10 border text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-transparent transition font-fallback ${formErrors.phone ? 'border-red-500 focus:ring-red-500/50' : 'border-white/20'}`}
                     placeholder="+1 555 123 4567"
+                    onBlur={() => clearError('phone')}
+                    onChange={() => clearError('phone')}
                   />
+                  {formErrors.phone && (
+                    <p className="mt-1.5 text-sm font-medium text-red-400" role="alert">{formErrors.phone}</p>
+                  )}
                 </div>
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-white/80 mb-2">
-                    Email
+                    {t('contact.email')}
                   </label>
                   <input
                     id="email"
                     name="email"
                     type="email"
-                    required
-                    className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-transparent transition font-fallback"
+                    className={`w-full px-4 py-3 rounded-xl bg-white/10 border text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-transparent transition font-fallback ${formErrors.email ? 'border-red-500 focus:ring-red-500/50' : 'border-white/20'}`}
                     placeholder="you@example.com"
+                    onBlur={() => clearError('email')}
+                    onChange={() => clearError('email')}
                   />
+                  {formErrors.email && (
+                    <p className="mt-1.5 text-sm font-medium text-red-400" role="alert">{formErrors.email}</p>
+                  )}
                 </div>
                 <div>
                   <label htmlFor="details" className="block text-sm font-medium text-white/80 mb-2">
-                    Details
+                    {t('contact.details')}
                   </label>
                   <p className="text-xs text-white/50 mb-2">
-                    If not enough details are provided we could not consider your inquiry
+                    {t('contact.detailsHint')}
                   </p>
                   <textarea
                     id="details"
                     name="details"
                     rows={6}
-                    required
-                    className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-transparent transition resize-y min-h-[140px] font-fallback"
+                    className={`w-full px-4 py-3 rounded-xl bg-white/10 border resize-y min-h-[140px] font-fallback text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-transparent transition ${formErrors.details ? 'border-red-500 focus:ring-red-500/50' : 'border-white/20'}`}
                     placeholder="Describe your project, goals, timeline, and any references or mood boards..."
+                    onBlur={() => clearError('details')}
+                    onChange={() => clearError('details')}
                   />
+                  {formErrors.details && (
+                    <p className="mt-1.5 text-sm font-medium text-red-400" role="alert">{formErrors.details}</p>
+                  )}
                 </div>
                 <button
                   type="submit"
                   className="w-full md:w-auto px-8 py-4 bg-white text-black font-semibold rounded-full hover:bg-zinc-200 transition-all duration-300 ease-out hover:scale-[1.03] text-base"
                 >
-                  Send
+                  {t('contact.send')}
                 </button>
               </form>
             </div>
@@ -228,10 +288,10 @@ export default function ContactPage() {
           <div className="mt-24 pt-16 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
             <div className="text-left">
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
-                Frequently Asked Questions
+                {t('contact.faqTitle')}
               </h2>
               <p className="text-sm md:text-base text-white/60 mb-8">
-                Your questions answered simply and clearly.
+                {t('contact.faqSubtitle')}
               </p>
             </div>
             <div className="space-y-3">
