@@ -55,6 +55,8 @@ export default function ContentSection({
     };
   }, []);
 
+  const isDarkSection = backgroundClassName?.includes('from-black') || backgroundClassName?.includes('bg-black');
+
   return (
     <section 
       ref={sectionRef}
@@ -75,12 +77,12 @@ export default function ContentSection({
                 {subtitle}
               </span>
             )}
-            <h2 className={`text-[3.3rem] md:text-[4.4rem] font-bold mb-6 ${backgroundClassName?.includes('from-black') ? 'text-white' : 'text-black dark:text-white'} leading-tight transition-all duration-1000 delay-100 ${
+            <h2 className={`text-[3.3rem] md:text-[4.4rem] font-bold mb-6 ${isDarkSection ? 'text-white' : 'text-black dark:text-white'} leading-tight transition-all duration-1000 delay-100 ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}>
               {title}
             </h2>
-            <p className={`text-[1.1rem] ${backgroundClassName?.includes('from-black') ? 'text-zinc-300' : 'text-zinc-600 dark:text-zinc-400'} mb-8 leading-relaxed transition-all duration-1000 delay-200 ${
+            <p className={`text-[1.1rem] ${isDarkSection ? 'text-zinc-300' : 'text-zinc-600 dark:text-zinc-400'} mb-8 leading-relaxed transition-all duration-1000 delay-200 ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}>
               {description}
@@ -105,7 +107,7 @@ export default function ContentSection({
             {learnMoreLink && (
               <Link 
                 href={learnMoreLink}
-                className={`inline-flex items-center gap-2 ${backgroundClassName?.includes('from-black') ? 'text-white' : 'text-black dark:text-white'} font-semibold hover:gap-4 transition-all group mt-6 duration-1000 delay-300 ${
+                className={`inline-flex items-center gap-2 ${isDarkSection ? 'text-white' : 'text-black dark:text-white'} font-semibold hover:gap-4 transition-all group mt-6 duration-1000 delay-300 ${
                   isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                 }`}
               >
