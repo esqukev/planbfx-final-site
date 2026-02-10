@@ -13,6 +13,7 @@ type VideoHeroWithScrollProps = {
  */
 const FADE_MS = 1200;
 const VISIBLE_MS = 2000;
+const HIDDEN_MS = 2000;
 
 export default function VideoHeroWithScroll({ videoUrl }: VideoHeroWithScrollProps) {
   const heroRef = useRef<HTMLElement>(null);
@@ -40,7 +41,7 @@ export default function VideoHeroWithScroll({ videoUrl }: VideoHeroWithScrollPro
       t1 = setTimeout(() => {
         if (cancelled) return;
         setLogoVisible(false);
-        t2 = setTimeout(runLoop, FADE_MS);
+        t2 = setTimeout(runLoop, FADE_MS + HIDDEN_MS);
       }, FADE_MS + VISIBLE_MS);
     };
     t2 = setTimeout(runLoop, 400);
@@ -73,7 +74,7 @@ export default function VideoHeroWithScroll({ videoUrl }: VideoHeroWithScrollPro
         aria-hidden
       >
         <div
-          className="relative w-48 h-24 md:w-64 md:h-32 opacity-90"
+          className="relative w-48 h-24 md:w-64 md:h-32 flex items-center justify-center mx-auto"
           style={{
             opacity: logoVisible ? 0.9 : 0,
             transition: `opacity ${FADE_MS / 1000}s ease-in-out`,

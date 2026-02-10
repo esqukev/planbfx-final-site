@@ -58,6 +58,7 @@ const PRODUCTS: Array<{
     title: 'Audio Reactive Art',
     description:
       'Visuals that breathe to the beat. We develop graphic environments that respond with absolute precision to every frequency and pulse, achieving a perfect synchronicity where music becomes visible.',
+    videoUrl: 'https://res.cloudinary.com/dpplgma25/video/upload/v1770748182/Audio_Reactive_Cymatics_zzo9sg.mp4',
   },
   {
     id: 'interactive-branding',
@@ -107,7 +108,7 @@ function ProductSection({
     >
       <div className="grid w-full max-w-7xl grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16 lg:items-center">
         <div className={isEven ? 'lg:order-2' : ''}>
-          <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-zinc-900/80 md:transition-transform md:duration-500 md:ease-[cubic-bezier(0.4,0,0.2,1)] md:hover:scale-[1.25]">
+          <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-zinc-900/80 md:transition-transform md:duration-500 md:ease-[cubic-bezier(0.4,0,0.2,1)] md:hover:scale-[1.08]">
             {product.videoUrl ? (
               <video
                 src={product.videoUrl}
@@ -128,7 +129,7 @@ function ProductSection({
           <h2 className="text-3xl font-bold text-white md:text-4xl lg:text-5xl">
             {textWithSymbolFallback(product.title)}
           </h2>
-          <p className="mt-6 text-lg leading-relaxed text-white/70 md:text-xl">
+          <p className="mt-6 text-lg leading-relaxed text-white/70 md:text-xl text-justify">
             {textWithSymbolFallback(product.description)}
           </p>
         </div>
