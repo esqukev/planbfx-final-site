@@ -1,6 +1,10 @@
+'use client';
+
 import Link from 'next/link';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Footer() {
+  const { t } = useLanguage();
   return (
     <footer className="bg-black text-white py-16 px-4 md:px-8 m-0">
       <div className="max-w-7xl mx-auto">
@@ -8,20 +12,20 @@ export default function Footer() {
           <div>
             <h3 className="text-2xl font-bold mb-4">PlanB FX</h3>
             <p className="text-zinc-400">
-              Art Comes First. We shape distinctive success stories with breakthrough ideas and creative mastery.
+              {t('footer.tagline')}
             </p>
           </div>
           <div>
-            <h4 className="text-lg font-semibold mb-4 uppercase tracking-wider">Quick Links</h4>
+            <h4 className="text-lg font-semibold mb-4 uppercase tracking-wider">{t('footer.quickLinks')}</h4>
             <ul className="space-y-2 text-zinc-400">
-              <li><Link href="/" className="hover:text-white transition-colors">Home</Link></li>
-              <li><Link href="/about" className="hover:text-white transition-colors">About</Link></li>
-              <li><Link href="/services" className="hover:text-white transition-colors">Services</Link></li>
-              <li><Link href="/contact" className="hover:text-white transition-colors">Contact</Link></li>
+              <li><Link href="/" className="hover:text-white transition-colors">{t('nav.home')}</Link></li>
+              <li><Link href="/about" className="hover:text-white transition-colors">{t('nav.about')}</Link></li>
+              <li><Link href="/services" className="hover:text-white transition-colors">{t('nav.services')}</Link></li>
+              <li><Link href="/contact" className="hover:text-white transition-colors">{t('nav.contact')}</Link></li>
             </ul>
           </div>
           <div>
-            <h4 className="text-lg font-semibold mb-4 uppercase tracking-wider">Contact</h4>
+            <h4 className="text-lg font-semibold mb-4 uppercase tracking-wider">{t('footer.contact')}</h4>
             <ul className="space-y-2 text-zinc-400">
               <li>info<span className="font-fallback">@</span>planbfx.com</li>
               <li>Phone: <span className="font-fallback">+506 8620 1212</span></li>
@@ -58,7 +62,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="border-t border-zinc-800 pt-8 text-center text-zinc-400 text-sm">
-          <span className="font-fallback">©</span> 2025 PlanB FX. All rights reserved.
+          <span className="font-fallback">©</span> 2025 PlanB FX. {t('footer.rights')}
         </div>
       </div>
     </footer>

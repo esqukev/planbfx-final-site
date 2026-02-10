@@ -7,6 +7,14 @@ import CursorTiltFigure from '../components/CursorTiltFigure';
 import VantaHalo from '../components/VantaHalo';
 import ImageHero from '../components/ImageHero';
 import HyperSpaceBackground from '../components/HyperSpaceBackground';
+import { useLanguage } from '../context/LanguageContext';
+
+const VALIDATION: Record<string, string> = {
+  name: 'Please enter your name.',
+  email: 'Please enter a valid email address.',
+  phone: 'Please enter your phone number.',
+  details: 'Please provide details about your inquiry.',
+};
 
 const FAQ_ITEMS = [
   {
@@ -32,7 +40,24 @@ const FAQ_ITEMS = [
 ];
 
 export default function ContactPage() {
+  const { t } = useLanguage();
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [modal, setModal] = useState<'errors' | 'success' | null>(null);
+  const [errors, setErrors] = useState<string[]>([]);
+
+  const validate = (form: HTMLFormElement): boolean => {
+    const d = new FormData(form);
+    const list: string[] = [];
+    if (!(d.get('name') as string)?.trim()) list.push(VALIDATION.name);
+    if (!(d.get('phone') as string)?.trim()) list.push(VALIDATION.phone);
+    const email = (d.get('email') as string)?.trim();
+    if (!email) list.push(VALIDATION.email);
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) list.push(VALIDATION.email);
+    if (!(d.get('details') as string)?.trim()) list.push(VALIDATION.details);
+    setErrors(list);
+    if (list.length) setModal('errors');
+    return list.length === 0;
+  };
 
   useEffect(() => {
     if (typeof window !== 'undefined' && window.location.hash === '#contact-form') {
@@ -50,7 +75,7 @@ export default function ContactPage() {
         imageAlt="Contact"
       />
 
-      <section className="relative py-24 md:py-32 px-4 md:px-8 overflow-x-hidden min-h-screen">
+      <section className="relative py-24 md:py-32 px-4 md:px-8 min-h-screen">
         <HyperSpaceBackground />
         <div className="relative z-10 max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
@@ -61,22 +86,21 @@ export default function ContactPage() {
                 perspective={1000}
               >
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
-                  Want to work with us?
+                  {t('contact.title')}
                 </h1>
               </CursorTiltFigure>
 
               <p className="text-2xl md:text-3xl font-light text-white/90 mb-8">
-                Let<span className="font-fallback">&apos;</span>s turn ideas into impact.
+                {t('contact.subtitle')}
               </p>
               <p className="text-lg text-white/70 leading-relaxed mb-6 text-justify">
-                Whether you have a clear vision or just a spark, we<span className="font-fallback">&apos;</span>re here to help shape it.
-                Reach out and let<span className="font-fallback">&apos;</span>s create something that actually stands out.
+                {t('contact.intro')}
               </p>
               <p className="text-lg font-semibold text-white/90 mb-10">
-                Get in contact.
+                {t('contact.getInContact')}
               </p>
 
-              <div className="flex flex-wrap gap-4 md:gap-6 mb-12">
+              <div className="flex flex-wrap gap-4 md:gap-6">
                 <a
                   href="tel:+50686201212"
                   className="inline-flex items-center justify-center px-8 py-4 rounded-full border-2 border-white/60 text-white font-semibold hover:bg-white/10 transition-all duration-300 ease-out hover:scale-[1.03] text-base"
@@ -98,30 +122,35 @@ export default function ContactPage() {
                   Email
                 </a>
               </div>
-              <div className="flex justify-start w-full max-w-2xl bg-transparent overflow-visible py-8">
-                <VantaHalo logoSrc="/logos/Property-1-Variant4.svg" className="min-h-[384px] w-full bg-transparent overflow-visible" />
+              <div className="mt-10 flex justify-start w-full overflow-visible py-6">
+                <div className="w-full max-w-2xl overflow-visible" style={{ minHeight: 480 }}>
+                  <VantaHalo logoSrc="/logos/Property-1-Variant4.svg" className="min-h-[480px] w-full bg-transparent overflow-visible" logoClassName="w-40 h-20 sm:w-52 sm:h-28 md:w-60 md:h-30" />
+                </div>
               </div>
             </div>
 
             <div id="contact-form" className="text-left scroll-mt-24">
               <h2 className="text-2xl md:text-3xl font-bold mb-6">
-                Ready to move forward?
+                {t('contact.readyTitle')}
               </h2>
               <p className="text-lg text-white/70 leading-relaxed mb-4">
-                This form is designed for clients who already have a clear vision, goals, and references.
-                The more detail you provide, the faster and more accurately we can move forward.
+                {t('contact.readyDesc1')}
               </p>
               <p className="text-lg text-white/70 leading-relaxed mb-8">
-                Book a meeting and walk us through your ideas and expectations.
+                {t('contact.readyDesc2')}
               </p>
 
               <form
+                noValidate
                 className="space-y-6"
-                onSubmit={(e) => e.preventDefault()}
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  if (validate(e.currentTarget)) setModal('success');
+                }}
               >
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-white/80 mb-2">
-                    Name
+                    {t('contact.name')}
                   </label>
                   <input
                     id="name"
@@ -134,7 +163,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <label htmlFor="company" className="block text-sm font-medium text-white/80 mb-2">
-                    Company or event name
+                    {t('contact.company')}
                   </label>
                   <input
                     id="company"
@@ -146,7 +175,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <label htmlFor="city" className="block text-sm font-medium text-white/80 mb-2">
-                    City
+                    {t('contact.city')}
                   </label>
                   <input
                     id="city"
@@ -158,7 +187,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <label htmlFor="country" className="block text-sm font-medium text-white/80 mb-2">
-                    Country
+                    {t('contact.country')}
                   </label>
                   <input
                     id="country"
@@ -170,7 +199,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <label htmlFor="phone" className="block text-sm font-medium text-white/80 mb-2">
-                    Phone Number
+                    {t('contact.phone')}
                   </label>
                   <input
                     id="phone"
@@ -183,7 +212,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-white/80 mb-2">
-                    Email
+                    {t('contact.email')}
                   </label>
                   <input
                     id="email"
@@ -196,10 +225,10 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <label htmlFor="details" className="block text-sm font-medium text-white/80 mb-2">
-                    Details
+                    {t('contact.details')}
                   </label>
                   <p className="text-xs text-white/50 mb-2">
-                    If not enough details are provided we could not consider your inquiry
+                    {t('contact.detailsHint')}
                   </p>
                   <textarea
                     id="details"
@@ -214,7 +243,7 @@ export default function ContactPage() {
                   type="submit"
                   className="w-full md:w-auto px-8 py-4 bg-white text-black font-semibold rounded-full hover:bg-zinc-200 transition-all duration-300 ease-out hover:scale-[1.03] text-base"
                 >
-                  Send
+                  {t('contact.send')}
                 </button>
               </form>
             </div>
@@ -223,10 +252,10 @@ export default function ContactPage() {
           <div className="mt-24 pt-16 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
             <div className="text-left">
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
-                Frequently Asked Questions
+                {t('contact.faqTitle')}
               </h2>
               <p className="text-sm md:text-base text-white/60 mb-8">
-                Your questions answered simply and clearly.
+                {t('contact.faqSubtitle')}
               </p>
             </div>
             <div className="space-y-3">
@@ -260,6 +289,46 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+
+      {modal && (
+        <div
+          className="fixed inset-0 z-[200] flex items-center justify-center p-4 backdrop-blur-md bg-black/40"
+          onClick={() => setModal(null)}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="modal-title"
+        >
+          <div
+            className="rounded-2xl border border-white/10 bg-black/70 shadow-2xl max-w-md w-full p-6 md:p-8"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h3 id="modal-title" className="text-xl font-bold text-white mb-4">
+              {modal === 'errors' ? t('contact.modalErrorsTitle') : t('contact.modalSuccessTitle')}
+            </h3>
+            {modal === 'errors' ? (
+              <>
+                <p className="text-white/80 mb-3">{t('contact.modalErrorsIntro')}</p>
+                <ul className="list-disc list-inside text-red-300/90 space-y-1 mb-6">
+                  {errors.map((msg, i) => (
+                    <li key={i}>{msg}</li>
+                  ))}
+                </ul>
+              </>
+            ) : (
+              <p className="text-white/80 mb-6">
+                {t('contact.modalSuccessMessage')}
+              </p>
+            )}
+            <button
+              type="button"
+              onClick={() => setModal(null)}
+              className="w-full md:w-auto px-6 py-3 rounded-full border-2 border-white/60 text-white font-semibold hover:bg-white/10 transition-all"
+            >
+              {t('contact.modalClose')}
+            </button>
+          </div>
+        </div>
+      )}
 
       <Footer />
     </main>

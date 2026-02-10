@@ -1,3 +1,5 @@
+'use client';
+
 import Hero from './components/Hero';
 import ContentSection from './components/ContentSection';
 import ProjectGrid from './components/ProjectGrid';
@@ -13,8 +15,10 @@ import VideoHero from './components/VideoHero';
 import ParallaxBanner from './components/ParallaxBanner';
 import ParallaxBannerWithImage from './components/ParallaxBannerWithImage';
 import ParallaxLink from './components/ParallaxLink';
+import { useLanguage } from './context/LanguageContext';
 
 export default function Home() {
+  const { t } = useLanguage();
   return (
     <main className="relative m-0 p-0 bg-black overflow-x-hidden">
       <Navigation />
@@ -23,9 +27,10 @@ export default function Home() {
 
       <div id="about" className="scroll-section m-0 p-0 relative">
         <ContentSection
-          title="Crafting Immersive Visual Experiences"
-          description="We create immersive, tailored visuals that push the boundaries of your vision. From concept to execution, we merge creativity, interaction, and technology to build unique visual experiences that engage, evolve, and resonate beyond the screen."
+          title={t('home.craftingTitle')}
+          description={t('home.craftingDesc')}
           learnMoreLink="/about"
+          learnMoreLabel={t('home.learnMore')}
           sideVisual={<PointCloudVisual />}
           backgroundClassName="from-black text-white"
         />
@@ -37,12 +42,11 @@ export default function Home() {
 
       <div className="m-0 p-0">
         <ParallaxBanner
-          title="We don´t just create visuals — we craft moments that move"
-          subtitle="Where art becomes experiences"
+          title={t('home.parallaxTitle')}
+          subtitle={t('home.parallaxSubtitle')}
         />
       </div>
 
-      {/* Misma sección con imagen de fondo */}
       <div className="m-0 p-0">
         <ParallaxBannerWithImage imageSrc="/bannerstage.jpg" />
       </div>
@@ -51,7 +55,6 @@ export default function Home() {
         <ProjectGrid />
       </div>
 
-      {/* Art In Motion — fade in de derecha a izquierda */}
       <section
         id="services"
         className="m-0 p-0 text-white overflow-hidden"
@@ -61,46 +64,50 @@ export default function Home() {
       >
         <div className="max-w-7xl mx-auto px-4 md:px-8 py-24 md:py-32 lg:py-40 text-center">
           <FadeInFromRight className="text-4xl md:text-6xl lg:text-7xl font-bold text-white">
-            Art In Motion
+            {t('home.artInMotion')}
           </FadeInFromRight>
           <ParallaxLink
             href="/contact#contact-form"
             className="mt-6 inline-block text-sm uppercase tracking-[0.35em] text-zinc-400 hover:text-white focus:outline-none focus:text-white transition-all duration-300 ease-out hover:scale-[1.04] focus:scale-[1.04]"
           >
-            BOOK YOUR CALL NOW
+            {t('home.bookCall')}
           </ParallaxLink>
         </div>
       </section>
 
-      {/* Banner parallax: Crafting Moments / Innovative Art Meets Technology + CTAs (julietbanner1) */}
       <div className="m-0 p-0">
-        <HomeCTABanner imageSrc="/afnisabanner2.jpg" />
+        <HomeCTABanner
+          imageSrc="/afnisabanner2.jpg"
+          subtitle={t('home.ctaBannerSubtitle')}
+          titleLine1={t('home.ctaBannerTitle1')}
+          titleLine2={t('home.ctaBannerTitle2')}
+          paragraph={t('home.ctaBannerParagraph')}
+          exploreServicesText={t('home.ctaBannerExplore')}
+          getInTouchText={t('home.ctaBannerTouch')}
+        />
       </div>
 
-      {/* CTA — fondo estrellas HyperSpace */}
       <section id="contact" className="relative min-h-screen m-0 p-0 py-0 px-4 md:px-8 text-white overflow-hidden">
         <HyperSpaceBackground />
         <div className="relative z-10 max-w-4xl mx-auto text-center py-24 md:py-32">
           <ScrollTextEffect className="text-6xl md:text-8xl font-bold mb-8">
-            Let<span className="font-fallback">´</span>s Create<br />
-            Something<br />
-            Different
+            {t('home.letsCreate')}<span className="font-fallback">´</span><br />
+            {t('home.something')}<br />
+            {t('home.different')}
           </ScrollTextEffect>
-          <FadeInOnScroll 
-            className="text-xl text-zinc-400 mb-12"
-          >
-            Do you have an idea? Let<span className="font-fallback">´</span>s talk
+          <FadeInOnScroll className="text-xl text-zinc-400 mb-12">
+            {t('home.idea')}
           </FadeInOnScroll>
           <a
             href="/contact#contact-form"
             className="inline-flex items-center justify-center px-8 py-4 border-2 border-white/60 text-white font-semibold rounded-full hover:bg-white/10 transition-all duration-300 ease-out hover:scale-[1.03] text-base"
           >
-            Contact us
+            {t('home.contactUs')}
           </a>
         </div>
       </section>
       
       <Footer />
-      </main>
+    </main>
   );
 }

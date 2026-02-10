@@ -8,9 +8,11 @@ import ImageHero from '../components/ImageHero';
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useLanguage } from '../context/LanguageContext';
 gsap.registerPlugin(ScrollTrigger);
 
 export default function AboutPage() {
+  const { t } = useLanguage();
   const introRef = useRef<HTMLDivElement>(null);
   const closingRef = useRef<HTMLDivElement>(null);
   const introParaRef = useRef<HTMLParagraphElement>(null);
@@ -89,20 +91,17 @@ export default function AboutPage() {
         <div className="mx-auto max-w-4xl px-8 py-16 md:py-24 lg:py-28 flex flex-col items-center text-center">
           <div ref={introRef} className="space-y-8 md:space-y-10">
             <span className="text-base uppercase tracking-[0.35em] text-white/50 block">
-              Who we are
+              {t('about.whoWeAre')}
             </span>
             <h1 className="text-5xl font-bold leading-tight text-white md:text-6xl lg:text-7xl">
-              About Plan B FX
+              {t('about.title')}
             </h1>
             <div className="max-w-4xl mx-auto space-y-6">
               <p ref={introParaRef} className="text-xl leading-relaxed text-white/70 md:text-2xl">
-                Plan B began as a collective of local musicians driven by the goal of
-                energizing the scene and elevating the standards of their own events.
+                {t('about.intro1')}
               </p>
               <p className="text-xl leading-relaxed text-white/70 md:text-2xl">
-                During this process, we incorporated code<span className="font-fallback">-</span>based visual development
-                into our workflow, allowing us to expand our services and provide
-                immersive, memorable experiences for diverse events.
+                {t('about.intro2')}
               </p>
             </div>
           </div>
@@ -128,17 +127,14 @@ export default function AboutPage() {
         <div className="mx-auto max-w-4xl px-8 py-16 md:py-24 lg:py-28 flex flex-col items-center text-center">
           <div ref={closingRef} className="space-y-8 md:space-y-10 max-w-4xl mx-auto">
             <p ref={closingParaRef} className="text-xl leading-relaxed text-white/70 md:text-2xl">
-              We have partnered with local promoters such as 3AM, Soulful Gathering,
-              Xtyle, and Microgarden, providing visual support for world<span className="font-fallback">-</span>class
-              artists like Adam Beyer, Anfisa Letyago and Donnie Cosmo, alongside
-              key local talent.
+              {t('about.closing')}
             </p>
           </div>
         </div>
       </section>
 
       {/* Banner final: foto + CUSTOM EXPERIENCES, texto y botones Get in Touch / Explore Our Art */}
-      <CTAFinalBanner imageSrc="/portilla.jpg" subtitle="CUSTOM EXPERIENCES" />
+      <CTAFinalBanner imageSrc="/portilla.jpg" subtitle={t('about.ctaSubtitle')} title={t('cta.defaultTitle')} paragraph={t('cta.defaultParagraph')} ctaText={t('cta.getInTouch')} ctaHref="/contact" secondaryText={t('cta.exploreArt')} secondaryHref="/services" />
 
       <Footer />
     </main>

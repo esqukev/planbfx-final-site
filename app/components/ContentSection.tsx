@@ -14,6 +14,7 @@ interface ContentSectionProps {
   reverse?: boolean;
   stats?: Array<{ number: string; numberSuffix?: string; label: string }>;
   learnMoreLink?: string;
+  learnMoreLabel?: string;
   backgroundClassName?: string;
 }
 
@@ -26,6 +27,7 @@ export default function ContentSection({
   reverse = false,
   stats,
   learnMoreLink,
+  learnMoreLabel = 'Learn More',
   backgroundClassName,
 }: ContentSectionProps) {
   const sectionRef = useRef<HTMLElement>(null);
@@ -112,7 +114,7 @@ export default function ContentSection({
                 }`}
               >
                 <span className="inline-block group-hover:scale-110 transition-transform duration-300">
-                  Learn More
+                  {learnMoreLabel}
                 </span>
                 <svg 
                   className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" 

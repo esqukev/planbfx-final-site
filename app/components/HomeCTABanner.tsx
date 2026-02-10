@@ -10,12 +10,26 @@ gsap.registerPlugin(ScrollTrigger);
 
 type HomeCTABannerProps = {
   imageSrc: string;
+  subtitle?: string;
+  titleLine1?: string;
+  titleLine2?: string;
+  paragraph?: string;
+  exploreServicesText?: string;
+  getInTouchText?: string;
 };
 
 /**
  * Banner parallax debajo de Art Meets Innovation: Crafting Moments, Innovative Art Meets Technology, párrafo y botones.
  */
-export default function HomeCTABanner({ imageSrc }: HomeCTABannerProps) {
+export default function HomeCTABanner({
+  imageSrc,
+  subtitle = 'Crafting Moments',
+  titleLine1 = 'Innovative Art',
+  titleLine2 = 'Meets Technology',
+  paragraph = 'Welcome to PlanB FX, where creativity and technology converge. We breathe life into events through interactive art, smart coding, and AI-driven experiences. Let us elevate your vision into a captivating reality.',
+  exploreServicesText = 'Explore services',
+  getInTouchText = 'Get in touch',
+}: HomeCTABannerProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -109,7 +123,7 @@ export default function HomeCTABanner({ imageSrc }: HomeCTABannerProps) {
       >
         {/* Subtitle: letter-by-letter fade-in (typewriter) */}
         <p className="text-sm uppercase tracking-[0.3em] text-zinc-400 block mb-4">
-          {'Crafting Moments'.split('').map((char, i) => (
+          {subtitle.split('').map((char, i) => (
             <span
               key={`st-${i}`}
               className={['\'', '"', '-', '–', '—', '+', '/'].includes(char) ? 'inline-block font-fallback' : 'inline-block'}
@@ -125,7 +139,7 @@ export default function HomeCTABanner({ imageSrc }: HomeCTABannerProps) {
         {/* Title: dos líneas — Innovative Art / Meets Technology */}
         <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight mb-6 md:mb-8">
           <span className="block">
-            {'Innovative Art'.split('').map((char, i) => (
+            {titleLine1.split('').map((char, i) => (
               <span
                 key={`t1-${i}`}
                 className={['\'', '"', '-', '–', '—', '+', '/'].includes(char) ? 'inline-block font-fallback' : 'inline-block'}
@@ -139,7 +153,7 @@ export default function HomeCTABanner({ imageSrc }: HomeCTABannerProps) {
             ))}
           </span>
           <span className="block">
-            {'Meets Technology'.split('').map((char, i) => (
+            {titleLine2.split('').map((char, i) => (
               <span
                 key={`t2-${i}`}
                 className={['\'', '"', '-', '–', '—', '+', '/'].includes(char) ? 'inline-block font-fallback' : 'inline-block'}
@@ -156,7 +170,7 @@ export default function HomeCTABanner({ imageSrc }: HomeCTABannerProps) {
         {/* Paragraph: cada palabra en una línea (ninguna se corta); letter-by-letter */}
         <p className="text-base md:text-lg text-white/80 leading-relaxed mb-10 max-w-2xl mx-auto">
           {(() => {
-            const full = 'Welcome to PlanB FX, where creativity and technology converge. We breathe life into events through interactive art, smart coding, and AI-driven experiences. Let us elevate your vision into a captivating reality.';
+            const full = paragraph;
             const words = full.split(' ');
             const sym = ["'", '"', '-', '–', '—', '+', '/'];
             let charIdx = 48;
@@ -192,13 +206,13 @@ export default function HomeCTABanner({ imageSrc }: HomeCTABannerProps) {
             href="/services"
             className="inline-flex items-center justify-center px-8 py-4 border-2 border-white/60 text-white font-semibold rounded-full hover:bg-white/10 transition-all duration-300 ease-out hover:scale-[1.03] text-base"
           >
-            Explore services
+            {exploreServicesText}
           </Link>
           <Link
             href="/contact#contact-form"
             className="inline-flex items-center justify-center px-8 py-4 border-2 border-white/60 text-white font-semibold rounded-full hover:bg-white/10 transition-all duration-300 ease-out hover:scale-[1.03] text-base"
           >
-            Get in touch
+            {getInTouchText}
           </Link>
         </div>
       </div>

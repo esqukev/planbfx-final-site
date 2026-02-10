@@ -5,10 +5,22 @@ import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import VideoHeroWithScroll from '../components/VideoHeroWithScroll';
 import CTAFinalBanner from '../components/CTAFinalBanner';
+import VantaNetBackground from '../components/VantaNetBackground';
+import { useLanguage } from '../context/LanguageContext';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
+
+const PRODUCT_ID_TO_KEY: Record<string, string> = {
+  'live-painting': 'livePainting',
+  'artificial-mirage': 'artificialMirage',
+  'audio-reactive-art': 'audioReactive',
+  'interactive-branding': 'interactiveBranding',
+  'logo-waterfall': 'logoWaterfall',
+  'projection-mapping': 'projectionMapping',
+  'customized-experience': 'customizedExperience',
+};
 
 const SERVICES_VIDEO_URL = 'https://res.cloudinary.com/dpplgma25/video/upload/v1769796195/beyerrandom_lk0ov5.mp4';
 
@@ -94,17 +106,22 @@ function ProductSection({
   product,
   index,
   sectionRef,
+  t,
 }: {
   product: (typeof PRODUCTS)[0];
   index: number;
   sectionRef: (el: HTMLElement | null) => void;
+  t: (key: string) => string;
 }) {
   const isEven = index % 2 === 0;
+  const key = PRODUCT_ID_TO_KEY[product.id] ?? product.id;
+  const title = t(`services.${key}.title`);
+  const description = t(`services.${key}.desc`);
   return (
     <section
       ref={sectionRef}
       id={product.id}
-      className="relative flex min-h-screen w-full items-center justify-center overflow-hidden bg-black px-4 py-20 md:px-8 lg:px-12"
+      className="relative flex min-h-screen w-full items-center justify-center overflow-hidden bg-black/85 backdrop-blur-sm px-4 py-20 md:px-8 lg:px-12"
     >
       <div className="grid w-full max-w-7xl grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16 lg:items-center">
         <div className={isEven ? 'lg:order-2' : ''}>
@@ -120,17 +137,17 @@ function ProductSection({
               />
             ) : (
               <div className="flex h-full w-full items-center justify-center text-zinc-500 text-sm uppercase tracking-wider">
-                Preview
+                {t('services.preview')}
               </div>
             )}
           </div>
         </div>
         <div className={isEven ? 'lg:order-1' : ''}>
           <h2 className="text-3xl font-bold text-white md:text-4xl lg:text-5xl">
-            {textWithSymbolFallback(product.title)}
+            {textWithSymbolFallback(title)}
           </h2>
           <p className="mt-6 text-lg leading-relaxed text-white/70 md:text-xl text-justify">
-            {textWithSymbolFallback(product.description)}
+            {textWithSymbolFallback(description)}
           </p>
         </div>
       </div>
@@ -139,6 +156,7 @@ function ProductSection({
 }
 
 export default function ServicesPage() {
+  const { t } = useLanguage();
   const sectionRefs = useRef<(HTMLElement | null)[]>([]);
 
   useEffect(() => {
@@ -157,11 +175,12 @@ export default function ServicesPage() {
   }, []);
 
   return (
-    <main className="relative min-h-screen bg-black text-white">
+    <main className="relative min-h-screen text-white">
       <Navigation />
 
       <VideoHeroWithScroll videoUrl={SERVICES_VIDEO_URL} />
 
+      <VantaNetBackground />
       <div className="relative z-20">
         {PRODUCTS.map((product, index) => (
           <ProductSection
@@ -171,19 +190,20 @@ export default function ServicesPage() {
             sectionRef={(el) => {
               sectionRefs.current[index] = el;
             }}
+            t={t}
           />
         ))}
       </div>
 
       <CTAFinalBanner
         imageSrc="/Untitled-9580.jpg"
-        subtitle="Innovate Your Experience"
-        title="Art and technology unite at PlanB FX"
-        paragraph="Discover how we blend creativity with technology to create stunning interactive art. Explore our imaginative solutions designed for events that leave a lasting impression. Experience art like never before."
-        ctaText={<>Let<span className="font-fallback">&apos;</span>s talk</>}
+        subtitle={t('services.ctaSubtitle')}
+        title={t('services.ctaTitle')}
+        paragraph={t('services.ctaParagraph')}
+        ctaText={t('services.letsTalk')}
         ctaHref="/contact"
-        secondaryText=""
-        secondaryHref=""
+        secondaryText={t('cta.exploreArt')}
+        secondaryHref="/services"
         centered
       />
 
