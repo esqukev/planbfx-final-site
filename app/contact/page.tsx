@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import CursorTiltFigure from '../components/CursorTiltFigure';
-import PlanBFXText from '../components/PlanBFXText';
+import VantaHalo from '../components/VantaHalo';
 import ImageHero from '../components/ImageHero';
 import HyperSpaceBackground from '../components/HyperSpaceBackground';
 
@@ -101,8 +101,8 @@ export default function ContactPage() {
                   Email
                 </a>
               </div>
-              <div className="flex justify-start">
-                <PlanBFXText />
+              <div className="flex justify-start w-full max-w-2xl">
+                <VantaHalo logoSrc="/planb-variant2.svg" className="min-h-[320px] w-full rounded-xl" />
               </div>
             </div>
 

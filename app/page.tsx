@@ -3,6 +3,7 @@ import ProjectGrid from './components/ProjectGrid';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 import PointCloudVisual from './components/PointCloudVisual';
+import VantaHalo from './components/VantaHalo';
 import HyperSpaceBackground from './components/HyperSpaceBackground';
 import ScrollTextEffect from './components/ScrollTextEffect';
 import FadeInFromRight from './components/FadeInFromRight';
@@ -22,7 +23,12 @@ export default function Home() {
 
       <div id="about" className="scroll-section m-0 p-0 relative">
         <section className="relative flex min-h-[70vh] items-center justify-center py-16 md:py-24">
-          <PointCloudVisual />
+          <div className="absolute inset-0 z-0">
+            <VantaHalo className="absolute inset-0 min-h-full w-full" />
+          </div>
+          <div className="relative z-10">
+            <PointCloudVisual />
+          </div>
         </section>
         <div
           className="absolute bottom-0 left-0 right-0 h-24 md:h-32 lg:h-40 pointer-events-none z-10"
