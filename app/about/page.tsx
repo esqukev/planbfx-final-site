@@ -101,9 +101,6 @@ export default function AboutPage() {
               into our workflow, allowing us to expand our services and provide
               immersive, memorable experiences for diverse events.
             </p>
-            <p className="max-w-4xl mx-auto text-xl leading-relaxed text-white/70 md:text-2xl text-justify mt-6">
-              We create immersive, tailored visuals that push the boundaries of your vision. From concept to execution, we merge creativity, interaction, and technology to build unique visual experiences that engage, evolve, and resonate beyond the screen.
-            </p>
           </div>
         </div>
       </section>

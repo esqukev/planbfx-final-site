@@ -101,8 +101,8 @@ export default function ContactPage() {
                   Email
                 </a>
               </div>
-              <div className="flex justify-start w-full max-w-2xl">
-                <VantaHalo logoSrc="/planb-variant2.svg" className="min-h-[320px] w-full rounded-xl" />
+              <div className="flex justify-start w-full max-w-2xl bg-transparent">
+                <VantaHalo logoSrc="/planb-variant3.svg" className="min-h-[384px] w-full bg-transparent" />
               </div>
             </div>
 

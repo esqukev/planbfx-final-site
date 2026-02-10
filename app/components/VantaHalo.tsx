@@ -52,6 +52,9 @@ export default function VantaHalo({ logoSrc, className = '' }: VantaHaloProps) {
           gyroControls: false,
           minHeight: 200,
           minWidth: 200,
+          backgroundColor: 0x000000,
+          baseColor: 0x0,
+          color2: 0x222222,
         });
       } catch (e) {
         console.warn('[VantaHalo] init failed', e);
@@ -71,8 +74,8 @@ export default function VantaHalo({ logoSrc, className = '' }: VantaHaloProps) {
   return (
     <div
       ref={containerRef}
-      className={`relative w-full overflow-hidden ${className}`}
-      style={{ minHeight: 200, minWidth: 200 }}
+      className={`relative w-full overflow-hidden bg-transparent ${className}`}
+      style={{ minHeight: 200, minWidth: 200, background: 'transparent' }}
     >
       {logoSrc && (
         <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none">
