@@ -4,9 +4,12 @@ import { useEffect, useRef, useState } from 'react';
 
 interface VideoHeroProps {
   videoUrl: string;
+  line1?: string;
+  line2?: string;
+  line3?: string;
 }
 
-export default function VideoHero({ videoUrl }: VideoHeroProps) {
+export default function VideoHero({ videoUrl, line1 = 'INTERACTIVE ART', line2 = '[PLANBFX]', line3 = 'FOR YOUR SPACES' }: VideoHeroProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
   const [viewportHeight, setViewportHeight] = useState(0);
@@ -136,7 +139,7 @@ export default function VideoHero({ videoUrl }: VideoHeroProps) {
               fontFamily: 'monospace, "Courier New", Courier, monospace'
             }}
           >
-            INTERACTIVE ART
+            {line1}
           </div>
           <div 
             className="text-white font-bold uppercase shrink-0 text-center flex-1 min-w-0"
@@ -147,7 +150,7 @@ export default function VideoHero({ videoUrl }: VideoHeroProps) {
               fontFamily: 'monospace, "Courier New", Courier, monospace'
             }}
           >
-            [PLANBFX]
+            {line2}
           </div>
           <div 
             className="text-white font-bold uppercase shrink-0 text-right flex-1 min-w-0"
@@ -158,7 +161,7 @@ export default function VideoHero({ videoUrl }: VideoHeroProps) {
               fontFamily: 'monospace, "Courier New", Courier, monospace'
             }}
           >
-            FOR YOUR SPACES
+            {line3}
           </div>
         </div>
       </div>

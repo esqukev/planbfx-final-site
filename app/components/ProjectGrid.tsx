@@ -3,41 +3,20 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Trans from './Trans';
+import { useLanguage } from '../context/LanguageContext';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const processSteps = [
-  {
-    id: '01',
-    subtitle: 'Meeting & Vision',
-    code: 'ALIGN',
-    description:
-      'We meet to capture your goals. From the first call, we align our vision to ensure every step builds toward the same outcome.',
-  },
-  {
-    id: '02',
-    subtitle: 'Product Selection',
-    code: 'CURATE',
-    description:
-      'We pinpoint the ideal technical and artistic solution for your needs, selecting the tools that will maximize your event\'s impact.',
-  },
-  {
-    id: '03',
-    subtitle: 'Pre-Production & Testing',
-    code: 'ARCHITECT',
-    description:
-      'Asset management, development, and technical testing. We prepare every digital detail to guarantee a flawless execution.',
-  },
-  {
-    id: '04',
-    subtitle: 'Production & Launch',
-    code: 'EXECUTE',
-    description:
-      'Deployment and live execution. We take control of the visuals live to breathe life into the event, powering the experience in real-time to ensure a high-impact atmosphere that lingers with the audience.',
-  },
-];
+const STEP_KEYS = [
+  { id: '01', subtitle: 'works.step1subtitle', code: 'works.step1code', desc: 'works.step1desc' },
+  { id: '02', subtitle: 'works.step2subtitle', code: 'works.step2code', desc: 'works.step2desc' },
+  { id: '03', subtitle: 'works.step3subtitle', code: 'works.step3code', desc: 'works.step3desc' },
+  { id: '04', subtitle: 'works.step4subtitle', code: 'works.step4code', desc: 'works.step4desc' },
+] as const;
 
 export default function ProjectGrid() {
+  const { t } = useLanguage();
   const sectionRef = useRef<HTMLElement>(null);
   const lineRef = useRef<HTMLDivElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
@@ -99,7 +78,7 @@ export default function ProjectGrid() {
             ref={subtitleRef}
             className="text-sm uppercase tracking-[0.3em] text-zinc-400 max-w-2xl mx-auto"
           >
-            Discover the process behind our work — from brief to delivery.
+            <Trans>{t('works.subtitle')}</Trans>
           </p>
         </div>
 
@@ -112,7 +91,7 @@ export default function ProjectGrid() {
             aria-hidden
           />
 
-          {processSteps.map((step, index) => (
+          {STEP_KEYS.map((step, index) => (
             <div
               key={step.id}
               ref={(el) => {
@@ -120,7 +99,6 @@ export default function ProjectGrid() {
               }}
               className="relative flex justify-center py-10 md:py-14 first:pt-0 last:pb-0"
             >
-              {/* Card apenas encima de la línea, un poco más al lado */}
               <div
                 className={`
                   w-full max-w-xl relative z-10
@@ -129,13 +107,13 @@ export default function ProjectGrid() {
               >
                 <div className="rounded-2xl border-0 bg-zinc-900/80 p-6 md:p-8 shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(255,255,255,0.08)]">
                   <span className="text-xs font-mono uppercase tracking-widest text-zinc-400 block mb-2">
-                    {step.subtitle}
+                    {t(step.subtitle)}
                   </span>
                   <h3 className="text-xl md:text-2xl font-semibold text-white mb-3">
-                    {step.code}
+                    {t(step.code)}
                   </h3>
                   <p className="text-zinc-400 text-sm md:text-base leading-relaxed text-justify">
-                    {step.description}
+                    {t(step.desc)}
                   </p>
                 </div>
               </div>

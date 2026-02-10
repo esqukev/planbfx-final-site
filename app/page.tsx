@@ -15,6 +15,7 @@ import VideoHero from './components/VideoHero';
 import ParallaxBanner from './components/ParallaxBanner';
 import ParallaxBannerWithImage from './components/ParallaxBannerWithImage';
 import ParallaxLink from './components/ParallaxLink';
+import Trans from './components/Trans';
 import { useLanguage } from './context/LanguageContext';
 
 export default function Home() {
@@ -37,7 +38,12 @@ export default function Home() {
       </div>
 
       <div className="m-0 p-0 block leading-none -mt-px">
-        <VideoHero videoUrl="https://res.cloudinary.com/dpplgma25/video/upload/v1769541821/plabanfisa_kskqbc.mp4" />
+        <VideoHero
+          videoUrl="https://res.cloudinary.com/dpplgma25/video/upload/v1769541821/plabanfisa_kskqbc.mp4"
+          line1={t('home.videoLine1')}
+          line2={t('home.videoLine2')}
+          line3={t('home.videoLine3')}
+        />
       </div>
 
       <div className="m-0 p-0">
@@ -91,12 +97,12 @@ export default function Home() {
         <HyperSpaceBackground />
         <div className="relative z-10 max-w-4xl mx-auto text-center py-24 md:py-32">
           <ScrollTextEffect className="text-6xl md:text-8xl font-bold mb-8">
-            {t('home.letsCreate')}<span className="font-fallback">´</span><br />
+            <Trans>{t('home.letsCreate')}</Trans><span className="font-fallback">´</span><br />
             {t('home.something')}<br />
             {t('home.different')}
           </ScrollTextEffect>
           <FadeInOnScroll className="text-xl text-zinc-400 mb-12">
-            {t('home.idea')}
+            <Trans>{t('home.idea')}</Trans>
           </FadeInOnScroll>
           <a
             href="/contact#contact-form"

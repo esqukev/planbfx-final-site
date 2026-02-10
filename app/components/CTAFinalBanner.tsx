@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import type { ReactNode } from 'react';
+import Trans from './Trans';
 
 type CTAFinalBannerProps = {
   imageSrc: string;
@@ -87,10 +88,10 @@ export default function CTAFinalBanner({
           {subtitle}
         </span>
         <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight mb-6 whitespace-pre-line">
-          {title}
+          {typeof title === 'string' ? <Trans>{title}</Trans> : title}
         </h2>
         <p className="text-base md:text-lg text-white/80 leading-relaxed mb-10 text-justify">
-          {paragraph}
+          {typeof paragraph === 'string' ? <Trans>{paragraph}</Trans> : paragraph}
         </p>
         <div className={`flex flex-wrap items-center gap-4 md:gap-6 ${centered ? 'justify-center' : ''}`}>
           <Link

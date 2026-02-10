@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import type { ReactNode } from 'react';
 import { useEffect, useRef, useState } from 'react';
+import Trans from './Trans';
 
 interface ContentSectionProps {
   title: string;
@@ -87,7 +88,7 @@ export default function ContentSection({
             <p className={`text-[1.1rem] ${isDarkSection ? 'text-zinc-300' : 'text-zinc-600 dark:text-zinc-400'} mb-8 leading-relaxed transition-all duration-1000 delay-200 ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}>
-              {description}
+              <Trans>{description}</Trans>
             </p>
             {stats && (
               <div className="grid grid-cols-3 gap-8 mt-12">

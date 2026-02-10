@@ -113,8 +113,15 @@ export default function AboutPage() {
         <ParallaxBannerWithImage
           imageSrc="/tomandres.jpg"
           rotatingTitle={{
-            prefix: 'WE CREATE ',
-            words: ['ART', 'EXPERIENCE', 'INNOVATION', 'TECHNOLOGY', 'INTERACTION', 'MEMORIES'],
+            prefix: t('about.weCreatePrefix'),
+            words: [
+              t('about.rotatingWord1'),
+              t('about.rotatingWord2'),
+              t('about.rotatingWord3'),
+              t('about.rotatingWord4'),
+              t('about.rotatingWord5'),
+              t('about.rotatingWord6'),
+            ],
           }}
         />
       </div>

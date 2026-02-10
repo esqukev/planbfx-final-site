@@ -7,6 +7,7 @@ import CursorTiltFigure from '../components/CursorTiltFigure';
 import VantaHalo from '../components/VantaHalo';
 import ImageHero from '../components/ImageHero';
 import HyperSpaceBackground from '../components/HyperSpaceBackground';
+import Trans from '../components/Trans';
 import { useLanguage } from '../context/LanguageContext';
 
 const VALIDATION: Record<string, string> = {
@@ -16,28 +17,13 @@ const VALIDATION: Record<string, string> = {
   details: 'Please provide details about your inquiry.',
 };
 
-const FAQ_ITEMS = [
-  {
-    question: 'Where are you based?',
-    answer: 'Headquartered in San José, Costa Rica, we bring our visual expertise to every corner of the country with forward planning. Contact us to learn more about our availability and reach.',
-  },
-  {
-    question: 'What kind of events do you work with?',
-    answer: 'We work with a wide range of events including festivals, concerts, corporate events, brand activations, art installations, and private parties. Our visual experiences are tailored to each occasion.',
-  },
-  {
-    question: 'How far in advance should I book?',
-    answer: 'We recommend reaching out at least 4–8 weeks before your event to allow time for concept development and technical setup. For larger or custom projects, earlier is better.',
-  },
-  {
-    question: 'Do you provide equipment or do we need to supply it?',
-    answer: 'We can work with your existing setup or provide recommendations. Depending on the project, we can handle projection, screens, and technical integration—just ask when you get in touch.',
-  },
-  {
-    question: 'What information do you need to get started?',
-    answer: 'Share your event date, venue, vision, and any references or mood boards. The more detail you provide in the form, the faster we can propose a tailored solution.',
-  },
-];
+const FAQ_KEYS = [
+  { q: 'contact.faq1q', a: 'contact.faq1a' },
+  { q: 'contact.faq2q', a: 'contact.faq2a' },
+  { q: 'contact.faq3q', a: 'contact.faq3a' },
+  { q: 'contact.faq4q', a: 'contact.faq4a' },
+  { q: 'contact.faq5q', a: 'contact.faq5a' },
+] as const;
 
 export default function ContactPage() {
   const { t } = useLanguage();
@@ -94,7 +80,7 @@ export default function ContactPage() {
                 {t('contact.subtitle')}
               </p>
               <p className="text-lg text-white/70 leading-relaxed mb-6 text-justify">
-                {t('contact.intro')}
+                <Trans>{t('contact.intro')}</Trans>
               </p>
               <p className="text-lg font-semibold text-white/90 mb-10">
                 {t('contact.getInContact')}
@@ -259,7 +245,7 @@ export default function ContactPage() {
               </p>
             </div>
             <div className="space-y-3">
-              {FAQ_ITEMS.map((item, index) => (
+              {FAQ_KEYS.map((item, index) => (
                 <div
                   key={index}
                   className="rounded-xl bg-white/5 border border-white/10 overflow-hidden"
@@ -269,7 +255,7 @@ export default function ContactPage() {
                     onClick={() => setOpenFaq(openFaq === index ? null : index)}
                     className="w-full px-5 py-4 text-left flex items-center justify-between gap-4 text-white font-medium hover:bg-white/5 transition-colors"
                   >
-                    <span>{item.question}</span>
+                    <span>{t(item.q)}</span>
                     <span
                       className={`shrink-0 w-6 h-6 flex items-center justify-center text-white/80 text-lg font-light transition-transform ${
                         openFaq === index ? 'rotate-45' : ''
@@ -280,7 +266,7 @@ export default function ContactPage() {
                   </button>
                   {openFaq === index && (
                     <div className="px-5 pb-4 pt-0">
-                      <p className="text-white/70 leading-relaxed text-justify">{item.answer}</p>
+                      <p className="text-white/70 leading-relaxed text-justify">{t(item.a)}</p>
                     </div>
                   )}
                 </div>
