@@ -74,11 +74,11 @@ export default function VantaHalo({ logoSrc, className = '' }: VantaHaloProps) {
   return (
     <div
       ref={containerRef}
-      className={`relative w-full overflow-hidden bg-transparent ${className}`}
+      className={`relative w-full overflow-visible bg-transparent ${className}`}
       style={{ minHeight: 200, minWidth: 200, background: 'transparent' }}
     >
       {logoSrc && (
-        <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none">
+        <div className="absolute inset-0 z-[100] flex items-center justify-center pointer-events-none">
           <div className="relative w-32 h-16 sm:w-40 sm:h-20 md:w-48 md:h-24 opacity-95">
             <Image
               src={logoSrc}

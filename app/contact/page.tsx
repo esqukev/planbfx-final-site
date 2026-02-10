@@ -51,7 +51,7 @@ export default function ContactPage() {
         imageAlt="Contact"
       />
 
-      <section className="relative py-24 md:py-32 px-4 md:px-8 overflow-hidden min-h-screen">
+      <section className="relative py-24 md:py-32 px-4 md:px-8 overflow-x-hidden min-h-screen">
         <HyperSpaceBackground />
         <div className="relative z-10 max-w-7xl mx-auto">
           {/* Dos columnas: izquierda = texto + contact; derecha = form */}
@@ -101,8 +101,8 @@ export default function ContactPage() {
                   Email
                 </a>
               </div>
-              <div className="flex justify-start w-full max-w-2xl bg-transparent">
-                <VantaHalo logoSrc="/planb-variant3.svg" className="min-h-[384px] w-full bg-transparent" />
+              <div className="flex justify-start w-full max-w-2xl bg-transparent overflow-visible py-8">
+                <VantaHalo logoSrc="/logos/Property-1-Variant4.svg" className="min-h-[420px] w-full max-w-full bg-transparent overflow-visible" />
               </div>
             </div>
 

@@ -94,7 +94,7 @@ export default function AboutPage() {
             <h1 className="text-5xl font-bold leading-tight text-white md:text-6xl lg:text-7xl">
               About Plan B FX
             </h1>
-            <p ref={introParaRef} className="max-w-4xl mx-auto text-xl leading-relaxed text-white/70 md:text-2xl text-justify">
+            <p ref={introParaRef} className="max-w-4xl mx-auto text-xl leading-relaxed text-white/70 md:text-2xl">
               Plan B began as a collective of local musicians driven by the goal of
               energizing the scene and elevating the standards of their own events.
               During this process, we incorporated code<span className="font-fallback">-</span>based visual development
@@ -123,7 +123,7 @@ export default function AboutPage() {
       <section className="relative z-20 bg-black">
         <div className="mx-auto max-w-4xl px-8 py-16 md:py-24 lg:py-28 flex flex-col items-center text-center">
           <div ref={closingRef} className="space-y-8 md:space-y-10 max-w-4xl mx-auto">
-            <p ref={closingParaRef} className="text-xl leading-relaxed text-white/70 md:text-2xl text-justify">
+            <p ref={closingParaRef} className="text-xl leading-relaxed text-white/70 md:text-2xl">
               We have partnered with local promoters such as 3AM, Soulful Gathering,
               Xtyle, and Microgarden, providing visual support for world<span className="font-fallback">-</span>class
               artists like Adam Beyer, Anfisa Letyago and Donnie Cosmo, alongside
