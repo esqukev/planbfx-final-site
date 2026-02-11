@@ -50,7 +50,7 @@ export default function Hero() {
             }}
             aria-hidden
           />
-          <div className="relative w-full h-full drop-shadow-[0_0_40px_rgba(255,255,255,0.15)]">
+          <div className="relative w-full h-full">
             <LogoPointCloud />
           </div>
         </div>
