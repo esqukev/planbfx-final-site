@@ -5,6 +5,7 @@ import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import VideoHeroWithScroll from '../components/VideoHeroWithScroll';
 import CTAFinalBanner from '../components/CTAFinalBanner';
+import VantaNet from '../components/VantaNet';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useLanguage } from '../context/LanguageContext';
@@ -46,7 +47,7 @@ function ProductSection({
     <section
       ref={sectionRef}
       id={product.id}
-      className="relative flex min-h-screen w-full items-center justify-center overflow-hidden bg-black px-4 py-20 md:px-8 lg:px-12"
+      className="relative flex min-h-screen w-full items-center justify-center overflow-hidden bg-transparent px-4 py-20 md:px-8 lg:px-12"
     >
       <div className="grid w-full max-w-7xl grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16 lg:items-center">
         <div className={isEven ? 'lg:order-2' : ''}>
@@ -105,8 +106,10 @@ export default function ServicesPage() {
 
       <VideoHeroWithScroll videoUrl={SERVICES_VIDEO_URL} />
 
-      <div className="relative z-20">
-        {PRODUCTS.map((product, index) => (
+      <div className="relative bg-black">
+        <VantaNet className="z-0" />
+        <div className="relative z-10">
+          {PRODUCTS.map((product, index) => (
           <ProductSection
             key={product.id}
             product={product}
@@ -118,6 +121,7 @@ export default function ServicesPage() {
             }}
           />
         ))}
+        </div>
       </div>
 
       <CTAFinalBanner
