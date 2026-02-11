@@ -4,6 +4,8 @@ import { useEffect, useRef } from 'react';
 
 type VantaNetProps = {
   className?: string;
+  /** Scale of the effect (0.5 = more zoomed out, 1 = default). Use lower for Services. */
+  scale?: number;
 };
 
 function loadScript(src: string): Promise<void> {
@@ -21,7 +23,7 @@ function loadScript(src: string): Promise<void> {
   });
 }
 
-export default function VantaNet({ className = '' }: VantaNetProps) {
+export default function VantaNet({ className = '', scale = 0.75 }: VantaNetProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const effectRef = useRef<{ destroy: () => void } | null>(null);
 
@@ -51,8 +53,8 @@ export default function VantaNet({ className = '' }: VantaNetProps) {
           gyroControls: false,
           minHeight: 200,
           minWidth: 200,
-          scale: 0.75,
-          scaleMobile: 0.75,
+          scale,
+          scaleMobile: scale,
           backgroundColor: 0x000000,
           color: 0xffffff,
           points: 10,
