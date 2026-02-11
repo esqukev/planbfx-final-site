@@ -86,19 +86,16 @@ export default function AboutPage() {
       {/* Banner hero (mismo que Services: ImageHero) */}
       <ImageHero imageSrc="/andresabout.jpg" imageAlt="About" />
 
-      {/* 1. Intro: Who we are + About Plan B FX + first paragraph (bg: ParallaxBanner flipped H) */}
+      {/* 1. Intro: Who we are + About Plan B FX + first paragraph */}
       <section className="relative z-20 overflow-hidden">
+        {/* Background: ParallaxBanner gradient rotated horizontally (to bottom right) */}
         <div
-          className="absolute inset-0"
+          className="absolute inset-0 -z-10"
           style={{
             background: 'linear-gradient(to bottom right, #000000 0%, #18181b 50%, #000000 100%)',
           }}
         />
-        <div className="absolute inset-0 z-10 pointer-events-none">
-          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-black to-transparent" />
-          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent" />
-        </div>
-        <div className="relative z-20 mx-auto max-w-4xl px-8 py-16 md:py-24 lg:py-28 flex flex-col items-center text-center">
+        <div className="mx-auto max-w-4xl px-8 py-16 md:py-24 lg:py-28 flex flex-col items-center text-center">
           <div ref={introRef} className="space-y-8 md:space-y-10">
             <span className="text-base uppercase tracking-[0.35em] text-white/50 block">
               {t('about.whoWeAre')}
@@ -139,19 +136,16 @@ export default function AboutPage() {
       {/* 2. Espacio mínimo entre banners */}
       <section className="relative z-20 min-h-[10vh] w-full bg-black" aria-hidden />
 
-      {/* 3. Closing (bg: ParallaxBanner flipped H+V) */}
+      {/* 3. Closing */}
       <section className="relative z-20 overflow-hidden">
+        {/* Background: ParallaxBanner gradient rotated horizontally + vertically (to top right) */}
         <div
-          className="absolute inset-0"
+          className="absolute inset-0 -z-10"
           style={{
             background: 'linear-gradient(to top right, #000000 0%, #18181b 50%, #000000 100%)',
           }}
         />
-        <div className="absolute inset-0 z-10 pointer-events-none">
-          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-black to-transparent" />
-          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent" />
-        </div>
-        <div className="relative z-20 mx-auto max-w-4xl px-8 py-16 md:py-24 lg:py-28 flex flex-col items-center text-center">
+        <div className="mx-auto max-w-4xl px-8 py-16 md:py-24 lg:py-28 flex flex-col items-center text-center">
           <div ref={closingRef} className="space-y-8 md:space-y-10 max-w-4xl mx-auto">
             <p ref={closingParaRef} className="text-xl leading-relaxed text-white/70 md:text-2xl">
               {tf('about.closing')}

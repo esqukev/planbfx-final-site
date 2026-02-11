@@ -31,29 +31,7 @@ export default function Hero() {
       </div>
       <HeroGradientBackground />
       <div className="relative z-20 w-full h-full min-h-0 flex items-center justify-center border-0 outline-none overflow-hidden translate-y-[-50px] md:translate-y-0 isolate">
-        <div className="relative w-full max-w-[min(100vw,80vh)] max-h-[80vh] aspect-square flex items-center justify-center">
-          {/* Blur layer in logo shape - behind point cloud */}
-          <div
-            className="absolute inset-0 w-full h-full"
-            style={{
-              maskImage: 'url(/logos/plablandinglogo.svg)',
-              WebkitMaskImage: 'url(/logos/plablandinglogo.svg)',
-              maskSize: 'contain',
-              WebkitMaskSize: 'contain',
-              maskRepeat: 'no-repeat',
-              WebkitMaskRepeat: 'no-repeat',
-              maskPosition: 'center',
-              WebkitMaskPosition: 'center',
-              backdropFilter: 'blur(20px)',
-              WebkitBackdropFilter: 'blur(20px)',
-              background: 'rgba(0,0,0,0.2)',
-            }}
-            aria-hidden
-          />
-          <div className="relative w-full h-full shadow-none">
-            <LogoPointCloud />
-          </div>
-        </div>
+        <LogoPointCloud />
       </div>
     </section>
   );
