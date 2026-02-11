@@ -26,9 +26,11 @@ export default function Hero() {
       className="relative min-h-screen h-screen flex items-center justify-center overflow-hidden bg-black m-0 border-0 outline-none"
       style={{ willChange: 'transform', minHeight: '100dvh' }}
     >
-      <VantaNet className="z-0" />
+      <div className="absolute inset-0 z-0">
+        <VantaNet className="w-full h-full" />
+      </div>
       <HeroGradientBackground />
-      <div className="relative z-10 w-full h-full min-h-0 flex items-center justify-center border-0 outline-none overflow-hidden translate-y-[-50px] md:translate-y-0">
+      <div className="relative z-20 w-full h-full min-h-0 flex items-center justify-center border-0 outline-none overflow-hidden translate-y-[-50px] md:translate-y-0 isolate">
         <LogoPointCloud />
       </div>
     </section>
