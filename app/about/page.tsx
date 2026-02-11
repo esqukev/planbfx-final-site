@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 import ParallaxBannerWithImage from '../components/ParallaxBannerWithImage';
 import CTAFinalBanner from '../components/CTAFinalBanner';
 import ImageHero from '../components/ImageHero';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useLanguage } from '../context/LanguageContext';
@@ -17,6 +17,30 @@ export default function AboutPage() {
   const closingRef = useRef<HTMLDivElement>(null);
   const introParaRef = useRef<HTMLParagraphElement>(null);
   const closingParaRef = useRef<HTMLParagraphElement>(null);
+  const introSectionRef = useRef<HTMLElement>(null);
+  const closingSectionRef = useRef<HTMLElement>(null);
+  const [introBgOffset, setIntroBgOffset] = useState(0);
+  const [closingBgOffset, setClosingBgOffset] = useState(0);
+
+  useEffect(() => {
+    const onScroll = () => {
+      if (introSectionRef.current) {
+        const rect = introSectionRef.current.getBoundingClientRect();
+        if (rect.bottom > 0 && rect.top < window.innerHeight) {
+          setIntroBgOffset(rect.top * 0.4);
+        }
+      }
+      if (closingSectionRef.current) {
+        const rect = closingSectionRef.current.getBoundingClientRect();
+        if (rect.bottom > 0 && rect.top < window.innerHeight) {
+          setClosingBgOffset(rect.top * 0.4);
+        }
+      }
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   useEffect(() => {
     const intro = introRef.current;
@@ -87,15 +111,21 @@ export default function AboutPage() {
       <ImageHero imageSrc="/andresabout.jpg" imageAlt="About" />
 
       {/* 1. Intro: Who we are + About Plan B FX + first paragraph */}
-      <section className="relative z-20 overflow-hidden">
-        {/* Background: ParallaxBanner gradient rotated horizontally (to bottom right) */}
+      <section ref={introSectionRef} className="relative z-20 overflow-hidden">
+        {/* Background: Parallax gradient rotated horizontally */}
         <div
-          className="absolute inset-0 -z-10"
+          className="absolute -top-[10%] -left-[5%] -z-10 w-[110%] h-[120%]"
           style={{
             background: 'linear-gradient(to bottom right, #000000 0%, #18181b 50%, #000000 100%)',
+            transform: `translate3d(0, ${introBgOffset}px, 0)`,
           }}
         />
-        <div className="mx-auto max-w-4xl px-8 py-16 md:py-24 lg:py-28 flex flex-col items-center text-center">
+        {/* Black gradient overlays for smooth transitions */}
+        <div className="absolute inset-0 z-10 pointer-events-none">
+          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-black to-transparent" />
+          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent" />
+        </div>
+        <div className="relative z-20 mx-auto max-w-4xl px-8 py-16 md:py-24 lg:py-28 flex flex-col items-center text-center">
           <div ref={introRef} className="space-y-8 md:space-y-10">
             <span className="text-base uppercase tracking-[0.35em] text-white/50 block">
               {t('about.whoWeAre')}
@@ -137,15 +167,21 @@ export default function AboutPage() {
       <section className="relative z-20 min-h-[10vh] w-full bg-black" aria-hidden />
 
       {/* 3. Closing */}
-      <section className="relative z-20 overflow-hidden">
-        {/* Background: ParallaxBanner gradient rotated horizontally + vertically (to top right) */}
+      <section ref={closingSectionRef} className="relative z-20 overflow-hidden">
+        {/* Background: Parallax gradient rotated horizontally + vertically */}
         <div
-          className="absolute inset-0 -z-10"
+          className="absolute -top-[10%] -left-[5%] -z-10 w-[110%] h-[120%]"
           style={{
             background: 'linear-gradient(to top right, #000000 0%, #18181b 50%, #000000 100%)',
+            transform: `translate3d(0, ${closingBgOffset}px, 0)`,
           }}
         />
-        <div className="mx-auto max-w-4xl px-8 py-16 md:py-24 lg:py-28 flex flex-col items-center text-center">
+        {/* Black gradient overlays for smooth transitions */}
+        <div className="absolute inset-0 z-10 pointer-events-none">
+          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-black to-transparent" />
+          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent" />
+        </div>
+        <div className="relative z-20 mx-auto max-w-4xl px-8 py-16 md:py-24 lg:py-28 flex flex-col items-center text-center">
           <div ref={closingRef} className="space-y-8 md:space-y-10 max-w-4xl mx-auto">
             <p ref={closingParaRef} className="text-xl leading-relaxed text-white/70 md:text-2xl">
               {tf('about.closing')}
