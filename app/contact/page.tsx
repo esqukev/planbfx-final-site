@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import CursorTiltFigure from '../components/CursorTiltFigure';
-import VantaHalo from '../components/VantaHalo';
+import PlanBFXText from '../components/PlanBFXText';
 import ImageHero from '../components/ImageHero';
 import HyperSpaceBackground from '../components/HyperSpaceBackground';
 import { useLanguage } from '../context/LanguageContext';
@@ -104,14 +104,9 @@ export default function ContactPage() {
                 </a>
               </div>
 
-              {/* VantaHalo below buttons, 30px left on desktop to align under WhatsApp, larger container to avoid clipping */}
-              <div className="flex justify-start w-full overflow-visible mt-8 md:mt-10 py-6 md:-ml-[30px]">
-                <div className="relative w-full max-w-2xl min-h-[720px] overflow-visible rounded-2xl">
-                  <VantaHalo
-                    logoSrc="/logos/Property-1-Variant4.svg"
-                    className="min-h-[720px] w-full bg-transparent overflow-visible"
-                  />
-                </div>
+              {/* PlanB FX rolling letters effect below buttons */}
+              <div className="flex justify-start w-full mt-8 md:mt-10">
+                <PlanBFXText />
               </div>
             </div>
 
