@@ -34,7 +34,7 @@ function PointLogo({ url }: { url: string }) {
           data.paths.forEach((path: any) => {
             const shapes = SVGLoader.createShapes(path);
             shapes.forEach((shape: any) => {
-              const spacedPoints = shape.getSpacedPoints(3800); // Más puntos para mayor visibilidad sobre el background
+              const spacedPoints = shape.getSpacedPoints(12000); // Muchísimos más puntos para bloquear el background
               spacedPoints.forEach((p: any) => {
                 // Flip Y to fix upside-down logo; Z spread for thicker profile when facing front
                 points.push(p.x, -p.y, (Math.random() - 0.5) * 48);
@@ -180,12 +180,12 @@ function PointLogo({ url }: { url: string }) {
       {/* Main points - MORE VISIBLE */}
       <points ref={pointsRef} geometry={geometry}>
         <pointsMaterial
-          size={0.056}
+          size={0.08}
           color="#ffffff"
           transparent
           opacity={1}
-          blending={2}
-          depthWrite={false}
+          blending={0}
+          depthWrite={true}
         />
       </points>
 
