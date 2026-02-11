@@ -51,8 +51,8 @@ export default function VantaNet({ className = '' }: VantaNetProps) {
           gyroControls: false,
           minHeight: 200,
           minWidth: 200,
-          scale: 1,
-          scaleMobile: 1,
+          scale: 0.75,
+          scaleMobile: 0.75,
           backgroundColor: 0x000000,
           color: 0xffffff,
           points: 10,
@@ -79,7 +79,7 @@ export default function VantaNet({ className = '' }: VantaNetProps) {
     <div
       ref={containerRef}
       className={`absolute inset-0 w-full h-full bg-black ${className}`}
-      style={{ minHeight: 200, minWidth: 200 }}
+      style={{ minHeight: 200, minWidth: 200, opacity: 0.85 }}
       aria-hidden
     />
   );
