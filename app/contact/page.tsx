@@ -104,12 +104,12 @@ export default function ContactPage() {
                 </a>
               </div>
 
-              {/* VantaHalo below buttons, ~20px left to align under WhatsApp, larger container to avoid clipping */}
-              <div className="flex justify-start w-full overflow-visible mt-8 md:mt-10 py-6 -ml-5">
-                <div className="relative w-full max-w-2xl min-h-[560px] overflow-visible rounded-2xl">
+              {/* VantaHalo below buttons, 30px left on desktop to align under WhatsApp, larger container to avoid clipping */}
+              <div className="flex justify-start w-full overflow-visible mt-8 md:mt-10 py-6 md:-ml-[30px]">
+                <div className="relative w-full max-w-2xl min-h-[720px] overflow-visible rounded-2xl">
                   <VantaHalo
                     logoSrc="/logos/Property-1-Variant4.svg"
-                    className="min-h-[560px] w-full bg-transparent overflow-visible"
+                    className="min-h-[720px] w-full bg-transparent overflow-visible"
                   />
                 </div>
               </div>

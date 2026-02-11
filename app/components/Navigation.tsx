@@ -96,17 +96,17 @@ export default function Navigation() {
               <button
                 type="button"
                 onClick={() => setLang('en')}
-                className={`text-xs uppercase tracking-wider py-1 transition-colors ${lang === 'en' ? 'text-white font-semibold' : 'hover:text-white'}`}
+                className={`text-xs uppercase tracking-wider py-1 transition-colors cursor-pointer ${lang === 'en' ? 'text-white font-semibold' : 'hover:text-white'}`}
                 title="English"
                 aria-label="English"
               >
                 EN
               </button>
-              <span className="text-white/50" aria-hidden>|</span>
+              <span className="text-white/50 font-fallback" aria-hidden>|</span>
               <button
                 type="button"
                 onClick={() => setLang('es')}
-                className={`text-xs uppercase tracking-wider py-1 transition-colors ${lang === 'es' ? 'text-white font-semibold' : 'hover:text-white'}`}
+                className={`text-xs uppercase tracking-wider py-1 transition-colors cursor-pointer ${lang === 'es' ? 'text-white font-semibold' : 'hover:text-white'}`}
                 title="Español"
                 aria-label="Español"
               >
@@ -142,15 +142,15 @@ export default function Navigation() {
               <button
                 type="button"
                 onClick={() => { setLang('en'); setIsMenuOpen(false); }}
-                className={`text-xs uppercase tracking-wider transition-colors ${lang === 'en' ? 'text-white font-semibold' : 'text-white/80 hover:text-white'}`}
+                className={`text-xs uppercase tracking-wider transition-colors cursor-pointer ${lang === 'en' ? 'text-white font-semibold' : 'text-white/80 hover:text-white'}`}
               >
                 EN
               </button>
-              <span className="text-white/50">|</span>
+              <span className="text-white/50 font-fallback" aria-hidden>|</span>
               <button
                 type="button"
                 onClick={() => { setLang('es'); setIsMenuOpen(false); }}
-                className={`text-xs uppercase tracking-wider transition-colors ${lang === 'es' ? 'text-white font-semibold' : 'text-white/80 hover:text-white'}`}
+                className={`text-xs uppercase tracking-wider transition-colors cursor-pointer ${lang === 'es' ? 'text-white font-semibold' : 'text-white/80 hover:text-white'}`}
               >
                 ES
               </button>

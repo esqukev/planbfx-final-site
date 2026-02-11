@@ -142,7 +142,7 @@ export default function HomeCTABanner({ imageSrc }: HomeCTABannerProps) {
               </span>
             ))}
           </span>
-          <span className="block">
+          <span className="block whitespace-nowrap">
             {meetsTechnology.split('').map((char, i) => (
               <span
                 key={`t2-${i}`}
