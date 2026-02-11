@@ -69,12 +69,14 @@ function ProductSection({
           </div>
         </div>
         <div className={isEven ? 'lg:order-1' : ''}>
-          <h2 className="text-3xl font-bold text-white md:text-4xl lg:text-5xl">
-            {tf(product.titleKey)}
-          </h2>
-          <p className="mt-6 text-lg leading-relaxed text-white/70 md:text-xl text-justify">
-            {tf(product.descKey)}
-          </p>
+          <div className="backdrop-blur-lg bg-transparent border-none rounded-xl px-4 py-6 w-full">
+            <h2 className="text-3xl font-bold text-white md:text-4xl lg:text-5xl">
+              {tf(product.titleKey)}
+            </h2>
+            <p className="mt-6 text-lg leading-relaxed text-white/70 md:text-xl text-justify">
+              {tf(product.descKey)}
+            </p>
+          </div>
         </div>
       </div>
     </section>

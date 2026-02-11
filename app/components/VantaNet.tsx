@@ -55,10 +55,10 @@ export default function VantaNet({ className = '' }: VantaNetProps) {
           scaleMobile: 1,
           backgroundColor: 0x000000,
           color: 0xffffff,
-          points: 6,
-          maxDistance: 12,
-          spacing: 22,
-          showDots: false,
+          points: 10,
+          maxDistance: 20,
+          spacing: 16,
+          showDots: true,
         });
       } catch (e) {
         console.warn('[VantaNet] init failed', e);
