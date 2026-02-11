@@ -92,15 +92,27 @@ export default function Navigation() {
                 )}
               </Link>
             ))}
-            <button
-              type="button"
-              onClick={() => setLang(lang === 'en' ? 'es' : 'en')}
-              className="text-white/80 hover:text-white transition-colors text-xs uppercase tracking-wider py-1"
-              title={lang === 'en' ? 'Switch to Spanish' : 'Switch to English'}
-              aria-label={lang === 'en' ? 'Switch to Spanish' : 'Switch to English'}
-            >
-              {lang === 'en' ? t('nav.langToEs') : t('nav.langToEn')}
-            </button>
+            <div className="flex items-center gap-1 text-white/80">
+              <button
+                type="button"
+                onClick={() => setLang('en')}
+                className={`text-xs uppercase tracking-wider py-1 transition-colors ${lang === 'en' ? 'text-white font-semibold' : 'hover:text-white'}`}
+                title="English"
+                aria-label="English"
+              >
+                EN
+              </button>
+              <span className="text-white/50" aria-hidden>|</span>
+              <button
+                type="button"
+                onClick={() => setLang('es')}
+                className={`text-xs uppercase tracking-wider py-1 transition-colors ${lang === 'es' ? 'text-white font-semibold' : 'hover:text-white'}`}
+                title="Español"
+                aria-label="Español"
+              >
+                ES
+              </button>
+            </div>
           </div>
           <button
             className="md:hidden text-white"
@@ -126,13 +138,23 @@ export default function Navigation() {
                 {t(item.labelKey)}
               </Link>
             ))}
-            <button
-              type="button"
-              onClick={() => { setLang(lang === 'en' ? 'es' : 'en'); setIsMenuOpen(false); }}
-              className="flex items-center gap-2 px-4 py-3 text-xs uppercase tracking-wider text-white/80 hover:text-white hover:bg-white/5 transition-colors"
-            >
-              {lang === 'en' ? t('nav.langToEs') : t('nav.langToEn')}
-            </button>
+            <div className="flex items-center gap-2 px-4 py-3">
+              <button
+                type="button"
+                onClick={() => { setLang('en'); setIsMenuOpen(false); }}
+                className={`text-xs uppercase tracking-wider transition-colors ${lang === 'en' ? 'text-white font-semibold' : 'text-white/80 hover:text-white'}`}
+              >
+                EN
+              </button>
+              <span className="text-white/50">|</span>
+              <button
+                type="button"
+                onClick={() => { setLang('es'); setIsMenuOpen(false); }}
+                className={`text-xs uppercase tracking-wider transition-colors ${lang === 'es' ? 'text-white font-semibold' : 'text-white/80 hover:text-white'}`}
+              >
+                ES
+              </button>
+            </div>
           </div>
         )}
       </div>

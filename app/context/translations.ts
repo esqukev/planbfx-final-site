@@ -70,6 +70,8 @@ export const translations: Record<Lang, Record<string, string>> = {
     'about.customExperiences': 'CUSTOM EXPERIENCES',
     'about.cta.title': 'Transforming Events with\nDigital Brilliance',
     'about.cta.paragraph': 'Connect with us to elevate your event. Our unique blend of art, technology, and creativity brings a stunning visual experience to every occasion. Discover how we can transform your vision into reality.',
+    'about.cta.getInTouch': 'Get in touch',
+    'about.cta.exploreOurArt': 'Explore Our Art',
 
     'services.livePainting.title': 'Live Painting',
     'services.livePainting.description': "A real-time fusion of human touch and AI. Using precision digital tools, we transform live illustrations into dynamic visual streams, crafting an organic piece of art that evolves before the audience's eyes.",
@@ -163,16 +165,16 @@ export const translations: Record<Lang, Record<string, string>> = {
 
     'home.process.discover': 'Descubre el proceso detrás de nuestro trabajo — del brief a la entrega.',
     'home.process.step1sub': 'Reunión y Visión',
-    'home.process.step1code': 'ALIGN',
+    'home.process.step1code': 'ALINEACIÓN',
     'home.process.step1desc': 'Nos reunimos para captar tus objetivos. Desde la primera llamada, alineamos nuestra visión para que cada paso construya hacia el mismo resultado.',
     'home.process.step2sub': 'Selección de Producto',
-    'home.process.step2code': 'CURATE',
+    'home.process.step2code': 'CURACIÓN',
     'home.process.step2desc': 'Identificamos la solución técnica y artística ideal para tus necesidades, seleccionando las herramientas que maximizarán el impacto de tu evento.',
     'home.process.step3sub': 'Preproducción y Pruebas',
-    'home.process.step3code': 'ARCHITECT',
+    'home.process.step3code': 'ARCHITECTURA',
     'home.process.step3desc': 'Gestión de activos, desarrollo y pruebas técnicas. Preparamos cada detalle digital para garantizar una ejecución impecable.',
     'home.process.step4sub': 'Producción y Lanzamiento',
-    'home.process.step4code': 'EXECUTE',
+    'home.process.step4code': 'PRODUCCIÓN',
     'home.process.step4desc': 'Despliegue y ejecución en vivo. Tomamos el control de los visuales en directo para dar vida al evento, impulsando la experiencia en tiempo real y asegurando una atmósfera de alto impacto que perdura en el público.',
 
     'home.artInMotion': 'Arte en Movimiento',
@@ -206,6 +208,8 @@ export const translations: Record<Lang, Record<string, string>> = {
     'about.customExperiences': 'EXPERIENCIAS A MEDIDA',
     'about.cta.title': 'Transformando eventos con\nBrillantez digital',
     'about.cta.paragraph': 'Conéctate con nosotros para elevar tu evento. Nuestra mezcla única de arte, tecnología y creatividad aporta una experiencia visual impactante en cada ocasión. Descubre cómo podemos transformar tu visión en realidad.',
+    'about.cta.getInTouch': 'Contactar',
+    'about.cta.exploreOurArt': 'Explorar Nuestro Arte',
 
     'services.livePainting.title': 'Dibujo en Vivo',
     'services.livePainting.description': 'Una fusión en tiempo real entre el trazo humano y la inteligencia artificial. Mediante el uso de herramientas digitales de precisión, transformamos ilustraciones en vivo en flujos visuales dinámicos, creando una obra de arte orgánica que evoluciona ante los ojos del espectador.',

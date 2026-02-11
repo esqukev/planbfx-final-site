@@ -146,6 +146,10 @@ export default function AboutPage() {
         subtitle={t('about.customExperiences')}
         title={t('about.cta.title')}
         paragraph={t('about.cta.paragraph')}
+        ctaText={t('about.cta.getInTouch')}
+        ctaHref="/contact"
+        secondaryText={t('about.cta.exploreOurArt')}
+        secondaryHref="/services"
       />
 
       <Footer />
