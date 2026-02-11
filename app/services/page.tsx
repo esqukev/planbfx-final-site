@@ -109,7 +109,7 @@ export default function ServicesPage() {
       <VideoHeroWithScroll videoUrl={SERVICES_VIDEO_URL} />
 
       <div className="relative bg-black">
-        <VantaNet className="z-0" scale={0.5} />
+        <VantaNet className="z-0" />
         <div className="relative z-10">
           {PRODUCTS.map((product, index) => (
           <ProductSection

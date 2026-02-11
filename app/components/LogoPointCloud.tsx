@@ -34,7 +34,7 @@ function PointLogo({ url }: { url: string }) {
           data.paths.forEach((path: any) => {
             const shapes = SVGLoader.createShapes(path);
             shapes.forEach((shape: any) => {
-              const spacedPoints = shape.getSpacedPoints(3600); // Más puntos para mayor visibilidad
+              const spacedPoints = shape.getSpacedPoints(4500); // Más puntos para mayor visibilidad
               spacedPoints.forEach((p: any) => {
                 // Flip Y to fix upside-down logo; Z spread for thicker profile when facing front
                 points.push(p.x, -p.y, (Math.random() - 0.5) * 48);
@@ -183,7 +183,7 @@ function PointLogo({ url }: { url: string }) {
           size={0.065}
           color="#ffffff"
           transparent
-          opacity={0.95}
+          opacity={1}
           blending={2}
           depthWrite={false}
         />
@@ -212,7 +212,7 @@ export default function LogoPointCloud() {
 
   return (
     <div
-      className="w-full max-w-[min(100vw,80vh)] max-h-[80vh] aspect-square overflow-hidden mx-auto"
+      className="w-full max-w-[min(100vw,80vh)] max-h-[80vh] aspect-square overflow-hidden mx-auto shadow-none"
       style={{
         opacity,
         transition: 'opacity 0.5s ease-out',
