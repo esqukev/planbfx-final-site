@@ -128,7 +128,7 @@ export default function HomeCTABanner({ imageSrc }: HomeCTABannerProps) {
           ))}
         </p>
         <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight mb-6 md:mb-8 text-center">
-          <span className="block text-center">
+          <span className={`block text-center ${lang === 'es' ? 'md:whitespace-nowrap' : ''}`}>
             {innovativeArt.split('').map((char, i) => (
               <span
                 key={`t1-${i}`}
@@ -142,39 +142,19 @@ export default function HomeCTABanner({ imageSrc }: HomeCTABannerProps) {
               </span>
             ))}
           </span>
-          <span className="block text-center mt-1">
-            {(() => {
-              const lastSpace = meetsTechnology.lastIndexOf(' ');
-              const prefix = lastSpace >= 0 ? meetsTechnology.slice(0, lastSpace + 1) : '';
-              const lastWord = lastSpace >= 0 ? meetsTechnology.slice(lastSpace + 1) : meetsTechnology;
-              const baseDelay = innovativeArt.length + 1;
-              const sym = ['\'', '"', '-', '–', '—', '+', '/'];
-              const renderChar = (char: string, idx: number, delay: number) => (
-                <span
-                  key={`t2-${idx}`}
-                  className={sym.includes(char) ? 'inline-block font-fallback' : 'inline-block'}
-                  style={{
-                    opacity: isVisible ? 1 : 0,
-                    transition: `opacity 0.6s ease ${(baseDelay + delay) * 0.03}s`,
-                  }}
-                >
-                  {char === ' ' ? '\u00A0' : char}
-                </span>
-              );
-              let charIdx = 0;
-              return (
-                <>
-                  {prefix.split('').map((char, i) => renderChar(char, i, charIdx++))}
-                  {lang === 'es' ? (
-                    <span className="md:whitespace-nowrap">
-                      {lastWord.split('').map((char, i) => renderChar(char, prefix.length + i, charIdx++))}
-                    </span>
-                  ) : (
-                    lastWord.split('').map((char, i) => renderChar(char, prefix.length + i, charIdx++))
-                  )}
-                </>
-              );
-            })()}
+          <span className={`block text-center mt-1 ${lang === 'es' ? 'md:whitespace-nowrap' : ''}`}>
+            {meetsTechnology.split('').map((char, i) => (
+              <span
+                key={`t2-${i}`}
+                className={['\'', '"', '-', '–', '—', '+', '/'].includes(char) ? 'inline-block font-fallback' : 'inline-block'}
+                style={{
+                  opacity: isVisible ? 1 : 0,
+                  transition: `opacity 0.6s ease ${(innovativeArt.length + meetsTechnology.length + 2 + i) * 0.03}s`,
+                }}
+              >
+                {char === ' ' ? '\u00A0' : char}
+              </span>
+            ))}
           </span>
         </h2>
         <p className="text-base md:text-lg text-white/80 leading-relaxed mb-10 max-w-2xl mx-auto px-2 sm:px-1 break-words">
