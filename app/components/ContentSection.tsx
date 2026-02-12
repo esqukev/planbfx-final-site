@@ -84,7 +84,7 @@ export default function ContentSection({
             }`}>
               {title}
             </h2>
-            <p className={`text-[1.1rem] ${isDarkSection ? 'text-zinc-300' : 'text-zinc-600 dark:text-zinc-400'} mb-8 leading-relaxed transition-all duration-1000 delay-200 ${
+            <p className={`text-[1.1rem] ${isDarkSection ? 'text-zinc-300' : 'text-zinc-600 dark:text-zinc-400'} mb-8 leading-relaxed transition-all duration-1000 delay-200 text-justify ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}>
               {description}

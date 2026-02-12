@@ -59,11 +59,17 @@ export default function ContactPage() {
     }
   }, []);
 
+  useEffect(() => {
+    if (Object.keys(formErrors).length > 0) {
+      window.dispatchEvent(new CustomEvent('contact-form-errors'));
+    }
+  }, [formErrors]);
+
   const inputBase = 'w-full px-4 py-3 rounded-xl bg-white/10 border text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-transparent transition font-fallback';
   const inputError = 'border-red-500/60 focus:ring-red-500/40';
 
   return (
-    <main className="relative min-h-screen bg-black text-white overflow-x-hidden overflow-y-auto">
+    <main className="relative min-h-screen bg-black text-white overflow-x-hidden">
       <Navigation />
       <ImageHero imageSrc="/letyago.jpg" imageAlt="Contact" />
 

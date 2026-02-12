@@ -26,6 +26,7 @@ function rafCallback(time: number, lenis: LenisInstance) {
 export default function SmoothScroll({ children }: { children: React.ReactNode }) {
   const lenisRef = useRef<LenisInstance | null>(null);
   const rafRef = useRef<(time: number) => void | null>(null);
+  const cleanupRef = useRef<(() => void) | null>(null);
   const pathname = usePathname();
 
   const scrollToTop = useCallback(() => {
@@ -52,6 +53,27 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
 
       lenis.on('scroll', () => ScrollTrigger.update());
 
+      const resizeLenis = () => {
+        if (lenis?.resize) lenis.resize();
+        ScrollTrigger.refresh();
+      };
+
+      const ro = new ResizeObserver(() => resizeLenis());
+      ro.observe(document.body);
+
+      const onFormErrors = () => {
+        requestAnimationFrame(() => {
+          resizeLenis();
+          requestAnimationFrame(resizeLenis);
+        });
+      };
+      window.addEventListener('contact-form-errors', onFormErrors);
+
+      cleanupRef.current = () => {
+        ro.disconnect();
+        window.removeEventListener('contact-form-errors', onFormErrors);
+      };
+
       ScrollTrigger.scrollerProxy(document.documentElement, {
         scrollTop(value) {
           if (arguments.length && value !== undefined && lenis) {
@@ -67,6 +89,8 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     });
 
     return () => {
+      cleanupRef.current?.();
+      cleanupRef.current = null;
       if (rafRef.current) gsap.ticker.remove(rafRef.current);
       ScrollTrigger.scrollerProxy(document.documentElement, {});
       if (lenisRef.current) {
