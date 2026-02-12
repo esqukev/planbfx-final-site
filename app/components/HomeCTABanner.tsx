@@ -157,7 +157,7 @@ export default function HomeCTABanner({ imageSrc }: HomeCTABannerProps) {
             ))}
           </span>
         </h2>
-        <p className="text-base md:text-lg text-white/80 leading-relaxed mb-10 max-w-2xl mx-auto px-2 sm:px-1 text-center">
+        <p className="text-base md:text-lg text-white/80 leading-relaxed mb-10 max-w-2xl mx-auto px-2 sm:px-1 break-words">
           {(() => {
             const words = paragraph.split(' ');
             const sym = ["'", '"', '-', '–', '—', '+', '/'];
@@ -165,7 +165,7 @@ export default function HomeCTABanner({ imageSrc }: HomeCTABannerProps) {
             return (
               <>
                 {words.map((word, wi) => (
-                  <span key={`w-${wi}`} className="inline whitespace-nowrap">
+                  <span key={`w-${wi}`} className="inline">
                     {word.split('').map((char, ci) => (
                       <span
                         key={`c-${wi}-${ci}`}
