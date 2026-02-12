@@ -17,7 +17,7 @@ type HomeCTABannerProps = {
  * Banner parallax debajo de Art Meets Innovation: Crafting Moments, Innovative Art Meets Technology, párrafo y botones.
  */
 export default function HomeCTABanner({ imageSrc }: HomeCTABannerProps) {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const sectionRef = useRef<HTMLElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -143,18 +143,38 @@ export default function HomeCTABanner({ imageSrc }: HomeCTABannerProps) {
             ))}
           </span>
           <span className="block text-center mt-1">
-            {meetsTechnology.split('').map((char, i) => (
-              <span
-                key={`t2-${i}`}
-                className={['\'', '"', '-', '–', '—', '+', '/'].includes(char) ? 'inline-block font-fallback' : 'inline-block'}
-                style={{
-                  opacity: isVisible ? 1 : 0,
-                  transition: `opacity 0.6s ease ${(innovativeArt.length + meetsTechnology.length + 2 + i) * 0.03}s`,
-                }}
-              >
-                {char === ' ' ? '\u00A0' : char}
-              </span>
-            ))}
+            {(() => {
+              const lastSpace = meetsTechnology.lastIndexOf(' ');
+              const prefix = lastSpace >= 0 ? meetsTechnology.slice(0, lastSpace + 1) : '';
+              const lastWord = lastSpace >= 0 ? meetsTechnology.slice(lastSpace + 1) : meetsTechnology;
+              const baseDelay = innovativeArt.length + 1;
+              const sym = ['\'', '"', '-', '–', '—', '+', '/'];
+              const renderChar = (char: string, idx: number, delay: number) => (
+                <span
+                  key={`t2-${idx}`}
+                  className={sym.includes(char) ? 'inline-block font-fallback' : 'inline-block'}
+                  style={{
+                    opacity: isVisible ? 1 : 0,
+                    transition: `opacity 0.6s ease ${(baseDelay + delay) * 0.03}s`,
+                  }}
+                >
+                  {char === ' ' ? '\u00A0' : char}
+                </span>
+              );
+              let charIdx = 0;
+              return (
+                <>
+                  {prefix.split('').map((char, i) => renderChar(char, i, charIdx++))}
+                  {lang === 'es' ? (
+                    <span className="md:whitespace-nowrap">
+                      {lastWord.split('').map((char, i) => renderChar(char, prefix.length + i, charIdx++))}
+                    </span>
+                  ) : (
+                    lastWord.split('').map((char, i) => renderChar(char, prefix.length + i, charIdx++))
+                  )}
+                </>
+              );
+            })()}
           </span>
         </h2>
         <p className="text-base md:text-lg text-white/80 leading-relaxed mb-10 max-w-2xl mx-auto px-2 sm:px-1 break-words">
