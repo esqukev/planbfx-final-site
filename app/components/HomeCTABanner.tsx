@@ -111,7 +111,7 @@ export default function HomeCTABanner({ imageSrc }: HomeCTABannerProps) {
 
       <div
         ref={contentRef}
-        className="relative z-10 w-full max-w-3xl mx-auto text-center px-5 sm:px-10 md:px-12 lg:px-16 py-24 md:py-32 lg:py-40 box-border overflow-hidden min-w-0"
+        className="relative z-10 w-full max-w-3xl mx-auto text-center px-6 sm:px-10 md:px-12 lg:px-16 py-24 md:py-32 lg:py-40 box-border min-w-0"
       >
         <p className="text-sm uppercase tracking-[0.3em] text-zinc-400 block mb-4">
           {craftingMoments.split('').map((char, i) => (
@@ -127,7 +127,7 @@ export default function HomeCTABanner({ imageSrc }: HomeCTABannerProps) {
             </span>
           ))}
         </p>
-        <h2 className="text-[clamp(0.875rem,4vw,4rem)] sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight mb-6 md:mb-8 text-center">
+        <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight mb-6 md:mb-8 text-center">
           <span className="block text-center">
             {innovativeArt.split('').map((char, i) => (
               <span
@@ -142,7 +142,7 @@ export default function HomeCTABanner({ imageSrc }: HomeCTABannerProps) {
               </span>
             ))}
           </span>
-          <span className="block text-center mt-1 whitespace-nowrap">
+          <span className="block text-center mt-1">
             {meetsTechnology.split('').map((char, i) => (
               <span
                 key={`t2-${i}`}
@@ -183,7 +183,7 @@ export default function HomeCTABanner({ imageSrc }: HomeCTABannerProps) {
           })()}
         </p>
         <div
-          className="flex flex-wrap items-center justify-center gap-4 md:gap-6"
+          className="flex flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 md:gap-6"
           style={{
             opacity: isVisible ? 1 : 0,
             transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
@@ -192,13 +192,15 @@ export default function HomeCTABanner({ imageSrc }: HomeCTABannerProps) {
         >
           <Link
             href="/services"
-            className="inline-flex items-center justify-center px-8 py-4 border-2 border-white/60 text-white font-semibold rounded-full hover:bg-white/10 transition-all duration-300 ease-out hover:scale-[1.03] text-base"
+            scroll={false}
+            className="inline-flex items-center justify-center px-5 py-2.5 sm:px-8 sm:py-4 border-2 border-white/60 text-white font-semibold rounded-full hover:bg-white/10 transition-all duration-300 ease-out hover:scale-[1.03] text-sm sm:text-base"
           >
             {t('home.ctaBanner.exploreServices')}
           </Link>
           <Link
             href="/contact"
-            className="inline-flex items-center justify-center px-8 py-4 border-2 border-white/60 text-white font-semibold rounded-full hover:bg-white/10 transition-all duration-300 ease-out hover:scale-[1.03] text-base"
+            scroll={false}
+            className="inline-flex items-center justify-center px-5 py-2.5 sm:px-8 sm:py-4 border-2 border-white/60 text-white font-semibold rounded-full hover:bg-white/10 transition-all duration-300 ease-out hover:scale-[1.03] text-sm sm:text-base"
           >
             {t('home.ctaBanner.getInTouch')}
           </Link>

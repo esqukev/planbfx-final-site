@@ -42,6 +42,7 @@ export default function Footer() {
                 <li key={labelKey}>
                   <Link
                     href={href}
+                    scroll={false}
                     className="hover:text-white transition-colors"
                     onClick={(e) => handleQuickLinkClick(e, href)}
                   >

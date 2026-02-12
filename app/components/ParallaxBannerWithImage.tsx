@@ -160,6 +160,7 @@ export default function ParallaxBannerWithImage({
             >
               <Link
                 href="/services"
+                scroll={false}
                 className="inline-block text-sm uppercase tracking-[0.35em] text-zinc-400 hover:text-white focus:outline-none focus:text-white transition-all duration-300 ease-out hover:scale-[1.04] focus:scale-[1.04]"
               >
                 {t('home.seeOurServices')}

@@ -65,7 +65,7 @@ export default function ContentSection({
       className={`m-0 py-0 px-4 md:px-8 relative ${backgroundClassName || (reverse ? 'bg-zinc-50 dark:bg-zinc-900' : 'bg-white dark:bg-black')}`}
       style={{ 
         background: backgroundClassName?.includes('from-black') 
-          ? 'linear-gradient(to bottom, #000000, #18181b, #000000)' 
+          ? 'linear-gradient(to bottom, #000000 0%, #0a0a0a 15%, #18181b 50%, #0a0a0a 85%, #000000 100%)' 
           : undefined,
         isolation: 'isolate' // Creates a new stacking context to prevent bleed-through
       }}
@@ -109,6 +109,7 @@ export default function ContentSection({
             {learnMoreLink && (
               <Link 
                 href={learnMoreLink}
+                scroll={false}
                 className={`inline-flex items-center gap-2 ${isDarkSection ? 'text-white' : 'text-black dark:text-white'} font-semibold hover:gap-4 transition-all group mt-6 duration-1000 delay-300 ${
                   isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                 }`}

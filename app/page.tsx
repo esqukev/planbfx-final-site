@@ -81,8 +81,8 @@ export default function Home() {
       <section id="contact" className="relative min-h-screen m-0 p-0 py-0 px-4 md:px-8 text-white overflow-hidden">
         <HyperSpaceBackground />
         <div className="relative z-10 max-w-4xl mx-auto text-center py-24 md:py-32">
-          <div className="flex flex-col items-center px-4 mb-8">
-            <ScrollTextEffect className="text-6xl md:text-8xl font-bold text-center">
+          <div className="flex flex-col items-center px-6 sm:px-4 mb-8">
+            <ScrollTextEffect className="text-4xl sm:text-6xl md:text-8xl font-bold text-center">
               {tf('home.cta.letsCreate')}<br />
               {t('home.cta.something')}<br />
               {t('home.cta.different')}

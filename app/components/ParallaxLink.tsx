@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import Link from 'next/link';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -43,11 +44,19 @@ export default function ParallaxLink({ href, children, className = '' }: Paralla
     };
   }, []);
 
+  const isExternal = href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('tel:');
+
   return (
     <div ref={wrapperRef} className="inline-block">
-      <a href={href} className={className}>
-        {children}
-      </a>
+      {isExternal ? (
+        <a href={href} className={className}>
+          {children}
+        </a>
+      ) : (
+        <Link href={href} scroll={false} className={className}>
+          {children}
+        </Link>
+      )}
     </div>
   );
 }

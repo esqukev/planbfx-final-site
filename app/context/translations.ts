@@ -181,8 +181,8 @@ export const translations: Record<Lang, Record<string, string>> = {
     'home.bookYourCall': 'RESERVA TU LLAMADA',
 
     'home.cta.letsCreate': 'Construyamos',
-    'home.cta.something': 'algo',
-    'home.cta.different': 'diferente',
+    'home.cta.something': 'Algo',
+    'home.cta.different': 'Diferente',
     'home.cta.doYouHaveIdea': '¿Tienes una idea? Hablemos',
     'home.cta.contactUs': 'Contáctanos',
 

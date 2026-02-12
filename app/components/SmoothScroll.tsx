@@ -84,19 +84,28 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
 
     window.history.scrollRestoration = 'manual';
 
-    if (lenisRef.current) {
-      lenisRef.current.scrollTo(0, { duration: 0.6 });
-    } else {
-      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-    }
+    const doScroll = () => {
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+      if (lenisRef.current) {
+        lenisRef.current.scrollTo(0, { immediate: true });
+      }
+    };
 
-    const t = setTimeout(() => {
-      if (lenisRef.current) lenisRef.current.scrollTo(0, { duration: 0.5 });
+    doScroll();
+
+    const t1 = setTimeout(doScroll, 50);
+    const t2 = setTimeout(doScroll, 150);
+    const t3 = setTimeout(() => {
+      doScroll();
       if (lenisRef.current?.resize) lenisRef.current.resize();
       ScrollTrigger.refresh();
-    }, 100);
+    }, 350);
 
-    return () => clearTimeout(t);
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+      clearTimeout(t3);
+    };
   }, [pathname]);
 
   return (

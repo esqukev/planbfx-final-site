@@ -95,6 +95,7 @@ export default function CTAFinalBanner({
         <div className={`flex flex-wrap items-center gap-4 md:gap-6 ${centered ? 'justify-center' : ''}`}>
           <Link
             href={ctaHref}
+            scroll={false}
             className="inline-flex items-center justify-center px-8 py-4 border-2 border-white/60 text-white font-semibold rounded-full hover:bg-white/10 transition-all duration-300 ease-out hover:scale-[1.03] text-base whitespace-nowrap"
           >
             {ctaText}
@@ -102,6 +103,7 @@ export default function CTAFinalBanner({
           {secondaryText && secondaryHref && (
             <Link
               href={secondaryHref}
+              scroll={false}
               className="inline-flex items-center gap-2 text-white font-medium hover:text-white/90 transition-all duration-300 ease-out hover:scale-[1.04] group whitespace-nowrap"
             >
               {secondaryText}
