@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import gsap from 'gsap';
@@ -62,24 +62,15 @@ export default function ParallaxBannerWithImage({
     return () => clearInterval(interval);
   }, [rotatingTitle]);
 
-  const words = rotatingTitle?.words ?? [];
-  const currentWord = words[wordIndex] ?? '';
-  const maxWordLen = Math.max(...words.map((w) => w.length), 3);
-
-  // Efecto rebote + fade in al cambiar la palabra: evitar flash usando useLayoutEffect y ancho fijo
-  useLayoutEffect(() => {
+  // Fade in al cambiar la palabra (versión simple sin bounce - evita flash)
+  useEffect(() => {
     if (!rotatingTitle || !wordRef.current) return;
     const el = wordRef.current;
-    gsap.set(el, { opacity: 0, y: -28, scale: 0.92 });
-    gsap.to(el, {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      duration: 0.75,
-      ease: 'back.out(1.6)',
-      overwrite: true,
-    });
+    gsap.fromTo(el, { opacity: 0 }, { opacity: 1, duration: 0.7, ease: 'power2.inOut' });
   }, [wordIndex, rotatingTitle]);
+
+  const words = rotatingTitle?.words ?? [];
+  const currentWord = words[wordIndex] ?? '';
 
   return (
     <section
@@ -119,21 +110,20 @@ export default function ParallaxBannerWithImage({
             }}
           >
             <p
-              className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white tracking-tight w-full text-center"
+              className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white tracking-tight w-full text-center whitespace-nowrap"
               style={{
                 textShadow: '0 2px 12px rgba(0,0,0,0.9), 0 4px 24px rgba(0,0,0,0.7), 0 0 40px rgba(0,0,0,0.4)',
               }}
             >
-              <span className="inline-flex flex-wrap justify-center items-baseline">
-                <span>{rotatingTitle.prefix.trim()}</span>
-                <span className="inline-block w-[0.4em]" aria-hidden />
-                <span
-                  ref={wordRef}
-                  className="inline-block text-center min-w-[3ch]"
-                  style={{ width: `${maxWordLen}ch`, opacity: 0 }}
-                >
-                  {currentWord}
-                </span>
+              {rotatingTitle.prefix.trim()}
+              <span className="inline-block w-[0.3em]" aria-hidden />
+              <span
+                ref={wordRef}
+                key={wordIndex}
+                className="inline-block min-w-[14ch] text-left align-bottom"
+                style={{ opacity: 0 }}
+              >
+                {currentWord}
               </span>
             </p>
           </div>
