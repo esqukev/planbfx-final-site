@@ -112,6 +112,25 @@ body {
   }
 }
 
+/* WE CREATE rotating word – bounce on change */
+@keyframes word-bounce {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scale(0.95);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-3px) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.animate-word-bounce {
+  animation: word-bounce 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
 .animate-scroll-left {
   animation: scroll-left linear infinite;
 }

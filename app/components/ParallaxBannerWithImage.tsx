@@ -8,20 +8,23 @@ import { useLanguage } from '../context/LanguageContext';
 type ParallaxBannerWithImageProps = {
   imageSrc?: string;
   className?: string;
-  /** Si se pasa, se muestra este título estático en lugar de TAKE THE NEXT STEP / SEE OUR SERVICES */
-  staticTitle?: string;
+  /** Si se pasa, se muestra "prefix + palabra rotando" en lugar de TAKE THE NEXT STEP / SEE OUR SERVICES */
+  rotatingTitle?: { prefix: string; words: string[] };
 };
+
+const WORD_SPIN_INTERVAL_MS = 2500;
 
 export default function ParallaxBannerWithImage({
   imageSrc = '/bannerstage.jpg',
   className = '',
-  staticTitle,
+  rotatingTitle,
 }: ParallaxBannerWithImageProps) {
   const { t } = useLanguage();
   const sectionRef = useRef<HTMLElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
   const [imageOffset, setImageOffset] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
+  const [wordIndex, setWordIndex] = useState(0);
 
   useEffect(() => {
     const onScroll = () => {
@@ -50,6 +53,16 @@ export default function ParallaxBannerWithImage({
     return () => observer.unobserve(el);
   }, []);
 
+  useEffect(() => {
+    if (!rotatingTitle || rotatingTitle.words.length === 0) return;
+    const id = setInterval(() => {
+      setWordIndex((i) => (i + 1) % rotatingTitle.words.length);
+    }, WORD_SPIN_INTERVAL_MS);
+    return () => clearInterval(id);
+  }, [rotatingTitle]);
+
+  const currentWord = rotatingTitle?.words[wordIndex] ?? '';
+
   return (
     <section
       ref={sectionRef}
@@ -77,10 +90,10 @@ export default function ParallaxBannerWithImage({
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent" />
       </div>
 
-      <div className="relative z-10 w-full min-h-[50vh] sm:min-h-[60vh] flex items-center justify-center px-6 sm:px-8 md:px-12 lg:px-16 py-20 sm:py-24 md:py-32 lg:py-40">
-        {staticTitle ? (
+      <div className="relative z-10 w-full min-h-[50vh] sm:min-h-[60vh] flex items-center justify-center px-4 sm:px-8 md:px-12 lg:px-16 py-20 sm:py-24 md:py-32 lg:py-40">
+        {rotatingTitle ? (
           <div
-            className="w-full flex justify-center items-center"
+            className="w-full flex justify-center items-center overflow-hidden"
             style={{
               opacity: isVisible ? 1 : 0,
               transform: isVisible ? 'translateY(0)' : 'translateY(24px)',
@@ -88,12 +101,19 @@ export default function ParallaxBannerWithImage({
             }}
           >
             <p
-              className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white tracking-tight w-full text-center whitespace-nowrap"
+              className="font-bold text-white tracking-tight text-center whitespace-nowrap max-w-full"
               style={{
+                fontSize: 'clamp(1.125rem, 6.2vw, 4.5rem)',
                 textShadow: '0 2px 12px rgba(0,0,0,0.9), 0 4px 24px rgba(0,0,0,0.7), 0 0 40px rgba(0,0,0,0.4)',
               }}
             >
-              {staticTitle}
+              {rotatingTitle.prefix}
+              <span
+                key={wordIndex}
+                className="inline-block animate-word-bounce"
+              >
+                {currentWord}
+              </span>
             </p>
           </div>
         ) : (
