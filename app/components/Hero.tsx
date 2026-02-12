@@ -29,6 +29,13 @@ export default function Hero() {
       <div className="absolute inset-0 z-0">
         <VantaNet className="w-full h-full" />
       </div>
+      <div
+        className="absolute inset-0 z-[1] pointer-events-none"
+        style={{
+          background: 'linear-gradient(to bottom, #000 0%, transparent 25%, transparent 75%, #000 100%)',
+        }}
+        aria-hidden
+      />
       <HeroGradientBackground />
       <div className="relative z-20 w-full h-full min-h-0 flex items-center justify-center border-0 outline-none overflow-hidden translate-y-[-50px] md:translate-y-0 isolate">
         <LogoPointCloud />

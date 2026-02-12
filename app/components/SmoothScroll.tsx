@@ -15,7 +15,7 @@ type LenisInstance = {
   on: (event: string, fn: () => void) => void;
   destroy: () => void;
   scroll: number;
-  scrollTo: (value: number, options?: { immediate?: boolean }) => void;
+  scrollTo: (value: number, options?: { immediate?: boolean; duration?: number }) => void;
   resize?: () => void;
 };
 
@@ -78,32 +78,25 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
 
   // Al cargar o cambiar de ruta: scroll a top (excepto cuando hay #contact-form)
   useEffect(() => {
-    const doScroll = () => {
-      if (typeof window === 'undefined') return;
-      const hash = window.location.hash;
-      if (hash === '#contact-form') return;
-      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-      if (lenisRef.current) lenisRef.current.scrollTo(0, { immediate: true });
-    };
+    if (typeof window === 'undefined') return;
+    const hash = window.location.hash;
+    if (hash === '#contact-form') return;
 
-    if (typeof window !== 'undefined') {
-      window.history.scrollRestoration = 'manual';
-      doScroll();
+    window.history.scrollRestoration = 'manual';
+
+    if (lenisRef.current) {
+      lenisRef.current.scrollTo(0, { duration: 0.6 });
+    } else {
+      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     }
 
-    const t1 = setTimeout(doScroll, 50);
-    const t2 = setTimeout(doScroll, 200);
-    const t3 = setTimeout(() => {
-      doScroll();
+    const t = setTimeout(() => {
+      if (lenisRef.current) lenisRef.current.scrollTo(0, { duration: 0.5 });
       if (lenisRef.current?.resize) lenisRef.current.resize();
       ScrollTrigger.refresh();
-    }, 400);
+    }, 100);
 
-    return () => {
-      clearTimeout(t1);
-      clearTimeout(t2);
-      clearTimeout(t3);
-    };
+    return () => clearTimeout(t);
   }, [pathname]);
 
   return (

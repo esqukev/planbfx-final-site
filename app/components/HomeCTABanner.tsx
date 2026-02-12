@@ -197,7 +197,7 @@ export default function HomeCTABanner({ imageSrc }: HomeCTABannerProps) {
             {t('home.ctaBanner.exploreServices')}
           </Link>
           <Link
-            href="/contact#contact-form"
+            href="/contact"
             className="inline-flex items-center justify-center px-8 py-4 border-2 border-white/60 text-white font-semibold rounded-full hover:bg-white/10 transition-all duration-300 ease-out hover:scale-[1.03] text-base"
           >
             {t('home.ctaBanner.getInTouch')}
