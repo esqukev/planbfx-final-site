@@ -130,7 +130,7 @@ export const translations: Record<Lang, Record<string, string>> = {
     'contact.faq5q': 'What information do you need to get started?',
     'contact.faq5a': 'Share your event date, venue, vision, and any references or mood boards. The more detail you provide in the form, the faster we can propose a tailored solution.',
 
-    'footer.tagline': 'Creativity Leads.\nWe craft remarkable stories through visionary ideas and digital artistry.',
+    'footer.tagline': 'Creativity Leads.\nWe craft remarkable stories through\nvisionary ideas and digital artistry.',
     'footer.quickLinks': 'Quick Links',
     'footer.contact': 'Contact',
     'footer.rights': '© 2025 PlanB FX. All rights reserved.',
@@ -151,9 +151,9 @@ export const translations: Record<Lang, Record<string, string>> = {
     'home.video.2': '[PLANBFX]',
     'home.video.3': 'PARA TUS ESPACIOS',
 
-    'home.crafting.title': 'Creando experiencias visuales inmersivas',
+    'home.crafting.title': 'Creando Experiencias Visuales Inmersivas',
     'home.crafting.description': 'Creamos visuales inmersivos y a medida que llevan tu visión más allá. Del concepto a la ejecución, fusionamos creatividad, interacción y tecnología para construir experiencias visuales únicas que conectan, evolucionan y resuenan más allá de la pantalla.',
-    'home.crafting.learnMore': 'Saber más',
+    'home.crafting.learnMore': 'Saber Más',
 
     'home.parallax.line1': 'No solo creamos visuales,',
     'home.parallax.line2': 'creamos momentos que',
@@ -206,7 +206,7 @@ export const translations: Record<Lang, Record<string, string>> = {
     'about.weCreateWord5': 'INTERACCIÓN',
     'about.weCreateWord6': 'RECUERDOS',
     'about.customExperiences': 'EXPERIENCIAS A MEDIDA',
-    'about.cta.title': 'Transformando eventos con\nInteracción digital',
+    'about.cta.title': 'Transformando Eventos con\nInteracción Digital',
     'about.cta.paragraph': 'Conéctate con nosotros para elevar tu evento. Nuestra mezcla única de arte, tecnología y creatividad aporta una experiencia visual impactante en cada ocasión. Descubre cómo podemos transformar tu visión en realidad.',
     'about.cta.getInTouch': 'Contactar',
     'about.cta.exploreOurArt': 'Explorar Nuestro Arte',
@@ -226,7 +226,7 @@ export const translations: Record<Lang, Record<string, string>> = {
     'services.customizedExperience.title': 'Experiencia Personalizada',
     'services.customizedExperience.description': 'Experiencias a medida. Colaboramos estrechamente con nuestros clientes para diseñar y desarrollar instalaciones interactivas exclusivas y soluciones visuales, adaptadas específicamente a la identidad y necesidades de cada proyecto.',
     'services.preview': 'Vista previa',
-    'services.cta.subtitle': 'Innova tu experiencia',
+    'services.cta.subtitle': 'Innova Tu Experiencia',
     'services.cta.title': 'Arte y tecnología convergen en PlanB FX',
     'services.cta.paragraph': 'Descubre cómo fusionamos creatividad y tecnología para crear arte interactivo impactante. Explora nuestras soluciones imaginativas diseñadas para eventos que dejan huella. Vive el arte como nunca antes.',
     'services.cta.letsTalk': 'Hablemos',
@@ -268,7 +268,7 @@ export const translations: Record<Lang, Record<string, string>> = {
     'contact.faq5q': '¿Qué información necesitan para empezar?',
     'contact.faq5a': 'Comparte la fecha del evento, sede, visión y referencias o mood boards. Cuantos más detalles des en el formulario, más rápido podremos proponer una solución a medida.',
 
-    'footer.tagline': 'Creatividad al mando.\nHistorias únicas creadas con visión y arte digital.',
+    'footer.tagline': 'Creatividad al mando.\nHistorias únicas creadas\ncon visión y arte digital.',
     'footer.quickLinks': 'Enlaces Rápidos',
     'footer.contact': 'Contacto',
     'footer.rights': '© 2025 PlanB FX. Todos los derechos reservados.',

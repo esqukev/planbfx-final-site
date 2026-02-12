@@ -181,7 +181,7 @@ export default function AboutPage() {
           <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-black to-transparent" />
           <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent" />
         </div>
-        <div className="relative z-20 mx-auto max-w-4xl px-8 py-16 md:py-24 lg:py-28 flex flex-col items-center text-center">
+        <div className="relative z-20 mx-auto max-w-4xl px-8 py-24 md:py-32 lg:py-40 flex flex-col items-center text-center">
           <div ref={closingRef} className="space-y-8 md:space-y-10 max-w-4xl mx-auto">
             <p ref={closingParaRef} className="text-xl leading-relaxed text-white/70 md:text-2xl">
               {tf('about.closing')}

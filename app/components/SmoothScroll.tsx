@@ -1,9 +1,10 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useCallback } from 'react';
 import { usePathname } from 'next/navigation';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ScrollProvider } from '../context/ScrollContext';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -26,6 +27,14 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
   const lenisRef = useRef<LenisInstance | null>(null);
   const rafRef = useRef<(time: number) => void | null>(null);
   const pathname = usePathname();
+
+  const scrollToTop = useCallback(() => {
+    if (lenisRef.current) {
+      lenisRef.current.scrollTo(0);
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, []);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -67,14 +76,20 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     };
   }, []);
 
-  // Al cargar o cambiar de ruta: scroll a top, refrescar Lenis y ScrollTrigger
+  // Al cargar o cambiar de ruta: scroll a top (excepto cuando hay #contact-form)
   useEffect(() => {
     if (typeof window !== 'undefined') {
       window.history.scrollRestoration = 'manual';
-      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+      const hash = window.location.hash;
+      if (hash !== '#contact-form') {
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+      }
     }
     if (lenisRef.current) {
-      lenisRef.current.scrollTo(0);
+      const hash = typeof window !== 'undefined' ? window.location.hash : '';
+      if (hash !== '#contact-form') {
+        lenisRef.current.scrollTo(0);
+      }
     }
     const t = setTimeout(() => {
       if (lenisRef.current?.resize) lenisRef.current.resize();
@@ -83,5 +98,9 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     return () => clearTimeout(t);
   }, [pathname]);
 
-  return <>{children}</>;
+  return (
+    <ScrollProvider scrollToTop={scrollToTop}>
+      {children}
+    </ScrollProvider>
+  );
 }

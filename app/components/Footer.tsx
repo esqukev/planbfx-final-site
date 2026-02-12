@@ -1,10 +1,30 @@
 'use client';
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useLanguage } from '../context/LanguageContext';
+import { useScrollToTop } from '../context/ScrollContext';
 
 export default function Footer() {
   const { t, tf } = useLanguage();
+  const pathname = usePathname();
+  const scrollToTop = useScrollToTop();
+
+  const quickLinks = [
+    { labelKey: 'footer.home' as const, href: '/' },
+    { labelKey: 'footer.about' as const, href: '/about' },
+    { labelKey: 'footer.services' as const, href: '/services' },
+    { labelKey: 'footer.contactLink' as const, href: '/contact' },
+  ];
+
+  const handleQuickLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    const isSamePage = href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(href + '/');
+    if (isSamePage) {
+      e.preventDefault();
+      scrollToTop();
+    }
+  };
+
   return (
     <footer className="bg-black text-white py-16 px-4 md:px-8 m-0">
       <div className="max-w-7xl mx-auto">
@@ -18,10 +38,17 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-semibold mb-4 uppercase tracking-wider">{t('footer.quickLinks')}</h4>
             <ul className="space-y-2 text-zinc-400">
-              <li><Link href="/" className="hover:text-white transition-colors">{t('footer.home')}</Link></li>
-              <li><Link href="/about" className="hover:text-white transition-colors">{t('footer.about')}</Link></li>
-              <li><Link href="/services" className="hover:text-white transition-colors">{t('footer.services')}</Link></li>
-              <li><Link href="/contact" className="hover:text-white transition-colors">{t('footer.contactLink')}</Link></li>
+              {quickLinks.map(({ labelKey, href }) => (
+                <li key={labelKey}>
+                  <Link
+                    href={href}
+                    className="hover:text-white transition-colors"
+                    onClick={(e) => handleQuickLinkClick(e, href)}
+                  >
+                    {t(labelKey)}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
           <div>

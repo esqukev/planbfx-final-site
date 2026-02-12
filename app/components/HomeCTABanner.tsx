@@ -111,7 +111,7 @@ export default function HomeCTABanner({ imageSrc }: HomeCTABannerProps) {
 
       <div
         ref={contentRef}
-        className="relative z-10 max-w-3xl mx-auto text-center px-6 sm:px-8 md:px-12 lg:px-16 py-24 md:py-32 lg:py-40"
+        className="relative z-10 w-full max-w-3xl mx-auto text-center px-5 sm:px-10 md:px-12 lg:px-16 py-24 md:py-32 lg:py-40 box-border overflow-hidden min-w-0"
       >
         <p className="text-sm uppercase tracking-[0.3em] text-zinc-400 block mb-4">
           {craftingMoments.split('').map((char, i) => (
@@ -127,8 +127,8 @@ export default function HomeCTABanner({ imageSrc }: HomeCTABannerProps) {
             </span>
           ))}
         </p>
-        <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight mb-6 md:mb-8 text-center">
-          <span className="inline-block whitespace-nowrap">
+        <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight mb-6 md:mb-8 text-center break-words">
+          <span className="block text-center">
             {innovativeArt.split('').map((char, i) => (
               <span
                 key={`t1-${i}`}
@@ -141,7 +141,8 @@ export default function HomeCTABanner({ imageSrc }: HomeCTABannerProps) {
                 {char === ' ' ? '\u00A0' : char}
               </span>
             ))}
-            {' '}
+          </span>
+          <span className="block text-center mt-1">
             {meetsTechnology.split('').map((char, i) => (
               <span
                 key={`t2-${i}`}
@@ -156,7 +157,7 @@ export default function HomeCTABanner({ imageSrc }: HomeCTABannerProps) {
             ))}
           </span>
         </h2>
-        <p className="text-base md:text-lg text-white/80 leading-relaxed mb-10 max-w-2xl mx-auto">
+        <p className="text-base md:text-lg text-white/80 leading-relaxed mb-10 max-w-2xl mx-auto px-2 sm:px-1 break-words">
           {(() => {
             const words = paragraph.split(' ');
             const sym = ["'", '"', '-', '–', '—', '+', '/'];
@@ -164,7 +165,7 @@ export default function HomeCTABanner({ imageSrc }: HomeCTABannerProps) {
             return (
               <>
                 {words.map((word, wi) => (
-                  <span key={`w-${wi}`} className="whitespace-nowrap inline-block">
+                  <span key={`w-${wi}`} className="inline">
                     {word.split('').map((char, ci) => (
                       <span
                         key={`c-${wi}-${ci}`}
@@ -174,7 +175,7 @@ export default function HomeCTABanner({ imageSrc }: HomeCTABannerProps) {
                         {char}
                       </span>
                     ))}
-                    {wi < words.length - 1 ? '\u00A0' : null}
+                    {wi < words.length - 1 ? ' ' : null}
                   </span>
                 ))}
               </>

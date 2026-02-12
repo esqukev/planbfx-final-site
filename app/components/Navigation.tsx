@@ -5,12 +5,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useLanguage } from '../context/LanguageContext';
+import { useScrollToTop } from '../context/ScrollContext';
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
   const { lang, setLang, t } = useLanguage();
+  const scrollToTop = useScrollToTop();
 
   useEffect(() => {
     const onScroll = () => {
@@ -64,7 +66,7 @@ export default function Navigation() {
             onClick={(e) => {
               if (pathname === '/') {
                 e.preventDefault();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                scrollToTop();
               }
             }}
           >
@@ -82,6 +84,12 @@ export default function Navigation() {
                 key={item.labelKey}
                 href={item.href}
                 className="relative flex flex-col items-center text-white hover:text-zinc-300 transition-colors text-sm uppercase tracking-wider py-1"
+                onClick={(e) => {
+                  if (isActiveDesktop(item.href)) {
+                    e.preventDefault();
+                    scrollToTop();
+                  }
+                }}
               >
                 {t(item.labelKey)}
                 {isActiveDesktop(item.href) && (
@@ -133,7 +141,13 @@ export default function Navigation() {
                 className={`flex items-center gap-2 px-4 py-3 text-sm uppercase tracking-wider transition-colors ${
                   isActiveMobile(item.href) ? 'text-white bg-white/10' : 'text-white/90 hover:text-white hover:bg-white/5'
                 }`}
-                onClick={() => setIsMenuOpen(false)}
+                onClick={(e) => {
+                  if (isActiveMobile(item.href)) {
+                    e.preventDefault();
+                    scrollToTop();
+                  }
+                  setIsMenuOpen(false);
+                }}
               >
                 {t(item.labelKey)}
               </Link>

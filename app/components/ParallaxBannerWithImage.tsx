@@ -68,13 +68,13 @@ export default function ParallaxBannerWithImage({
     const el = wordRef.current;
     gsap.fromTo(
       el,
-      { opacity: 0, y: -28, scale: 0.92 },
+      { opacity: 0, y: -24, scale: 0.98 },
       {
         opacity: 1,
         y: 0,
         scale: 1,
-        duration: 0.75,
-        ease: 'back.out(1.6)',
+        duration: 0.6,
+        ease: 'power2.out',
         overwrite: true,
       }
     );
@@ -126,13 +126,12 @@ export default function ParallaxBannerWithImage({
                 textShadow: '0 2px 12px rgba(0,0,0,0.9), 0 4px 24px rgba(0,0,0,0.7), 0 0 40px rgba(0,0,0,0.4)',
               }}
             >
-              <span className="block text-center w-full">
-                <span>{rotatingTitle.prefix.trim()}</span>
-                <span className="inline-block w-[0.4em]" aria-hidden />
+              <span className="inline-flex flex-wrap justify-center items-baseline gap-x-[0.35em]">
+                <span className="inline-block">{rotatingTitle.prefix.trim()}</span>
                 <span
                   ref={wordRef}
-                  className="inline-block text-center min-w-[3ch] transition-[width] duration-500 ease-in-out"
-                  style={{ width: `${Math.max(currentWord.length, 3)}ch` }}
+                  className="inline-block text-center min-w-[3ch]"
+                  style={{ width: `${Math.max(...words.map((w) => w.length), 3)}ch` }}
                 >
                   {currentWord}
                 </span>
