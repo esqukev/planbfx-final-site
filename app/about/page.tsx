@@ -145,21 +145,11 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Banner parallax WE CREATE + palabra rotando (ART / EXPERIENCE / INNOVATION / etc.) */}
+      {/* Banner parallax: título estático (efecto rotando eliminado, palabras guardadas en translations) */}
       <div className="m-0 p-0">
         <ParallaxBannerWithImage
           imageSrc="/tomandres.jpg"
-          rotatingTitle={{
-            prefix: t('about.weCreatePrefix'),
-            words: [
-              t('about.weCreateWord1'),
-              t('about.weCreateWord2'),
-              t('about.weCreateWord3'),
-              t('about.weCreateWord4'),
-              t('about.weCreateWord5'),
-              t('about.weCreateWord6'),
-            ],
-          }}
+          staticTitle={`${t('about.weCreatePrefix')}${t('about.weCreateWord1')}`}
         />
       </div>
 

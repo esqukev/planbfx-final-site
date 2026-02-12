@@ -3,28 +3,25 @@
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import gsap from 'gsap';
 import { useLanguage } from '../context/LanguageContext';
 
 type ParallaxBannerWithImageProps = {
   imageSrc?: string;
   className?: string;
-  /** Si se pasa, se muestra "prefix + palabra rotando" en lugar de TAKE THE NEXT STEP / SEE OUR SERVICES */
-  rotatingTitle?: { prefix: string; words: string[] };
+  /** Si se pasa, se muestra este título estático en lugar de TAKE THE NEXT STEP / SEE OUR SERVICES */
+  staticTitle?: string;
 };
 
 export default function ParallaxBannerWithImage({
   imageSrc = '/bannerstage.jpg',
   className = '',
-  rotatingTitle,
+  staticTitle,
 }: ParallaxBannerWithImageProps) {
   const { t } = useLanguage();
   const sectionRef = useRef<HTMLElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
-  const wordRef = useRef<HTMLSpanElement>(null);
   const [imageOffset, setImageOffset] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
-  const [wordIndex, setWordIndex] = useState(0);
 
   useEffect(() => {
     const onScroll = () => {
@@ -52,25 +49,6 @@ export default function ParallaxBannerWithImage({
     observer.observe(el);
     return () => observer.unobserve(el);
   }, []);
-
-  // Rotating word (WE CREATE ART / EXPERIENCE / INNOVATION / etc.)
-  useEffect(() => {
-    if (!rotatingTitle || rotatingTitle.words.length === 0) return;
-    const interval = setInterval(() => {
-      setWordIndex((i) => (i + 1) % rotatingTitle.words.length);
-    }, 2500);
-    return () => clearInterval(interval);
-  }, [rotatingTitle]);
-
-  // Fade in al cambiar la palabra (versión simple sin bounce - evita flash)
-  useEffect(() => {
-    if (!rotatingTitle || !wordRef.current) return;
-    const el = wordRef.current;
-    gsap.fromTo(el, { opacity: 0 }, { opacity: 1, duration: 0.7, ease: 'power2.inOut' });
-  }, [wordIndex, rotatingTitle]);
-
-  const words = rotatingTitle?.words ?? [];
-  const currentWord = words[wordIndex] ?? '';
 
   return (
     <section
@@ -100,7 +78,7 @@ export default function ParallaxBannerWithImage({
       </div>
 
       <div className="relative z-10 w-full min-h-[50vh] sm:min-h-[60vh] flex items-center justify-center px-6 sm:px-8 md:px-12 lg:px-16 py-20 sm:py-24 md:py-32 lg:py-40">
-        {rotatingTitle ? (
+        {staticTitle ? (
           <div
             className="w-full flex justify-center items-center"
             style={{
@@ -115,16 +93,7 @@ export default function ParallaxBannerWithImage({
                 textShadow: '0 2px 12px rgba(0,0,0,0.9), 0 4px 24px rgba(0,0,0,0.7), 0 0 40px rgba(0,0,0,0.4)',
               }}
             >
-              {rotatingTitle.prefix.trim()}
-              <span className="inline-block w-[0.3em]" aria-hidden />
-              <span
-                ref={wordRef}
-                key={wordIndex}
-                className="inline-block min-w-[14ch] text-left align-bottom"
-                style={{ opacity: 0 }}
-              >
-                {currentWord}
-              </span>
+              {staticTitle}
             </p>
           </div>
         ) : (
