@@ -47,7 +47,7 @@ export default function ParallaxBannerWithImage({
       ([entry]) => {
         if (entry.isIntersecting) setIsVisible(true);
       },
-      { threshold: 0.2 }
+      { threshold: 0.05 }
     );
     observer.observe(el);
     return () => observer.unobserve(el);
@@ -55,11 +55,13 @@ export default function ParallaxBannerWithImage({
 
   useEffect(() => {
     if (!rotatingTitle || rotatingTitle.words.length === 0) return;
+    if (!isVisible) return;
+    setWordIndex(0);
     const id = setInterval(() => {
       setWordIndex((i) => (i + 1) % rotatingTitle.words.length);
     }, WORD_SPIN_INTERVAL_MS);
     return () => clearInterval(id);
-  }, [rotatingTitle]);
+  }, [rotatingTitle, isVisible]);
 
   const currentWord = rotatingTitle?.words[wordIndex] ?? '';
 
@@ -97,7 +99,7 @@ export default function ParallaxBannerWithImage({
             style={{
               opacity: isVisible ? 1 : 0,
               transform: isVisible ? 'translateY(0)' : 'translateY(24px)',
-              transition: 'opacity 1200ms ease-out, transform 1200ms ease-out',
+              transition: 'opacity 500ms ease-out, transform 500ms ease-out',
             }}
           >
             <p
