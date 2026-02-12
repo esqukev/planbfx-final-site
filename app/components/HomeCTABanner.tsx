@@ -157,7 +157,7 @@ export default function HomeCTABanner({ imageSrc }: HomeCTABannerProps) {
             ))}
           </span>
         </h2>
-        <p className="text-base md:text-lg text-white/80 leading-relaxed mb-10 max-w-2xl mx-auto px-2 sm:px-1 break-words">
+        <p className="text-base md:text-lg text-white/80 leading-relaxed mb-10 max-w-2xl mx-auto px-2 sm:px-1">
           {(() => {
             const words = paragraph.split(' ');
             const sym = ["'", '"', '-', '–', '—', '+', '/'];
@@ -165,16 +165,18 @@ export default function HomeCTABanner({ imageSrc }: HomeCTABannerProps) {
             return (
               <>
                 {words.map((word, wi) => (
-                  <span key={`w-${wi}`} className="inline" style={{ whiteSpace: 'nowrap' }}>
-                    {word.split('').map((char, ci) => (
-                      <span
-                        key={`c-${wi}-${ci}`}
-                        className={sym.includes(char) ? 'inline-block font-fallback' : 'inline-block'}
-                        style={{ opacity: isVisible ? 1 : 0, transition: `opacity 0.6s ease ${(charIdx++) * 0.02}s` }}
-                      >
-                        {char}
-                      </span>
-                    ))}
+                  <span key={`w-${wi}`}>
+                    <span className="inline" style={{ whiteSpace: 'nowrap' }}>
+                      {word.split('').map((char, ci) => (
+                        <span
+                          key={`c-${wi}-${ci}`}
+                          className={sym.includes(char) ? 'inline-block font-fallback' : 'inline-block'}
+                          style={{ opacity: isVisible ? 1 : 0, transition: `opacity 0.6s ease ${(charIdx++) * 0.02}s` }}
+                        >
+                          {char}
+                        </span>
+                      ))}
+                    </span>
                     {wi < words.length - 1 ? ' ' : null}
                   </span>
                 ))}

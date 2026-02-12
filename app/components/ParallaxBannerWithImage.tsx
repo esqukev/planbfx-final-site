@@ -12,7 +12,7 @@ type ParallaxBannerWithImageProps = {
   rotatingTitle?: { prefix: string; words: string[] };
 };
 
-const WORD_SPIN_INTERVAL_MS = 2500;
+const WORD_SPIN_INTERVAL_MS = 1000;
 
 export default function ParallaxBannerWithImage({
   imageSrc = '/bannerstage.jpg',
