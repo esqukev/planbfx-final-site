@@ -127,7 +127,7 @@ export default function HomeCTABanner({ imageSrc }: HomeCTABannerProps) {
             </span>
           ))}
         </p>
-        <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight mb-6 md:mb-8 text-center">
+        <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight mb-6 md:mb-8 text-center flex flex-col items-center">
           <span className={`block text-center ${lang === 'es' ? 'md:whitespace-nowrap' : ''}`}>
             {innovativeArt.split('').map((char, i) => (
               <span

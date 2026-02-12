@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import gsap from 'gsap';
@@ -62,26 +62,24 @@ export default function ParallaxBannerWithImage({
     return () => clearInterval(interval);
   }, [rotatingTitle]);
 
-  // Efecto rebote + fade in al cambiar la palabra: aparece desde arriba (GSAP bounce)
-  useEffect(() => {
-    if (!rotatingTitle || !wordRef.current) return;
-    const el = wordRef.current;
-    gsap.fromTo(
-      el,
-      { opacity: 0, y: -28, scale: 0.92 },
-      {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 0.75,
-        ease: 'back.out(1.6)',
-        overwrite: true,
-      }
-    );
-  }, [wordIndex, rotatingTitle]);
-
   const words = rotatingTitle?.words ?? [];
   const currentWord = words[wordIndex] ?? '';
+  const maxWordLen = Math.max(...words.map((w) => w.length), 3);
+
+  // Efecto rebote + fade in al cambiar la palabra: evitar flash usando useLayoutEffect y ancho fijo
+  useLayoutEffect(() => {
+    if (!rotatingTitle || !wordRef.current) return;
+    const el = wordRef.current;
+    gsap.set(el, { opacity: 0, y: -28, scale: 0.92 });
+    gsap.to(el, {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      duration: 0.75,
+      ease: 'back.out(1.6)',
+      overwrite: true,
+    });
+  }, [wordIndex, rotatingTitle]);
 
   return (
     <section
@@ -126,13 +124,13 @@ export default function ParallaxBannerWithImage({
                 textShadow: '0 2px 12px rgba(0,0,0,0.9), 0 4px 24px rgba(0,0,0,0.7), 0 0 40px rgba(0,0,0,0.4)',
               }}
             >
-              <span className="block text-center w-full">
+              <span className="inline-flex flex-wrap justify-center items-baseline">
                 <span>{rotatingTitle.prefix.trim()}</span>
                 <span className="inline-block w-[0.4em]" aria-hidden />
                 <span
                   ref={wordRef}
-                  className="inline-block text-center min-w-[3ch] transition-[width] duration-500 ease-in-out"
-                  style={{ width: `${Math.max(currentWord.length, 3)}ch` }}
+                  className="inline-block text-center min-w-[3ch]"
+                  style={{ width: `${maxWordLen}ch`, opacity: 0 }}
                 >
                   {currentWord}
                 </span>
