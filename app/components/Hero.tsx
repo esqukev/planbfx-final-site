@@ -32,7 +32,7 @@ export default function Hero() {
       <div
         className="absolute inset-0 z-[1] pointer-events-none"
         style={{
-          background: 'linear-gradient(to bottom, #000 0%, rgba(0,0,0,0.6) 22%, rgba(0,0,0,0.5) 68%, rgba(0,0,0,0.85) 85%, #000 100%)',
+          background: 'linear-gradient(to bottom, #000 0%, rgba(0,0,0,0.42) 22%, rgba(0,0,0,0.35) 68%, rgba(0,0,0,0.6) 85%, #000 100%)',
         }}
         aria-hidden
       />
