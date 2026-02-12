@@ -67,8 +67,15 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     };
   }, []);
 
-  // Al cambiar de ruta (ej. About → Home), refrescar Lenis y ScrollTrigger para que el scroll funcione
+  // Al cargar o cambiar de ruta: scroll a top, refrescar Lenis y ScrollTrigger
   useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.history.scrollRestoration = 'manual';
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    }
+    if (lenisRef.current) {
+      lenisRef.current.scrollTo(0);
+    }
     const t = setTimeout(() => {
       if (lenisRef.current?.resize) lenisRef.current.resize();
       ScrollTrigger.refresh();

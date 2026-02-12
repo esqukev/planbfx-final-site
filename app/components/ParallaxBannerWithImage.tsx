@@ -128,11 +128,11 @@ export default function ParallaxBannerWithImage({
             >
               <span className="block text-center w-full">
                 <span>{rotatingTitle.prefix.trim()}</span>
-                <span className="inline-block w-[0.2em]" aria-hidden />
+                <span className="inline-block w-[0.4em]" aria-hidden />
                 <span
                   ref={wordRef}
-                  className="inline-block text-center min-w-[1ch] transition-[width] duration-500 ease-in-out"
-                  style={{ width: `${currentWord.length}ch` }}
+                  className="inline-block text-center min-w-[3ch] transition-[width] duration-500 ease-in-out"
+                  style={{ width: `${Math.max(currentWord.length, 3)}ch` }}
                 >
                   {currentWord}
                 </span>

@@ -112,7 +112,6 @@ export default function ContactPage() {
 
             <div id="contact-form" className="text-left scroll-mt-24">
               <h2 className="text-2xl md:text-3xl font-bold mb-6">{t('contact.readyTitle')}</h2>
-              <p className="text-lg text-white/70 leading-relaxed mb-4">{t('contact.readyDesc1')}</p>
               <p className="text-lg text-white/70 leading-relaxed mb-8">{t('contact.readyDesc2')}</p>
 
               <form

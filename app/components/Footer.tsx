@@ -11,7 +11,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
           <div>
             <h3 className="text-2xl font-bold mb-4">PlanB FX</h3>
-            <p className="text-zinc-400">
+            <p className="text-zinc-400 whitespace-pre-line">
               {t('footer.tagline')}
             </p>
           </div>

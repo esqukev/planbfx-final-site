@@ -111,7 +111,7 @@ export default function HomeCTABanner({ imageSrc }: HomeCTABannerProps) {
 
       <div
         ref={contentRef}
-        className="relative z-10 max-w-3xl mx-auto text-center px-8 md:px-12 lg:px-16 py-24 md:py-32 lg:py-40"
+        className="relative z-10 max-w-3xl mx-auto text-center px-6 sm:px-8 md:px-12 lg:px-16 py-24 md:py-32 lg:py-40"
       >
         <p className="text-sm uppercase tracking-[0.3em] text-zinc-400 block mb-4">
           {craftingMoments.split('').map((char, i) => (
@@ -127,8 +127,8 @@ export default function HomeCTABanner({ imageSrc }: HomeCTABannerProps) {
             </span>
           ))}
         </p>
-        <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight mb-6 md:mb-8">
-          <span className="block">
+        <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight mb-6 md:mb-8 text-center">
+          <span className="inline-block whitespace-nowrap">
             {innovativeArt.split('').map((char, i) => (
               <span
                 key={`t1-${i}`}
@@ -141,8 +141,7 @@ export default function HomeCTABanner({ imageSrc }: HomeCTABannerProps) {
                 {char === ' ' ? '\u00A0' : char}
               </span>
             ))}
-          </span>
-          <span className="block whitespace-nowrap">
+            {' '}
             {meetsTechnology.split('').map((char, i) => (
               <span
                 key={`t2-${i}`}
