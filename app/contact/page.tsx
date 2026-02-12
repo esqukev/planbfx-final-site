@@ -78,7 +78,7 @@ export default function ContactPage() {
                 </h1>
               </CursorTiltFigure>
               <p className="text-2xl md:text-3xl font-light text-white/90 mb-8">{tf('contact.subtitle')}</p>
-              <p className="text-lg text-white/70 leading-relaxed mb-6 text-justify">{t('contact.intro')}</p>
+              <p className="text-lg text-white/70 leading-relaxed mb-6 text-justify">{tf('contact.intro')}</p>
               <p className="text-lg font-semibold text-white/90 mb-10">{t('contact.getInContact')}</p>
 
               <div className="flex flex-wrap gap-4 md:gap-6">

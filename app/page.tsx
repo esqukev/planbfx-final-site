@@ -81,11 +81,11 @@ export default function Home() {
       <section id="contact" className="relative min-h-screen m-0 p-0 py-0 px-4 md:px-8 text-white overflow-hidden">
         <HyperSpaceBackground />
         <div className="relative z-10 max-w-4xl mx-auto text-center py-24 md:py-32">
-          <ScrollTextEffect className="text-6xl md:text-8xl font-bold mb-8">
-            {tf('home.cta.letsCreate')}<br />
-            {t('home.cta.something')}<br />
-            {t('home.cta.different')}
-          </ScrollTextEffect>
+          <div className="flex justify-center overflow-hidden px-4 mb-8">
+            <ScrollTextEffect className="text-[clamp(0.7rem,4vw,5rem)] sm:text-4xl md:text-6xl lg:text-8xl font-bold text-center whitespace-nowrap">
+              {tf('home.cta.letsCreate')} {t('home.cta.something')} {t('home.cta.different')}
+            </ScrollTextEffect>
+          </div>
           <FadeInOnScroll className="text-xl text-zinc-400 mb-12">
             {tf('home.cta.doYouHaveIdea')}
           </FadeInOnScroll>

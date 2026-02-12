@@ -127,7 +127,7 @@ export default function HomeCTABanner({ imageSrc }: HomeCTABannerProps) {
             </span>
           ))}
         </p>
-        <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight mb-6 md:mb-8 text-center break-words">
+        <h2 className="text-[clamp(0.875rem,4vw,4rem)] sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight mb-6 md:mb-8 text-center">
           <span className="block text-center">
             {innovativeArt.split('').map((char, i) => (
               <span
@@ -142,7 +142,7 @@ export default function HomeCTABanner({ imageSrc }: HomeCTABannerProps) {
               </span>
             ))}
           </span>
-          <span className="block text-center mt-1">
+          <span className="block text-center mt-1 whitespace-nowrap">
             {meetsTechnology.split('').map((char, i) => (
               <span
                 key={`t2-${i}`}
