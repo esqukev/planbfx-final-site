@@ -165,7 +165,7 @@ export default function HomeCTABanner({ imageSrc }: HomeCTABannerProps) {
             return (
               <>
                 {words.map((word, wi) => (
-                  <span key={`w-${wi}`} className="inline">
+                  <span key={`w-${wi}`} className="inline" style={{ whiteSpace: 'nowrap' }}>
                     {word.split('').map((char, ci) => (
                       <span
                         key={`c-${wi}-${ci}`}

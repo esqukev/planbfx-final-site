@@ -103,7 +103,7 @@ export default function ContactPage() {
                   WhatsApp
                 </a>
                 <a
-                  href="mailto:hello@planbfx.com"
+                  href="mailto:info@planb-fx.com"
                   className="inline-flex items-center justify-center px-8 py-4 rounded-full border-2 border-white/60 text-white font-semibold hover:bg-white/10 transition-all duration-300 ease-out hover:scale-[1.03] text-base"
                 >
                   Email
