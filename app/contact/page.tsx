@@ -22,13 +22,32 @@ export default function ContactPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
+  const [successFading, setSuccessFading] = useState(false);
+  const [successReady, setSuccessReady] = useState(false);
+  const [formResetting, setFormResetting] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!submitted) return;
-    const t = setTimeout(() => setSubmitted(false), 5000);
-    return () => clearTimeout(t);
+    setSuccessReady(false);
+    const readyId = requestAnimationFrame(() => {
+      requestAnimationFrame(() => setSuccessReady(true));
+    });
+    let removeTimer: ReturnType<typeof setTimeout>;
+    const hideTimer = setTimeout(() => {
+      setSuccessFading(true);
+      removeTimer = setTimeout(() => {
+        setSubmitted(false);
+        setSuccessFading(false);
+        setSuccessReady(false);
+      }, 350);
+    }, 5000);
+    return () => {
+      cancelAnimationFrame(readyId);
+      clearTimeout(hideTimer);
+      clearTimeout(removeTimer!);
+    };
   }, [submitted]);
 
   const clearError = (field: string) => {
@@ -140,7 +159,7 @@ export default function ContactPage() {
                 action="https://formsubmit.co/info@planb-fx.com"
                 method="POST"
                 target="formsubmit-frame"
-                className="space-y-6"
+                className={`space-y-6 transition-opacity duration-300 ease-out ${formResetting ? 'opacity-75' : 'opacity-100'}`}
                 onSubmit={(e) => {
                   if (!validate(e.currentTarget)) {
                     e.preventDefault();
@@ -154,8 +173,14 @@ export default function ContactPage() {
                     if (done) return;
                     done = true;
                     setSubmitted(true);
-                    form.reset();
                     setSubmitting(false);
+                    setTimeout(() => {
+                      setFormResetting(true);
+                      setTimeout(() => {
+                        form.reset();
+                        setFormResetting(false);
+                      }, 280);
+                    }, 400);
                   };
                   const iframe = document.getElementById('formsubmit-frame') as HTMLIFrameElement;
                   if (iframe) iframe.onload = finish;
@@ -299,7 +324,10 @@ export default function ContactPage() {
                   )}
                 </div>
                 {submitted && (
-                  <div className="rounded-xl bg-green-500/20 border border-green-500/40 px-4 py-3 text-green-300 text-sm" role="status">
+                  <div
+                    className={`rounded-xl bg-green-500/20 border border-green-500/40 px-4 py-3 text-green-300 text-sm transition-opacity duration-300 ease-out ${successFading || !successReady ? 'opacity-0' : 'opacity-100'}`}
+                    role="status"
+                  >
                     <p className="font-semibold">{tf('contact.successTitle')}</p>
                     <p className="text-white/80 mt-0.5">{t('contact.successMessage')}</p>
                   </div>
