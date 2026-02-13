@@ -55,15 +55,29 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-semibold mb-4 uppercase tracking-wider">{t('footer.contact')}</h4>
             <ul className="space-y-2 text-zinc-400">
-              <li>info<span className="font-fallback">@</span>planb<span className="font-fallback">-</span>fx.com</li>
-              <li>Phone: <span className="font-fallback">+506 8620 1212</span></li>
+              <li>
+                <a
+                  href="mailto:info@planb-fx.com"
+                  className="text-zinc-400 hover:text-white transition-colors cursor-pointer"
+                >
+                  info<span className="font-fallback">@</span>planb<span className="font-fallback">-</span>fx.com
+                </a>
+              </li>
+              <li>
+                <a
+                  href="tel:+50686201212"
+                  className="text-zinc-400 hover:text-white transition-colors cursor-pointer"
+                >
+                  Phone: <span className="font-fallback">+506 8620 1212</span>
+                </a>
+              </li>
             </ul>
             <div className="flex gap-4 mt-6 items-center">
               <a 
                 href="https://www.instagram.com/planb_fx/" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-zinc-400 hover:text-white transition-colors"
+                className="text-zinc-400 hover:text-white transition-colors cursor-pointer"
                 aria-label="Instagram"
               >
                 <svg 
@@ -79,7 +93,7 @@ export default function Footer() {
                 href="https://wa.me/"
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-zinc-400 hover:text-white transition-colors"
+                className="text-zinc-400 hover:text-white transition-colors cursor-pointer"
                 aria-label="WhatsApp"
               >
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
