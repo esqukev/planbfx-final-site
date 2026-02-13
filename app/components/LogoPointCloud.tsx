@@ -212,19 +212,21 @@ export default function LogoPointCloud() {
 
   return (
     <div
-      className="w-full max-w-[min(100vw,80vh)] max-h-[80vh] aspect-square overflow-hidden mx-auto"
+      className="w-full max-w-[min(100vw,80vh)] max-h-[80vh] aspect-square overflow-hidden mx-auto bg-black"
       style={{
         opacity,
-        transition: 'opacity 0.5s ease-out',
+        transition: 'opacity 0.6s ease-out',
         border: 'none',
         outline: 'none',
-        background: 'transparent',
       }}
     >
       <Canvas
         camera={{ position: [0, 0, 180], fov: 45 }}
         style={{ width: '100%', height: '100%', background: 'transparent', border: 'none' }}
         gl={{ alpha: true, antialias: true, powerPreference: 'high-performance', stencil: false }}
+        onCreated={({ gl }) => {
+          gl.setClearColor(0x000000, 0);
+        }}
         dpr={[1, 2]}
       >
         <ambientLight intensity={1} />
