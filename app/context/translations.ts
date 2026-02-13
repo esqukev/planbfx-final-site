@@ -299,4 +299,4 @@ export const translations: Record<Lang, Record<string, string>> = {
   },
 };
 
-export const SPECIAL_CHARS = ["'", "'", "´", "-", "–", "—", "+", "/", "@", "©"];
+export const SPECIAL_CHARS = ["'", "'", "´", "-", "–", "—", "+", "/", "@", "©", "!", "¡"];

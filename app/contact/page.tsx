@@ -32,6 +32,12 @@ export default function ContactPage() {
     }
   }, []);
 
+  useEffect(() => {
+    if (!submitted) return;
+    const t = setTimeout(() => setSubmitted(false), 3000);
+    return () => clearTimeout(t);
+  }, [submitted]);
+
   const clearError = (field: string) => {
     setFormErrors((prev) => {
       const next = { ...prev };
@@ -128,13 +134,24 @@ export default function ContactPage() {
 
             <div id="contact-form" className="text-left scroll-mt-24">
               <h2 className="text-2xl md:text-3xl font-bold mb-6">{t('contact.readyTitle')}</h2>
-              {submitted ? (
-                <div className="rounded-xl bg-green-500/20 border border-green-500/40 px-6 py-8 text-center">
-                  <p className="text-lg font-semibold text-green-300 mb-2">{t('contact.successTitle')}</p>
-                  <p className="text-white/80">{t('contact.successMessage')}</p>
+              <div className="relative min-h-[320px]">
+                <div
+                  className={`absolute inset-0 transition-opacity duration-500 ease-in-out ${
+                    submitted ? 'opacity-100' : 'opacity-0 pointer-events-none'
+                  }`}
+                  aria-hidden={!submitted}
+                >
+                  <div className="rounded-xl bg-green-500/20 border border-green-500/40 px-6 py-8 text-center">
+                    <p className="text-lg font-semibold text-green-300 mb-2">{tf('contact.successTitle')}</p>
+                    <p className="text-white/80">{t('contact.successMessage')}</p>
+                  </div>
                 </div>
-              ) : (
-                <>
+                <div
+                  className={`transition-opacity duration-500 ease-in-out ${
+                    submitted ? 'opacity-0 pointer-events-none' : 'opacity-100'
+                  }`}
+                  aria-hidden={submitted}
+                >
               <p className="text-lg text-white/70 leading-relaxed mb-8">{t('contact.readyDesc2')}</p>
 
               <form
@@ -292,8 +309,8 @@ export default function ContactPage() {
                   {t('contact.send')}
                 </button>
               </form>
-                </>
-              )}
+                </div>
+              </div>
             </div>
           </div>
 
