@@ -95,7 +95,7 @@ export default function ContactPage() {
                   Phone
                 </a>
                 <a
-                  href="https://wa.me/50686201212"
+                  href="https://api.whatsapp.com/send?phone=50686201212&text=Hello%20PlanB%20FX%2C%20let%27s%20talk%20%F0%9F%A4%96"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center px-8 py-4 rounded-full border-2 border-white/60 text-white font-semibold hover:bg-white/10 transition-all duration-300 ease-out hover:scale-[1.03] text-base"

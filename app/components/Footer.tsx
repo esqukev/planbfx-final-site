@@ -90,7 +90,7 @@ export default function Footer() {
                 </svg>
               </a>
               <a 
-                href="https://wa.me/"
+                href="https://api.whatsapp.com/send?phone=50686201212&text=Hello%20PlanB%20FX%2C%20let%27s%20talk%20%F0%9F%A4%96"
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-zinc-400 hover:text-white transition-colors cursor-pointer"
