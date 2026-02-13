@@ -127,24 +127,6 @@ export default function ContactPage() {
 
             <div id="contact-form" className="text-left scroll-mt-24">
               <h2 className="text-2xl md:text-3xl font-bold mb-6">{t('contact.readyTitle')}</h2>
-              <div className="relative min-h-[320px]">
-                <div
-                  className={`absolute inset-0 transition-opacity duration-500 ease-in-out ${
-                    submitted ? 'opacity-100' : 'opacity-0 pointer-events-none'
-                  }`}
-                  aria-hidden={!submitted}
-                >
-                  <div className="rounded-xl bg-green-500/20 border border-green-500/40 px-6 py-8 text-center">
-                    <p className="text-lg font-semibold text-green-300 mb-2">{tf('contact.successTitle')}</p>
-                    <p className="text-white/80">{t('contact.successMessage')}</p>
-                  </div>
-                </div>
-                <div
-                  className={`transition-opacity duration-500 ease-in-out ${
-                    submitted ? 'opacity-0 pointer-events-none' : 'opacity-100'
-                  }`}
-                  aria-hidden={submitted}
-                >
               <p className="text-lg text-white/70 leading-relaxed mb-8">{t('contact.readyDesc2')}</p>
 
               <form
@@ -156,17 +138,26 @@ export default function ContactPage() {
                   setSubmitError(null);
                   setSubmitting(true);
                   const form = e.currentTarget;
-                  const formData = new FormData(form);
-                  formData.append('_subject', 'New contact from PlanB FX website');
-                  formData.append('_captcha', 'false');
+                  const data = new FormData(form);
+                  const payload = {
+                    name: data.get('name'),
+                    company: data.get('company'),
+                    city: data.get('city'),
+                    country: data.get('country'),
+                    phone: data.get('phone'),
+                    email: data.get('email'),
+                    details: data.get('details'),
+                    _subject: 'New contact from PlanB FX website',
+                    _captcha: 'false',
+                  };
                   try {
-                    const res = await fetch('https://formsubmit.co/info@planb-fx.com', {
+                    const res = await fetch('https://formsubmit.co/ajax/info@planb-fx.com', {
                       method: 'POST',
-                      headers: { Accept: 'application/json' },
-                      body: formData,
+                      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+                      body: JSON.stringify(payload),
                     });
-                    const data = await res.json();
-                    if (data.success === 'true' || res.ok) {
+                    const json = (await res.json().catch(() => ({}))) as { success?: string };
+                    if (json.success === 'true' || res.ok) {
                       setSubmitted(true);
                       form.reset();
                     } else {
@@ -313,6 +304,12 @@ export default function ContactPage() {
                     </p>
                   )}
                 </div>
+                {submitted && (
+                  <div className="rounded-xl bg-green-500/20 border border-green-500/40 px-4 py-3 text-green-300 text-sm" role="status">
+                    <p className="font-semibold">{tf('contact.successTitle')}</p>
+                    <p className="text-white/80 mt-0.5">{t('contact.successMessage')}</p>
+                  </div>
+                )}
                 {submitError && (
                   <p className="text-sm text-red-400 rounded-lg bg-red-500/10 border border-red-500/20 px-4 py-2" role="alert">
                     {submitError}
@@ -326,8 +323,6 @@ export default function ContactPage() {
                   {submitting ? '...' : t('contact.send')}
                 </button>
               </form>
-                </div>
-              </div>
             </div>
           </div>
 
