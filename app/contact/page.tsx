@@ -138,26 +138,16 @@ export default function ContactPage() {
                   setSubmitError(null);
                   setSubmitting(true);
                   const form = e.currentTarget;
-                  const data = new FormData(form);
-                  const payload = {
-                    name: data.get('name'),
-                    company: data.get('company'),
-                    city: data.get('city'),
-                    country: data.get('country'),
-                    phone: data.get('phone'),
-                    email: data.get('email'),
-                    details: data.get('details'),
-                    _subject: 'New contact from PlanB FX website',
-                    _captcha: 'false',
-                  };
+                  const formData = new FormData(form);
+                  formData.append('_subject', 'New contact from PlanB FX website');
+                  formData.append('_captcha', 'false');
                   try {
-                    const res = await fetch('https://formsubmit.co/ajax/info@planb-fx.com', {
+                    const res = await fetch('/api/contact', {
                       method: 'POST',
-                      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-                      body: JSON.stringify(payload),
+                      body: formData,
                     });
-                    const json = (await res.json().catch(() => ({}))) as { success?: string };
-                    if (json.success === 'true' || res.ok) {
+                    const data = await res.json();
+                    if (data.success) {
                       setSubmitted(true);
                       form.reset();
                     } else {
