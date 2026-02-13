@@ -47,7 +47,7 @@ export default function ParallaxBannerWithImage({
       ([entry]) => {
         if (entry.isIntersecting) setIsVisible(true);
       },
-      { threshold: 0.2 }
+      { threshold: 0 }
     );
     observer.observe(el);
     return () => observer.unobserve(el);
@@ -97,7 +97,7 @@ export default function ParallaxBannerWithImage({
             style={{
               opacity: isVisible ? 1 : 0,
               transform: isVisible ? 'translateY(0)' : 'translateY(24px)',
-              transition: 'opacity 1200ms ease-out, transform 1200ms ease-out',
+              transition: 'opacity 600ms ease-out, transform 600ms ease-out',
             }}
           >
             <p

@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "PlanB FX",
-  description: "PlanB FX",
+  title: "PlanB FX | Interactive Art & Visual Experiences",
+  description: "PlanB FX creates immersive visual experiences through interactive art, smart coding, and AI-driven installations. Events, festivals, and brand activations.",
   icons: {
     icon: [
       { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
