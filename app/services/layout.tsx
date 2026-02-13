@@ -13,19 +13,15 @@ const products = [
 ];
 
 export const metadata: Metadata = {
-  title: 'Services',
-  description: 'PlanB FX services: Live Painting, Artificial Mirage, Audio Reactive Art, Interactive Branding, Logo Waterfall, Projection Mapping, Customized Experience. Custom Interactive Experiences for events and festivals.',
+  title: 'Servicios: Visuales en Vivo, VFX, Video Mapping | PlanB FX',
+  description: 'Servicios profesionales de PlanB FX: visuales en vivo para DJs y festivales, VJ loops, motion graphics, VFX, video mapping, contenido para pantallas LED y experiencias inmersivas para eventos y marcas. Dibujo en Vivo, Espejismo Artificial, Arte Audio Reactivo, Anuncios Interactivos, Cascada de Logos, Mapping y Control Visual Expresivo, Experiencia Personalizada.',
   keywords: [
     'Live Painting',
     'Artificial Mirage',
     'Audio Reactive Art',
     'Interactive Branding / Advertising',
-    'Interactive Branding',
-    'Advertising',
     'Logo Waterfall',
-    'Projection Mapping + Visual Control Performance',
     'Projection Mapping',
-    'Visual Control Performance',
     'Customized Experience',
     'Dibujo en Vivo',
     'Espejismo Artificial',
@@ -33,35 +29,47 @@ export const metadata: Metadata = {
     'Anuncios Interactivos',
     'Cascada de Logos',
     'Mapping y Control Visual Expresivo',
-    'Mapping',
-    'Control Visual Expresivo',
     'Experiencia Personalizada',
-    'Custom Interactive Experiences',
-    'Arte interactivo',
-    'Interactive Art',
-    'Experiencias Interactivas',
-    'Arte con IA',
-    'AI Art',
-    'Projection Art',
-    'House Music Visuals',
-    'Visuales para eventos',
-    'Proyecciones para eventos',
+    'visuales en vivo',
+    'VFX',
+    'video mapping',
+    'VJ loops',
+    'motion graphics',
+    'LED screen content',
     'PlanB FX services',
-    'interactive art Costa Rica',
-    'visual experiences events',
   ],
   openGraph: {
-    title: 'Services | PlanB FX',
-    description: 'Live Painting, Artificial Mirage, Audio Reactive Art, Interactive Branding, Logo Waterfall, Projection Mapping, Customized Experience. Custom Interactive Experiences.',
+    title: 'Servicios: Visuales en Vivo, VFX, Video Mapping | PlanB FX',
+    description: 'Servicios profesionales de PlanB FX: visuales en vivo para DJs y festivales, VJ loops, motion graphics, VFX, video mapping, contenido para pantallas LED y experiencias inmersivas para eventos y marcas.',
     url: `${SITE_URL}/services`,
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Services: Live Visuals, VFX, Video Mapping | PlanB FX',
+    description: 'PlanB FX services: live visuals for DJs and festivals, VJ loops, motion graphics, VFX, video mapping, LED screen content and immersive experiences for events and brands. Live Painting, Artificial Mirage, Audio Reactive Art, Interactive Branding / Advertising, Logo Waterfall, Projection Mapping + Visual Control Performance, Customized Experience.',
+  },
+  alternates: {
+    canonical: `${SITE_URL}/services`,
+  },
+};
+
+const organizationJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'PlanB FX',
+  url: SITE_URL,
+  description: 'VFX studio, live visuals for DJs and festivals, video mapping, motion graphics, interactive art and immersive experiences.',
+  areaServed: [
+    { '@type': 'Country', name: 'Costa Rica' },
+    { '@type': 'Place', name: 'Latin America' },
+  ],
 };
 
 const servicesJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
   name: 'PlanB FX Services',
-  description: 'Custom Interactive Experiences for events and festivals',
+  description: 'Live Visuals, VFX, Video Mapping, Motion Graphics, Interactive Art, Immersive Experiences for events and brands in Costa Rica and Latin America',
   itemListElement: products.map((p, i) => ({
     '@type': 'ListItem',
     position: i + 1,
@@ -84,6 +92,10 @@ export default function ServicesLayout({
 }) {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesJsonLd) }}

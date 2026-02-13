@@ -105,6 +105,24 @@ export default function ServicesPage() {
 
       <VideoHeroWithScroll videoUrl={SERVICES_VIDEO_URL} />
 
+      {/* SEO H1 + H2 section */}
+      <section className="relative bg-black px-4 py-12 md:py-16 lg:py-20">
+        <div className="max-w-7xl mx-auto">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white text-center mb-10 md:mb-14">
+            {t('services.seo.h1')}
+          </h1>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 text-center">
+            <h2 className="text-lg md:text-xl text-white/80 font-semibold">{t('services.seo.h2_1')}</h2>
+            <h2 className="text-lg md:text-xl text-white/80 font-semibold">{t('services.seo.h2_2')}</h2>
+            <h2 className="text-lg md:text-xl text-white/80 font-semibold">{t('services.seo.h2_3')}</h2>
+            <h2 className="text-lg md:text-xl text-white/80 font-semibold">{t('services.seo.h2_4')}</h2>
+            <h2 className="text-lg md:text-xl text-white/80 font-semibold">{t('services.seo.h2_5')}</h2>
+            <h2 className="text-lg md:text-xl text-white/80 font-semibold">{t('services.seo.h2_6')}</h2>
+            <h2 className="text-lg md:text-xl text-white/80 font-semibold sm:col-span-2 lg:col-span-3">{t('services.seo.h2_7')}</h2>
+          </div>
+        </div>
+      </section>
+
       <div className="relative bg-black">
         {PRODUCTS.map((product, index) => (
           <ProductSection
