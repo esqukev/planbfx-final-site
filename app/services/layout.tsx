@@ -14,7 +14,7 @@ const products = [
 
 export const metadata: Metadata = {
   title: { absolute: 'PlanB FX' },
-  description: 'Servicios profesionales de PlanB FX: visuales en vivo para DJs y festivales, VJ loops, motion graphics, VFX, video mapping, contenido para pantallas LED y experiencias inmersivas para eventos y marcas. Dibujo en Vivo, Espejismo Artificial, Arte Audio Reactivo, Anuncios Interactivos, Cascada de Logos, Mapping y Control Visual Expresivo, Experiencia Personalizada.',
+  description: 'PlanB FX services: live visuals for DJs and festivals, VJ loops, motion graphics, VFX, video mapping, LED screen content and immersive experiences for events and brands. Live Painting, Artificial Mirage, Audio Reactive Art, Interactive Branding / Advertising, Logo Waterfall, Projection Mapping + Visual Control Performance, Customized Experience.',
   keywords: [
     'Live Painting',
     'Artificial Mirage',
@@ -39,8 +39,8 @@ export const metadata: Metadata = {
     'PlanB FX services',
   ],
   openGraph: {
-    title: 'Servicios: Visuales en Vivo, VFX, Video Mapping | PlanB FX',
-    description: 'Servicios profesionales de PlanB FX: visuales en vivo para DJs y festivales, VJ loops, motion graphics, VFX, video mapping, contenido para pantallas LED y experiencias inmersivas para eventos y marcas.',
+    title: 'Services: Live Visuals, VFX, Video Mapping | PlanB FX',
+    description: 'PlanB FX services: live visuals for DJs and festivals, VJ loops, motion graphics, VFX, video mapping, LED screen content and immersive experiences for events and brands. Live Painting, Artificial Mirage, Audio Reactive Art, Interactive Branding / Advertising, Logo Waterfall, Projection Mapping + Visual Control Performance, Customized Experience.',
     url: `${SITE_URL}/services`,
   },
   twitter: {
