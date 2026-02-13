@@ -100,12 +100,11 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     };
   }, []);
 
-  // Al cargar o cambiar de ruta: scroll a top (excepto cuando hay #contact-form o ?submitted=1)
+  // Al cargar o cambiar de ruta: scroll a top (excepto cuando hay #contact-form)
   useEffect(() => {
     if (typeof window === 'undefined') return;
     const hash = window.location.hash;
-    const hasSubmitted = window.location.search.includes('submitted=1');
-    if (hash === '#contact-form' || hasSubmitted) return;
+    if (hash === '#contact-form') return;
 
     window.history.scrollRestoration = 'manual';
 

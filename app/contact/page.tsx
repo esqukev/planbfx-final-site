@@ -17,20 +17,13 @@ const FAQ_ITEMS = [
   { questionKey: 'contact.faq5q', answerKey: 'contact.faq5a' },
 ];
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://planb-fx.com';
-
 export default function ContactPage() {
   const { t, tf } = useLanguage();
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
-
-  useEffect(() => {
-    if (typeof window !== 'undefined' && window.location.search.includes('submitted=1')) {
-      setSubmitted(true);
-      window.history.replaceState({}, '', '/contact');
-    }
-  }, []);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!submitted) return;
@@ -156,18 +149,36 @@ export default function ContactPage() {
 
               <form
                 noValidate
-                action="https://formsubmit.co/info@planb-fx.com"
-                method="POST"
                 className="space-y-6"
-                onSubmit={(e) => {
-                  if (!validate(e.currentTarget)) {
-                    e.preventDefault();
+                onSubmit={async (e) => {
+                  e.preventDefault();
+                  if (!validate(e.currentTarget)) return;
+                  setSubmitError(null);
+                  setSubmitting(true);
+                  const form = e.currentTarget;
+                  const formData = new FormData(form);
+                  formData.append('_subject', 'New contact from PlanB FX website');
+                  formData.append('_captcha', 'false');
+                  try {
+                    const res = await fetch('https://formsubmit.co/info@planb-fx.com', {
+                      method: 'POST',
+                      headers: { Accept: 'application/json' },
+                      body: formData,
+                    });
+                    const data = await res.json();
+                    if (data.success === 'true' || res.ok) {
+                      setSubmitted(true);
+                      form.reset();
+                    } else {
+                      setSubmitError(t('contact.submitError'));
+                    }
+                  } catch {
+                    setSubmitError(t('contact.submitError'));
+                  } finally {
+                    setSubmitting(false);
                   }
                 }}
               >
-                <input type="hidden" name="_subject" value="New contact from PlanB FX website" />
-                <input type="hidden" name="_captcha" value="false" />
-                <input type="hidden" name="_next" value={`${SITE_URL}/contact?submitted=1#contact-form`} />
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-white/80 mb-2">
                     {t('contact.name')}
@@ -302,11 +313,17 @@ export default function ContactPage() {
                     </p>
                   )}
                 </div>
+                {submitError && (
+                  <p className="text-sm text-red-400 rounded-lg bg-red-500/10 border border-red-500/20 px-4 py-2" role="alert">
+                    {submitError}
+                  </p>
+                )}
                 <button
                   type="submit"
-                  className="w-full md:w-auto inline-flex items-center justify-center px-8 py-4 rounded-full border-2 border-white/60 text-white font-semibold hover:bg-white/10 transition-all duration-300 ease-out hover:scale-[1.03] text-base"
+                  disabled={submitting}
+                  className="w-full md:w-auto inline-flex items-center justify-center px-8 py-4 rounded-full border-2 border-white/60 text-white font-semibold hover:bg-white/10 transition-all duration-300 ease-out hover:scale-[1.03] text-base disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100"
                 >
-                  {t('contact.send')}
+                  {submitting ? '...' : t('contact.send')}
                 </button>
               </form>
                 </div>
