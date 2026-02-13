@@ -187,7 +187,8 @@ export default function ContactPage() {
                   setTimeout(finish, 2500);
                 }}
               >
-                <input type="hidden" name="_subject" value="New contact from PlanB FX website" />
+                <input type="hidden" name="_subject" value="Form contact" />
+                <input type="hidden" name="form" value="PlanB FX" />
                 <input type="hidden" name="_captcha" value="false" />
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-white/80 mb-2">
