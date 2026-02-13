@@ -39,9 +39,10 @@ export async function POST(request: NextRequest) {
   const toEmail = process.env.SMTP_TO || 'info@planb-fx.com';
 
   if (!host || !user || !pass) {
+    console.error('[contact] SMTP not configured: SMTP_HOST, SMTP_USER, SMTP_PASS required');
     return NextResponse.json(
-      { success: false, error: 'SMTP not configured (SMTP_HOST, SMTP_USER, SMTP_PASS)' },
-      { status: 500 }
+      { success: false, error: 'Email service not configured' },
+      { status: 503 }
     );
   }
 
@@ -57,6 +58,8 @@ export async function POST(request: NextRequest) {
       port,
       secure: port === 465,
       auth: { user, pass },
+      connectionTimeout: 10000,
+      greetingTimeout: 5000,
     });
 
     await transporter.sendMail({
@@ -69,6 +72,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ success: true });
   } catch (e) {
+    console.error('[contact] SMTP error:', e);
     return NextResponse.json({ success: false }, { status: 500 });
   }
 }

@@ -9,6 +9,14 @@ import ImageHero from '../components/ImageHero';
 import HyperSpaceBackground from '../components/HyperSpaceBackground';
 import { useLanguage } from '../context/LanguageContext';
 
+function createHidden(name: string, value: string): HTMLInputElement {
+  const el = document.createElement('input');
+  el.type = 'hidden';
+  el.name = name;
+  el.value = value;
+  return el;
+}
+
 const FAQ_ITEMS = [
   { questionKey: 'contact.faq1q', answerKey: 'contact.faq1a' },
   { questionKey: 'contact.faq2q', answerKey: 'contact.faq2a' },
@@ -157,15 +165,11 @@ export default function ContactPage() {
                   setSubmitError(null);
                   setSubmitting(true);
                   const form = e.currentTarget;
-                  try {
-                    const formData = new FormData(form);
-                    const res = await fetch('/api/contact', { method: 'POST', body: formData });
-                    const json = await res.json().catch(() => ({}));
-                    if (!res.ok || !json.success) {
-                      setSubmitError(t('contact.submitError'));
-                      setSubmitting(false);
-                      return;
-                    }
+                  const formData = new FormData(form);
+                  let done = false;
+                  const finish = () => {
+                    if (done) return;
+                    done = true;
                     setSubmitted(true);
                     setSubmitting(false);
                     setTimeout(() => {
@@ -175,6 +179,39 @@ export default function ContactPage() {
                         setFormResetting(false);
                       }, 280);
                     }, 400);
+                  };
+                  try {
+                    const res = await fetch('/api/contact', { method: 'POST', body: formData });
+                    const json = await res.json().catch(() => ({}));
+                    if (res.ok && json.success) {
+                      finish();
+                      return;
+                    }
+                    // Fallback: Formsubmit cuando SMTP no está configurado (ej. Vercel bloquea SMTP)
+                    const fallbackForm = document.createElement('form');
+                    fallbackForm.action = 'https://formsubmit.co/info@planb-fx.com';
+                    fallbackForm.method = 'POST';
+                    fallbackForm.target = 'formsubmit-fallback';
+                    fallbackForm.style.display = 'none';
+                    const fields = ['name', 'company', 'city', 'country', 'phone', 'email', 'details'];
+                    fallbackForm.appendChild(createHidden('_subject', 'Form contact'));
+                    fallbackForm.appendChild(createHidden('_captcha', 'false'));
+                    fields.forEach((k) => {
+                      const v = formData.get(k);
+                      if (v) fallbackForm.appendChild(createHidden(k, String(v)));
+                    });
+                    let iframe = document.getElementById('formsubmit-fallback') as HTMLIFrameElement;
+                    if (!iframe) {
+                      iframe = document.createElement('iframe');
+                      iframe.id = iframe.name = 'formsubmit-fallback';
+                      iframe.style.cssText = 'position:absolute;width:0;height:0;border:0';
+                      document.body.appendChild(iframe);
+                    }
+                    iframe.onload = finish;
+                    document.body.appendChild(fallbackForm);
+                    fallbackForm.submit();
+                    fallbackForm.remove();
+                    setTimeout(finish, 2500);
                   } catch {
                     setSubmitError(t('contact.submitError'));
                     setSubmitting(false);
