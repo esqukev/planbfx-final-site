@@ -13,7 +13,7 @@ const products = [
 ];
 
 export const metadata: Metadata = {
-  title: 'Servicios: Visuales en Vivo, VFX, Video Mapping | PlanB FX',
+  title: { absolute: 'PlanB FX' },
   description: 'Servicios profesionales de PlanB FX: visuales en vivo para DJs y festivales, VJ loops, motion graphics, VFX, video mapping, contenido para pantallas LED y experiencias inmersivas para eventos y marcas. Dibujo en Vivo, Espejismo Artificial, Arte Audio Reactivo, Anuncios Interactivos, Cascada de Logos, Mapping y Control Visual Expresivo, Experiencia Personalizada.',
   keywords: [
     'Live Painting',

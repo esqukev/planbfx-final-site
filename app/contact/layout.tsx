@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://planb-fx.com';
 
 export const metadata: Metadata = {
-  title: 'Contacto: Cotiza Experiencias Interactivas | PlanB FX',
+  title: { absolute: 'PlanB FX' },
   description: 'Contacta a PlanB FX para cotizar visuales en vivo, VFX, motion graphics, video mapping y producción audiovisual para eventos de música electrónica, marcas y corporativos en Costa Rica y LATAM.',
   keywords: ['PlanB FX contact', 'cotizar visuales', 'VFX Costa Rica', 'video mapping', 'eventos corporativos'],
   openGraph: {

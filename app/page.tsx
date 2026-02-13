@@ -4,7 +4,7 @@ import HomePage from './components/HomePage';
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://planb-fx.com';
 
 export const metadata: Metadata = {
-  title: { absolute: 'PlanB FX | Experiencias Interactivas en Costa Rica' },
+  title: { absolute: 'PlanB FX' },
   description: 'PlanB FX crea visuales en vivo, VFX cinematográficos, motion graphics, video mapping y experiencias inmersivas para eventos de música electrónica, festivales, eventos corporativos y marcas en Costa Rica y Latinoamérica.',
   openGraph: {
     title: 'PlanB FX | Experiencias Interactivas en Costa Rica',
