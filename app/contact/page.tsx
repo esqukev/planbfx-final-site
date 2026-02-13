@@ -129,37 +129,41 @@ export default function ContactPage() {
               <h2 className="text-2xl md:text-3xl font-bold mb-6">{t('contact.readyTitle')}</h2>
               <p className="text-lg text-white/70 leading-relaxed mb-8">{t('contact.readyDesc2')}</p>
 
+              <iframe
+                name="formsubmit-frame"
+                id="formsubmit-frame"
+                title="Form submit"
+                className="hidden w-0 h-0 border-0"
+              />
               <form
                 noValidate
+                action="https://formsubmit.co/info@planb-fx.com"
+                method="POST"
+                target="formsubmit-frame"
                 className="space-y-6"
-                onSubmit={async (e) => {
-                  e.preventDefault();
-                  if (!validate(e.currentTarget)) return;
+                onSubmit={(e) => {
+                  if (!validate(e.currentTarget)) {
+                    e.preventDefault();
+                    return;
+                  }
                   setSubmitError(null);
                   setSubmitting(true);
                   const form = e.currentTarget;
-                  const formData = new FormData(form);
-                  formData.append('_subject', 'New contact from PlanB FX website');
-                  formData.append('_captcha', 'false');
-                  try {
-                    const res = await fetch('/api/contact', {
-                      method: 'POST',
-                      body: formData,
-                    });
-                    const data = await res.json();
-                    if (data.success) {
-                      setSubmitted(true);
-                      form.reset();
-                    } else {
-                      setSubmitError(t('contact.submitError'));
-                    }
-                  } catch {
-                    setSubmitError(t('contact.submitError'));
-                  } finally {
+                  let done = false;
+                  const finish = () => {
+                    if (done) return;
+                    done = true;
+                    setSubmitted(true);
+                    form.reset();
                     setSubmitting(false);
-                  }
+                  };
+                  const iframe = document.getElementById('formsubmit-frame') as HTMLIFrameElement;
+                  if (iframe) iframe.onload = finish;
+                  setTimeout(finish, 2500);
                 }}
               >
+                <input type="hidden" name="_subject" value="New contact from PlanB FX website" />
+                <input type="hidden" name="_captcha" value="false" />
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-white/80 mb-2">
                     {t('contact.name')}
