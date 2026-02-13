@@ -1,21 +1,23 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import Hero from './Hero';
 import ContentSection from './ContentSection';
-import ProjectGrid from './ProjectGrid';
 import Navigation from './Navigation';
 import Footer from './Footer';
-import PointCloudVisual from './PointCloudVisual';
-import HyperSpaceBackground from './HyperSpaceBackground';
-import ScrollTextEffect from './ScrollTextEffect';
-import FadeInFromRight from './FadeInFromRight';
-import HomeCTABanner from './HomeCTABanner';
-import FadeInOnScroll from './FadeInOnScroll';
+const PointCloudVisual = dynamic(() => import('./PointCloudVisual'), { ssr: false });
 import VideoHero from './VideoHero';
-import ParallaxBanner from './ParallaxBanner';
-import ParallaxBannerWithImage from './ParallaxBannerWithImage';
 import ParallaxLink from './ParallaxLink';
 import { useLanguage } from '../context/LanguageContext';
+
+const ProjectGrid = dynamic(() => import('./ProjectGrid'), { ssr: false });
+const HomeCTABanner = dynamic(() => import('./HomeCTABanner'), { ssr: false });
+const ParallaxBanner = dynamic(() => import('./ParallaxBanner'), { ssr: false });
+const ParallaxBannerWithImage = dynamic(() => import('./ParallaxBannerWithImage'), { ssr: false });
+const HyperSpaceBackground = dynamic(() => import('./HyperSpaceBackground'), { ssr: false });
+const ScrollTextEffect = dynamic(() => import('./ScrollTextEffect'), { ssr: false });
+const FadeInFromRight = dynamic(() => import('./FadeInFromRight'), { ssr: false });
+const FadeInOnScroll = dynamic(() => import('./FadeInOnScroll'), { ssr: false });
 
 export default function HomePage() {
   const { t, tf } = useLanguage();

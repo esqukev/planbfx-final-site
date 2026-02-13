@@ -1,7 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  experimental: {
+    optimizePackageImports: ['@react-three/fiber', '@react-three/drei', 'gsap'],
+  },
   // Asegurar que los videos se sirvan correctamente
   async headers() {
     return [
