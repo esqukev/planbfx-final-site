@@ -17,10 +17,20 @@ const FAQ_ITEMS = [
   { questionKey: 'contact.faq5q', answerKey: 'contact.faq5a' },
 ];
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://planb-fx.com';
+
 export default function ContactPage() {
   const { t, tf } = useLanguage();
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
+  const [submitted, setSubmitted] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.location.search.includes('submitted=1')) {
+      setSubmitted(true);
+      window.history.replaceState({}, '', '/contact');
+    }
+  }, []);
 
   const clearError = (field: string) => {
     setFormErrors((prev) => {
@@ -118,16 +128,29 @@ export default function ContactPage() {
 
             <div id="contact-form" className="text-left scroll-mt-24">
               <h2 className="text-2xl md:text-3xl font-bold mb-6">{t('contact.readyTitle')}</h2>
+              {submitted ? (
+                <div className="rounded-xl bg-green-500/20 border border-green-500/40 px-6 py-8 text-center">
+                  <p className="text-lg font-semibold text-green-300 mb-2">{t('contact.successTitle')}</p>
+                  <p className="text-white/80">{t('contact.successMessage')}</p>
+                </div>
+              ) : (
+                <>
               <p className="text-lg text-white/70 leading-relaxed mb-8">{t('contact.readyDesc2')}</p>
 
               <form
                 noValidate
+                action="https://formsubmit.co/info@planb-fx.com"
+                method="POST"
                 className="space-y-6"
                 onSubmit={(e) => {
-                  e.preventDefault();
-                  validate(e.currentTarget);
+                  if (!validate(e.currentTarget)) {
+                    e.preventDefault();
+                  }
                 }}
               >
+                <input type="hidden" name="_subject" value="New contact from PlanB FX website" />
+                <input type="hidden" name="_captcha" value="false" />
+                <input type="hidden" name="_next" value={`${SITE_URL}/contact?submitted=1`} />
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-white/80 mb-2">
                     {t('contact.name')}
@@ -269,6 +292,8 @@ export default function ContactPage() {
                   {t('contact.send')}
                 </button>
               </form>
+                </>
+              )}
             </div>
           </div>
 
