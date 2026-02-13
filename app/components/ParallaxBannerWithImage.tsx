@@ -55,11 +55,13 @@ export default function ParallaxBannerWithImage({
 
   useEffect(() => {
     if (!rotatingTitle || rotatingTitle.words.length === 0) return;
+    if (!isVisible) return;
+    setWordIndex(0);
     const id = setInterval(() => {
       setWordIndex((i) => (i + 1) % rotatingTitle.words.length);
     }, WORD_SPIN_INTERVAL_MS);
     return () => clearInterval(id);
-  }, [rotatingTitle]);
+  }, [rotatingTitle, isVisible]);
 
   const currentWord = rotatingTitle?.words[wordIndex] ?? '';
 
