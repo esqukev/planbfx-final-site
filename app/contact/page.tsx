@@ -34,7 +34,7 @@ export default function ContactPage() {
 
   useEffect(() => {
     if (!submitted) return;
-    const t = setTimeout(() => setSubmitted(false), 3000);
+    const t = setTimeout(() => setSubmitted(false), 5000);
     return () => clearTimeout(t);
   }, [submitted]);
 
@@ -167,7 +167,7 @@ export default function ContactPage() {
               >
                 <input type="hidden" name="_subject" value="New contact from PlanB FX website" />
                 <input type="hidden" name="_captcha" value="false" />
-                <input type="hidden" name="_next" value={`${SITE_URL}/contact?submitted=1`} />
+                <input type="hidden" name="_next" value={`${SITE_URL}/contact?submitted=1#contact-form`} />
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-white/80 mb-2">
                     {t('contact.name')}
