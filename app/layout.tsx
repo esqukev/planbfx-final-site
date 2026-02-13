@@ -14,9 +14,50 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://planb-fx.com';
+
 export const metadata: Metadata = {
-  title: "PlanB FX | Interactive Art & Visual Experiences",
-  description: "PlanB FX creates immersive visual experiences through interactive art, smart coding, and AI-driven installations. Events, festivals, and brand activations.",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: 'PlanB FX',
+    template: '%s | PlanB FX',
+  },
+  description: 'Custom Interactive Experiences',
+  keywords: [
+    'PlanB FX',
+    'planbfx',
+    'planb-fx',
+    'plan b fx',
+    'Plan B',
+    'plan b',
+    'interactive art',
+    'visual experiences',
+    'Live Painting',
+    'Artificial Mirage',
+    'Audio Reactive Art',
+    'Interactive Branding',
+    'Logo Waterfall',
+    'Projection Mapping',
+    'Customized Experience',
+    'Costa Rica',
+    'events',
+    'festivals',
+  ],
+  openGraph: {
+    title: 'PlanB FX',
+    description: 'Custom Interactive Experiences',
+    type: 'website',
+    locale: 'en_US',
+    alternateLocale: 'es_ES',
+    url: SITE_URL,
+  },
+  twitter: {
+    card: 'summary_large_image',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
   icons: {
     icon: [
       { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
@@ -30,6 +71,22 @@ export const metadata: Metadata = {
   manifest: "/site.webmanifest",
 };
 
+const organizationJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'PlanB FX',
+  alternateName: ['planbfx', 'planb-fx', 'Plan B FX', 'Plan B'],
+  url: SITE_URL,
+  description: 'Custom Interactive Experiences. Interactive art, visual experiences, and immersive installations for events and festivals.',
+  email: 'info@planb-fx.com',
+  sameAs: ['https://www.instagram.com/planb_fx/'],
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'San José',
+    addressCountry: 'CR',
+  },
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -40,6 +97,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-[100dvh] w-full m-0 p-0 bg-black overflow-x-hidden`}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
         <LanguageProvider>
           <SmoothScroll>{children}</SmoothScroll>
         </LanguageProvider>
