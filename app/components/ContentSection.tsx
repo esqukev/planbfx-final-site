@@ -79,7 +79,7 @@ export default function ContentSection({
                 {subtitle}
               </span>
             )}
-            <h2 className={`text-[3.3rem] md:text-[4.4rem] font-bold mb-6 ${isDarkSection ? 'text-white' : 'text-black dark:text-white'} leading-tight transition-all duration-1000 delay-100 ${
+            <h2 className={`text-[2.97rem] md:text-[3.96rem] font-bold mb-6 ${isDarkSection ? 'text-white' : 'text-black dark:text-white'} leading-tight transition-all duration-1000 delay-100 ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}>
               {title}
