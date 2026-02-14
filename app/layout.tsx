@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     default: 'PlanB FX',
     template: '%s | PlanB FX',
   },
-  description: 'Custom Interactive Experiences',
+  description: 'PlanB FX creates live visuals, cinematic VFX, motion graphics, video mapping and immersive experiences for electronic music events, festivals, corporate events and brands across Costa Rica and Latin America.',
   keywords: [
     'PlanB FX',
     'planbfx',
@@ -250,7 +250,7 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     title: 'PlanB FX',
-    description: 'Custom Interactive Experiences',
+    description: 'PlanB FX creates live visuals, cinematic VFX, motion graphics, video mapping and immersive experiences for electronic music events, festivals, corporate events and brands across Costa Rica and Latin America.',
     type: 'website',
     locale: 'en_US',
     alternateLocale: 'es_ES',
@@ -303,7 +303,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es">
+    <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-[100dvh] w-full m-0 p-0 bg-black overflow-x-hidden`}
       >
