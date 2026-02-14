@@ -294,7 +294,7 @@ export default function ContactPage() {
                     name="email"
                     type="email"
                     className={`${inputBase} ${formErrors.email ? inputError : 'border-white/20'}`}
-                    placeholder="you@example.com"
+                    placeholder={t('contact.emailPlaceholder')}
                     onBlur={() => clearError('email')}
                     onChange={() => clearError('email')}
                   />
