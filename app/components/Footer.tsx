@@ -68,7 +68,7 @@ export default function Footer() {
                   href="tel:+50688852057"
                   className="text-zinc-400 hover:text-white transition-colors cursor-pointer"
                 >
-                  Phone: <span className="font-fallback">+506 8885 2057</span>
+                  Phone: <span className="font-fallback">+506 88852057</span>
                 </a>
               </li>
               <li>
@@ -76,7 +76,7 @@ export default function Footer() {
                   href="tel:+50686201212"
                   className="text-zinc-400 hover:text-white transition-colors cursor-pointer"
                 >
-                  Phone: <span className="font-fallback">+506 8620 1212</span>
+                  Phone: <span className="font-fallback">+506 86201212</span>
                 </a>
               </li>
             </ul>
