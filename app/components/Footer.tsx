@@ -64,20 +64,9 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a
-                  href="tel:+50688852057"
-                  className="text-zinc-400 hover:text-white transition-colors cursor-pointer"
-                >
-                  Phone: <span className="font-fallback">+506 88852057</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="tel:+50686201212"
-                  className="text-zinc-400 hover:text-white transition-colors cursor-pointer"
-                >
-                  Phone: <span className="font-fallback">+506 86201212</span>
-                </a>
+                Phone: <a href="tel:+50688852057" className="text-zinc-400 hover:text-white transition-colors cursor-pointer"><span className="font-fallback">+506 88852057</span></a>
+                {' / '}
+                <a href="tel:+50686201212" className="text-zinc-400 hover:text-white transition-colors cursor-pointer"><span className="font-fallback">+506 86201212</span></a>
               </li>
             </ul>
             <div className="flex gap-4 mt-6 items-center">
