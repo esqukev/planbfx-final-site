@@ -65,6 +65,14 @@ export default function Footer() {
               </li>
               <li>
                 <a
+                  href="tel:+50688852057"
+                  className="text-zinc-400 hover:text-white transition-colors cursor-pointer"
+                >
+                  Phone: <span className="font-fallback">+506 8885 2057</span>
+                </a>
+              </li>
+              <li>
+                <a
                   href="tel:+50686201212"
                   className="text-zinc-400 hover:text-white transition-colors cursor-pointer"
                 >
@@ -90,7 +98,7 @@ export default function Footer() {
                 </svg>
               </a>
               <a 
-                href="https://api.whatsapp.com/send?phone=50686201212&text=Hello%20PlanB%20FX%2C%20let%27s%20talk%20%F0%9F%A4%96"
+                href="https://api.whatsapp.com/send?phone=50688852057&text=Hello%20PlanB%20FX%2C%20let%27s%20talk%20%F0%9F%A4%96"
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-zinc-400 hover:text-white transition-colors cursor-pointer"
