@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import MuxPlayer, { getMuxPlaybackId } from './MuxPlayer';
 
 type VideoHeroWithScrollProps = {
   videoUrl: string;
@@ -32,12 +33,11 @@ export default function VideoHeroWithScroll({ videoUrl }: VideoHeroWithScrollPro
     >
       <div className="absolute inset-0 z-10">
         {videoUrl.includes('player.mux.com') ? (
-          <iframe
-            src={videoUrl}
+          <MuxPlayer
+            playbackId={getMuxPlaybackId(videoUrl)!}
             className="absolute inset-0 w-full h-full min-w-full min-h-full"
-            style={{ border: 'none', objectFit: 'cover' }}
-            allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
-            allowFullScreen
+            objectFit="cover"
+            fillViewport
           />
         ) : (
           <video

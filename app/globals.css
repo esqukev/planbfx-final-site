@@ -73,6 +73,37 @@ body {
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
 }
 
+/* Mux Player - hide all controls, no play button, no progress bar */
+mux-player {
+  --controls: none !important;
+  --center-controls: none !important;
+  --play-button: none !important;
+  --loading-indicator: none !important;
+  --dialog: none !important;
+  --time-range: none !important;
+  --seek-backward-button: none !important;
+  --seek-forward-button: none !important;
+  --mute-button: none !important;
+  --captions-button: none !important;
+  --airplay-button: none !important;
+  --pip-button: none !important;
+  --fullscreen-button: none !important;
+  --cast-button: none !important;
+  --playback-rate-button: none !important;
+  --volume-range: none !important;
+  --time-display: none !important;
+  --duration-display: none !important;
+  --rendition-menu-button: none !important;
+}
+/* Hide via CSS parts as fallback */
+mux-player::part(center),
+mux-player::part(bottom),
+mux-player::part(top),
+mux-player::part(play),
+mux-player::part(button) {
+  display: none !important;
+}
+
 /* Animations */
 @keyframes scroll-left {
   0% {

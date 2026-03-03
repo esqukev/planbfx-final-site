@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
+import MuxPlayer, { getMuxPlaybackId } from './MuxPlayer';
 
 interface VideoHeroProps {
   videoUrl: string;
@@ -95,25 +96,11 @@ export default function VideoHero({ videoUrl }: VideoHeroProps) {
       }}
     >
       {videoUrl.includes('player.mux.com') ? (
-        <iframe
-          src={videoUrl}
+        <MuxPlayer
+          playbackId={getMuxPlaybackId(videoUrl)!}
           className="pointer-events-none absolute inset-0 w-full min-w-full min-h-full"
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: viewportHeight > 0 ? `${viewportHeight}px` : '100vh',
-            minWidth: '100%',
-            minHeight: viewportHeight > 0 ? `${viewportHeight}px` : '100vh',
-            objectFit: 'cover',
-            objectPosition: 'center center',
-            margin: 0,
-            padding: 0,
-            border: 'none'
-          }}
-          allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
-          allowFullScreen
+          objectFit="cover"
+          fillViewport
         />
       ) : (
         <video
