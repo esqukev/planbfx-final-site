@@ -20,7 +20,7 @@ const PRODUCTS: Array<{
   videoUrl?: string;
 }> = [
   { id: 'live-painting', titleKey: 'services.livePainting.title', descKey: 'services.livePainting.description', videoUrl: 'https://res.cloudinary.com/dpplgma25/video/upload/v1770746569/Live_painting_PB_FX_vosurw.mp4' },
-  { id: 'artificial-mirage', titleKey: 'services.artificialMirage.title', descKey: 'services.artificialMirage.description', videoUrl: 'https://player.mux.com/rR8P8mSaKDzz02TsftugTUdI00cQPJX00oy?metadata-video-title=Test+Video&video-title=Test+Video' },
+  { id: 'artificial-mirage', titleKey: 'services.artificialMirage.title', descKey: 'services.artificialMirage.description', videoUrl: 'https://player.mux.com/5xmVk005LJVjdokXO8prxqwb2Be62qutfv4qf01o3gH2o?metadata-video-title=egypt&video-title=egypt&autoplay=1&muted=1' },
   { id: 'audio-reactive-art', titleKey: 'services.audioReactive.title', descKey: 'services.audioReactive.description', videoUrl: 'https://res.cloudinary.com/dpplgma25/video/upload/v1770748182/Audio_Reactive_Cymatics_zzo9sg.mp4' },
   { id: 'interactive-branding', titleKey: 'services.interactiveBranding.title', descKey: 'services.interactiveBranding.description', videoUrl: 'https://res.cloudinary.com/dpplgma25/video/upload/v1770338141/CYRIX_jcsd8k.mp4' },
   { id: 'logo-waterfall', titleKey: 'services.logoWaterfall.title', descKey: 'services.logoWaterfall.description', videoUrl: 'https://res.cloudinary.com/dpplgma25/video/upload/v1770746759/logo_rain_tyohaa.mp4' },
