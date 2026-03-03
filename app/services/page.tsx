@@ -23,7 +23,7 @@ const PRODUCTS: Array<{
   { id: 'artificial-mirage', titleKey: 'services.artificialMirage.title', descKey: 'services.artificialMirage.description', videoUrl: 'https://stream.mux.com/5xmVk005LJVjdokXO8prxqwb2Be62qutfv4qf01o3gH2o.m3u8' },
   { id: 'audio-reactive-art', titleKey: 'services.audioReactive.title', descKey: 'services.audioReactive.description', videoUrl: 'https://stream.mux.com/Q4jWgXitCvHmOSqK1fw7C02CrGIJJQAi5UO3dU28ot6Q.m3u8' },
   { id: 'interactive-branding', titleKey: 'services.interactiveBranding.title', descKey: 'services.interactiveBranding.description', videoUrl: 'https://stream.mux.com/lUfhg3dB8H5tkvhQo2uZnnm6YQtW00r01mFjbYjIQTur4.m3u8' },
-  { id: 'logo-waterfall', titleKey: 'services.logoWaterfall.title', descKey: 'services.logoWaterfall.description', videoUrl: 'https://res.cloudinary.com/dpplgma25/video/upload/v1770746759/logo_rain_tyohaa.mp4' },
+  { id: 'logo-waterfall', titleKey: 'services.logoWaterfall.title', descKey: 'services.logoWaterfall.description', videoUrl: 'https://stream.mux.com/013acMdndgiE20096ONFsBMlYNkkZBrkuoPODmSTQgvwg.m3u8' },
   { id: 'projection-mapping', titleKey: 'services.projectionMapping.title', descKey: 'services.projectionMapping.description', videoUrl: 'https://stream.mux.com/lXLqZRpm5mnuUy702dM00bJYtjhBLuqL4cmqyQc2hYw01Q.m3u8' },
   { id: 'customized-experience', titleKey: 'services.customizedExperience.title', descKey: 'services.customizedExperience.description', videoUrl: 'https://stream.mux.com/mF9PhpjvXu7mOk3MaOr2Ye9Dm2hDONde3sf7Hfini7o.m3u8' },
 ];
