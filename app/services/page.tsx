@@ -11,7 +11,8 @@ import { useLanguage } from '../context/LanguageContext';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const SERVICES_VIDEO_URL = 'https://res.cloudinary.com/dpplgma25/video/upload/v1769796195/beyerrandom_lk0ov5.mp4';
+const MUX_PARAMS = 'autoplay=muted&muted=true&controls=false&loop=true';
+const SERVICES_VIDEO_URL = `https://player.mux.com/lKnmpOTSed5Kpw01k1mi9ldLt00A7Bsvt3ZMdy41003q6Y?${MUX_PARAMS}`;
 
 const PRODUCTS: Array<{
   id: string;
@@ -19,13 +20,13 @@ const PRODUCTS: Array<{
   descKey: string;
   videoUrl?: string;
 }> = [
-  { id: 'live-painting', titleKey: 'services.livePainting.title', descKey: 'services.livePainting.description', videoUrl: 'https://res.cloudinary.com/dpplgma25/video/upload/v1770746569/Live_painting_PB_FX_vosurw.mp4' },
-  { id: 'artificial-mirage', titleKey: 'services.artificialMirage.title', descKey: 'services.artificialMirage.description', videoUrl: 'https://player.mux.com/5xmVk005LJVjdokXO8prxqwb2Be62qutfv4qf01o3gH2o?metadata-video-title=egypt&video-title=egypt&autoplay=1&muted=1' },
-  { id: 'audio-reactive-art', titleKey: 'services.audioReactive.title', descKey: 'services.audioReactive.description', videoUrl: 'https://res.cloudinary.com/dpplgma25/video/upload/v1770748182/Audio_Reactive_Cymatics_zzo9sg.mp4' },
-  { id: 'interactive-branding', titleKey: 'services.interactiveBranding.title', descKey: 'services.interactiveBranding.description', videoUrl: 'https://res.cloudinary.com/dpplgma25/video/upload/v1770338141/CYRIX_jcsd8k.mp4' },
-  { id: 'logo-waterfall', titleKey: 'services.logoWaterfall.title', descKey: 'services.logoWaterfall.description', videoUrl: 'https://res.cloudinary.com/dpplgma25/video/upload/v1770746759/logo_rain_tyohaa.mp4' },
-  { id: 'projection-mapping', titleKey: 'services.projectionMapping.title', descKey: 'services.projectionMapping.description', videoUrl: 'https://res.cloudinary.com/dpplgma25/video/upload/v1770338660/IMG_3202_k8sfmw.mp4' },
-  { id: 'customized-experience', titleKey: 'services.customizedExperience.title', descKey: 'services.customizedExperience.description', videoUrl: 'https://res.cloudinary.com/dpplgma25/video/upload/v1770746128/Custom_Experience_clip_xgf2i6.mp4' },
+  { id: 'live-painting', titleKey: 'services.livePainting.title', descKey: 'services.livePainting.description', videoUrl: `https://player.mux.com/g01gzXddhASNJW01BF1wnPWDRzzKvbD8uY02msTnyey2TQ?${MUX_PARAMS}` },
+  { id: 'artificial-mirage', titleKey: 'services.artificialMirage.title', descKey: 'services.artificialMirage.description', videoUrl: `https://player.mux.com/5xmVk005LJVjdokXO8prxqwb2Be62qutfv4qf01o3gH2o?${MUX_PARAMS}` },
+  { id: 'audio-reactive-art', titleKey: 'services.audioReactive.title', descKey: 'services.audioReactive.description', videoUrl: `https://player.mux.com/Q4jWgXitCvHmOSqK1fw7C02CrGIJJQAi5UO3dU28ot6Q?${MUX_PARAMS}` },
+  { id: 'interactive-branding', titleKey: 'services.interactiveBranding.title', descKey: 'services.interactiveBranding.description', videoUrl: `https://player.mux.com/mF9PhpjvXu7mOk3MaOr2Ye9Dm2hDONde3sf7Hfini7o?${MUX_PARAMS}` },
+  { id: 'logo-waterfall', titleKey: 'services.logoWaterfall.title', descKey: 'services.logoWaterfall.description', videoUrl: `https://player.mux.com/013acMdndgiE20096ONFsBMlYNkkZBrkuoPODmSTQgvwg?${MUX_PARAMS}` },
+  { id: 'projection-mapping', titleKey: 'services.projectionMapping.title', descKey: 'services.projectionMapping.description', videoUrl: `https://player.mux.com/lXLqZRpm5mnuUy702dM00bJYtjhBLuqL4cmqyQc2hYw01Q?${MUX_PARAMS}` },
+  { id: 'customized-experience', titleKey: 'services.customizedExperience.title', descKey: 'services.customizedExperience.description', videoUrl: `https://player.mux.com/mF9PhpjvXu7mOk3MaOr2Ye9Dm2hDONde3sf7Hfini7o?${MUX_PARAMS}` },
 ];
 
 function ProductSection({

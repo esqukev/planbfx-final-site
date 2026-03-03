@@ -94,29 +94,52 @@ export default function VideoHero({ videoUrl }: VideoHeroProps) {
         overflow: 'hidden'
       }}
     >
-      <video
-        ref={videoRef}
-        src={videoUrl}
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="auto"
-        className="pointer-events-none"
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: viewportHeight > 0 ? `${viewportHeight}px` : '100vh',
-          minWidth: '100%',
-          minHeight: viewportHeight > 0 ? `${viewportHeight}px` : '100vh',
-          objectFit: 'cover',
-          objectPosition: 'center center',
-          margin: 0,
-          padding: 0
-        }}
-      />
+      {videoUrl.includes('player.mux.com') ? (
+        <iframe
+          src={videoUrl}
+          className="pointer-events-none absolute inset-0 w-full min-w-full min-h-full"
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: viewportHeight > 0 ? `${viewportHeight}px` : '100vh',
+            minWidth: '100%',
+            minHeight: viewportHeight > 0 ? `${viewportHeight}px` : '100vh',
+            objectFit: 'cover',
+            objectPosition: 'center center',
+            margin: 0,
+            padding: 0,
+            border: 'none'
+          }}
+          allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+          allowFullScreen
+        />
+      ) : (
+        <video
+          ref={videoRef}
+          src={videoUrl}
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          className="pointer-events-none"
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: viewportHeight > 0 ? `${viewportHeight}px` : '100vh',
+            minWidth: '100%',
+            minHeight: viewportHeight > 0 ? `${viewportHeight}px` : '100vh',
+            objectFit: 'cover',
+            objectPosition: 'center center',
+            margin: 0,
+            padding: 0
+          }}
+        />
+      )}
 
       {/* overlay suave solo para legibilidad del texto del footer */}
       <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/20 via-transparent to-black/60 pointer-events-none" />
