@@ -20,7 +20,7 @@ const PRODUCTS: Array<{
   videoUrl?: string;
 }> = [
   { id: 'live-painting', titleKey: 'services.livePainting.title', descKey: 'services.livePainting.description', videoUrl: 'https://res.cloudinary.com/dpplgma25/video/upload/v1770746569/Live_painting_PB_FX_vosurw.mp4' },
-  { id: 'artificial-mirage', titleKey: 'services.artificialMirage.title', descKey: 'services.artificialMirage.description', videoUrl: 'https://res.cloudinary.com/dpplgma25/video/upload/v1770745183/egypt_q9pz1j.mp4' },
+  { id: 'artificial-mirage', titleKey: 'services.artificialMirage.title', descKey: 'services.artificialMirage.description', videoUrl: 'https://player.mux.com/rR8P8mSaKDzz02TsftugTUdI00cQPJX00oy?metadata-video-title=Test+Video&video-title=Test+Video' },
   { id: 'audio-reactive-art', titleKey: 'services.audioReactive.title', descKey: 'services.audioReactive.description', videoUrl: 'https://res.cloudinary.com/dpplgma25/video/upload/v1770748182/Audio_Reactive_Cymatics_zzo9sg.mp4' },
   { id: 'interactive-branding', titleKey: 'services.interactiveBranding.title', descKey: 'services.interactiveBranding.description', videoUrl: 'https://res.cloudinary.com/dpplgma25/video/upload/v1770338141/CYRIX_jcsd8k.mp4' },
   { id: 'logo-waterfall', titleKey: 'services.logoWaterfall.title', descKey: 'services.logoWaterfall.description', videoUrl: 'https://res.cloudinary.com/dpplgma25/video/upload/v1770746759/logo_rain_tyohaa.mp4' },
@@ -52,14 +52,24 @@ function ProductSection({
         <div className={isEven ? 'lg:order-2' : ''}>
           <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-zinc-900/80 md:transition-transform md:duration-500 md:ease-[cubic-bezier(0.4,0,0.2,1)] md:hover:scale-[1.116]">
             {product.videoUrl ? (
-              <video
-                src={product.videoUrl}
-                className="absolute inset-0 w-full h-full object-cover min-w-full min-h-full"
-                playsInline
-                muted
-                loop
-                autoPlay
-              />
+              product.videoUrl.includes('player.mux.com') ? (
+                <iframe
+                  src={product.videoUrl}
+                  className="absolute inset-0 w-full h-full min-w-full min-h-full"
+                  style={{ border: 'none', aspectRatio: '16/9' }}
+                  allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+                  allowFullScreen
+                />
+              ) : (
+                <video
+                  src={product.videoUrl}
+                  className="absolute inset-0 w-full h-full object-cover min-w-full min-h-full"
+                  playsInline
+                  muted
+                  loop
+                  autoPlay
+                />
+              )
             ) : (
               <div className="flex h-full w-full items-center justify-center text-zinc-500 text-sm uppercase tracking-wider">
                 {t('services.preview')}
