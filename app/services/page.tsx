@@ -5,7 +5,6 @@ import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import VideoHeroWithScroll from '../components/VideoHeroWithScroll';
 import CTAFinalBanner from '../components/CTAFinalBanner';
-import MuxPlayer, { getMuxPlaybackId } from '../components/MuxPlayer';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useLanguage } from '../context/LanguageContext';
@@ -55,10 +54,12 @@ function ProductSection({
           <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-zinc-900/80 md:transition-transform md:duration-500 md:ease-[cubic-bezier(0.4,0,0.2,1)] md:hover:scale-[1.116]">
             {product.videoUrl ? (
               product.videoUrl.includes('player.mux.com') ? (
-                <MuxPlayer
-                  playbackId={getMuxPlaybackId(product.videoUrl)!}
-                  className="absolute inset-0 w-full h-full min-w-full min-h-full"
-                  objectFit="cover"
+                <iframe
+                  src={product.videoUrl}
+                  className="absolute inset-0 w-full h-full min-w-full min-h-full border-0 pointer-events-none"
+                  allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+                  allowFullScreen
+                  title=""
                 />
               ) : (
                 <video
