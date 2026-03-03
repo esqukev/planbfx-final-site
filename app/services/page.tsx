@@ -18,13 +18,14 @@ const PRODUCTS: Array<{
   titleKey: string;
   descKey: string;
   videoUrl?: string;
+  verticalVideo?: boolean;
 }> = [
   { id: 'live-painting', titleKey: 'services.livePainting.title', descKey: 'services.livePainting.description', videoUrl: 'https://stream.mux.com/g01gzXddhASNJW01BF1wnPWDRzzKvbD8uY02msTnyey2TQ.m3u8' },
   { id: 'artificial-mirage', titleKey: 'services.artificialMirage.title', descKey: 'services.artificialMirage.description', videoUrl: 'https://stream.mux.com/5xmVk005LJVjdokXO8prxqwb2Be62qutfv4qf01o3gH2o.m3u8' },
   { id: 'audio-reactive-art', titleKey: 'services.audioReactive.title', descKey: 'services.audioReactive.description', videoUrl: 'https://stream.mux.com/Q4jWgXitCvHmOSqK1fw7C02CrGIJJQAi5UO3dU28ot6Q.m3u8' },
   { id: 'interactive-branding', titleKey: 'services.interactiveBranding.title', descKey: 'services.interactiveBranding.description', videoUrl: 'https://stream.mux.com/lUfhg3dB8H5tkvhQo2uZnnm6YQtW00r01mFjbYjIQTur4.m3u8' },
   { id: 'logo-waterfall', titleKey: 'services.logoWaterfall.title', descKey: 'services.logoWaterfall.description', videoUrl: 'https://res.cloudinary.com/dpplgma25/video/upload/v1770746759/logo_rain_tyohaa.mp4' },
-  { id: 'projection-mapping', titleKey: 'services.projectionMapping.title', descKey: 'services.projectionMapping.description', videoUrl: 'https://stream.mux.com/lXLqZRpm5mnuUy702dM00bJYtjhBLuqL4cmqyQc2hYw01Q.m3u8' },
+  { id: 'projection-mapping', titleKey: 'services.projectionMapping.title', descKey: 'services.projectionMapping.description', videoUrl: 'https://stream.mux.com/lXLqZRpm5mnuUy702dM00bJYtjhBLuqL4cmqyQc2hYw01Q.m3u8', verticalVideo: true },
   { id: 'customized-experience', titleKey: 'services.customizedExperience.title', descKey: 'services.customizedExperience.description', videoUrl: 'https://stream.mux.com/mF9PhpjvXu7mOk3MaOr2Ye9Dm2hDONde3sf7Hfini7o.m3u8' },
 ];
 
@@ -42,6 +43,45 @@ function ProductSection({
   tf: (k: string) => React.ReactNode;
 }) {
   const isEven = index % 2 === 0;
+  const isVertical = product.verticalVideo;
+
+  if (isVertical) {
+    return (
+      <section
+        ref={sectionRef}
+        id={product.id}
+        className="relative flex min-h-screen w-full items-center justify-center overflow-hidden bg-black px-4 py-20 md:px-8 lg:px-12"
+      >
+        <div className="w-full max-w-7xl flex flex-col lg:flex-row gap-8 lg:gap-12 items-center">
+          <div className="relative w-full aspect-[9/16] max-h-[min(90vh,900px)] overflow-hidden rounded-2xl bg-zinc-900/80 flex-1 md:transition-transform md:duration-500 md:ease-[cubic-bezier(0.4,0,0.2,1)] md:hover:scale-[1.02]">
+            {product.videoUrl ? (
+              <video
+                src={product.videoUrl}
+                className="absolute inset-0 w-full h-full object-cover min-w-full min-h-full"
+                playsInline
+                muted
+                loop
+                autoPlay
+              />
+            ) : (
+              <div className="flex h-full w-full items-center justify-center text-zinc-500 text-sm uppercase tracking-wider">
+                {t('services.preview')}
+              </div>
+            )}
+          </div>
+          <div className="flex-1 min-w-0">
+            <h2 className="text-3xl font-bold text-white md:text-4xl lg:text-5xl">
+              {tf(product.titleKey)}
+            </h2>
+            <p className="mt-6 text-lg leading-relaxed text-white/70 md:text-xl text-justify">
+              {tf(product.descKey)}
+            </p>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section
       ref={sectionRef}
