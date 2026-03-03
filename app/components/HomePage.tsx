@@ -39,7 +39,7 @@ export default function HomePage() {
       </div>
 
       <div className="m-0 p-0 block leading-none -mt-px">
-        <VideoHero videoUrl="https://player.mux.com/WEry4DCwkdk02q7uSXzK600mrdQH7p1gHzo3gI4Fd59l8?autoplay=muted&muted=true&controls=false&loop=true" />
+        <VideoHero videoUrl="https://stream.mux.com/WEry4DCwkdk02q7uSXzK600mrdQH7p1gHzo3gI4Fd59l8.m3u8" />
       </div>
 
       <div className="m-0 p-0">

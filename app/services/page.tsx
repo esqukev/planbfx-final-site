@@ -11,8 +11,7 @@ import { useLanguage } from '../context/LanguageContext';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const MUX_PARAMS = 'autoplay=muted&muted=true&controls=false&loop=true';
-const SERVICES_VIDEO_URL = `https://player.mux.com/lKnmpOTSed5Kpw01k1mi9ldLt00A7Bsvt3ZMdy41003q6Y?${MUX_PARAMS}`;
+const SERVICES_VIDEO_URL = 'https://stream.mux.com/lKnmpOTSed5Kpw01k1mi9ldLt00A7Bsvt3ZMdy41003q6Y.m3u8';
 
 const PRODUCTS: Array<{
   id: string;
@@ -20,13 +19,13 @@ const PRODUCTS: Array<{
   descKey: string;
   videoUrl?: string;
 }> = [
-  { id: 'live-painting', titleKey: 'services.livePainting.title', descKey: 'services.livePainting.description', videoUrl: `https://player.mux.com/g01gzXddhASNJW01BF1wnPWDRzzKvbD8uY02msTnyey2TQ?${MUX_PARAMS}` },
-  { id: 'artificial-mirage', titleKey: 'services.artificialMirage.title', descKey: 'services.artificialMirage.description', videoUrl: `https://player.mux.com/5xmVk005LJVjdokXO8prxqwb2Be62qutfv4qf01o3gH2o?${MUX_PARAMS}` },
-  { id: 'audio-reactive-art', titleKey: 'services.audioReactive.title', descKey: 'services.audioReactive.description', videoUrl: `https://player.mux.com/Q4jWgXitCvHmOSqK1fw7C02CrGIJJQAi5UO3dU28ot6Q?${MUX_PARAMS}` },
-  { id: 'interactive-branding', titleKey: 'services.interactiveBranding.title', descKey: 'services.interactiveBranding.description', videoUrl: `https://player.mux.com/mF9PhpjvXu7mOk3MaOr2Ye9Dm2hDONde3sf7Hfini7o?${MUX_PARAMS}` },
-  { id: 'logo-waterfall', titleKey: 'services.logoWaterfall.title', descKey: 'services.logoWaterfall.description', videoUrl: `https://player.mux.com/013acMdndgiE20096ONFsBMlYNkkZBrkuoPODmSTQgvwg?${MUX_PARAMS}` },
-  { id: 'projection-mapping', titleKey: 'services.projectionMapping.title', descKey: 'services.projectionMapping.description', videoUrl: `https://player.mux.com/lXLqZRpm5mnuUy702dM00bJYtjhBLuqL4cmqyQc2hYw01Q?${MUX_PARAMS}` },
-  { id: 'customized-experience', titleKey: 'services.customizedExperience.title', descKey: 'services.customizedExperience.description', videoUrl: `https://player.mux.com/mF9PhpjvXu7mOk3MaOr2Ye9Dm2hDONde3sf7Hfini7o?${MUX_PARAMS}` },
+  { id: 'live-painting', titleKey: 'services.livePainting.title', descKey: 'services.livePainting.description', videoUrl: 'https://stream.mux.com/g01gzXddhASNJW01BF1wnPWDRzzKvbD8uY02msTnyey2TQ.m3u8' },
+  { id: 'artificial-mirage', titleKey: 'services.artificialMirage.title', descKey: 'services.artificialMirage.description', videoUrl: 'https://stream.mux.com/5xmVk005LJVjdokXO8prxqwb2Be62qutfv4qf01o3gH2o.m3u8' },
+  { id: 'audio-reactive-art', titleKey: 'services.audioReactive.title', descKey: 'services.audioReactive.description', videoUrl: 'https://stream.mux.com/Q4jWgXitCvHmOSqK1fw7C02CrGIJJQAi5UO3dU28ot6Q.m3u8' },
+  { id: 'interactive-branding', titleKey: 'services.interactiveBranding.title', descKey: 'services.interactiveBranding.description', videoUrl: 'https://stream.mux.com/lUfhg3dB8H5tkvhQo2uZnnm6YQtW00r01mFjbYjIQTur4.m3u8' },
+  { id: 'logo-waterfall', titleKey: 'services.logoWaterfall.title', descKey: 'services.logoWaterfall.description', videoUrl: 'https://res.cloudinary.com/dpplgma25/video/upload/v1770746759/logo_rain_tyohaa.mp4' },
+  { id: 'projection-mapping', titleKey: 'services.projectionMapping.title', descKey: 'services.projectionMapping.description', videoUrl: 'https://stream.mux.com/lXLqZRpm5mnuUy702dM00bJYtjhBLuqL4cmqyQc2hYw01Q.m3u8' },
+  { id: 'customized-experience', titleKey: 'services.customizedExperience.title', descKey: 'services.customizedExperience.description', videoUrl: 'https://stream.mux.com/mF9PhpjvXu7mOk3MaOr2Ye9Dm2hDONde3sf7Hfini7o.m3u8' },
 ];
 
 function ProductSection({
@@ -53,24 +52,14 @@ function ProductSection({
         <div className={isEven ? 'lg:order-2' : ''}>
           <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-zinc-900/80 md:transition-transform md:duration-500 md:ease-[cubic-bezier(0.4,0,0.2,1)] md:hover:scale-[1.116]">
             {product.videoUrl ? (
-              product.videoUrl.includes('player.mux.com') ? (
-                <iframe
-                  src={product.videoUrl}
-                  className="absolute inset-0 w-full h-full min-w-full min-h-full border-0 pointer-events-none"
-                  allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
-                  allowFullScreen
-                  title=""
-                />
-              ) : (
-                <video
-                  src={product.videoUrl}
-                  className="absolute inset-0 w-full h-full object-cover min-w-full min-h-full"
-                  playsInline
-                  muted
-                  loop
-                  autoPlay
-                />
-              )
+              <video
+                src={product.videoUrl}
+                className="absolute inset-0 w-full h-full object-cover min-w-full min-h-full"
+                playsInline
+                muted
+                loop
+                autoPlay
+              />
             ) : (
               <div className="flex h-full w-full items-center justify-center text-zinc-500 text-sm uppercase tracking-wider">
                 {t('services.preview')}
