@@ -173,6 +173,20 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Hide video controls – no playback bar on any video */
+video {
+  -webkit-media-controls: none !important;
+  -webkit-media-controls-panel: none !important;
+  -webkit-media-controls-play-button: none !important;
+  -webkit-media-controls-start-playback-button: none !important;
+}
+video::-webkit-media-controls {
+  display: none !important;
+}
+video::-webkit-media-controls-enclosure {
+  display: none !important;
+}
+
 /* GSAP pin-spacer: no borde/fondo blanco junto al Hero */
 .pin-spacer {
   background: transparent !important;

@@ -31,33 +31,18 @@ export default function VideoHeroWithScroll({ videoUrl }: VideoHeroWithScrollPro
       style={{ willChange: 'transform' }}
     >
       <div className="absolute inset-0 z-10">
-        {videoUrl.includes('player.mux.com') ? (
-          <iframe
-            src={videoUrl}
-            className="absolute inset-0 border-0 pointer-events-none"
-            style={{
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              width: 'max(100vw, 177.78vh)',
-              height: 'max(100vh, 56.25vw)',
-              transform: 'translate(-50%, -50%)',
-            }}
-            allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
-            allowFullScreen
-            title=""
-          />
-        ) : (
-          <video
-            src={videoUrl}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-            className="absolute inset-0 w-full h-full object-cover"
-          />
-        )}
+        <video
+          src={videoUrl}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          controls={false}
+          disablePictureInPicture
+          disableRemotePlayback
+          className="absolute inset-0 w-full h-full object-cover"
+        />
         <div className="absolute inset-0 bg-black/40" aria-hidden />
       </div>
     </section>

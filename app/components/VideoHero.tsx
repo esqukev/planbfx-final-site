@@ -94,47 +94,32 @@ export default function VideoHero({ videoUrl }: VideoHeroProps) {
         overflow: 'hidden'
       }}
     >
-      {videoUrl.includes('player.mux.com') ? (
-        <iframe
-          src={videoUrl}
-          className="pointer-events-none absolute inset-0 border-0"
-          style={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            width: 'max(100vw, 177.78vh)',
-            height: 'max(100vh, 56.25vw)',
-            transform: 'translate(-50%, -50%)',
-          }}
-          allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
-          allowFullScreen
-          title=""
-        />
-      ) : (
-        <video
-          ref={videoRef}
-          src={videoUrl}
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
-          className="pointer-events-none"
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: viewportHeight > 0 ? `${viewportHeight}px` : '100vh',
-            minWidth: '100%',
-            minHeight: viewportHeight > 0 ? `${viewportHeight}px` : '100vh',
-            objectFit: 'cover',
-            objectPosition: 'center center',
-            margin: 0,
-            padding: 0
-          }}
-        />
-      )}
+      <video
+        ref={videoRef}
+        src={videoUrl}
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="auto"
+        controls={false}
+        disablePictureInPicture
+        disableRemotePlayback
+        className="pointer-events-none"
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: viewportHeight > 0 ? `${viewportHeight}px` : '100vh',
+          minWidth: '100%',
+          minHeight: viewportHeight > 0 ? `${viewportHeight}px` : '100vh',
+          objectFit: 'cover',
+          objectPosition: 'center center',
+          margin: 0,
+          padding: 0
+        }}
+      />
 
       {/* overlay suave solo para legibilidad del texto del footer */}
       <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/20 via-transparent to-black/60 pointer-events-none" />
