@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef } from 'react';
 import Navigation from '../components/Navigation';
+import HLSVideo from '../components/HLSVideo';
 import Footer from '../components/Footer';
 import VideoHeroWithScroll from '../components/VideoHeroWithScroll';
 import CTAFinalBanner from '../components/CTAFinalBanner';
@@ -52,7 +53,7 @@ function ProductSection({
         <div className={isEven ? 'lg:order-2' : ''}>
           <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-zinc-900/80 md:transition-transform md:duration-500 md:ease-[cubic-bezier(0.4,0,0.2,1)] md:hover:scale-[1.116]">
             {product.videoUrl ? (
-              <video
+              <HLSVideo
                 src={product.videoUrl}
                 className="absolute inset-0 w-full h-full object-cover min-w-full min-h-full"
                 playsInline

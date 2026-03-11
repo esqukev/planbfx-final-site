@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
+import HLSVideo from './HLSVideo';
 
 interface VideoHeroProps {
   videoUrl: string;
@@ -94,7 +95,7 @@ export default function VideoHero({ videoUrl }: VideoHeroProps) {
         overflow: 'hidden'
       }}
     >
-      <video
+      <HLSVideo
         ref={videoRef}
         src={videoUrl}
         autoPlay

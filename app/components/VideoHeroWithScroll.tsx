@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import HLSVideo from './HLSVideo';
 
 type VideoHeroWithScrollProps = {
   videoUrl: string;
@@ -31,7 +32,7 @@ export default function VideoHeroWithScroll({ videoUrl }: VideoHeroWithScrollPro
       style={{ willChange: 'transform' }}
     >
       <div className="absolute inset-0 z-10">
-        <video
+        <HLSVideo
           src={videoUrl}
           autoPlay
           muted
