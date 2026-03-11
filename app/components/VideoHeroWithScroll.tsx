@@ -21,7 +21,7 @@ export default function VideoHeroWithScroll({ videoUrl }: VideoHeroWithScrollPro
       hero.style.transform = `translateY(${scrolled * 0.5}px)`;
       hero.style.opacity = `${Math.max(0, 1 - scrolled / 800)}`;
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 

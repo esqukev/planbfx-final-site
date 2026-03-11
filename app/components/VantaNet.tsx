@@ -33,7 +33,9 @@ export default function VantaNet({ className = '' }: VantaNetProps) {
 
     const init = async () => {
       try {
-        await loadScript('/vendor/three.r134.min.js');
+        // Usar el mismo Three.js del proyecto para evitar "Multiple instances" warning
+        const THREE = await import('three');
+        (window as unknown as Record<string, unknown>).THREE = THREE;
         if (cancelled) return;
         await loadScript('/vendor/vanta.net.min.js');
         if (cancelled || !el) return;

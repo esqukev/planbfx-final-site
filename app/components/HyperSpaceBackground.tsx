@@ -40,6 +40,7 @@ export default function HyperSpaceBackground() {
       renderer.setSize(width, height);
       renderer.setPixelRatio(Math.min(2, window.devicePixelRatio));
       mount.appendChild(renderer.domElement);
+      renderer.domElement.addEventListener('webglcontextlost', (e: Event) => e.preventDefault());
 
       // ⭐ STARFIELD (reducido para rendimiento y que se vean las estrellas)
       const starCount = 1800;

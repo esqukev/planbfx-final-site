@@ -35,6 +35,7 @@ export default function PointCloudVisual({ className = '' }: PointCloudVisualPro
       renderer.setClearColor(0x000000, 0);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
       mount.appendChild(renderer.domElement);
+      renderer.domElement.addEventListener('webglcontextlost', (e: Event) => e.preventDefault());
 
       const geometry = new THREE.BufferGeometry();
       const count = 900;

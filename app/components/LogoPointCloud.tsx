@@ -225,7 +225,11 @@ export default function LogoPointCloud() {
         camera={{ position: [0, 0, 180], fov: 45 }}
         style={{ width: '100%', height: '100%', background: 'transparent', border: 'none' }}
         gl={{ alpha: true, antialias: true, powerPreference: 'high-performance', stencil: false }}
-        onCreated={({ gl }) => gl.setClearColor(0x000000, 0)}
+        onCreated={({ gl }) => {
+          gl.setClearColor(0x000000, 0);
+          const canvas = gl.domElement;
+          canvas.addEventListener('webglcontextlost', (e: Event) => e.preventDefault());
+        }}
         dpr={[1, 2]}
       >
         <ambientLight intensity={1} />

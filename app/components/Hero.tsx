@@ -16,7 +16,7 @@ export default function Hero() {
       hero.style.transform = `translateY(${scrolled * 0.5}px)`;
       hero.style.opacity = `${1 - scrolled / 800}`;
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
