@@ -1,16 +1,12 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import Navigation from '../components/Navigation';
 import HLSVideo from '../components/HLSVideo';
 import Footer from '../components/Footer';
 import VideoHeroWithScroll from '../components/VideoHeroWithScroll';
 import CTAFinalBanner from '../components/CTAFinalBanner';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useLanguage } from '../context/LanguageContext';
-
-gsap.registerPlugin(ScrollTrigger);
 
 const SERVICES_VIDEO_URL = 'https://stream.mux.com/lKnmpOTSed5Kpw01k1mi9ldLt00A7Bsvt3ZMdy41003q6Y.m3u8';
 
@@ -32,54 +28,18 @@ const PRODUCTS: Array<{
 function ProductSection({
   product,
   index,
-  sectionRef,
   t,
   tf,
 }: {
   product: (typeof PRODUCTS)[0];
   index: number;
-  sectionRef: (el: HTMLElement | null) => void;
   t: (k: string) => string;
   tf: (k: string) => React.ReactNode;
 }) {
   const isEven = index % 2 === 0;
-  const sectionElRef = useRef<HTMLElement | null>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [isVisible, setIsVisible] = useState(index === 0);
-
-  useEffect(() => {
-    const sectionNode = sectionElRef.current;
-    if (!sectionNode) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsVisible(entry.isIntersecting);
-      },
-      { threshold: 0.3, rootMargin: '120px 0px' }
-    );
-
-    observer.observe(sectionNode);
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    if (isVisible) {
-      video.play().catch(() => {});
-      return;
-    }
-
-    video.pause();
-  }, [isVisible]);
 
   return (
     <section
-      ref={(el) => {
-        sectionElRef.current = el;
-        sectionRef(el);
-      }}
       id={product.id}
       className="relative flex min-h-screen w-full items-center justify-center overflow-hidden bg-black px-4 py-20 md:px-8 lg:px-12"
     >
@@ -88,14 +48,13 @@ function ProductSection({
           <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-zinc-900/80 md:transition-transform md:duration-500 md:ease-[cubic-bezier(0.4,0,0.2,1)] md:hover:scale-[1.116]">
             {product.videoUrl ? (
               <HLSVideo
-                ref={videoRef}
                 src={product.videoUrl}
                 className="absolute inset-0 w-full h-full object-cover min-w-full min-h-full"
                 playsInline
                 muted
                 loop
-                autoPlay={isVisible}
-                preload="metadata"
+                autoPlay
+                preload="auto"
                 controls={false}
                 disablePictureInPicture
                 disableRemotePlayback
@@ -122,29 +81,9 @@ function ProductSection({
 
 export default function ServicesPage() {
   const { t, tf } = useLanguage();
-  const sectionRefs = useRef<(HTMLElement | null)[]>([]);
-  const pageRef = useRef<HTMLElement | null>(null);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      const refs = sectionRefs.current.filter(Boolean);
-      refs.forEach((section) => {
-        if (!section) return;
-        ScrollTrigger.create({
-          trigger: section,
-          start: 'top top',
-          end: 'bottom top',
-          pin: true,
-          pinSpacing: true,
-        });
-      });
-    }, pageRef);
-
-    return () => ctx.revert();
-  }, []);
 
   return (
-    <main ref={pageRef} className="relative min-h-screen bg-black text-white">
+    <main className="relative min-h-screen bg-black text-white">
       <Navigation />
 
       <VideoHeroWithScroll videoUrl={SERVICES_VIDEO_URL} />
@@ -157,9 +96,6 @@ export default function ServicesPage() {
             index={index}
             t={t}
             tf={tf}
-            sectionRef={(el) => {
-              sectionRefs.current[index] = el;
-            }}
           />
         ))}
       </div>

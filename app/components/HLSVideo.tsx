@@ -28,7 +28,11 @@ const HLSVideo = forwardRef<HTMLVideoElement, ComponentPropsWithoutRef<'video'>>
 
       const isHLS = srcStr.endsWith('.m3u8');
       if (muted) video.muted = true;
-      if (playsInline) video.playsInline = true;
+      if (playsInline) {
+        video.playsInline = true;
+        video.setAttribute('playsinline', '');
+        video.setAttribute('webkit-playsinline', '');
+      }
       const tryAutoplay = () => {
         if (!autoPlay) return;
         video.play().catch(() => {
