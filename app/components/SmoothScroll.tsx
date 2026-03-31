@@ -109,7 +109,7 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     window.history.scrollRestoration = 'manual';
 
     const doScroll = () => {
-      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
       if (lenisRef.current) {
         lenisRef.current.scrollTo(0, { immediate: true });
       }

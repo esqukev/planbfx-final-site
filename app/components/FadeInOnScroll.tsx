@@ -31,28 +31,28 @@ export default function FadeInOnScroll({
 
     if (!trigger) return;
 
-    gsap.fromTo(
-      element,
-      {
-        opacity: 0,
-        y: 30,
-      },
-      {
-        opacity: 1,
-        y: 0,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: trigger,
-          start: 'top 40%',
-          end: 'top 20%',
-          scrub: true,
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        element,
+        {
+          opacity: 0,
+          y: 30,
         },
-      }
-    );
+        {
+          opacity: 1,
+          y: 0,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: trigger,
+            start: 'top 40%',
+            end: 'top 20%',
+            scrub: true,
+          },
+        }
+      );
+    }, element);
 
-    return () => {
-      ScrollTrigger.getAll().forEach(t => t.kill());
-    };
+    return () => ctx.revert();
   }, [triggerSelector]);
 
   return (

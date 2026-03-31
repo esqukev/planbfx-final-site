@@ -8,7 +8,7 @@ import Hls from 'hls.js';
  * que no tienen soporte nativo. Usa hls.js para decodificar HLS vía Media Source Extensions.
  */
 const HLSVideo = forwardRef<HTMLVideoElement, ComponentPropsWithoutRef<'video'>>(
-  function HLSVideo({ src, className, style, autoPlay, ...videoProps }, ref) {
+  function HLSVideo({ src, className, style, autoPlay, muted, playsInline, ...videoProps }, ref) {
     const internalRef = useRef<HTMLVideoElement>(null);
     const hlsRef = useRef<Hls | null>(null);
 
@@ -27,6 +27,8 @@ const HLSVideo = forwardRef<HTMLVideoElement, ComponentPropsWithoutRef<'video'>>
       if (!video || !srcStr) return;
 
       const isHLS = srcStr.endsWith('.m3u8');
+      if (muted) video.muted = true;
+      if (playsInline) video.playsInline = true;
       const tryAutoplay = () => {
         if (!autoPlay) return;
         video.play().catch(() => {
@@ -38,6 +40,7 @@ const HLSVideo = forwardRef<HTMLVideoElement, ComponentPropsWithoutRef<'video'>>
         // Safari soporta HLS nativo; usar src directo
         if (video.canPlayType('application/vnd.apple.mpegurl')) {
           video.src = srcStr;
+          video.load();
           tryAutoplay();
           return;
         }
@@ -49,10 +52,46 @@ const HLSVideo = forwardRef<HTMLVideoElement, ComponentPropsWithoutRef<'video'>>
             lowLatencyMode: false,
           });
           hlsRef.current = hls;
+          let networkErrorRetries = 0;
+          let mediaErrorRetries = 0;
+          const MAX_NETWORK_ERROR_RETRIES = 3;
+          const MAX_MEDIA_ERROR_RETRIES = 3;
 
           hls.loadSource(srcStr);
           hls.attachMedia(video);
           hls.on(Hls.Events.MANIFEST_PARSED, tryAutoplay);
+          hls.on(Hls.Events.ERROR, (_event, data) => {
+            if (!data.fatal) return;
+
+            switch (data.type) {
+              case Hls.ErrorTypes.NETWORK_ERROR: {
+                if (networkErrorRetries < MAX_NETWORK_ERROR_RETRIES) {
+                  networkErrorRetries += 1;
+                  hls.startLoad();
+                } else {
+                  hls.destroy();
+                  hlsRef.current = null;
+                }
+                break;
+              }
+              case Hls.ErrorTypes.MEDIA_ERROR: {
+                if (mediaErrorRetries < MAX_MEDIA_ERROR_RETRIES) {
+                  mediaErrorRetries += 1;
+                  hls.recoverMediaError();
+                  tryAutoplay();
+                } else {
+                  hls.destroy();
+                  hlsRef.current = null;
+                }
+                break;
+              }
+              default: {
+                hls.destroy();
+                hlsRef.current = null;
+                break;
+              }
+            }
+          });
 
           return () => {
             hls.destroy();
@@ -63,8 +102,9 @@ const HLSVideo = forwardRef<HTMLVideoElement, ComponentPropsWithoutRef<'video'>>
 
       // MP4 u otros formatos: usar src nativo
       video.src = srcStr;
+      video.load();
       tryAutoplay();
-    }, [src, autoPlay]);
+    }, [src, autoPlay, muted, playsInline]);
 
     useEffect(() => {
       const video = internalRef.current;
@@ -86,6 +126,9 @@ const HLSVideo = forwardRef<HTMLVideoElement, ComponentPropsWithoutRef<'video'>>
         className={className}
         style={style}
         autoPlay={autoPlay}
+        muted={muted}
+        playsInline={playsInline}
+        crossOrigin="anonymous"
         {...videoProps}
       />
     );

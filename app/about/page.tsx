@@ -48,59 +48,62 @@ export default function AboutPage() {
     const introPara = introParaRef.current;
     const closingPara = closingParaRef.current;
     if (!intro) return;
-    gsap.fromTo(
-      intro,
-      { opacity: 0, y: 32, filter: 'blur(12px)' },
-      {
-        opacity: 1,
-        y: 0,
-        filter: 'blur(0px)',
-        duration: 1.2,
-        ease: 'power3.out',
-        scrollTrigger: { trigger: intro, start: 'top 78%' },
-      }
-    );
-    if (introPara) {
+    const ctx = gsap.context(() => {
       gsap.fromTo(
-        introPara,
-        { opacity: 0, y: 20 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          ease: 'power3.out',
-          scrollTrigger: { trigger: introPara, start: 'top 85%' },
-        }
-      );
-    }
-    if (closing) {
-      gsap.fromTo(
-        closing,
-        { opacity: 0, y: 28, filter: 'blur(10px)' },
+        intro,
+        { opacity: 0, y: 32, filter: 'blur(12px)' },
         {
           opacity: 1,
           y: 0,
           filter: 'blur(0px)',
-          duration: 1.1,
+          duration: 1.2,
           ease: 'power3.out',
-          scrollTrigger: { trigger: closing, start: 'top 82%' },
+          scrollTrigger: { trigger: intro, start: 'top 78%' },
         }
       );
-    }
-    if (closingPara) {
-      gsap.fromTo(
-        closingPara,
-        { opacity: 0, y: 20 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          ease: 'power3.out',
-          scrollTrigger: { trigger: closingPara, start: 'top 85%' },
-        }
-      );
-    }
-    return () => ScrollTrigger.getAll().forEach((t) => t.kill());
+
+      if (introPara) {
+        gsap.fromTo(
+          introPara,
+          { opacity: 0, y: 20 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: 'power3.out',
+            scrollTrigger: { trigger: introPara, start: 'top 85%' },
+          }
+        );
+      }
+      if (closing) {
+        gsap.fromTo(
+          closing,
+          { opacity: 0, y: 28, filter: 'blur(10px)' },
+          {
+            opacity: 1,
+            y: 0,
+            filter: 'blur(0px)',
+            duration: 1.1,
+            ease: 'power3.out',
+            scrollTrigger: { trigger: closing, start: 'top 82%' },
+          }
+        );
+      }
+      if (closingPara) {
+        gsap.fromTo(
+          closingPara,
+          { opacity: 0, y: 20 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: 'power3.out',
+            scrollTrigger: { trigger: closingPara, start: 'top 85%' },
+          }
+        );
+      }
+    });
+    return () => ctx.revert();
   }, []);
 
   return (

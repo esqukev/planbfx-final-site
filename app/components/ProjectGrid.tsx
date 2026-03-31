@@ -27,43 +27,41 @@ export default function ProjectGrid() {
     const cards = cardsRef.current.filter(Boolean) as HTMLDivElement[];
     if (!section || cards.length === 0) return;
 
-    if (subtitle) {
-      gsap.fromTo(
-        subtitle,
-        { opacity: 0, scale: 0.92 },
-        {
-          opacity: 1,
-          scale: 1,
-          duration: 1.2,
-          ease: 'power2.out',
-          scrollTrigger: { trigger: subtitle, start: 'top 88%', once: true },
-        }
-      );
-    }
+    const ctx = gsap.context(() => {
+      if (subtitle) {
+        gsap.fromTo(
+          subtitle,
+          { opacity: 0, scale: 0.92 },
+          {
+            opacity: 1,
+            scale: 1,
+            duration: 1.2,
+            ease: 'power2.out',
+            scrollTrigger: { trigger: subtitle, start: 'top 88%', once: true },
+          }
+        );
+      }
 
-    cards.forEach((card) => {
-      gsap.fromTo(
-        card,
-        { opacity: 0, scale: 0.88 },
-        {
-          opacity: 1,
-          scale: 1,
-          duration: 1.1,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: card,
-            start: 'top 88%',
-            once: true,
-          },
-        }
-      );
-    });
-
-    return () => {
-      ScrollTrigger.getAll().forEach((t) => {
-        if (t.trigger === section || t.trigger === subtitle || cards.some((c) => c && t.trigger === c)) t.kill();
+      cards.forEach((card) => {
+        gsap.fromTo(
+          card,
+          { opacity: 0, scale: 0.88 },
+          {
+            opacity: 1,
+            scale: 1,
+            duration: 1.1,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: card,
+              start: 'top 88%',
+              once: true,
+            },
+          }
+        );
       });
-    };
+    }, section);
+
+    return () => ctx.revert();
   }, []);
 
   return (

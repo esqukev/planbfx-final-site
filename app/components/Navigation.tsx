@@ -62,7 +62,6 @@ export default function Navigation() {
         <div className="relative z-10 w-full px-4 md:px-8 lg:px-12 xl:px-16 py-4 flex items-center justify-between">
           <Link
             href="/"
-            scroll={false}
             className="relative h-12 w-32 cursor-pointer hover:opacity-80 transition-opacity block"
             onClick={(e) => {
               if (pathname === '/') {
@@ -84,7 +83,6 @@ export default function Navigation() {
               <Link
                 key={item.labelKey}
                 href={item.href}
-                scroll={false}
                 className="relative flex flex-col items-center text-white hover:text-zinc-300 transition-colors text-sm uppercase tracking-wider py-1"
                 onClick={(e) => {
                   if (isActiveDesktop(item.href)) {
@@ -140,7 +138,6 @@ export default function Navigation() {
               <Link
                 key={item.labelKey}
                 href={item.href}
-                scroll={false}
                 className={`flex items-center gap-2 px-4 py-3 text-sm uppercase tracking-wider transition-colors ${
                   isActiveMobile(item.href) ? 'text-white bg-white/10' : 'text-white/90 hover:text-white hover:bg-white/5'
                 }`}
