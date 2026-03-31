@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Navigation from '../components/Navigation';
 import HLSVideo from '../components/HLSVideo';
 import Footer from '../components/Footer';
@@ -43,10 +43,43 @@ function ProductSection({
   tf: (k: string) => React.ReactNode;
 }) {
   const isEven = index % 2 === 0;
+  const sectionElRef = useRef<HTMLElement | null>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isVisible, setIsVisible] = useState(index === 0);
+
+  useEffect(() => {
+    const sectionNode = sectionElRef.current;
+    if (!sectionNode) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0.2, rootMargin: '80px 0px' }
+    );
+
+    observer.observe(sectionNode);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (isVisible) {
+      video.play().catch(() => {});
+      return;
+    }
+
+    video.pause();
+  }, [isVisible]);
 
   return (
     <section
-      ref={sectionRef}
+      ref={(el) => {
+        sectionElRef.current = el;
+        sectionRef(el);
+      }}
       id={product.id}
       className="relative flex min-h-screen w-full items-center justify-center overflow-hidden bg-black px-4 py-20 md:px-8 lg:px-12"
     >
@@ -55,13 +88,14 @@ function ProductSection({
           <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-zinc-900/80 md:transition-transform md:duration-500 md:ease-[cubic-bezier(0.4,0,0.2,1)] md:hover:scale-[1.116]">
             {product.videoUrl ? (
               <HLSVideo
+                ref={videoRef}
                 src={product.videoUrl}
                 className="absolute inset-0 w-full h-full object-cover min-w-full min-h-full"
                 playsInline
                 muted
                 loop
-                autoPlay
-                preload="auto"
+                autoPlay={isVisible}
+                preload="metadata"
                 controls={false}
                 disablePictureInPicture
                 disableRemotePlayback

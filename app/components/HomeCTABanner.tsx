@@ -19,28 +19,12 @@ type HomeCTABannerProps = {
 export default function HomeCTABanner({ imageSrc }: HomeCTABannerProps) {
   const { t, lang } = useLanguage();
   const sectionRef = useRef<HTMLElement>(null);
-  const bgRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  const [imageOffset, setImageOffset] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const craftingMoments = t('home.ctaBanner.craftingMoments');
   const innovativeArt = t('home.ctaBanner.innovativeArt');
   const meetsTechnology = t('home.ctaBanner.meetsTechnology');
   const paragraph = t('home.ctaBanner.paragraph');
-
-  useEffect(() => {
-    const onScroll = () => {
-      if (!sectionRef.current || !bgRef.current) return;
-      const rect = sectionRef.current.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-      if (rect.bottom > 0 && rect.top < windowHeight) {
-        setImageOffset(rect.top * 0.3);
-      }
-    };
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
 
   useEffect(() => {
     const el = sectionRef.current;
@@ -87,10 +71,9 @@ export default function HomeCTABanner({ imageSrc }: HomeCTABannerProps) {
       ref={sectionRef}
       className="relative min-h-[70vh] flex items-center justify-center overflow-hidden m-0 p-0 border-0"
     >
-      <div ref={bgRef} className="absolute inset-0 z-0 overflow-hidden">
+      <div className="absolute inset-0 z-0 overflow-hidden">
         <div
           className="absolute inset-0 w-full h-[120%] -top-[10%]"
-          style={{ transform: `translate3d(0, ${imageOffset}px, 0)` }}
         >
           <Image
             src={imageSrc}
@@ -194,14 +177,12 @@ export default function HomeCTABanner({ imageSrc }: HomeCTABannerProps) {
         >
           <Link
             href="/services"
-            scroll={false}
             className="inline-flex items-center justify-center px-5 py-2.5 sm:px-8 sm:py-4 border-2 border-white/60 text-white font-semibold rounded-full hover:bg-white/10 transition-all duration-300 ease-out hover:scale-[1.03] text-sm sm:text-base"
           >
             {t('home.ctaBanner.exploreServices')}
           </Link>
           <Link
             href="/contact"
-            scroll={false}
             className="inline-flex items-center justify-center px-5 py-2.5 sm:px-8 sm:py-4 border-2 border-white/60 text-white font-semibold rounded-full hover:bg-white/10 transition-all duration-300 ease-out hover:scale-[1.03] text-sm sm:text-base"
           >
             {t('home.ctaBanner.getInTouch')}

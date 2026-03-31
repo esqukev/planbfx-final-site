@@ -21,24 +21,8 @@ export default function ParallaxBannerWithImage({
 }: ParallaxBannerWithImageProps) {
   const { t } = useLanguage();
   const sectionRef = useRef<HTMLElement>(null);
-  const bgRef = useRef<HTMLDivElement>(null);
-  const [imageOffset, setImageOffset] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const [wordIndex, setWordIndex] = useState(0);
-
-  useEffect(() => {
-    const onScroll = () => {
-      if (!sectionRef.current || !bgRef.current) return;
-      const rect = sectionRef.current.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-      if (rect.bottom > 0 && rect.top < windowHeight) {
-        setImageOffset(rect.top * 0.3);
-      }
-    };
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
 
   useEffect(() => {
     const el = sectionRef.current;
@@ -69,10 +53,9 @@ export default function ParallaxBannerWithImage({
       ref={sectionRef}
       className={`relative min-h-[70vh] flex items-center justify-center overflow-hidden m-0 p-0 border-0 ${className}`}
     >
-      <div ref={bgRef} className="absolute inset-0 z-0 overflow-hidden">
+      <div className="absolute inset-0 z-0 overflow-hidden">
         <div
           className="absolute inset-0 w-full h-[120%] -top-[10%]"
-          style={{ transform: `translate3d(0, ${imageOffset}px, 0)` }}
         >
           <Image
             src={imageSrc}
@@ -139,7 +122,6 @@ export default function ParallaxBannerWithImage({
             >
               <Link
                 href="/services"
-                scroll={false}
                 className="inline-block text-sm uppercase tracking-[0.35em] text-zinc-400 hover:text-white focus:outline-none focus:text-white transition-all duration-300 ease-out hover:scale-[1.04] focus:scale-[1.04]"
               >
                 {t('home.seeOurServices')}

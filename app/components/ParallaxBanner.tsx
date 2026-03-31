@@ -24,23 +24,7 @@ export default function ParallaxBanner({
   const sectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLParagraphElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
-  const [offset, setOffset] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => {
-      if (!sectionRef.current) return;
-      const rect = sectionRef.current.getBoundingClientRect();
-      const sectionTop = rect.top;
-      const windowHeight = window.innerHeight;
-      if (rect.bottom > 0 && rect.top < windowHeight) {
-        setOffset(sectionTop * 0.4);
-      }
-    };
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -88,7 +72,6 @@ export default function ParallaxBanner({
           ref={subtitleRef}
           className="text-xs sm:text-sm uppercase tracking-[0.2em] sm:tracking-[0.3em] text-zinc-400 mb-4 sm:mb-6 md:mb-8 transition-opacity duration-1000"
           style={{
-            transform: `translate3d(0, ${offset * 0.6}px, 0)`,
             opacity: isVisible ? 1 : 0,
           }}
         >
@@ -109,7 +92,6 @@ export default function ParallaxBanner({
                 key={lineIndex}
                 className="mb-0 md:mb-0.5 leading-tight whitespace-nowrap"
                 style={{
-                  transform: `translate3d(0, ${offset * (1 + lineIndex * 0.1)}px, 0)`,
                   display: 'block',
                 }}
               >
