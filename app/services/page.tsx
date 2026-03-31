@@ -6,7 +6,11 @@ import HLSVideo from '../components/HLSVideo';
 import Footer from '../components/Footer';
 import VideoHeroWithScroll from '../components/VideoHeroWithScroll';
 import CTAFinalBanner from '../components/CTAFinalBanner';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useLanguage } from '../context/LanguageContext';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const SERVICES_VIDEO_URL = 'https://stream.mux.com/lKnmpOTSed5Kpw01k1mi9ldLt00A7Bsvt3ZMdy41003q6Y.m3u8';
 
@@ -28,11 +32,13 @@ const PRODUCTS: Array<{
 function ProductSection({
   product,
   index,
+  sectionRef,
   t,
   tf,
 }: {
   product: (typeof PRODUCTS)[0];
   index: number;
+  sectionRef: (el: HTMLElement | null) => void;
   t: (k: string) => string;
   tf: (k: string) => React.ReactNode;
 }) {
@@ -40,6 +46,7 @@ function ProductSection({
 
   return (
     <section
+      ref={sectionRef}
       id={product.id}
       className="relative flex min-h-screen w-full items-center justify-center overflow-hidden bg-black px-4 py-20 md:px-8 lg:px-12"
     >
@@ -81,9 +88,29 @@ function ProductSection({
 
 export default function ServicesPage() {
   const { t, tf } = useLanguage();
+  const sectionRefs = React.useRef<(HTMLElement | null)[]>([]);
+  const pageRef = React.useRef<HTMLElement | null>(null);
+
+  React.useEffect(() => {
+    const ctx = gsap.context(() => {
+      const refs = sectionRefs.current.filter(Boolean);
+      refs.forEach((section) => {
+        if (!section) return;
+        ScrollTrigger.create({
+          trigger: section,
+          start: 'top top',
+          end: 'bottom top',
+          pin: true,
+          pinSpacing: true,
+        });
+      });
+    }, pageRef);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <main className="relative min-h-screen bg-black text-white">
+    <main ref={pageRef} className="relative min-h-screen bg-black text-white">
       <Navigation />
 
       <VideoHeroWithScroll videoUrl={SERVICES_VIDEO_URL} />
@@ -96,6 +123,9 @@ export default function ServicesPage() {
             index={index}
             t={t}
             tf={tf}
+            sectionRef={(el) => {
+              sectionRefs.current[index] = el;
+            }}
           />
         ))}
       </div>

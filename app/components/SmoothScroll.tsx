@@ -13,19 +13,15 @@ if (typeof window !== 'undefined') {
 type LenisInstance = {
   raf: (time: number) => void;
   on: (event: string, fn: () => void) => void;
+  off?: (event: string, fn: () => void) => void;
   destroy: () => void;
   scroll: number;
   scrollTo: (value: number, options?: { immediate?: boolean; duration?: number }) => void;
   resize?: () => void;
 };
 
-function rafCallback(time: number, lenis: LenisInstance) {
-  lenis.raf(time * 1000);
-}
-
 export default function SmoothScroll({ children }: { children: React.ReactNode }) {
   const lenisRef = useRef<LenisInstance | null>(null);
-  const rafRef = useRef<(time: number) => void | null>(null);
   const cleanupRef = useRef<(() => void) | null>(null);
   const pathname = usePathname();
 
@@ -41,6 +37,8 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     if (typeof window === 'undefined') return;
 
     let lenis: LenisInstance | null = null;
+    let rafId = 0;
+    let onLenisScroll: (() => void) | null = null;
 
     import('lenis').then(({ default: Lenis }) => {
       lenis = new Lenis({
@@ -51,7 +49,8 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
 
       lenisRef.current = lenis;
 
-      lenis.on('scroll', () => ScrollTrigger.update());
+      onLenisScroll = () => ScrollTrigger.update();
+      lenis.on('scroll', onLenisScroll);
 
       const resizeLenis = () => {
         if (lenis?.resize) lenis.resize();
@@ -74,26 +73,23 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
         window.removeEventListener('contact-form-errors', onFormErrors);
       };
 
-      ScrollTrigger.scrollerProxy(document.documentElement, {
-        scrollTop(value) {
-          if (arguments.length && value !== undefined && lenis) {
-            lenis.scrollTo(value);
-          }
-          return lenis?.scroll ?? 0;
-        },
-      });
+      const animate = (time: number) => {
+        if (!lenis) return;
+        lenis.raf(time);
+        rafId = window.requestAnimationFrame(animate);
+      };
 
-      rafRef.current = (time: number) => rafCallback(time, lenis!);
-      gsap.ticker.add(rafRef.current);
-      gsap.ticker.lagSmoothing(0);
+      rafId = window.requestAnimationFrame(animate);
     });
 
     return () => {
       cleanupRef.current?.();
       cleanupRef.current = null;
-      if (rafRef.current) gsap.ticker.remove(rafRef.current);
-      ScrollTrigger.scrollerProxy(document.documentElement, {});
+      if (rafId) window.cancelAnimationFrame(rafId);
       if (lenisRef.current) {
+        if (onLenisScroll && lenisRef.current.off) {
+          lenisRef.current.off('scroll', onLenisScroll);
+        }
         lenisRef.current.destroy();
         lenisRef.current = null;
       }
