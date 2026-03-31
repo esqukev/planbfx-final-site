@@ -14,12 +14,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const SERVICES_VIDEO_URL = 'https://stream.mux.com/lKnmpOTSed5Kpw01k1mi9ldLt00A7Bsvt3ZMdy41003q6Y.m3u8';
 
-const PRODUCTS: Array<{
-  id: string;
-  titleKey: string;
-  descKey: string;
-  videoUrl?: string;
-}> = [
+const PRODUCTS = [
   { id: 'live-painting', titleKey: 'services.livePainting.title', descKey: 'services.livePainting.description', videoUrl: 'https://stream.mux.com/g01gzXddhASNJW01BF1wnPWDRzzKvbD8uY02msTnyey2TQ.m3u8' },
   { id: 'artificial-mirage', titleKey: 'services.artificialMirage.title', descKey: 'services.artificialMirage.description', videoUrl: 'https://stream.mux.com/5xmVk005LJVjdokXO8prxqwb2Be62qutfv4qf01o3gH2o.m3u8' },
   { id: 'audio-reactive-art', titleKey: 'services.audioReactive.title', descKey: 'services.audioReactive.description', videoUrl: 'https://stream.mux.com/Q4jWgXitCvHmOSqK1fw7C02CrGIJJQAi5UO3dU28ot6Q.m3u8' },
@@ -29,22 +24,9 @@ const PRODUCTS: Array<{
   { id: 'customized-experience', titleKey: 'services.customizedExperience.title', descKey: 'services.customizedExperience.description', videoUrl: 'https://stream.mux.com/mF9PhpjvXu7mOk3MaOr2Ye9Dm2hDONde3sf7Hfini7o.m3u8' },
 ];
 
-function ProductSection({
-  product,
-  index,
-  sectionRef,
-  t,
-  tf,
-}: {
-  product: (typeof PRODUCTS)[0];
-  index: number;
-  sectionRef: (el: HTMLElement | null) => void;
-  t: (k: string) => string;
-  tf: (k: string) => React.ReactNode;
-}) {
+function ProductSection({ product, index, sectionRef, t, tf }) {
   const isEven = index % 2 === 0;
-  const sectionElRef = useRef<HTMLElement | null>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const sectionElRef = useRef(null);
   const [isVisible, setIsVisible] = useState(index === 0);
 
   useEffect(() => {
@@ -53,26 +35,14 @@ function ProductSection({
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setIsVisible(entry.isIntersecting);
+        setIsVisible(entry.intersectionRatio > 0.6);
       },
-      { threshold: 0.2, rootMargin: '80px 0px' }
+      { threshold: [0, 0.6, 1] }
     );
 
     observer.observe(sectionNode);
     return () => observer.disconnect();
   }, []);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    if (isVisible) {
-      video.play().catch(() => {});
-      return;
-    }
-
-    video.pause();
-  }, [isVisible]);
 
   return (
     <section
@@ -84,37 +54,41 @@ function ProductSection({
       className="relative flex min-h-screen w-full items-center justify-center overflow-hidden bg-black px-4 py-20 md:px-8 lg:px-12"
     >
       <div className="grid w-full max-w-7xl grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16 lg:items-center">
+        
+        {/* VIDEO */}
         <div className={isEven ? 'lg:order-2' : ''}>
-          <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-zinc-900/80 md:transition-transform md:duration-500 md:ease-[cubic-bezier(0.4,0,0.2,1)] md:hover:scale-[1.116]">
-            {product.videoUrl ? (
+          <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-zinc-900/80 md:transition-transform md:duration-500 md:hover:scale-[1.116]">
+
+            {product.videoUrl && isVisible ? (
               <HLSVideo
-                ref={videoRef}
                 src={product.videoUrl}
-                className="absolute inset-0 w-full h-full object-cover min-w-full min-h-full"
+                className="absolute inset-0 w-full h-full object-cover"
                 playsInline
                 muted
                 loop
-                autoPlay={isVisible}
-                preload="metadata"
+                autoPlay
+                preload="auto"
                 controls={false}
-                disablePictureInPicture
-                disableRemotePlayback
               />
             ) : (
               <div className="flex h-full w-full items-center justify-center text-zinc-500 text-sm uppercase tracking-wider">
                 {t('services.preview')}
               </div>
             )}
+
           </div>
         </div>
+
+        {/* TEXT */}
         <div className={isEven ? 'lg:order-1' : ''}>
           <h2 className="text-3xl font-bold text-white md:text-4xl lg:text-5xl">
-              {tf(product.titleKey)}
+            {tf(product.titleKey)}
           </h2>
           <p className="mt-6 text-lg leading-relaxed text-white/70 md:text-xl text-justify">
             {tf(product.descKey)}
           </p>
         </div>
+
       </div>
     </section>
   );
@@ -122,14 +96,14 @@ function ProductSection({
 
 export default function ServicesPage() {
   const { t, tf } = useLanguage();
-  const sectionRefs = React.useRef<(HTMLElement | null)[]>([]);
-  const pageRef = React.useRef<HTMLElement | null>(null);
+  const sectionRefs = React.useRef([]);
+  const pageRef = React.useRef(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const ctx = gsap.context(() => {
-      const refs = sectionRefs.current.filter(Boolean);
-      refs.forEach((section) => {
+      sectionRefs.current.forEach((section) => {
         if (!section) return;
+
         ScrollTrigger.create({
           trigger: section,
           start: 'top top',
